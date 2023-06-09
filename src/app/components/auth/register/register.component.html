@@ -1,0 +1,122 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-sx-0 col-sm-1 col-md-2 col-lg-3"></div>
+
+    <div class="col-sx-12 col-sm-10 col-md-8 col-lg-8">
+
+      <div class="card my-4">
+        <div class="card-body py-2">
+          <h3 class="text-muted font-weight-bold">Регистрация</h3>
+
+
+
+          <form [formGroup]="registerForm" novalidate (ngSubmit)="submit()">
+
+            <div class="d-flex justify-content-start mb-3">
+              <label class="font-weight-bold text-muted pt-2" for="userName">Логин</label>
+              <input autocomplete="off"  type="text" class="form-control w-50" id="userName" formControlName="userLogin" placeholder="Логин">
+            </div>
+
+
+            <div class="d-flex justify-content-start mb-3">
+              <label class="font-weight-bold text-muted pt-2" for="userFio">Ф.И.О.</label>
+              <input autocomplete="off"  type="text" class="form-control w-50" id="userFio" formControlName="userFio" placeholder="Ф.И.О.">
+            </div>
+
+            <div class="d-flex justify-content-start mb-3">
+              <label class="font-weight-bold text-muted pt-2" for="organization ">Организация</label>
+              <input autocomplete="off"  type="text" class="form-control w-50" id="organization " formControlName="organization" placeholder="№ школы">
+            </div>
+            <p style="font-size: 0.9em;">* Внесите информацию в виде - <span style="font-weight: 600">ГБОУ школа № 25 Петроградского района Санкт-Петербурга</span></p>
+
+            <div *ngIf="registerForm.controls['userLogin'].value.length > 0">
+
+              <div *ngIf="registerForm.controls['userLogin'].invalid; else trueUserNameTemplate">
+                <div class="alert alert-danger">Логин занят</div>
+              </div>
+
+              <ng-template #trueUserNameTemplate>
+                <div class="alert alert-success">Логин свободен</div>
+              </ng-template>
+
+            </div>
+
+            <!-- закончили проверку логина -->
+
+            <div class="d-flex justify-content-start mb-3">
+              <label class="font-weight-bold text-muted pt-2" for="userEmail">Email</label>
+              <input autocomplete="off" type="email" class="form-control w-50" id="userEmail" placeholder="Email" formControlName="userEmail">
+
+            </div>
+
+            <!-- начало обработки почтовых ошибок -->
+
+            <div *ngIf="registerForm.controls['userEmail'].dirty">
+
+              <div *ngIf="registerForm.controls['userEmail'].value.length > 0">
+                <div *ngIf="registerForm.controls['userEmail'].invalid; else trueSucc">
+
+                  <div class="alert alert-danger"
+                       *ngIf="registerForm.controls['userEmail'].hasError('errorEmailExists') === true">
+                    Данный Email уже занят.
+                  </div>
+
+                  <div class="alert alert-danger"
+                       *ngIf="registerForm.controls['userEmail'].hasError('errorEmailExists') !== true &&  registerForm.controls['userEmail'].invalid">
+                    введите Email
+                  </div>
+
+
+                </div>
+
+                <ng-template #trueSucc>
+
+                  <div class="alert alert-success">Email свободен.</div>
+
+                </ng-template>
+
+              </div>
+
+            </div>
+
+            <!-- закончили обработку почтовых ошибок -->
+
+            <div class="d-flex justify-content-start mb-3">
+              <label class="font-weight-bold text-muted pt-2" for="inputPassword1">Пароль</label>
+              <input type="password" class="form-control w-50" id="inputPassword1" placeholder="Password" formControlName="userPassword1">
+            </div>
+            <div class="d-flex justify-content-start mb-3">
+              <label class="font-weight-bold text-muted pt-2" for="inputPassword2">Повторите пароль</label>
+              <input type="password" class="form-control w-50" id="inputPassword2" placeholder="Password" formControlName="userPassword2">
+            </div>
+
+            <div *ngIf="registerForm.controls['userPassword2'].value.length > 0">
+              <div *ngIf="registerForm.controls['userPassword2'].invalid; else truePassword2Template">
+                <div class="alert alert-danger">Повторный пароль не совпадает. *Пароль не менее 2-х символов</div>
+              </div>
+            </div>
+
+            <ng-template #truePassword2Template>
+              <div class="alert alert-success">Пароль совпал</div>
+            </ng-template>
+
+            <div *ngIf="bPassword" class="alert alert-danger">
+              Пароли не совпадают. *Пароль не менее 2-х символов
+            </div>
+
+
+            <button class="btn btn-outline-primary my-4" [disabled]="registerForm.invalid">Зарегистрироваться</button>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sx-0 col-sm-1 col-md-2 col-lg-4"></div>
+
+
+
+  </div>
+</div>

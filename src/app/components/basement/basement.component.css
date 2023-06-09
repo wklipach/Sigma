@@ -1,0 +1,17 @@
+.basement {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+
+}
+.information-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.information {
+  font-size: 1.1rem;
+
+}
+

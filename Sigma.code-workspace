@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../school"
+		},
+		{
+			"path": "../server-school"
+		}
+	],
+	"settings": {}
+}

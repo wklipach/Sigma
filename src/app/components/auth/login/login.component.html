@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <app-caption></app-caption>
+
+
+      <img class="img-fluid mb-1" src="../../assets/img/school25.jpg"/>
+
+      <!--
+         начали модель
+         [disabled]="loginForm.invalid"
+         <button type="submit" class="btn-signin" id="btnPwd" formControlName="btnPwd">Войти</button>
+      -->
+
+
+      <div class="card">
+        <div class="card-body pt-2 pb-1">
+          <h3 class="text-muted font-weight-bold">Вход</h3>
+
+
+          <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
+
+            <div class="d-flex justify-content-start mb-3">
+              <label class="w-25 font-weight-bold text-muted pt-2" for="inputLogin">Логин</label>
+              <input type="text" class="form-control w-75" id="inputLogin" formControlName="nameOrEmail" placeholder="Логин"
+                     [ngClass]="{
+                          succesfullvalidator: this.loginForm.controls['nameOrEmail'].value.length >= 3,
+                          troublevalidator: loginForm.controls['nameOrEmail'].value.length >= 1 && loginForm.controls['nameOrEmail'].value.length <= 2  }">
+            </div>
+
+            <div class="d-flex justify-content-start mb-3">
+              <label class="w-25 font-weight-bold text-muted pt-2" for="inputPassword">Пароль</label>
+              <input type="password" class="form-control w-75" id="inputPassword" formControlName="password"  placeholder="Пароль">
+            </div>
+
+            <p><button type="submit" class="btn btn-outline-primary my-2" role="button" id="btnpwd" [disabled]="loginForm.invalid || stopCondition" style="width: 100px;">Войти</button></p>
+
+            <p><a class="forgot-password" routerLink="/forgot-password" routerLinkActive="active">Забыли пароль или логин?</a></p>
+
+            <p><a class="register" routerLink="/register" routerLinkActive="active">Зарегистрироваться</a></p>
+
+
+            <ng-container *ngIf="showErr">
+              <div class="alert alert-danger">
+                {{sResTrouble}}
+              </div>
+            </ng-container>
+
+
+            <ng-container *ngIf="showSucc">
+              <div class="alert alert-success">Успешный вход.</div>
+              <a routerLink="/smain" routerLinkActive="active"></a>
+            </ng-container>
+
+          </form>
+
+          <!--    закончили модель   -->
+
+
+
+
+
+        </div>
+      </div>
+
+      <app-basement></app-basement>
+
+    </div>
+  </div>
+</div>
