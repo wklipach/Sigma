@@ -9,7 +9,83 @@ var usersRouter = require('./routes/users');
 
 var forgotPassword = require('./routes/forgotpassword');
 
+
+
+
 var app = express();
+
+
+
+//BEGIN СОКЕТ
+const httpChat = require('http').Server(app);
+
+const io = require('socket.io')(httpChat, {
+  cors: {
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST"]
+  }
+});
+
+const portChat = process.env.portChat || 5000;
+
+
+
+/* ЧУЖОЕ
+socket.on('user:add', async (user) => {
+  // сообщаем другим пользователям об этом
+  socket.to(roomId).emit('log', `User ${userName} connected`)
+  // записываем идентификатор сокета пользователя
+  user.socketId = socket.id
+  // записываем пользователя в хранилище
+  users[roomId].push(user)
+  // обновляем список пользователей
+  updateUserList()
+})
+*/
+
+
+
+let users = new Map();
+io.on('connection', (socket) => {
+
+
+  socket.on('sigma_message', msg => {
+    console.log('curmsg', msg);
+    io.emit('sigma_message', msg);
+  });
+
+
+  // добавляем пользователя в хранилище
+  socket.on('sigma_adduser', async (user) => {
+    socket.id_user=user;
+    console.log('initialize user', 'user=', user, 'socket.id=', socket.id);
+    users.set(socket.id, user);
+    io.emit('sigma_users', Object.fromEntries(users));
+    console.log(Object.fromEntries(users));
+  });
+
+
+  socket.on('disconnect', () => {
+    console.log('disconnect', 'socket.id=', socket.id, '', 'socket.id_user=', socket.id_user);
+
+    // удаляем пользователя из хранилища
+    users.delete(socket.id);
+    io.emit('sigma_users', Object.fromEntries(users));
+    console.log(Object.fromEntries(users));
+
+  });
+
+
+});
+
+httpChat.listen(portChat, () => {
+  console.log(`Socket.IO server running at http://localhost:${portChat}/`);
+});
+//END СОКЕТ
+
+
+
+
 
 
 app.use(express.json({ limit: '50mb' }));
@@ -17,6 +93,7 @@ app.use(express.json({ limit: '50mb' }));
 // Add headers
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:4200" ); // update to match the domain you will make the request from
+    //res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
@@ -50,5 +127,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
+//app.use(usersChat);
+
 
 module.exports = app;

@@ -15,3 +15,12 @@ export interface IOhrArchive {
     curOhrLogin: string;
     curOhrConnected: boolean;
 }
+
+
+export interface ISessionUser {
+    id_user: number;
+    name: string;
+    email: string;
+    fio: string;
+    organization: string;
+}

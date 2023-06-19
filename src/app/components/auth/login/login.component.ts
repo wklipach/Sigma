@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import * as CryptoJS from 'crypto-js';
 import {Subscription, timer} from 'rxjs';
+import { ISessionUser } from 'src/app/interface/auth/user';
 
 
 @Component({
@@ -63,8 +64,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.auth.getUserFromBase(sUserOrEmail).subscribe(
       (value: any) => {
 
-        console.log('res=',value);
-
         if (value.length > 1) {
           this.showErr = true;
           this.showSucc = false;
@@ -97,8 +96,11 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.block_button(this.nStopMs);
             return;
           }
+          
           console.log('успешный вход');
 
+          const sUser: ISessionUser = {id_user: value[0]?.id, name: value[0]?.login, email: value[0]?.email, fio: value[0]?.fio, organization: value[0]?.organization};
+          this.auth.setSessionUser(sUser);
           this.auth.setStorage(value[0].login, true, value[0].id);
           this.router.navigate(['/']);
         } // value[0].length === 1

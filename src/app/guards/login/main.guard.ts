@@ -9,9 +9,7 @@ export const mainGuard: CanActivateFn = (route, state) => {
   if (inject(AuthService).getLoggedIn()){
     return true
   } else {
-
-    return inject(Router).navigate(['/login']);
-
+   return inject(Router).navigate(['/login']);
   }
 
 };

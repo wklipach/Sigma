@@ -1,5 +1,5 @@
 {
-  "name": "ohr",
+  "name": "sigma",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.0",
+    "@angular/cdk": "^16.1.1",
     "@angular/common": "^16.0.0",
     "@angular/compiler": "^16.0.0",
     "@angular/core": "^16.0.4",
@@ -21,6 +22,7 @@
     "crypto-js": "^4.1.1",
     "express": "^4.18.2",
     "express-generator": "^4.16.1",
+    "ngx-socket-io": "^4.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

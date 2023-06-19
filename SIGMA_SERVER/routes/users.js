@@ -23,10 +23,18 @@ router.get('/', async function(req, res, next) {
     res.send(emailUser);
 }
 
-if (req.query.get_nick_user) {
-    const nickUser = await asyncNickUser(req.query.get_nick_user);
-    res.send(nickUser);
-}
+  if (req.query.get_nick_user) {
+      const nickUser = await asyncNickUser(req.query.get_nick_user);
+      res.send(nickUser);
+  }
+
+  if (req.query.get_user_withoutcurrentid) {
+     const user_without_currentid = await asyncUserWithoutCurrentID(req.query.id_user);
+     res.send(user_without_currentid);
+  }
+
+
+
 
 });
 
@@ -70,6 +78,22 @@ async function asyncNickUser(sNick) {
     if (conn) conn.release(); 
   }
 }
+
+
+async function asyncUserWithoutCurrentID(currentID) {
+  let conn = await pool.getConnection();
+  try {
+      
+      const resUsers = await conn.query("SELECT * FROM tuser WHERE id<>? AND bitdelete=0", [currentID]);
+      return JSON.stringify(resUsers);
+
+  } catch (err) {
+      return  err;
+  } finally {
+    if (conn) conn.release(); 
+  }
+ }
+
 
 async function asyncNewUser(newuser) {
   let conn = await pool.getConnection();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {GlobalRef} from '../../../globalref';
-import { IUser, IOhrArchive } from '../interface/auth/user';
+import { IUser, IOhrArchive, ISessionUser } from '../interface/auth/user';
 
 
 @Injectable({
@@ -20,17 +20,50 @@ export class AuthService implements IUser, IOhrArchive {
   bitdelete = false; 
   organization = '';
 
+
+  _id_user: number = -1;
+  _name: string = '';
+  _email = ''; 
+  _fio = '';
+  _organization = '';
+
+  public getSessionUser(): ISessionUser {
+
+
+    if (window.localStorage.getItem('sUser') && (this._id_user === -1) )  {
+      const sUser: ISessionUser = JSON.parse(window.localStorage.getItem('sUser') || "{id_user: -1, name: '', email: '', fio: '', organization: ''}");
+      this._id_user = sUser.id_user;
+      this._name = sUser.name;
+      this._email = sUser.email;
+      this._fio = sUser.fio;
+      this._organization = sUser.organization;
+      }
+
+    const user: ISessionUser = {id_user: this._id_user, name: this._name, email: this._email, fio: this._fio, organization: this._organization};
+    return user;
+  } 
+
+  public setSessionUser(sUser: ISessionUser) {
+    this._id_user = sUser.id_user;
+    this._name = sUser.name;
+    this._email = sUser.email;
+    this._fio = sUser.fio;
+    this._organization = sUser.organization;
+
+    window.localStorage.setItem('sUser', JSON.stringify(sUser));
+
+  } 
+
+  
+
   constructor(private http: HttpClient, public gr: GlobalRef) { 
   }
 
 
   public getLoggedIn() {
-
-
       let curOhrConnected = localStorage.getItem('curOhrConnected');
       // curOhrConnected = curOhrConnected !== null ? JSON.parse(curOhrConnected): Boolean;
-      let boolOhrConnected = (curOhrConnected?.toLowerCase() === "true"); 
-
+      let boolOhrConnected = (curOhrConnected?.toLowerCase() === "true") && (this.getSessionUser().id_user?.toString()!=="-1"); 
       return boolOhrConnected;
   }
 
@@ -88,7 +121,7 @@ export class AuthService implements IUser, IOhrArchive {
     return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
   }
 
-  // получаем пользователя, поиск по mongo-ID
+  // получаем пользователя, поиск по maria DB
   getUserFromID(mariaID: string) {
     const params = new HttpParams()
       .set('get_user_id', mariaID.toString());
@@ -96,10 +129,11 @@ export class AuthService implements IUser, IOhrArchive {
   }
 
   // получаем пользователя, поиск по mongo-ID
-  getUserWithoutID(mongoID: string) {
+  getUserWithoutID(id_user: number) {
     const params = new HttpParams()
       .set('get_user_withoutcurrentid', 'get_user_withoutcurrentid')
-      .set('id_user', mongoID.toString());
+      .set('id_user', id_user.toString());
+
     return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
   }
 

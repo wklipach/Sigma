@@ -10,15 +10,9 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', async function(req, res, next) {
 
-
-  /*
-
-    const schoolUsers = await asyncSelectTest();
-    //res.send(schoolUsers);
-    res.render('index', { title: schoolUsers });
-*/    
-
-  res.render('index', { title: 'Express' });
+ //res.render('index', { title: 'Express' });
+ res.sendFile(__dirname + '/index.html');
+ 
 });
 
 

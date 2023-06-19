@@ -20,6 +20,14 @@ import { RegisterComponent } from './components/auth/register/register.component
 // services
 import {AuthService} from './services/auth.service';
 import { MainComponent } from './components/main/main.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './services/chat.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
+// socket config
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+
 
 
 @NgModule({
@@ -30,16 +38,19 @@ import { MainComponent } from './components/main/main.component';
     BasementComponent,
     ForgotPasswordComponent,
     RegisterComponent,
-    MainComponent
+    MainComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule    
+    HttpClientModule,
+    ScrollingModule,
+    SocketIoModule.forRoot(config)    
   ],
-  providers: [GlobalRef, DatePipe, AuthService],
+  providers: [GlobalRef, DatePipe, AuthService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
