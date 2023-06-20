@@ -3,6 +3,7 @@ export interface IDocChat {
     id_user_to: number;
     message: string;
     bMarked: boolean;
+    createdAt: number;
 }
 
 

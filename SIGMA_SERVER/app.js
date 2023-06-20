@@ -44,16 +44,24 @@ socket.on('user:add', async (user) => {
 */
 
 
+// "хранилище" для сообщений
+const messages = []
 
 let users = new Map();
 io.on('connection', (socket) => {
 
 
   socket.on('sigma_message', msg => {
+    msg.createdAt = Date.now();
     console.log('curmsg', msg);
-    io.emit('sigma_message', msg);
+    messages.push(msg);
+    io.emit('sigma_message', messages);
   });
 
+  // обновление сообщений при инициализации клиента
+  socket.on('sigma_start', msg => {
+    io.emit('sigma_start', messages);
+  });
 
   // добавляем пользователя в хранилище
   socket.on('sigma_adduser', async (user) => {

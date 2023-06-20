@@ -9,11 +9,15 @@
 
 
  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
-  <div *cdkVirtualFor="let user of users" class="example-item">{{user.name}} {{user.connected}}</div>
+  <div *cdkVirtualFor="let user of users" class="example-item" (click)="clickUser(user)">{{user.name}} {{user.connected}}" </div>
 </cdk-virtual-scroll-viewport>
 
 
-<button (click)="onTest()">Тест</button>
+<cdk-virtual-scroll-viewport #fareNotes appendOnly itemSize="50" class="example-viewport">
+        <div *cdkVirtualFor="let msg of this.appearMessages" class="example-item">{{msg.message}} {{msg.createdAt  | date: "MMM d, y, h:mm:ss"  }} </div>
+      </cdk-virtual-scroll-viewport>
+      
+
 
 <div id="footer">
     <form [formGroup]="chatForm">
