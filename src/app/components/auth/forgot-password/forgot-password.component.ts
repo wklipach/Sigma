@@ -83,7 +83,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
       if (addSymbols && !/\W/.test(pass)) {continue; }  // check symbols
       if (addNums && !/\d/.test(pass)) {continue; }  // check nums
 
-      return pass; // all good
+      return pass; // all good!!!!!
     }
   }
 
