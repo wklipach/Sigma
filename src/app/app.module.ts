@@ -15,7 +15,7 @@ import { CaptionComponent } from './components/caption/caption.component';
 import { BasementComponent } from './components/basement/basement.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-
+import { OverviewComponent } from './components/account/overview/overview.component';
 
 // services
 import {AuthService} from './services/auth.service';
@@ -24,6 +24,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -39,6 +40,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ForgotPasswordComponent,
     RegisterComponent,
     MainComponent,
+    OverviewComponent,
     ChatComponent
   ],
   imports: [
