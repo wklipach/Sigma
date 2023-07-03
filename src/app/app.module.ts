@@ -24,6 +24,9 @@ import { ChatComponent } from './components/chat/chat.component';
 import { ChatService } from './services/chat.service';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { GeneralComponent } from './components/account/general/general.component';
+import { SummaryComponent } from './components/account/summary/summary.component';
+import { SummaryService } from './services/summary.service';
 
 
 // socket config
@@ -41,7 +44,9 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     RegisterComponent,
     MainComponent,
     OverviewComponent,
-    ChatComponent
+    ChatComponent,
+    GeneralComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ScrollingModule,
     SocketIoModule.forRoot(config)    
   ],
-  providers: [GlobalRef, DatePipe, AuthService, ChatService],
+  providers: [GlobalRef, DatePipe, AuthService, ChatService, SummaryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

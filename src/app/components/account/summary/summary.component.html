@@ -3,79 +3,119 @@
   <div class="row mb-3">
   <label class="col-lg-4 fw-semibold fs-5 text-muted">Фамилия Имя Отчество</label>
   <div class="col-lg-8">
-  <span class="fw-semibold fs-5 text-gray-800">Петров Иван Сергеевич</span>
+  <span class="fw-semibold fs-5 text-gray-800">
+        {{this.ShowRes?.fio}} 
+  </span>
   </div>
   </div>
 
   <div class="row mb-3">
   <label class="col-lg-4 fs-5 fw-semibold text-muted">Компания</label>
     <div class="col-lg-8 fv-row">
-    <span class="fw-semibold text-gray-800 fs-5">ООО ЧОП Сигма-Профи 3</span>
+
+    <div *ngFor="let item of this.ShowCompany">  
+       <span class="fw-semibold text-gray-800 fs-5">{{item?.name}}</span>
+    </div>
+
     </div>
   </div>
   <div class="row mb-3">
     <label class="col-lg-4 fs-5 fw-semibold text-muted">Телефон
  </label>
     <div class="col-lg-8 d-flex align-items-center">
-    <span class="fw-semibold fs-5 text-gray-800 me-2">+7 495 326 54 35</span>
+    <span class="fw-semibold fs-5 text-gray-800 me-2">{{this.ShowRes?.phone}}</span>
     </div>
   </div>
 
   <div class="row mb-3">
-    <label class="col-lg-4 fs-5 fw-semibold text-muted">Объект</label>
-    <div class="col-lg-8">
-      <span class="fw-semibold fs-5 text-gray-800 me-2">БЦ Радуга</span>
+    <label class="col-lg-4 fs-5 fw-semibold text-muted">Телефон 2
+ </label>
+    <div class="col-lg-8 d-flex align-items-center">
+    <span class="fw-semibold fs-5 text-gray-800 me-2">{{this.ShowRes?.phone2}}</span>
     </div>
+  </div>
+
+
+  <div class="row mb-3">
+    <label class="col-lg-4 fs-5 fw-semibold text-muted">Объект</label>
+
+    <div class="col-lg-8">
+      
+      <div *ngFor="let item of this.ShowObjectSenjor">
+         <span class="fw-semibold fs-5 text-gray-800 me-2">{{item?.PONAME}}</span>
+      </div>
+    </div>
+
+
    </div>
   <div class="row mb-3">
   <label class="col-lg-4 fs-5 fw-semibold text-muted">Руководитель
   </label>
   <div class="col-lg-8">
-  <span class="fw-semibold fs-5 text-gray-800">Акаткин Сергей Петрович</span>
+     <div  *ngFor="let item of this.ShowObjectSenjor">
+        <span class="fw-semibold fs-5 text-gray-800">{{item?.senjor}}</span>
+     </div>
   </div>
   </div>
   <div class="row mb-3">
   <label class="col-lg-4 fs-5 fw-semibold text-muted">Разряд</label>
   <div class="col-lg-8">
-  <span class="fw-semibold fs-5 text-gray-800">6</span>
+  <span class="fw-semibold fs-5 text-gray-800">НЕ ЗНАЮ ЧТО ЭТО</span>
   </div>
   </div>
   <div class="row mb-3">
   <label class="col-lg-4 fs-5 fw-semibold text-muted">Тип сотрудника</label>
     <div class="col-lg-8">
-  <span class="fw-semibold fs-5 text-gray-800">Вахтовик</span>
+  <span class="fw-semibold fs-5 text-gray-800"> {{this.ShowRes?.typeperson}} </span>
     </div>
 
     <label class="col-lg-4 fs-5 fw-semibold text-muted">Должность</label>
     
     <div class="col-lg-8">
-      <span class="fw-semibold fs-5 text-gray-800">Охранник</span>
+      <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes?.position}}</span>
     </div>
      
     <label class="col-lg-4 fs-5 fw-semibold text-muted">Статус</label>
     
     <div class="col-lg-8">
-      <span class="fw-semibold fs-5 text-gray-800">Резерв</span>
+      <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes?.status}}</span>
     </div>
     <label class="col-lg-4 fs-5 fw-semibold text-muted">Дата рождения</label>
     
     <div class="col-lg-8">
-      <span class="fw-semibold fs-5 text-gray-800">10.08.1980</span>
+      <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes?.DateBirth | date:'dd-MM-YYY'}}</span>
     </div>
 
     <div class="row mb-3">
       <label class="col-lg-4 fs-5 fw-semibold text-muted">Возраст</label>
         <div class="col-lg-8">
-      <span class="fw-semibold fs-5 text-gray-800">36</span>
+      <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes?.Age}}</span>
         </div>
 
     <label class="col-lg-4 fs-5 fw-semibold text-muted">ОЛЛР</label>
     
+
+
+    <div class="col-lg-8">
+      <div *ngFor="let item of this.ShowOLLR">
+
+               <ng-container *ngIf="item?.bitOverdue == true">
+                     <span class="badge rounded-pill text-bg-danger fs-6 me-2">{{item?.name}}</span>
+              </ng-container>
+              <ng-container *ngIf="item?.bitOverdue == false">
+                <span class="badge rounded-pill text-bg-success fs-6 me-2">{{item?.name}}</span>
+         </ng-container>
+
+      </div>
+    </div>  
+
+<!--
     <div class="col-lg-8">
       <span class="badge rounded-pill text-bg-danger fs-6 me-2">002-ОУ</span>
-  <span class="badge rounded-pill text-bg-danger fs-6 me-2">003-ОУ</span>
-  <span class="badge rounded-pill text-bg-success fs-6 me-2">РСЛА</span>
-  <span class="badge rounded-pill text-bg-success fs-6 me-2">ЛК СПК</span>
-  <span class="badge rounded-pill text-bg-success fs-6 me-2">ЛК СП1</span>
+      <span class="badge rounded-pill text-bg-danger fs-6 me-2">003-ОУ</span>
+      <span class="badge rounded-pill text-bg-success fs-6 me-2">РСЛА</span>
+      <span class="badge rounded-pill text-bg-success fs-6 me-2">ЛК СПК</span>
+      <span class="badge rounded-pill text-bg-success fs-6 me-2">ЛК СП1</span>
     </div>
   </div>
+-->  

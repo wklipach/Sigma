@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AuthService }  from "../../services/auth.service";
 import { Router } from '@angular/router';
 import { ChatService } from 'src/app/services/chat.service';
@@ -30,6 +30,14 @@ export class MainComponent implements OnInit  {
     this.authService.clearStorage();
     this.router.navigate(['/login']);
   }
+
+  public Summary() {
+
+
+    const id_staff = (<HTMLInputElement>document.getElementById('mySummary')).value;
+    this.router.navigate(['summary'], { queryParams: { id_staff }});
+  }
+
 
 
 }

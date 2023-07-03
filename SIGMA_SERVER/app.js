@@ -6,8 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 var forgotPassword = require('./routes/forgotpassword');
+var summary = require('./routes/summary');
 
 
 
@@ -119,6 +119,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/forgotpassword', forgotPassword);
+app.use('/summary', summary);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
