@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { GeneralComponent } from './components/account/general/general.component';
 import { OverviewComponent } from './components/account/overview/overview.component';
 import { SummaryComponent } from './components/account/summary/summary.component';
+import { SettingsComponent } from './components/account/settings/settings.component';
 import { MainComponent } from './components/main/main.component';
 import { mainGuard } from './guards/login/main.guard';
 import { ListObjectsComponent } from './components/protected_objects/list-objects/list-objects.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'general', component: GeneralComponent },
   { path: 'overview', component: OverviewComponent },
   { path: 'summary', component: SummaryComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'listobjects', component: ListObjectsComponent }
   
 ];
