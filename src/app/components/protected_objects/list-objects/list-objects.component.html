@@ -1,6 +1,10 @@
+
+
+<!--
+
 <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="50" class="example-viewport">
     <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
-        {{ objectone.id_object }} 
+        {{ objectone.id_object }}
         {{ objectone.name }} 
         {{ objectone.post_status }} 
         {{ objectone.object_type }} 
@@ -17,4 +21,36 @@
     </div>
 </cdk-virtual-scroll-viewport>
 
+-->
+<div>ПЕРВАЯ СТРОКА №50</div>div>
+{{ this.ShowObjects[50].id_object }}
+{{ this.ShowObjects[50].name }} 
+{{ this.ShowObjects[50].post_status }} 
+{{ this.ShowObjects[50].object_type }} 
+{{ this.ShowObjects[50].options }} 
+{{ this.ShowObjects[50].cur_organization }} 
+{{ this.ShowObjects[50].address }} 
+{{ this.ShowObjects[50].yandex_maps }} 
+{{ this.ShowObjects[50].google_maps }} 
+{{ this.ShowObjects[50].phone }} 
+{{ this.ShowObjects[50].senjor_guard }} 
+{{ this.ShowObjects[50].postwasset_date  | date: "MMM d, y, h:mm:ss"  }} 
+{{ this.ShowObjects[50].withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
+{{ this.ShowObjects[50].MTR }}         
+
+<div>ВТОРАЯ СТРОКА №185</div>div>
+{{ this.ShowObjects[185].id_object }}
+{{ this.ShowObjects[185].name }} 
+{{ this.ShowObjects[185].post_status }} 
+{{ this.ShowObjects[185].object_type }} 
+{{ this.ShowObjects[185].options }} 
+{{ this.ShowObjects[185].cur_organization }} 
+{{ this.ShowObjects[185].address }} 
+{{ this.ShowObjects[185].yandex_maps }} 
+{{ this.ShowObjects[185].google_maps }} 
+{{ this.ShowObjects[185].phone }} 
+{{ this.ShowObjects[185].senjor_guard }} 
+{{ this.ShowObjects[185].postwasset_date  | date: "MMM d, y, h:mm:ss"  }} 
+{{ this.ShowObjects[185].withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
+{{ this.ShowObjects[185].MTR }}         
 
