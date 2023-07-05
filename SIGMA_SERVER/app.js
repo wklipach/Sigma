@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var forgotPassword = require('./routes/forgotpassword');
 var summary = require('./routes/summary');
+var protected_objects = require('./routes/protected_objects');
 
 
 
@@ -120,6 +121,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/forgotpassword', forgotPassword);
 app.use('/summary', summary);
+app.use('/protected_objects', protected_objects);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,20 @@
+<cdk-virtual-scroll-viewport #fareNotes appendOnly itemSize="50" class="example-viewport">
+    <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+        {{ objectone.id_object }} 
+        {{ objectone.name }} 
+        {{ objectone.post_status }} 
+        {{ objectone.object_type }} 
+        {{ objectone.options }} 
+        {{ objectone.cur_organization }} 
+        {{ objectone.address }} 
+        {{ objectone.yandex_maps }} 
+        {{ objectone.google_maps }} 
+        {{ objectone.phone }} 
+        {{ objectone.senjor_guard }} 
+        {{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }} 
+        {{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
+        {{ objectone.MTR }}         
+    </div>
+</cdk-virtual-scroll-viewport>
+
+

@@ -1,5 +1,5 @@
-import { CdkScrollable, CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {  CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ISessionUser } from 'src/app/interface/auth/user';
 import { IDocChat, IUserChat } from 'src/app/interface/chat/chat';

@@ -32,12 +32,16 @@ export class MainComponent implements OnInit  {
   }
 
   public Summary() {
-
-
     const id_staff = (<HTMLInputElement>document.getElementById('mySummary')).value;
     this.router.navigate(['summary'], { queryParams: { id_staff }});
   }
 
+
+  public ListoOjects() {
+    this.router.navigate(['listobjects']);
+  }
+
+  
 
 
 }

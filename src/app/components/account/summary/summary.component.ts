@@ -3,18 +3,32 @@ import { ActivatedRoute } from '@angular/router';
 import { SummaryService } from 'src/app/services/summary.service';
 
 
-type ObjectSenjor = {
+
+interface IShowRes { 
+  Age?: string; 
+  DateBirth?: Date; 
+  fio?: string; 
+  phone?: string; 
+  phone2?: string; 
+  position?: string; 
+  status?: string; 
+  typeperson?: string; 
+  rank?: string;
+};
+
+
+interface IObjectSenjor  {
   id_object?: number; 
   PONAME?: string; 
   senjor?: string;
 };
 
-type Company = {
+interface ICompany  {
   id_organization?: number; 
   name?: string; 
 };
 
-type OLLR = {
+interface IOLLR  {
   name?: string; 
   bitOverdue: boolean;
 };
@@ -32,11 +46,10 @@ export class SummaryComponent  implements OnInit  {
 
 
   id_staff: number = 0;
-  ShowRes: { Age: ''; DateBirth: ''; fio: ''; phone: '', phone2: ''; position: ''; status: '';  typeperson: ''} | undefined;
-
-  ShowObjectSenjor: ObjectSenjor[] = [];
-  ShowCompany: Company[] = [];
-  ShowOLLR: OLLR[] = [];
+  ShowRes: IShowRes = <IShowRes>{};
+  ShowObjectSenjor: IObjectSenjor[] = [];
+  ShowCompany: ICompany[] = [];
+  ShowOLLR: IOLLR[] = [];
 
 
 
@@ -48,8 +61,6 @@ export class SummaryComponent  implements OnInit  {
 
   
    ngOnInit() {
-    console.log(this.id_staff);
-
 
     this.summaryServ.getStaffOne(this.id_staff).subscribe ( (value: any) => {
 
@@ -62,7 +73,8 @@ export class SummaryComponent  implements OnInit  {
                           phone2: value[0].phone2,
                           position:value[0].position,
                           status: value[0].status,
-                          typeperson: value[0].typeperson
+                          typeperson: value[0].typeperson,
+                          rank: value[0].rank
                         };
                       }
       });

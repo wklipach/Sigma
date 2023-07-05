@@ -8,6 +8,7 @@ import { OverviewComponent } from './components/account/overview/overview.compon
 import { SummaryComponent } from './components/account/summary/summary.component';
 import { MainComponent } from './components/main/main.component';
 import { mainGuard } from './guards/login/main.guard';
+import { ListObjectsComponent } from './components/protected_objects/list-objects/list-objects.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'general', component: GeneralComponent },
   { path: 'overview', component: OverviewComponent },
-  { path: 'summary', component: SummaryComponent }
+  { path: 'summary', component: SummaryComponent },
+  { path: 'listobjects', component: ListObjectsComponent }
+  
 ];
 
 

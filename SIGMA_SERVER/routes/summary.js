@@ -44,7 +44,7 @@ router.get('/', async function(req, res, next) {
         const params = [id_staff];
         const sQuery = 
         "SELECT s.fio, s.phone, s.phone2, s.id_status, gs.name as status, s.id_position, gp.name as position, s.DateBirth, "+  
-               " YEAR(CURRENT_DATE()) -  YEAR(s.DateBirth) AS Age, s.id_typeperson, gtp.name typeperson "+
+               " YEAR(CURRENT_DATE()) -  YEAR(s.DateBirth) AS Age, s.id_typeperson, gtp.name typeperson, s.rank "+
         "from staff s "+
         "LEFT JOIN guide_status gs ON s.id_status=gs.id_status "+
         "LEFT JOIN guide_position gp ON gp.id_position = s.id_position "+

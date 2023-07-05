@@ -13,7 +13,6 @@ export class SummaryService {
   getStaffOne(id_staff: number) {
     const params = new HttpParams()
       .set('get_one_date', id_staff.toString());
-      console.log(params);
     return this.http.get(this.gr.sUrlGlobal + 'summary', {params: params});
   }
 
@@ -21,7 +20,6 @@ export class SummaryService {
   getObjectSenjor(id_staff: number) {
     const params = new HttpParams()
       .set('get_object_senjor', id_staff.toString());
-      console.log(params);
     return this.http.get(this.gr.sUrlGlobal + 'summary', {params: params});
   }
 
@@ -29,7 +27,6 @@ export class SummaryService {
   getCompany(id_staff: number) {
     const params = new HttpParams()
       .set('get_company', id_staff.toString());
-      console.log(params);
     return this.http.get(this.gr.sUrlGlobal + 'summary', {params: params});
   }  
 
@@ -37,7 +34,6 @@ export class SummaryService {
   getOLLR(id_staff: number) {
     const params = new HttpParams()
       .set('get_ollr', id_staff.toString());
-      console.log(params);
     return this.http.get(this.gr.sUrlGlobal + 'summary', {params: params});
   }  
 
