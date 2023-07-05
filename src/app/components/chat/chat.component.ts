@@ -113,8 +113,7 @@ export class ChatComponent implements OnInit {
     // child is set
     if (this.virtualScroll) {
 
-
-      this.virtualScroll.getElementRef
+      // this.virtualScroll.getElementRef
 
       this.virtualScroll.scrolledIndexChange.subscribe( e=> {
         console.log('e', e);

@@ -1,4 +1,4 @@
-<cdk-virtual-scroll-viewport #fareNotes appendOnly itemSize="50" class="example-viewport">
+<cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="50" class="example-viewport">
     <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
         {{ objectone.id_object }} 
         {{ objectone.name }} 

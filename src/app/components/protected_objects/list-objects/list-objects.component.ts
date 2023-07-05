@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ListobjectsService } from 'src/app/services/listobjects.service';
 import {  CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
 
@@ -32,6 +32,7 @@ interface IObjectOne {
 export class ListObjectsComponent {
 
   ShowObjects: IObjectOne[] = [];
+  @ViewChild('fareObjects') virtualScroll!: CdkVirtualScrollViewport;
 
   constructor (private listobjectsserv: ListobjectsService) {  
 
