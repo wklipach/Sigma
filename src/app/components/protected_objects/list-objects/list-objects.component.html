@@ -4,25 +4,36 @@
 
 <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="50" class="example-viewport">
     <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
-        {{ objectone.id_object }}
-        {{ objectone.name }} 
-        {{ objectone.post_status }} 
-        {{ objectone.object_type }} 
-        {{ objectone.options }} 
-        {{ objectone.cur_organization }} 
-        {{ objectone.address }} 
-        {{ objectone.yandex_maps }} 
-        {{ objectone.google_maps }} 
-        {{ objectone.phone }} 
-        {{ objectone.senjor_guard }} 
-        {{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }} 
-        {{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
-        {{ objectone.MTR }}         
+        <div>{{ objectone.id_object }}</div>
+        <div>{{ objectone.name }} </div>
+        <div>{{ objectone.post_status }}</div> 
+        <div>{{ objectone.object_type }}</div> 
+        <div>{{ objectone.options }}</div> 
+        <div>{{ objectone.cur_organization }}</div> 
+        <div>{{ objectone.address }}</div> 
+
+        <!--
+        <div>{{ objectone.yandex_maps }}</div> 
+        <div>{{ objectone.google_maps }}</div> 
+        
+        <link rel="Объект в Яндекс" href="{{ objectone.yandex_maps }}">
+        <link rel="Объект в Гугле" href="{{ objectone.google_maps }}">
+-->
+
+        <div>{{ objectone.phone }}</div> 
+        <div>{{ objectone.senjor_guard }}</div> 
+        <div>{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</div> 
+        <div>{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</div> 
+        <div>{{ objectone.MTR }}</div>
+
+        
+
+        <div></div>
     </div>
 </cdk-virtual-scroll-viewport>
 
-
-<div>ПЕРВАЯ СТРОКА №50</div>div>
+<!--
+<div>ПЕРВАЯ СТРОКА №50</div>
 {{ this.ShowObjects[50].id_object }}
 {{ this.ShowObjects[50].name }} 
 {{ this.ShowObjects[50].post_status }} 
@@ -38,7 +49,7 @@
 {{ this.ShowObjects[50].withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
 {{ this.ShowObjects[50].MTR }}         
 
-<div>ВТОРАЯ СТРОКА №185</div>div>
+<div>ВТОРАЯ СТРОКА №185</div>
 {{ this.ShowObjects[185].id_object }}
 {{ this.ShowObjects[185].name }} 
 {{ this.ShowObjects[185].post_status }} 
@@ -53,4 +64,4 @@
 {{ this.ShowObjects[185].postwasset_date  | date: "MMM d, y, h:mm:ss"  }} 
 {{ this.ShowObjects[185].withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
 {{ this.ShowObjects[185].MTR }}         
-
+-->
