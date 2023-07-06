@@ -9,29 +9,29 @@
         <div class="row">
           <div class="col-12">
 
-    <table class="table1">
-        <tbody>
-            <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
-                <tr>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_object }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.name }}</td> 
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.post_status }}</td> 
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.options }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.cur_organization }}</td> 
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.address }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.yandex_maps }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.google_maps }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.phone }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.senjor_guard }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.MTR }}</td>
-                </tr>
-            </div>
-        </tbody>
-    </table>            
-    </div>
-    </div>
+                    <table class="table1">
+                        <tbody>
+                            <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+                                <tr>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_object }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.name }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.post_status }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.options }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.cur_organization }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.address }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.yandex_maps }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.google_maps }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.phone }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.senjor_guard }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.MTR }}</td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>            
+          </div>
+       </div>
     </div>
 </cdk-virtual-scroll-viewport>
 
