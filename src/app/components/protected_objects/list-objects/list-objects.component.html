@@ -3,7 +3,39 @@
 
 
 <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="50" class="example-viewport">
-    <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+
+
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+    <table class="table1">
+        <tbody>
+            <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+                <tr>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_object }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.name }}</td> 
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.post_status }}</td> 
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.options }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.cur_organization }}</td> 
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.address }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.yandex_maps }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.google_maps }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.phone }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.senjor_guard }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.MTR }}</td>
+                </tr>
+            </div>
+        </tbody>
+    </table>            
+    </div>
+    </div>
+    </div>
+</cdk-virtual-scroll-viewport>
+
+<!--
         <div>{{ objectone.id_object }}</div>
         <div>{{ objectone.name }} </div>
         <div>{{ objectone.post_status }}</div> 
@@ -11,57 +43,11 @@
         <div>{{ objectone.options }}</div> 
         <div>{{ objectone.cur_organization }}</div> 
         <div>{{ objectone.address }}</div> 
-
-        <!--
         <div>{{ objectone.yandex_maps }}</div> 
         <div>{{ objectone.google_maps }}</div> 
-        
-        <link rel="Объект в Яндекс" href="{{ objectone.yandex_maps }}">
-        <link rel="Объект в Гугле" href="{{ objectone.google_maps }}">
--->
-
         <div>{{ objectone.phone }}</div> 
         <div>{{ objectone.senjor_guard }}</div> 
         <div>{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</div> 
         <div>{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</div> 
         <div>{{ objectone.MTR }}</div>
-
-        
-
-        <div></div>
-    </div>
-</cdk-virtual-scroll-viewport>
-
-<!--
-<div>ПЕРВАЯ СТРОКА №50</div>
-{{ this.ShowObjects[50].id_object }}
-{{ this.ShowObjects[50].name }} 
-{{ this.ShowObjects[50].post_status }} 
-{{ this.ShowObjects[50].object_type }} 
-{{ this.ShowObjects[50].options }} 
-{{ this.ShowObjects[50].cur_organization }} 
-{{ this.ShowObjects[50].address }} 
-{{ this.ShowObjects[50].yandex_maps }} 
-{{ this.ShowObjects[50].google_maps }} 
-{{ this.ShowObjects[50].phone }} 
-{{ this.ShowObjects[50].senjor_guard }} 
-{{ this.ShowObjects[50].postwasset_date  | date: "MMM d, y, h:mm:ss"  }} 
-{{ this.ShowObjects[50].withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
-{{ this.ShowObjects[50].MTR }}         
-
-<div>ВТОРАЯ СТРОКА №185</div>
-{{ this.ShowObjects[185].id_object }}
-{{ this.ShowObjects[185].name }} 
-{{ this.ShowObjects[185].post_status }} 
-{{ this.ShowObjects[185].object_type }} 
-{{ this.ShowObjects[185].options }} 
-{{ this.ShowObjects[185].cur_organization }} 
-{{ this.ShowObjects[185].address }} 
-{{ this.ShowObjects[185].yandex_maps }} 
-{{ this.ShowObjects[185].google_maps }} 
-{{ this.ShowObjects[185].phone }} 
-{{ this.ShowObjects[185].senjor_guard }} 
-{{ this.ShowObjects[185].postwasset_date  | date: "MMM d, y, h:mm:ss"  }} 
-{{ this.ShowObjects[185].withdrawal_date  | date: "MMM d, y, h:mm:ss"  }} 
-{{ this.ShowObjects[185].MTR }}         
--->
+-->  
