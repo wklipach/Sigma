@@ -1,16 +1,16 @@
 
-.table1 td { height:40px;color:#1a171b;font-family:"Myriad Pro","PT Sans Caption","PT Sans",Calibri,Carlito,sans-serif;padding-left:10px; }
+.table1 td {  overflow: hidden !important;height:40px;color:#1a171b;font-family:"Myriad Pro","PT Sans Caption","PT Sans",Calibri,Carlito,sans-serif;padding-left:10px; }
 .td1   {border-left:1px dashed #005da8;border-bottom:1px dashed #005da8;}
 .td11   {border-bottom:1px dashed #005da8;}
 .td12   {border-bottom:1px dashed #005da8;line-height: 2.4;}
 .td13   {border:1px dashed #005da8;}
 .tl {background:#a4c5dd;border:1px dashed #005da8;} 
-.table1 tr:hover{font-size: 1.2em;}
 
-
-.table1 {display: block; overflow-x: auto; white-space: nowrap;}
+.table1 {display: block;}
    
     /*
+
+    
     display: flex;
     flex-direction: row;
         overflow-x: auto;
