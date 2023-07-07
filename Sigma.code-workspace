@@ -4,10 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "../school"
+			"path": "../Victoria"
 		},
 		{
-			"path": "../server-school"
+			"path": "../VICTORIA_SERVER"
 		}
 	],
 	"settings": {}

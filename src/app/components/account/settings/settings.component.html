@@ -1,3 +1,24 @@
+<form [formGroup]="form">
+
+    <div *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+    <ng-template #contentLoadAvatar>
+      <img class="rounded" [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+    </ng-template>
+
+    <ng-template #contentDefault>
+      <img src="/assets/img/usernull.png" class="rounded" onclick="document.getElementById('avatar').click()">
+    </ng-template>
+
+    <div>
+
+      <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none">
+      <label class="text-muted ml-1 mt-3" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</label>
+      <label class="text-muted ml-1" style="display: block; cursor: pointer; text-decoration: underline;" (click)="clearFile()">Очистить</label>
+    </div>
+
+  </form>
+
+
 <form id="kt_account_profile_details_form" class="form">
     <!--begin::Card body-->
     <div class="card-body border-top p-9">

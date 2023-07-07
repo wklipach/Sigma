@@ -9,12 +9,12 @@ var usersRouter = require('./routes/users');
 var forgotPassword = require('./routes/forgotpassword');
 var summary = require('./routes/summary');
 var protected_objects = require('./routes/protected_objects');
-
+var avatar = require('./routes/avatar');
 
 
 
 var app = express();
-
+app.use(express.json({ limit: '50mb' }));
 
 
 //BEGIN СОКЕТ
@@ -122,6 +122,8 @@ app.use('/users', usersRouter);
 app.use('/forgotpassword', forgotPassword);
 app.use('/summary', summary);
 app.use('/protected_objects', protected_objects);
+app.use('/avatar', avatar);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -143,5 +145,5 @@ app.use(function(err, req, res, next) {
 
 //app.use(usersChat);
 
-
+global.appRoot = path.resolve(__dirname);
 module.exports = app;

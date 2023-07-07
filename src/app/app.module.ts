@@ -28,6 +28,8 @@ import { GeneralComponent } from './components/account/general/general.component
 import { SummaryComponent } from './components/account/summary/summary.component';
 import { SummaryService } from './services/summary.service';
 import { ListObjectsComponent } from './components/protected_objects/list-objects/list-objects.component';
+import { AvatarService } from './services/avatar.service';
+import { SettingsComponent } from './components/account/settings/settings.component';
 
 
 // socket config
@@ -48,7 +50,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ChatComponent,
     GeneralComponent,
     SummaryComponent,
-    ListObjectsComponent
+    ListObjectsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ScrollingModule,
     SocketIoModule.forRoot(config)    
   ],
-  providers: [GlobalRef, DatePipe, AuthService, ChatService, SummaryService],
+  providers: [GlobalRef, DatePipe, AuthService, ChatService, SummaryService, AvatarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
