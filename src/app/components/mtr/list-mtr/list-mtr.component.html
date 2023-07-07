@@ -1,0 +1,40 @@
+<cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="50" class="example-viewport">
+
+
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+
+                    <table class="table1">
+                        <tbody>
+                            <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+                                <tr>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_mtr }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.name }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_mtrvid }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.color }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.status }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.description }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.property }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.equipment }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.price }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.size }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.count }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.date_purchase  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.date_issue  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.tabel_number }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.invent_number }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.serial_number }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.barcode }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.invoice }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.delivery_contract }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_organization }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_object }}</td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>            
+          </div>
+       </div>
+    </div>
+</cdk-virtual-scroll-viewport>

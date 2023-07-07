@@ -30,6 +30,7 @@ import { SummaryService } from './services/summary.service';
 import { ListObjectsComponent } from './components/protected_objects/list-objects/list-objects.component';
 import { AvatarService } from './services/avatar.service';
 import { SettingsComponent } from './components/account/settings/settings.component';
+import { ListMtrComponent } from './components/mtr/list-mtr/list-mtr.component';
 
 
 // socket config
@@ -51,7 +52,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     GeneralComponent,
     SummaryComponent,
     ListObjectsComponent,
-    SettingsComponent
+    SettingsComponent,
+    ListMtrComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ var forgotPassword = require('./routes/forgotpassword');
 var summary = require('./routes/summary');
 var protected_objects = require('./routes/protected_objects');
 var avatar = require('./routes/avatar');
+var mtr = require('./routes/mtr');
 
 
 
@@ -123,6 +124,7 @@ app.use('/forgotpassword', forgotPassword);
 app.use('/summary', summary);
 app.use('/protected_objects', protected_objects);
 app.use('/avatar', avatar);
+app.use('/mtr', mtr);
 
 
 // catch 404 and forward to error handler
