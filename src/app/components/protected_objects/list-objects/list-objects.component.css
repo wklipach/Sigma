@@ -1,14 +1,23 @@
 .example-viewport {
     height: 800px;
-    width: 1600px;
-    border: 1px solid black;
+    width: 100vw;
+    border: 1px solid rgb(75, 92, 167);
   }
   
   .example-item {
-    height: 50px;
+    height: 150px;
   }
+.td{
+  min-width: 150px;
+  max-width: 500px;
+  margin: 10px; 
+}
 
-
+.tl{
+  background-color: bisque;
+  font-size: 1.1em;
+  font-weight: bold;
+}
 
 
    

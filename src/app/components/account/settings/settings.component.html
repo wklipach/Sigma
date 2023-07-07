@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form class="avaLoad mb-6 h-125px" [formGroup]="form">
 
     <div *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
     <ng-template #contentLoadAvatar>
@@ -18,6 +18,51 @@
 
   </form>
 
+
+<!--begin::Card body-->
+    <div class="card-body border-top p-9">
+        <!--begin::Input group-->
+        <div class="row mb-6">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label fw-semibold fs-6">Фото</label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">
+                <div class="image-input image-input-outline" style="background-image: url('assets/img/blank.svg')">
+                    <!--begin::Preview existing avatar-->
+                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/img/300-1.jpg)"></div>
+                    <!--end::Preview existing avatar-->
+                    <!--begin::Label-->
+                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Загрузить фото">
+                        <i class="ki-duotone ki-pencil fs-7">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                        <!--begin::Inputs-->
+                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+                        <input type="hidden" name="Удалить фото" />
+                        <!--end::Inputs-->
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Cancel-->
+                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                        <i class="ki-duotone ki-cross fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </span>
+                    <!--end::Cancel-->
+                    <!--begin::Remove-->
+                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                        <i class="ki-duotone ki-cross fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </span>
+                    <!--end::Remove-->
+                </div>
+
+            </div>
 
 <form id="kt_account_profile_details_form" class="form">
     <!--begin::Card body-->

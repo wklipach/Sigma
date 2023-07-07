@@ -13,19 +13,35 @@
                         <tbody>
                             <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
                                 <tr>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_object }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.name }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.post_status }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.options }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.cur_organization }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.address }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.yandex_maps }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.google_maps }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.phone }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.senjor_guard }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.MTR }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>№ Объекта</td>
+                                    <td class="tl" width="150"><span class="masha"></span>2Название</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>3Статус</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>4 Опции</td>
+                                    <td class="tl" width="150"><span class="masha"></span>5 КурОрг</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>6 Адрес</td>
+                                    <td class="tl" width="150"><span class="masha"></span>7Яндекс ссылка</td>
+                                    <td class="tl" width="150"><span class="masha"></span>8Гугл ссылка</td>
+                                    <td class="tl" width="150"><span class="masha"></span>9Телефон</td>
+                                    <td class="tl" width="150"><span class="masha"></span>10 НОО</td>
+                                    <td class="tl" width="150"><span class="masha"></span>11</td>
+                                    <td class="tl" width="150"><span class="masha"></span>12Дата Вассет</td>
+                                    <td class="tl" width="150"><span class="masha"></span>13Виздровал</td>
+                                    <td class="tl" width="150"><span class="masha"></span>14МТР</td>
+                                    </tr>
+                                <tr>
+                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.id_object }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.name }}</td> 
+                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.post_status }}</td> 
+                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.options }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>5{{ objectone.cur_organization }}</td> 
+                                    <td class="td" width="150"><span class="masha"></span>6{{ objectone.address }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>7{{ objectone.yandex_maps }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>8{{ objectone.google_maps }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>9{{ objectone.phone }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>10{{ objectone.senjor_guard }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>11{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>12{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="td" width="150"><span class="masha"></span>13{{ objectone.MTR }}</td>
                                 </tr>
                             </div>
                         </tbody>
