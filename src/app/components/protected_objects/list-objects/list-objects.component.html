@@ -1,69 +1,43 @@
 
-
-
-
-<cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="50" class="example-viewport">
-
-
-    <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-
-                    <table class="table1">
-                        <tbody>
-                            <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
-                                <tr>
-                                    <td class="tl" width="150"><span class="masha"></span>№ Объекта</td>
-                                    <td class="tl" width="150"><span class="masha"></span>2Название</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>3Статус</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>4 Опции</td>
-                                    <td class="tl" width="150"><span class="masha"></span>5 КурОрг</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>6 Адрес</td>
-                                    <td class="tl" width="150"><span class="masha"></span>7Яндекс ссылка</td>
-                                    <td class="tl" width="150"><span class="masha"></span>8Гугл ссылка</td>
-                                    <td class="tl" width="150"><span class="masha"></span>9Телефон</td>
-                                    <td class="tl" width="150"><span class="masha"></span>10 НОО</td>
-                                    <td class="tl" width="150"><span class="masha"></span>11</td>
-                                    <td class="tl" width="150"><span class="masha"></span>12Дата Вассет</td>
-                                    <td class="tl" width="150"><span class="masha"></span>13Виздровал</td>
-                                    <td class="tl" width="150"><span class="masha"></span>14МТР</td>
-                                    </tr>
-                                <tr>
-                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.id_object }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.name }}</td> 
-                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.post_status }}</td> 
-                                    <td class="td" width="150"><span class="masha"></span>«& nbsp;»{{ objectone.options }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>5{{ objectone.cur_organization }}</td> 
-                                    <td class="td" width="150"><span class="masha"></span>6{{ objectone.address }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>7{{ objectone.yandex_maps }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>8{{ objectone.google_maps }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>9{{ objectone.phone }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>10{{ objectone.senjor_guard }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>11{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>12{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="td" width="150"><span class="masha"></span>13{{ objectone.MTR }}</td>
-                                </tr>
-                            </div>
-                        </tbody>
-                    </table>            
-          </div>
-       </div>
-    </div>
-</cdk-virtual-scroll-viewport>
-
-<!--
-        <div>{{ objectone.id_object }}</div>
-        <div>{{ objectone.name }} </div>
-        <div>{{ objectone.post_status }}</div> 
-        <div>{{ objectone.object_type }}</div> 
-        <div>{{ objectone.options }}</div> 
-        <div>{{ objectone.cur_organization }}</div> 
-        <div>{{ objectone.address }}</div> 
-        <div>{{ objectone.yandex_maps }}</div> 
-        <div>{{ objectone.google_maps }}</div> 
-        <div>{{ objectone.phone }}</div> 
-        <div>{{ objectone.senjor_guard }}</div> 
-        <div>{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</div> 
-        <div>{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</div> 
-        <div>{{ objectone.MTR }}</div>
--->  
+            <h1 class="m-3">Объекты</h1> 
+            <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="30" class="example-viewport">
+            <!-- <cdk-virtual-scroll-viewport [itemSize]="20"> -->
+            
+            <table>
+                <thead>
+                 <tr>
+                    <th class="tl">#</th> 
+                    <th class="tl">Название</th> 
+                    <th class="tl">Статус</th> 
+                    <th class="tl">Опции</th>
+                    <th class="tl">Организация</th>
+                    <th class="tl">Телефон</th> 
+                    <th class="tl">Адрес</th>
+                    <th class="tl">Яндекс Карта</th>
+                    <th class="tl">Google Карта</th>
+                    <th class="tl">НОО</th>
+                    <th class="tl">выставлен</th>
+                    <th class="tl">Виздровал</th>
+                 
+                </tr>
+            </thead>
+                <tbody>
+                <tr *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+                               
+                <td class="td">{{ objectone.id_object}}</td>
+                <td class="td">{{ objectone.name}}</td> 
+                <td class="td">{{ objectone.post_status}}</td> 
+                <td class="td">{{ objectone.options}}</td>
+                <td class="td">{{ objectone.cur_organization}}</td> 
+                <td class="td">{{ objectone.phone}}</td>
+                <td class="td">{{ objectone.address}}</td>
+                <td class="td">{{ objectone.yandex_maps}}</td>
+                <td class="td">{{ objectone.google_maps}}</td>
+                <td class="td">{{ objectone.senjor_guard }}</td>
+                <td class="td">{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                <td class="td">{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
+                <!-- <td class="td">{{ objectone.MTR }}</td>  -->
+                </tr>                                
+    </tbody>        
+        </table>            
+                </cdk-virtual-scroll-viewport>

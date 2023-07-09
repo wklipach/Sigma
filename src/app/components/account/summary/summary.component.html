@@ -68,35 +68,44 @@
     <div class="col-lg-8">
   <span class="fw-semibold fs-5 text-gray-800"> {{this.ShowRes.typeperson}} </span>
     </div>
+  </div>
 
+ <div class="row mb-3">
     <label class="col-lg-4 fs-5 fw-semibold text-muted">Должность</label>
     
     <div class="col-lg-8">
       <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes.position}}</span>
     </div>
-     
+ </div>
+
+ <div class="row mb-3">
     <label class="col-lg-4 fs-5 fw-semibold text-muted">Статус</label>
     
     <div class="col-lg-8">
       <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes.status}}</span>
     </div>
+  </div>  
+
+  <div class="row mb-3">
     <label class="col-lg-4 fs-5 fw-semibold text-muted">Дата рождения</label>
     
     <div class="col-lg-8">
       <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes.DateBirth | date:'dd-MM-YYY'}}</span>
     </div>
+</div>
+
 
     <div class="row mb-3">
       <label class="col-lg-4 fs-5 fw-semibold text-muted">Возраст</label>
         <div class="col-lg-8">
       <span class="fw-semibold fs-5 text-gray-800">{{this.ShowRes.Age}}</span>
         </div>
+</div>
 
+    <div class="row mb-3">  
     <label class="col-lg-4 fs-5 fw-semibold text-muted">ОЛЛР</label>
     
-
-
-    <div class="col-lg-8">
+    <div class="d-flex col-lg-8">
       <div *ngFor="let item of this.ShowOLLR">
 
                <ng-container *ngIf="item?.bitOverdue == true">
@@ -108,14 +117,54 @@
 
       </div>
     </div>  
+  </div> 
 
-<!--
-    <div class="col-lg-8">
-      <span class="badge rounded-pill text-bg-danger fs-6 me-2">002-ОУ</span>
-      <span class="badge rounded-pill text-bg-danger fs-6 me-2">003-ОУ</span>
-      <span class="badge rounded-pill text-bg-success fs-6 me-2">РСЛА</span>
-      <span class="badge rounded-pill text-bg-success fs-6 me-2">ЛК СПК</span>
-      <span class="badge rounded-pill text-bg-success fs-6 me-2">ЛК СП1</span>
+    <div class="row mb-3">
+      <label class="col-lg-4 fs-5 fw-semibold text-muted">Рост
+   </label>
+      <div class="col-lg-8 d-flex align-items-center">
+      <span class="fw-semibold fs-5 text-gray-800 me-2">180</span>
+      </div>
     </div>
-  </div>
--->  
+
+    <div class="row mb-3">
+      <label class="col-lg-4 fs-5 fw-semibold text-muted">Вес
+   </label>
+      <div class="col-lg-8 d-flex align-items-center">
+      <span class="fw-semibold fs-5 text-gray-800 me-2">85</span>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-lg-4 fs-5 fw-semibold text-muted">Пустой
+   </label>
+      <div class="col-lg-8 d-flex align-items-center">
+      <span class="fw-semibold fs-5 text-gray-800 me-2">Пустой</span>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-lg-4 fs-5 fw-semibold text-muted">Пустой
+   </label>
+      <div class="col-lg-8 d-flex align-items-center">
+      <span class="fw-semibold fs-5 text-gray-800 me-2">Пустой</span>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-lg-4 fs-5 fw-semibold text-muted">Пустой
+   </label>
+      <div class="col-lg-8 d-flex align-items-center">
+      <span class="fw-semibold fs-5 text-gray-800 me-2">Пустой</span>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-lg-4 fs-5 fw-semibold text-muted">Пустой
+   </label>
+      <div class="col-lg-8 d-flex align-items-center">
+      <span class="fw-semibold fs-5 text-gray-800 me-2">Пустой</span>
+      </div>
+    </div>
+<!-- 
+    <a class="btn btn-primary" href="https://yandex.ru/maps/213/moscow/search/%D0%B3.%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F%20%D0%AF%D0%BA%D0%B8%D0%BC%D0%B0%D0%BD%D0%BA%D0%B0%2C%2021" role="button">Yandex</a> -->

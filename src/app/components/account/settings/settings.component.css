@@ -1,0 +1,10 @@
+.upload-photo{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+.container{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column; 
+}
