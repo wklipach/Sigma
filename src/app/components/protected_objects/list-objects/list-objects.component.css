@@ -52,3 +52,15 @@ td a {
   white-space: nowrap;*img src="image.jpg">
 </td>/
 */
+
+.btn.btn-primary{
+  color: #fff;
+  background-color: #386bc0 !important;
+  font-weight: semibold !important;
+ }
+ .btn.btn-primary:hover{
+color: white !important;
+font-weight: bold !important;
+background-color: #386bc0 !important; 
+cursor: pointer;
+}

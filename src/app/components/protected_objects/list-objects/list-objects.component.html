@@ -1,5 +1,12 @@
-
-            <h1 class="m-3">Объекты</h1> 
+       
+       <h1 class="m-3">Объекты</h1> 
+       <div class="input-group rounded">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <span class="input-group-text border-0" id="search-addon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+       
             <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="30" class="example-viewport">
             <!-- <cdk-virtual-scroll-viewport [itemSize]="20"> -->
             
@@ -16,9 +23,9 @@
                     <th class="tl">Яндекс Карта</th>
                     <th class="tl">Google Карта</th>
                     <th class="tl">НОО</th>
-                    <th class="tl">выставлен</th>
-                    <th class="tl">снят</th>
-                 
+                    <th class="tl">Выставлен Дата</th>
+                    <th class="tl">Снят Дата</th>
+                    <th class="tl">МТР</th>
                 </tr>
             </thead>
                 <tbody>
@@ -54,8 +61,8 @@
                     {{ objectone.address}}
                 </td>
 
-                <td class="td"><a href="{{ objectone.yandex_maps}}" class="btn btn-primary">Яндекс карта</a></td>
-                <td class="td"><a href="{{ objectone.google_maps}}" class="btn btn-primary">Гугл карта</a></td>
+                <td class="td"><a href="{{ objectone.yandex_maps}}" class="btn btn-primary">Яндекс</a></td>
+                <td class="td"><a href="{{ objectone.google_maps}}" class="btn btn-primary">Google</a></td>
                 
 
 
@@ -63,6 +70,7 @@
                 <td class="td">{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
                 <td class="td">{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
                 <!-- <td class="td">{{ objectone.MTR }}</td>  -->
+                <td class="td">Пистолет</td>
                 </tr>                                
     </tbody>        
         </table>            

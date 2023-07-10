@@ -1,2 +1,12 @@
-
+#btnpwd{
+    color: #fff;
+    background-color: #386bc0 !important; 
+    cursor: pointer !important;
+    }
+#btnpwd:hover{
+color: #fff !important;
+font-weight: bold !important;
+background-color: #386bc0 !important; 
+cursor: pointer;
+}
 
