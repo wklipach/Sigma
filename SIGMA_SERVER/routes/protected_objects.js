@@ -18,6 +18,14 @@ router.get('/', async function(req, res, next) {
   });
 
 
+router.post('/', async function(req, res) {
+    if (req.body['text'] && req.body['id_object'] && req.body['field'] && req.body['id_user']) {
+        const result = await asyncUpdateProtectedObject(req.body['text'], req.body['id_object'], req.body['field'], req.body['id_user']);
+        res.send(result);
+    }
+});
+
+
   async function asyncProtectedObjects() {
     let conn = await pool.getConnection();
     try {
@@ -49,6 +57,43 @@ router.get('/', async function(req, res, next) {
           if (conn) conn.release(); 
     }
   }
+
+
+  async function asyncUpdateProtectedObject(text, id_object, field, id_user) {
+    let conn = await pool.getConnection();
+    try {
+  
+        const params = [id_object];
+        const sQuery = 
+        "update protected_object set `"+field+"`="+"'"+text+"'"+" where id_object=?";
+
+        const paramsJournal = [text, id_object, field, id_user];
+        const sJournal = 
+        "insert protected_object_log (`newvalue`, `id_object`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+
+        const paramsCheck = [id_object];
+        const sCheck = 
+        "select `"+field+"` from protected_object where id_object=?";
+
+        console.log('sCheck=', sCheck);
+        const resCheck = await conn.query(sCheck, paramsCheck);
+        console.log('resCheck=', resCheck, 'resCheck[0]=', resCheck[0]);
+
+        if (resCheck[0].options == text) {
+          return JSON.stringify(resCheck);
+        } else {
+          const resObectUpdate = await conn.query(sQuery, params);
+          await conn.query(sJournal, paramsJournal);
+          return JSON.stringify(resObectUpdate);
+        }
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+  
 
 
   module.exports = router;

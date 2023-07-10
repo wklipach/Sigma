@@ -17,22 +17,46 @@
                     <th class="tl">Google Карта</th>
                     <th class="tl">НОО</th>
                     <th class="tl">выставлен</th>
-                    <th class="tl">Виздровал</th>
+                    <th class="tl">снят</th>
                  
                 </tr>
             </thead>
                 <tbody>
-                <tr *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+                <tr *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item">
                                
                 <td class="td">{{ objectone.id_object}}</td>
-                <td class="td">{{ objectone.name}}</td> 
+                <td class="td" id="name" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'name')" 
+                                                                   (keypress)="maxInputLength($event,250)" 
+                                                                   (paste)="maxPasteLength($event,250)" >
+                    {{ objectone.name}}
+                </td> 
+
                 <td class="td">{{ objectone.post_status}}</td> 
-                <td class="td">{{ objectone.options}}</td>
+                <td class="td" id="options" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'options')" 
+                                                                   (keypress)="maxInputLength($event,250)" 
+                                                                   (paste)="maxPasteLength($event,250)" >
+                    {{ objectone.options}}
+                </td>
+
                 <td class="td">{{ objectone.cur_organization}}</td> 
-                <td class="td">{{ objectone.phone}}</td>
-                <td class="td">{{ objectone.address}}</td>
+
+                <td class="td" id="phone" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'phone')" 
+                                                                    (keypress)="maxInputLength($event,250)" 
+                                                                    (paste)="maxPasteLength($event,250)" >
+                    {{ objectone.phone }}
+                </td>
+
+
+                <td class="td" id="address" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'address')" 
+                                                                   (keypress)="maxInputLength($event,250)" 
+                                                                   (paste)="maxPasteLength($event,250)" >
+                    {{ objectone.address}}
+                </td>
+
                 <td class="td">{{ objectone.yandex_maps}}</td>
                 <td class="td">{{ objectone.google_maps}}</td>
+
+
                 <td class="td">{{ objectone.senjor_guard }}</td>
                 <td class="td">{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
                 <td class="td">{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>

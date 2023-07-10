@@ -52,4 +52,45 @@ export class ListObjectsComponent {
   }
  
 
+
+
+  myUpdateClick(x: any, id_object: number, field: string) {
+    
+    let text = x.innerText;
+    if (!text ) text='';
+    console.log(text, id_object, field);
+
+
+    this.listobjectsserv.updateProtectedOne(text, id_object.toString(), field).subscribe( (res: any) =>
+    {
+      console.log('res update = ', res);
+    } );
+
+
+  }
+
+  
+  maxInputLength(e: Event, iLength: number) {
+      
+    const text =(e.target! as HTMLInputElement).innerText;
+    console.log('text=', text, 'text.length=', text.length);
+    if (text.length>=iLength) {
+      e.preventDefault();
+     }
+
+  }
+
+
+  maxPasteLength(e: ClipboardEvent, iLength: number) {
+
+    let clipboardData = e.clipboardData;
+    var s = clipboardData!.getData('text')
+    if (s.length>=iLength) {
+      e.preventDefault();
+     }
+
+
+  }
+
+
 }
