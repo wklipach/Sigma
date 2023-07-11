@@ -98,7 +98,7 @@ export class ListObjectsComponent {
         this.ShowObjects.forEach((el)=>
         {
           el.postwassetdate_str = this.datePipe.transform(el.postwasset_date, 'yyyy-MM-dd') || undefined;
-          el.withdrawaldate_str = this.datePipe.transform(el.withdrawaldate_str, 'yyyy-MM-dd') || undefined;
+          el.withdrawaldate_str = this.datePipe.transform(el.withdrawal_date, 'yyyy-MM-dd') || undefined;
         });
 
 
