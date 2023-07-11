@@ -25,5 +25,10 @@ export class ListobjectsService {
   }
 
 
+  updateProtectedSmallGuide(text: string, id_object: string, field: string) {
+    const sUrl = this.gr.sUrlGlobal + 'protected_objects';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {text, id_object, field, id_user});
+  }
 
 }

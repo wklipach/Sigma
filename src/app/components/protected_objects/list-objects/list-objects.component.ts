@@ -22,7 +22,6 @@ interface IObjectOne {
   name?: string; 
   id_post_status?: string; 
   post_status?: string; 
-  object_type?: string; 
   options?: string; 
   id_organization?: string; 
   cur_organization?: string;   
@@ -38,6 +37,11 @@ interface IObjectOne {
   withdrawaldate_str?: string;  
   id_mtr?: string; 
   MTR?: string; 
+  id_customer?: string; 
+  customer?: string; 
+  id_object_type?: string; 
+  object_type?: string; 
+
 };
 
 
@@ -55,6 +59,8 @@ export class ListObjectsComponent {
   guideOrganization:  ISmallGuide[] = [];
   guideMTR:  ISmallGuide[] = [];
   guideSenjorGuard:  ISenjorGuardGuide[] = [];
+  guideCustomers:  ISmallGuide[] = [];
+  guideObjectType:  ISmallGuide[] = [];
 
   @ViewChild('fareObjects') virtualScroll!: CdkVirtualScrollViewport;
 
@@ -87,6 +93,16 @@ export class ListObjectsComponent {
     this.servguide.getSmallGuide('guide_organization').subscribe( (value: any) => {
       this.guideOrganization = value; 
       console.log('guideOrganization', this.guideOrganization);
+  });
+
+   this.servguide.getSmallGuide('guide_customers').subscribe( (value: any) => {
+    this.guideCustomers = value; 
+    console.log('guideCustomers', this.guideCustomers);
+  });
+
+  this.servguide.getSmallGuide('guide_object_type').subscribe( (value: any) => {
+    this.guideObjectType = value; 
+    console.log('guideObjectType', this.guideObjectType);
   });
     
     
