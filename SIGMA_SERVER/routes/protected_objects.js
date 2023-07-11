@@ -32,6 +32,7 @@ router.post('/', async function(req, res) {
   
         const sQuery = 
         'SELECT po.id_object, po.`name`, '+
+        'gps.`id` as id_post_status, '+
         'gps.`name` as post_status, '+
         'got.`name` as object_type, '+
         '`options`, '+
