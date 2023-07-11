@@ -40,11 +40,8 @@
 
                 <td class="td">
                   
-                  <!--
-                  {{ objectone.post_status}}
-                  -->
 
-
+                <!-- ПОСТ ВЫСТАВЛЕН ИЛИ СНЯТ-->    
                   <select [ngModel]="objectone.id_post_status" >
                     <option *ngFor="let poststatus of this.guidePostStatus" [value]="poststatus.id">{{poststatus.name}}</option>
                   </select>
@@ -58,7 +55,14 @@
 
                 </td>
 
-                <td class="td">{{ objectone.cur_organization}}</td> 
+                <!-- ОРГАНИЗАЦИИ К КОТОРЫМ ОТНОСИТСЯ СОТРУДНИК-->
+                <td class="td">
+                <select [ngModel]="objectone.id_organization" >
+                    <option *ngFor="let organization of this.guideOrganization" [value]="organization.id">{{organization.name}}</option>
+                  </select>
+                </td> 
+
+
 
                 <td class="td" id="phone" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'phone')" 
                                                                     (keypress)="maxInputLength($event,250)" 
@@ -77,39 +81,32 @@
                 <td class="td"><a href="{{ objectone.google_maps}}" class="btn btn-primary">Google</a></td>
                 
 
+                <!--  НАЧАЛЬНИК ОХРАНЫ ОБЪЕКТА -->
+                <td class="td">
+                <select [ngModel]="objectone.id_senjor_guard">
+                    <option *ngFor="let gsg of this.guideSenjorGuard" [value]="gsg.id_staff">{{gsg.fio}}</option>
+                </select>
+                </td>
 
-                <td class="td">{{ objectone.senjor_guard }}</td>
-                <td class="td">{{ objectone.postwasset_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                <td class="td">{{ objectone.withdrawal_date  | date: "MMM d, y, h:mm:ss"  }}</td>
-                <!-- <td class="td">{{ objectone.MTR }}</td>  -->
-                <td class="td">Пистолет</td>
-                </tr>                                
+                <!--  ДАТА ПОСТАНОВКИ ОХРАНЫ -->
+                <td class="td">
+                    <input type="date" [value]="objectone.postwassetdate_str"  />
+                </td>
+
+                <!--  ДАТА СНЯТИЯ ОХРАНЫ -->
+                <td class="td">
+                    <input type="date" [value]="objectone.withdrawaldate_str"  />
+                </td>
+
+                <!-- МТР-->
+                <td class="td">
+                        <select [ngModel]="objectone.id_mtr" >
+                            <option *ngFor="let mtr of this.guideMTR" [value]="mtr.id">{{mtr.name}}</option>
+                        </select>
+                    </td> 
+
+               </tr>                                
     </tbody>        
         </table>            
                 </cdk-virtual-scroll-viewport>
 
-
-
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown link
-                    </a>
-                  
-                    <ul class="dropdown-menu" style="">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </div>
-
-
-
-
-                
-
-
-                <select>
-                  <option></option>
-                  <option>Выставлен</option>
-                  <option>Снят</option>
-                  </select>

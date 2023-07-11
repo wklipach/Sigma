@@ -36,18 +36,21 @@ router.post('/', async function(req, res) {
         'gps.`name` as post_status, '+
         'got.`name` as object_type, '+
         '`options`, '+
+        'gor.`id` as id_organization, '+
         'gor.`name` as cur_organization, '+
         'po.address, po.yandex_maps, po.google_maps, po.phone, '+
+        'po.id_senjor_guard, '+
         's.fio as `senjor_guard`, '+
         'po.postwasset_date, po.withdrawal_date, '+
+        'gm.`id` as id_mtr, '+
         'gm.name as MTR '+
         ''+
         'FROM protected_object po '+
         'LEFT JOIN guide_post_status gps on gps.id = po.post_status '+
         'LEFT JOIN guide_object_type got on po.id_object_type=got.id '+
-        'LEFT JOIN guide_organization gor on po.id_organization=gor.id_organization '+
+        'LEFT JOIN guide_organization gor on po.id_organization=gor.id '+
         'LEFT JOIN staff s on s.id_staff=po.id_senjor_guard '+
-        'LEFT JOIN guide_mtr gm on gm.id_mtr =po.id_mtr '+
+        'LEFT JOIN guide_mtr gm on gm.id =po.id_mtr '+
         'ORDER BY po.id_object ASC';
  
         const resProtectedObjects = await conn.query(sQuery);
