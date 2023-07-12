@@ -23,6 +23,28 @@ router.post('/', async function(req, res) {
         const result = await asyncUpdateProtectedObject(req.body['text'], req.body['id_object'], req.body['field'], req.body['id_user']);
         res.send(result);
     }
+
+    if (req.body['id_smallguide'] && req.body['text_guide'] && req.body['id_object'] && req.body['field'] && req.body['id_user']) {
+      const result = await asyncUpdateProtectedObjectSmallGuide
+                          (req.body['id_smallguide'], req.body['text_guide'], req.body['id_object'], req.body['field'], req.body['id_user']);
+      res.send(result);
+     }
+
+
+     if (req.body['date'] && req.body['id_object'] && req.body['field'] && req.body['id_user']) {
+      const result = await asyncUpdateProtectedObjectDate
+                          (req.body['date'], req.body['id_object'], req.body['field'], req.body['id_user']);
+      res.send(result);
+     }
+
+
+     if (req.body['pNull'] && req.body['id_object'] && req.body['field'] && req.body['id_user']) {
+      const result = await asyncUpdateProtectedObjectDateNull
+                          (req.body['id_object'], req.body['field'], req.body['id_user']);
+      res.send(result);
+     }
+
+
 });
 
 
@@ -87,7 +109,7 @@ router.post('/', async function(req, res) {
         const resCheck = await conn.query(sCheck, paramsCheck);
         console.log('resCheck=', resCheck, 'resCheck[0]=', resCheck[0]);
 
-        if (resCheck[0].options == text) {
+        if (resCheck[0][field] == text) {
           return JSON.stringify(resCheck);
         } else {
           const resObectUpdate = await conn.query(sQuery, params);
@@ -102,6 +124,122 @@ router.post('/', async function(req, res) {
     }
   }
   
+
+
+
+  
+  async function asyncUpdateProtectedObjectDateNull(id_object, field, id_user) {
+    let conn = await pool.getConnection();
+    try {
+ 
+        const params = [id_object];
+        const sQuery = 
+        "update protected_object set `"+field+"`= null where id_object=?";
+
+        const paramsJournal = [id_object, field, id_user];
+        const sJournal = 
+        "insert protected_object_log (`newvalue`, `id_object`, `field`, `id_user`, `date_oper`) value('', ?, ?, ?, now())";
+
+        const paramsCheck = [id_object];
+        const sCheck = 
+        "select `"+field+"` from protected_object where id_object=?";
+
+        const resCheck = await conn.query(sCheck, paramsCheck);
+        // console.log('resCheck[0][field]=', resCheck[0][field]);
+
+        if (resCheck[0][field] == '' || resCheck[0][field] == null) {
+          return JSON.stringify(resCheck);
+        } else {
+
+          // console.log('sQuery=', sQuery);
+          const resObectUpdate = await conn.query(sQuery, params);
+          await conn.query(sJournal, paramsJournal);
+          return JSON.stringify(resObectUpdate);
+        }
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+
+  
+  async function asyncUpdateProtectedObjectDate(date, id_object, field, id_user) {
+    let conn = await pool.getConnection();
+    try {
+ 
+        date = date.replace("Z", " ").replace("T", " ");
+
+        const params = [id_object];
+        const sQuery = 
+        "update protected_object set `"+field+"`="+"'"+date+"'"+" where id_object=?";
+
+        const paramsJournal = [date, id_object, field, id_user];
+        const sJournal = 
+        "insert protected_object_log (`newvalue`, `id_object`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+
+        const paramsCheck = [id_object];
+        const sCheck = 
+        "select `"+field+"` from protected_object where id_object=?";
+
+        const resCheck = await conn.query(sCheck, paramsCheck);
+        // console.log('resCheck[0][field]=', resCheck[0][field]);
+
+        if (resCheck[0][field] == date) {
+          return JSON.stringify(resCheck);
+        } else {
+
+          // console.log('sQuery=', sQuery);
+          const resObectUpdate = await conn.query(sQuery, params);
+          await conn.query(sJournal, paramsJournal);
+          return JSON.stringify(resObectUpdate);
+        }
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+
+
+  async function asyncUpdateProtectedObjectSmallGuide(id_smallguide, text_guide, id_object, field, id_user) {
+    let conn = await pool.getConnection();
+    try {
+  
+        const params = [id_object];
+        const sQuery = 
+        "update protected_object set `"+field+"`="+"'"+id_smallguide+"'"+" where id_object=?";
+
+        const paramsJournal = [text_guide, id_object, field, id_user];
+        const sJournal = 
+        "insert protected_object_log (`newvalue`, `id_object`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+
+        const paramsCheck = [id_object];
+        const sCheck = 
+        "select `"+field+"` from protected_object where id_object=?";
+
+        console.log('sCheck=', sCheck);
+        const resCheck = await conn.query(sCheck, paramsCheck);
+        console.log('resCheck=', resCheck, 'resCheck[0]=', resCheck[0]);
+
+        if (resCheck[0].options == text_guide) {
+          return JSON.stringify(resCheck);
+        } else {
+          const resObectUpdate = await conn.query(sQuery, params);
+          await conn.query(sJournal, paramsJournal);
+          return JSON.stringify(resObectUpdate);
+        }
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
 
 
   module.exports = router;

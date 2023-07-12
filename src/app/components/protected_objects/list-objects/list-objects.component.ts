@@ -45,14 +45,13 @@ interface IObjectOne {
 };
 
 
-
-
 @Component({
   selector: 'app-list-objects',
   templateUrl: './list-objects.component.html',
   styleUrls: ['./list-objects.component.css']
 })
 export class ListObjectsComponent {
+
 
   ShowObjects: IObjectOne[] = [];
   guidePostStatus:  ISmallGuide[] = [];
@@ -113,8 +112,8 @@ export class ListObjectsComponent {
         // posts.forEach((post)=>post.id===1?post.text='other text':post.text=post.text)
         this.ShowObjects.forEach((el)=>
         {
-          el.postwassetdate_str = this.datePipe.transform(el.postwasset_date, 'yyyy-MM-dd') || undefined;
-          el.withdrawaldate_str = this.datePipe.transform(el.withdrawal_date, 'yyyy-MM-dd') || undefined;
+          el.postwassetdate_str = this.datePipe.transform(el.postwasset_date, 'yyyy-MM-dd') || '';
+          el.withdrawaldate_str = this.datePipe.transform(el.withdrawal_date, 'yyyy-MM-dd') || '';
         });
 
 
@@ -145,6 +144,31 @@ export class ListObjectsComponent {
 
   }
 
+
+  onChangeSmallGuide(ev: any,  smallGuide:  ISmallGuide[], id_object: string, field: string) {
+    if (ev) {
+     let res = smallGuide.find( (el) => Number(el.id) == Number(ev.target.value));
+     if (res) {
+      if (!res.name) res.name='';
+      this.listobjectsserv.updateProtectedSmallGuide(Number(res.id), res.name, id_object, field).subscribe(value => {
+        console.log(value);
+      })
+     }
+    }
+  }
+    
+  onChangeSenjorGuard(ev: any,  senjorGuide:  ISenjorGuardGuide[], id_object: string, field: string) {
+    if (ev) {
+     let res = senjorGuide.find( (el) => Number(el.id_staff) == Number(ev.target.value));
+     if (res) {
+      if (!res.fio) res.fio='';
+      this.listobjectsserv.updateProtectedSmallGuide(Number(res.id_staff), res.fio, id_object, field).subscribe(value => {
+        console.log(value);
+      })
+     }
+    }
+  }
+
   
   maxInputLength(e: Event, iLength: number) {
       
@@ -164,7 +188,49 @@ export class ListObjectsComponent {
     if (s.length>=iLength) {
       e.preventDefault();
      }
+  }
 
+
+  focusOutFunction(e: any) {
+    e.target.type = '';
+    e.target.value = this.datePipe.transform(e.target.value, 'dd.MM.yyyy') || '';
+  }
+
+  focusFunction(e: any, datestr: any) {
+    e.target.type = 'date';
+    e.target.value =  datestr;
+  }
+
+
+  idDateisValid (date: Date) {
+    return date.getTime() === date.getTime();
+  }; 
+
+
+  setDatePostwassetdate($event: any, id_object: number) {
+
+      let date = new Date($event.target.value);
+       
+      if (this.idDateisValid(date)) {
+        // console.log($event.target.value, date);
+        this.listobjectsserv.updateProtectedDate(date, id_object.toString(), 'postwasset_date').subscribe( (res: any) => { console.log('res update = ', res); } );
+      } else {
+        // console.log($event.target.value, 'даты нет!');
+        this.listobjectsserv.updateProtectedDateNull(id_object.toString(), 'postwasset_date').subscribe( (res: any) => { console.log('res update = ', res); } );
+      }
+  }
+
+
+  setDateWithdrawaldate($event: any, id_object: number) {
+    let date = new Date($event.target.value);
+       
+    if (this.idDateisValid(date)) {
+      // console.log($event.target.value, date);
+      this.listobjectsserv.updateProtectedDate(date, id_object.toString(), 'withdrawal_date').subscribe( (res: any) => { console.log('res update = ', res); } );
+    } else {
+      // console.log($event.target.value, 'даты нет!');
+      this.listobjectsserv.updateProtectedDateNull(id_object.toString(), 'withdrawal_date').subscribe( (res: any) => { console.log('res update = ', res); } );
+    }
 
   }
 

@@ -25,10 +25,30 @@ export class ListobjectsService {
   }
 
 
-  updateProtectedSmallGuide(text: string, id_object: string, field: string) {
+
+
+  updateProtectedDate(date: Date | null, id_object: string, field: string) {
+
     const sUrl = this.gr.sUrlGlobal + 'protected_objects';
     const id_user = this.auth.getSessionUser().id_user;
-    return this.http.post(sUrl, {text, id_object, field, id_user});
+    return this.http.post(sUrl, {date, id_object, field, id_user});
+  }
+
+
+  updateProtectedDateNull(id_object: string, field: string) {
+    const sUrl = this.gr.sUrlGlobal + 'protected_objects';
+    const pNull = 'pNull';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {pNull, id_object, field, id_user});
+  }
+
+
+
+
+  updateProtectedSmallGuide(id_smallguide: number, text_guide: string, id_object: string, field: string) {
+    const sUrl = this.gr.sUrlGlobal + 'protected_objects';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {id_smallguide, text_guide, id_object, field, id_user});
   }
 
 }

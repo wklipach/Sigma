@@ -45,7 +45,7 @@
                   
 
                 <!-- ПОСТ ВЫСТАВЛЕН ИЛИ СНЯТ-->    
-                  <select [ngModel]="objectone.id_post_status" >
+                  <select [ngModel]="objectone.id_post_status" (change)="onChangeSmallGuide($event, this.guidePostStatus, objectone.id_object, 'post_status' )" >
                     <option *ngFor="let poststatus of this.guidePostStatus" [value]="poststatus.id">{{poststatus.name}}</option>
                   </select>
 
@@ -60,7 +60,7 @@
 
                 <!-- ОРГАНИЗАЦИИ К КОТОРЫМ ОТНОСИТСЯ СОТРУДНИК-->
                 <td class="td">
-                <select [ngModel]="objectone.id_organization" >
+                <select [ngModel]="objectone.id_organization" (change)="onChangeSmallGuide($event, this.guideOrganization, objectone.id_object, 'id_organization')">
                     <option *ngFor="let organization of this.guideOrganization" [value]="organization.id">{{organization.name}}</option>
                   </select>
                 </td> 
@@ -86,38 +86,45 @@
 
                 <!--  НАЧАЛЬНИК ОХРАНЫ ОБЪЕКТА -->
                 <td class="td">
-                <select [ngModel]="objectone.id_senjor_guard">
+                <select [ngModel]="objectone.id_senjor_guard" (change)="onChangeSenjorGuard($event, this.guideSenjorGuard, objectone.id_object, 'id_senjor_guard')">
                     <option *ngFor="let gsg of this.guideSenjorGuard" [value]="gsg.id_staff">{{gsg.fio}}</option>
                 </select>
                 </td>
 
                 <!--  ДАТА ПОСТАНОВКИ ОХРАНЫ -->
                 <td class="td">
-                    <input type="date" [value]="objectone.postwassetdate_str"  />
+                    <!--<input type="date" [value]="objectone.postwassetdate_str"  /> -->
+                    <input name="date" type="text" (focus)="focusFunction($event, objectone.postwassetdate_str)" 
+                                                   (focusout)="focusOutFunction($event)" 
+                                                   (change)="setDatePostwassetdate($event, objectone.id_object)"
+                                                   value="{{objectone.postwassetdate_str | date: 'dd.MM.yyyy'}}">
                 </td>
 
                 <!--  ДАТА СНЯТИЯ ОХРАНЫ -->
                 <td class="td">
-                    <input type="date" [value]="objectone.withdrawaldate_str"  />
+                    <input name="date" type="text" (focus)="focusFunction($event, objectone.withdrawaldate_str)" 
+                                                   (focusout)="focusOutFunction($event)" 
+                                                   (change)="setDateWithdrawaldate($event, objectone.id_object)"
+                                                   value="{{objectone.withdrawaldate_str | date: 'dd.MM.yyyy'}}">
                 </td>
 
                 <!-- МТР-->
                 <td class="td">
-                        <select [ngModel]="objectone.id_mtr" >
+                        <select [ngModel]="objectone.id_mtr" (change)="onChangeSmallGuide($event, this.guideMTR, objectone.id_object, 'id_mtr')">
                             <option *ngFor="let mtr of this.guideMTR" [value]="mtr.id">{{mtr.name}}</option>
                         </select>
                 </td> 
 
                 <!-- Клиент-->
                 <td class="td">
-                    <select [ngModel]="objectone.id_customer" >
+                    <select [ngModel]="objectone.id_customer" (change)="onChangeSmallGuide($event, this.guideCustomers, objectone.id_object, 'id_customer')">
                         <option *ngFor="let customer of this.guideCustomers" [value]="customer.id">{{customer.name}}</option>
                     </select>
                 </td> 
 
                 <!-- тип объекта -->
                 <td class="td">
-                    <select [ngModel]="objectone.id_object_type" >
+                    <select [ngModel]="objectone.id_object_type" (change)="onChangeSmallGuide($event, this.guideObjectType, objectone.id_object, 'id_object_type')">
                         <option *ngFor="let objecttype of this.guideObjectType" [value]="objecttype.id">{{objecttype.name}}</option>
                     </select>
                 </td> 
@@ -129,3 +136,8 @@
         </table>            
                 </cdk-virtual-scroll-viewport>
 
+
+<!--
+                <input type="date"  (focus)="focusFunction($event)"  (focusout)="focusOutFunction($event)"  />
+                <input name="date" type="text" (focus)="focusFunction($event)" (focusout)="focusOutFunction($event)">
+-->                                
