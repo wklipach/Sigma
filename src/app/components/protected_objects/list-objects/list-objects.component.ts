@@ -53,7 +53,14 @@ interface IObjectOne {
 export class ListObjectsComponent {
 
 
+  // то что показывается в таблице - ограниченно строкой поиска
   ShowObjects: IObjectOne[] = [];
+
+  // все что скачано с сервера
+  ORIGINAL_ShowObjects: IObjectOne[] = [];
+
+
+
   guidePostStatus:  ISmallGuide[] = [];
   guideOrganization:  ISmallGuide[] = [];
   guideMTR:  ISmallGuide[] = [];
@@ -75,49 +82,49 @@ export class ListObjectsComponent {
 
     this.servguide.getSenjorGuard().subscribe( (value: any) => {
       this.guideSenjorGuard = value; 
-      console.log('guideSenjorGuard', this.guideSenjorGuard);
+      //console.log('guideSenjorGuard', this.guideSenjorGuard);
     });
 
     this.servguide.getSmallGuide('guide_post_status').subscribe( (value: any) => {
         this.guidePostStatus = value; 
-        console.log('guidePostStatus', this.guidePostStatus);
+       // console.log('guidePostStatus', this.guidePostStatus);
     });
 
     this.servguide.getSmallGuide('guide_mtr').subscribe( (value: any) => {
       this.guideMTR = value; 
-      console.log('guideMTR', this.guideMTR);
+      //console.log('guideMTR', this.guideMTR);
   });
 
 
     this.servguide.getSmallGuide('guide_organization').subscribe( (value: any) => {
       this.guideOrganization = value; 
-      console.log('guideOrganization', this.guideOrganization);
+      //console.log('guideOrganization', this.guideOrganization);
   });
 
    this.servguide.getSmallGuide('guide_customers').subscribe( (value: any) => {
     this.guideCustomers = value; 
-    console.log('guideCustomers', this.guideCustomers);
+    //console.log('guideCustomers', this.guideCustomers);
   });
 
   this.servguide.getSmallGuide('guide_object_type').subscribe( (value: any) => {
     this.guideObjectType = value; 
-    console.log('guideObjectType', this.guideObjectType);
+    //console.log('guideObjectType', this.guideObjectType);
   });
     
     
       this.listobjectsserv.getProtectedObjectsOne().subscribe ( (value: any) => {
-        this.ShowObjects = value;
-
-
+        this.ORIGINAL_ShowObjects = value;
         // posts.forEach((post)=>post.id===1?post.text='other text':post.text=post.text)
-        this.ShowObjects.forEach((el)=>
+        this.ORIGINAL_ShowObjects.forEach((el)=>
         {
           el.postwassetdate_str = this.datePipe.transform(el.postwasset_date, 'yyyy-MM-dd') || '';
           el.withdrawaldate_str = this.datePipe.transform(el.withdrawal_date, 'yyyy-MM-dd') || '';
         });
 
+        // при загрузке показываем без всяких ограничений
+        this.ShowObjects = JSON.parse(JSON.stringify(this.ORIGINAL_ShowObjects));
 
-         console.log('this.ShowObjects =', this.ShowObjects);
+         //console.log('this.ShowObjects =', this.ShowObjects);
       });
 
 
@@ -138,7 +145,7 @@ export class ListObjectsComponent {
 
     this.listobjectsserv.updateProtectedOne(text, id_object.toString(), field).subscribe( (res: any) =>
     {
-      console.log('res update = ', res);
+      //console.log('res update = ', res);
     } );
 
 
@@ -151,7 +158,7 @@ export class ListObjectsComponent {
      if (res) {
       if (!res.name) res.name='';
       this.listobjectsserv.updateProtectedSmallGuide(Number(res.id), res.name, id_object, field).subscribe(value => {
-        console.log(value);
+        //console.log(value);
       })
      }
     }
@@ -163,7 +170,7 @@ export class ListObjectsComponent {
      if (res) {
       if (!res.fio) res.fio='';
       this.listobjectsserv.updateProtectedSmallGuide(Number(res.id_staff), res.fio, id_object, field).subscribe(value => {
-        console.log(value);
+        //console.log(value);
       })
      }
     }
@@ -234,5 +241,42 @@ export class ListObjectsComponent {
 
   }
 
+
+  funcSearch() {
+
+    console.log('h1');
+    let sInput = (document.getElementById('search') as HTMLInputElement).value.trim().toUpperCase();
+
+    if (sInput) {
+        // console.log('ищем=',sInput);
+        
+        const res = this.ORIGINAL_ShowObjects.filter( (el) => {
+           return (el.name &&  el.name.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.post_status && el.post_status.toUpperCase().indexOf(sInput) !=-1)  ||
+
+                  (el.options && el.options?.toUpperCase().indexOf(sInput) != -1)  ||
+                  (el.cur_organization && el.cur_organization?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.address && el.address?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.phone && el.phone?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.senjor_guard && el.senjor_guard?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.postwasset_date && el.postwasset_date?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.postwassetdate_str && el.postwassetdate_str?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.withdrawal_date && el.withdrawal_date?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.withdrawaldate_str && el.withdrawaldate_str?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.MTR && el.MTR?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.customer && el.customer?.toUpperCase().indexOf(sInput) != -1) ||
+                  (el.customer && el.customer?.toUpperCase().indexOf(sInput) != -1);
+        });
+
+        // console.log('find=', res)
+        this.ShowObjects =  JSON.parse(JSON.stringify(res));
+
+      } else {
+        console.log('обнуляем поиск');
+        // показываем без всяких ограничений
+        this.ShowObjects = JSON.parse(JSON.stringify(this.ORIGINAL_ShowObjects));
+      }
+    }
+    
 
 }
