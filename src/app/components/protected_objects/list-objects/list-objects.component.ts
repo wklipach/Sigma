@@ -242,9 +242,12 @@ export class ListObjectsComponent {
   }
 
 
-  funcSearch() {
+  onEnterSearch() {
+    this.funcSearch();
+    }
+    
 
-    console.log('h1');
+  funcSearch() {
     let sInput = (document.getElementById('search') as HTMLInputElement).value.trim().toUpperCase();
 
     if (sInput) {
