@@ -1,12 +1,10 @@
-<h1 class="m-3">
-  Объекты
-  <button (click)="addNewObject()">add</button>
-</h1> 
-       <div class="input-group rounded">
+<div class="Container d-flex flex-row p-2">
+  <h2>Объекты</h2>
+   <div class="input-group rounded  w-lg-350px ml-auto">
         <input id="search" 
-               type="search" 
+               type="search"
                class="form-control rounded" 
-               placeholder="Search" 
+               placeholder="Поиск" 
                aria-label="Search" 
                aria-describedby="search-addon" 
                (keyup.enter)="onEnterSearch()"/>
@@ -14,6 +12,8 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
+</div>
+    
        
             <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="30" class="example-viewport">
             <!-- <cdk-virtual-scroll-viewport [itemSize]="20"> -->
@@ -22,8 +22,8 @@
                 <thead>
                  <tr>
                     <th class="tl"># </th> 
-                    <th class="tl">2Название</th> 
-                    <th class="tl">3Статус</th> 
+                    <th class="tl">Название</th> 
+                    <th class="tl">Статус</th> 
                     <th class="tl">Опции</th>
                     <th class="tl">Под охраной</th>
                     <th class="tl">Телефон</th> 
@@ -37,8 +37,9 @@
                     <th class="tl">Снят Дата</th>
                     <th class="tl">МТР</th>
                     <th class="tl">Клиент</th>
-                    <th class="tl">Тип объекта</th>
-                    <th сдфыы="tl">Удалить</th>
+                     <th class="tl">Тип объекта</th>
+                     <th class="tl">Delete</th>
+                     
                 </tr>
             </thead>
                 <tbody>
@@ -59,6 +60,9 @@
                     <option *ngFor="let poststatus of this.guidePostStatus" [value]="poststatus.id">{{poststatus.name}}</option>
                   </select>
 
+                
+                
+                
                 </td> 
                 <td class="td" id="options" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'options')" 
                                                                    (keypress)="maxInputLength($event,250)" 
@@ -73,7 +77,6 @@
                     <option *ngFor="let organization of this.guideOrganization" [value]="organization.id">{{organization.name}}</option>
                   </select>
                 </td> 
-
 
                 <td class="td" id="phone" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'phone')" 
                                                                     (keypress)="maxInputLength($event,250)" 
@@ -94,11 +97,10 @@
 
                 <td class="td"><a href="{{ objectone.yandex_maps}}" class="btn btn-primary">Яндекс</a></td>
 
-
                 <td class="td"> 
                          <!-- Вызов кнопки изменения яндекса -->
                           <button type="button" 
-                          class="btn btn-primary" 
+                          class="btn btn-info" 
                           data-bs-toggle="modal" 
                           data-bs-target="#yandexModal"
                           (click)="onClickYandex(objectone.id_object, objectone.yandex_maps)">
@@ -110,7 +112,7 @@
                 <td class="td"> 
                          <!-- Вызов кнопки изменения гуггл -->                  
                           <button  type="button" 
-                           class="btn btn-primary" 
+                           class="btn btn-warning" 
                            data-toggle="modal" 
                            data-target="#googleModal"
                            (click)="onClickGoogle(objectone.id_object, objectone.google_maps)">
@@ -162,9 +164,8 @@
                     <select [ngModel]="objectone.id_object_type" (change)="onChangeSmallGuide($event, this.guideObjectType, objectone.id_object, 'id_object_type')">
                         <option *ngFor="let objecttype of this.guideObjectType" [value]="objecttype.id">{{objecttype.name}}</option>
                     </select>
-                </td> 
-
-
+                </td>
+                
                 <td>
                   <button (click)="deleteObject(objectone.id_object, objectone.name)">Удалить</button>
                 </td>
@@ -183,7 +184,7 @@
 -->                                
 
 <!-- YANDEX modal -->
-<button id="openYandexModalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yandexModal" [hidden]="true">
+<button id="openYandexModalButton" type="button" class="btn btn-Warning" data-bs-toggle="modal" data-bs-target="#yandexModal" [hidden]="true">
    YandexOpen 
 </button>
 <button id="closeYandexModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#yandexModal" [hidden]="true"  data-dismiss="modal">
@@ -195,13 +196,13 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Ссылка на Яндекс</h5>
+          <h5 class="modal-title">Внесите ссылку  Яндекс.</h5>
         </div>
         <div class="modal-body">
-          <input [(ngModel)]="this.curMaps.sLink"/>
+          <input [(ngModel)]="this.curMaps.sLink" style="width: 100%;"/>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="yandexClose()">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="yandexClose()">Закрыть</button>
           <button type="button" class="btn btn-primary" (click)="yandexSave()">Сохранить</button>
         </div>
       </div>
@@ -220,19 +221,18 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Ссылка на Google</h5>
+        <h5 class="modal-title">Внесите ссылку Google.</h5>
       </div>
       <div class="modal-body">
-        <input [(ngModel)]="this.curMaps.sLink"/>
+        <input [(ngModel)]="this.curMaps.sLink" style="width: 100%;"/>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="googleClose()">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="googleClose()">Закрыть</button>
         <button type="button" class="btn btn-primary" (click)="googleSave()">Сохранить</button>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- Удалить объект -->
 <button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
@@ -254,4 +254,8 @@ DeleteClose
     </div>
   </div>
 </div>
+</div>
+
+<div class="add">
+<button class="btn btn-success add-btn" type="button" (click)="addNewObject()">ADD </button>
 </div>

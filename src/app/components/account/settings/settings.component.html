@@ -4,7 +4,7 @@
    
     <div *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
     
-    <ng-template #contentLoadAvatar style="display: flex; flex-direction:row;">
+    <ng-template #contentLoadAvatar style="display: flex; flex-direction:column;">
         <div class="image-fluid w-125px h-125px" style="background-image: url('assets/img/blank.svg')">
         <img class="rounded image-fluid w-125px h-125px" [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
         </div>
