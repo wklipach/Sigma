@@ -30,7 +30,7 @@ router.get('/', async function(req, res, next) {
     try {
   
         const sQuery = 
-        "SELECT `id`, `name` FROM "+ sGuide+" where bitDelete = 0";
+        "SELECT `id`, `name` FROM "+ sGuide+" where bitDelete = 0 order by `name` asc";
 
         console.log('sQuery=',sQuery);
         const resPostStatus = await conn.query(sQuery);
@@ -49,7 +49,7 @@ router.get('/', async function(req, res, next) {
   
         const sQuery = 
         "SELECT gn.`id`, gn.`id_staff`, s.`fio` FROM guide_senjor_guard gn, staff s "+ 
-        "WHERE s.id_staff=gn.id_staff and  gn.bitDelete = 0 ";
+        "WHERE s.id_staff=gn.id_staff and  gn.bitDelete = 0 order by s.`fio` asc";
         const resSenjorGuard = await conn.query(sQuery);
         return JSON.stringify(resSenjorGuard);
       } catch (err) {

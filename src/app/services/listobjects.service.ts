@@ -48,7 +48,7 @@ export class ListobjectsService {
   updateProtectedSmallGuide(id_smallguide: number, text_guide: string, id_object: string, field: string) {
     const sUrl = this.gr.sUrlGlobal + 'protected_objects';
     const id_user = this.auth.getSessionUser().id_user;
-    return this.http.post(sUrl, {id_smallguide, text_guide, id_object, field, id_user});
+    return this.http.post(sUrl, {itis_smallguide: 'itis_smallguide', id_smallguide, text_guide, id_object, field, id_user});
   }
 
 

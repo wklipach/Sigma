@@ -24,7 +24,7 @@ router.post('/', async function(req, res) {
         res.send(result);
     }
 
-    if (req.body['id_smallguide'] && req.body['text_guide'] && req.body['id_object'] && req.body['field'] && req.body['id_user']) {
+    if (req.body['itis_smallguide']) {
       const result = await asyncUpdateProtectedObjectSmallGuide
                           (req.body['id_smallguide'], req.body['text_guide'], req.body['id_object'], req.body['field'], req.body['id_user']);
       res.send(result);
@@ -210,6 +210,9 @@ router.post('/', async function(req, res) {
   async function asyncUpdateProtectedObjectSmallGuide(id_smallguide, text_guide, id_object, field, id_user) {
     let conn = await pool.getConnection();
     try {
+
+
+      console.log('text_guide');
   
         const params = [id_object];
         const sQuery = 
