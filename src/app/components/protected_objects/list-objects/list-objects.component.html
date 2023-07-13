@@ -1,5 +1,4 @@
-       
-       <h1 class="m-3">Объекты</h1> 
+<h1 class="m-3">Объекты</h1> 
        <div class="input-group rounded">
         <input id="search" 
                type="search" 
@@ -19,22 +18,23 @@
             <table>
                 <thead>
                  <tr>
-                    <th class="tl">#</th> 
-                    <th class="tl">Название</th> 
-                    <th class="tl">Статус</th> 
+                    <th class="tl"># </th> 
+                    <th class="tl">2Название</th> 
+                    <th class="tl">3Статус</th> 
                     <th class="tl">Опции</th>
-                    <th class="tl">Организация</th>
+                    <th class="tl">Под охраной</th>
                     <th class="tl">Телефон</th> 
                     <th class="tl">Адрес</th>
                     <th class="tl">Яндекс Карта</th>
+                    <th class="tl">Ссылка Y</th>
                     <th class="tl">Google Карта</th>
+                    <th class="tl">Ссылка G</th>
                     <th class="tl">НОО</th>
                     <th class="tl">Выставлен Дата</th>
                     <th class="tl">Снят Дата</th>
                     <th class="tl">МТР</th>
                     <th class="tl">Клиент</th>
-                    <th class="tl">Тип объекта</th>
-
+                     <th class="tl">Тип объекта</th>
                 </tr>
             </thead>
                 <tbody>
@@ -55,7 +55,6 @@
                     <option *ngFor="let poststatus of this.guidePostStatus" [value]="poststatus.id">{{poststatus.name}}</option>
                   </select>
 
-
                 </td> 
                 <td class="td" id="options" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'options')" 
                                                                    (keypress)="maxInputLength($event,250)" 
@@ -72,13 +71,11 @@
                 </td> 
 
 
-
                 <td class="td" id="phone" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'phone')" 
                                                                     (keypress)="maxInputLength($event,250)" 
                                                                     (paste)="maxPasteLength($event,250)" >
                     {{ objectone.phone }}
                 </td>
-
 
                 <td class="td" id="address" contenteditable="true" (blur)="myUpdateClick($event.target, objectone.id_object, 'address')" 
                                                                    (keypress)="maxInputLength($event,250)" 
@@ -92,7 +89,6 @@
                 -->
 
                 <td class="td"><a href="{{ objectone.yandex_maps}}" class="btn btn-primary">Яндекс</a></td>
-
 
 
                 <td class="td"> 
@@ -165,12 +161,10 @@
                 </td> 
 
 
-
                </tr>                                
     </tbody>        
         </table>            
                 </cdk-virtual-scroll-viewport>
-
 
 <!--
                 <input type="date"  (focus)="focusFunction($event)"  (focusout)="focusOutFunction($event)"  />
@@ -178,7 +172,6 @@
 
                 aria-labelledby="exampleModalLabel" aria-hidden="true"
 -->                                
-
 
 <!-- YANDEX modal -->
 <button id="openYandexModalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yandexModal" [hidden]="true">
@@ -206,7 +199,6 @@
     </div>
   </div>
 
-
 <!-- GOOGLE modal -->
 <button id="openGoogleModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#googleModal" [hidden]="true">
     GoogleOpen
@@ -214,7 +206,6 @@
 <button id="closeGoogleModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#googleModal" [hidden]="true"  data-dismiss="modal">
   GoogleClose
 </button>
-
 
 <div class="modal fade" tabindex="-1" role="dialog" id="googleModal">
   <div class="modal-dialog" role="document">
@@ -232,3 +223,5 @@
     </div>
   </div>
 </div>
+
+

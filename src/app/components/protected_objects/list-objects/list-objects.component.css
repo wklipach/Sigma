@@ -31,6 +31,7 @@ color: #222121;
 text-align: center;
 border: 1px dashed #cacaca;
 background-clip: padding-box;
+z-index: 999;
 }
 thead th {
   position: -webkit-sticky; /* for Safari */
@@ -63,4 +64,10 @@ color: white !important;
 font-weight: bold !important;
 background-color: #386bc0 !important; 
 cursor: pointer;
+}
+
+select {
+  border: 1px solid #fff;
+  background-color: transparent;
+  -webkit-appearance: none;
 }
