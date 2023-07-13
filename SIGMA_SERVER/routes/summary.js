@@ -46,9 +46,9 @@ router.get('/', async function(req, res, next) {
         "SELECT s.fio, s.phone, s.phone2, s.id_status, gs.name as status, s.id_position, gp.name as position, s.DateBirth, "+  
                " YEAR(CURRENT_DATE()) -  YEAR(s.DateBirth) AS Age, s.id_typeperson, gtp.name typeperson, s.rank "+
         "from staff s "+
-        "LEFT JOIN guide_status gs ON s.id_status=gs.id_status "+
-        "LEFT JOIN guide_position gp ON gp.id_position = s.id_position "+
-        "LEFT JOIN guide_typeperson gtp ON gtp.id_person = s.id_typeperson "+
+        "LEFT JOIN guide_status gs ON s.id_status=gs.id "+
+        "LEFT JOIN guide_position gp ON gp.id = s.id_position "+
+        "LEFT JOIN guide_typeperson gtp ON gtp.id = s.id_typeperson "+
         "WHERE s.id_staff=?";
 
         const resOne = await conn.query(sQuery, params);
@@ -90,7 +90,7 @@ router.get('/', async function(req, res, next) {
         const params = [id_staff];
         const sQuery = 
         "SELECT so.id_organization, g.name FROM staff_organization so "+
-        "LEFT JOIN guide_organization g ON g.id_organization=so.id_organization "+
+        "LEFT JOIN guide_organization g ON g.id=so.id_organization "+
         "WHERE id_staff=?";
 
         const resCompany = await conn.query(sQuery, params);
