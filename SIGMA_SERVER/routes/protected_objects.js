@@ -30,6 +30,11 @@ router.post('/', async function(req, res) {
       res.send(result);
      }
 
+     if (req.body['deleteObject']) {
+      const result = await asyncDeleteObject(req.body['id_object'], req.body['id_user']);
+      res.send(result);
+     }
+
 
      if (req.body['date'] && req.body['id_object'] && req.body['field'] && req.body['id_user']) {
       const result = await asyncUpdateProtectedObjectDate
@@ -43,6 +48,13 @@ router.post('/', async function(req, res) {
                           (req.body['id_object'], req.body['field'], req.body['id_user']);
       res.send(result);
      }
+
+
+     if (req.body['addObject']) {
+      const result = await asyncAddObject(req.body['id_user'], req.body['text_name']);
+      res.send(result);
+     }
+
 
 
 });
@@ -245,5 +257,59 @@ router.post('/', async function(req, res) {
     }
   }
 
+
+  async function asyncDeleteObject(id_object, id_user) {
+    let conn = await pool.getConnection();
+    try {
+
+        const params = [id_object];
+        const sQuery = 
+        "update protected_object set bitDelete=1 where id_object=?";
+
+        const paramsJournal = [id_object, id_user];
+        const sJournal = 
+        "insert protected_object_log (`newvalue`, `id_object`, `field`, `id_user`, `date_oper`) value('delete', ?, '', ?, now())";
+
+
+          const resDeleteObject = await conn.query(sQuery, params);
+          await conn.query(sJournal, paramsJournal);
+          return JSON.stringify(resDeleteObject);
+
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+  
+
+  async function asyncAddObject(id_user, text_name) {
+    let conn = await pool.getConnection();
+    try {
+
+        const sQuery = 
+        "insert protected_object(`name`) "+
+                " values ('" + text_name + "')"; 
+
+        const resAddObject = await conn.query(sQuery);
+        console.log('resAddObject=', resAddObject);
+        
+        if (resAddObject.insertId) {
+          const paramsJournal = [resAddObject.insertId, id_user];
+          const sJournal = 
+          "insert protected_object_log (`newvalue`, `id_object`, `field`, `id_user`, `date_oper`) value('insert', ?, '', ?, now())";
+          await conn.query(sJournal, paramsJournal);
+        }
+       
+          return JSON.stringify(resAddObject);
+
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  } 
 
   module.exports = router;

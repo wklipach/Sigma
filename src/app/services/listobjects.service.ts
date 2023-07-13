@@ -25,6 +25,17 @@ export class ListobjectsService {
   }
 
 
+  addObject(text_name: string) {
+    const sUrl = this.gr.sUrlGlobal + 'protected_objects';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {addObject: 'addObject', id_user, text_name});
+  }
+
+  deleteObject(id_object: string) {
+    const sUrl = this.gr.sUrlGlobal + 'protected_objects';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {deleteObject: 'deleteObject', id_object, id_user});
+  }
 
 
   updateProtectedDate(date: Date | null, id_object: string, field: string) {

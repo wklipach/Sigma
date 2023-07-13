@@ -49,6 +49,11 @@ interface IMaps {
   sLink?: string;
 }
 
+interface IDeleteObject {
+  id_objects?: number;
+  sLink?: string;
+}
+
 
 @Component({
   selector: 'app-list-objects',
@@ -59,11 +64,15 @@ export class ListObjectsComponent {
 
   // то что показывается в таблице - ограниченно строкой поиска
   ShowObjects: IObjectOne[] = [];
-
-  curMaps: IMaps = {};
-
   // все что скачано с сервера
   ORIGINAL_ShowObjects: IObjectOne[] = [];
+
+  // объект для модального окна кнопок карты
+  curMaps: IMaps = {};
+
+  //объект для модального окна удаления
+  curDeleteObject: IDeleteObject = {};
+
 
 
 
@@ -328,5 +337,70 @@ export class ListObjectsComponent {
     this.googleClose();
   }
  
+  deleteObject(id_objects: number, sLink: string) {
+      //openDeleteModalButton
+      this.curDeleteObject.sLink = sLink;
+      this.curDeleteObject.id_objects = id_objects;
+      document!.getElementById("openDeleteModalButton")!.click();
+    }
+
+
+    deleteClose() {
+      document!.getElementById("closeDeleteModalButton")!.click();
+    }
+      
+    deleteSave() {
+
+
+      if (this.curDeleteObject.id_objects) {
+
+        let idObject = this.curDeleteObject.id_objects;
+        let indexShowObjects = this.ShowObjects.findIndex( (el  =>  el.id_object == idObject.toString()));
+        this.ShowObjects.splice(indexShowObjects,1);
+        let indexOriginalShowObjects = this.ORIGINAL_ShowObjects.findIndex( (el  =>  el.id_object == idObject.toString()));
+        this.ORIGINAL_ShowObjects = this.ORIGINAL_ShowObjects.splice(indexOriginalShowObjects,1);
+
+        //refresh data
+        this.ShowObjects = [...this.ShowObjects];
+        this.ORIGINAL_ShowObjects = [...this.ORIGINAL_ShowObjects];
+
+        this.listobjectsserv.deleteObject(idObject.toString()).subscribe();
+      }
+      this.deleteClose();
+    }
+
+
+    addNewObject() {
+
+      let item: IObjectOne = {};
+      const s = 'Новый объект';
+
+      this.listobjectsserv.addObject(s).subscribe( (res: any) =>
+        {
+          if (res.insertId) {
+            item.id_object = res.insertId;
+            item.name = s;
+            this.ShowObjects.unshift(item);
+            this.ORIGINAL_ShowObjects.unshift(item);
+            this.ShowObjects = [...this.ShowObjects];
+            this.virtualScroll.scrollTo({top: 0});
+          }
+        });
+      
+
+/*      
+      item.id_object = '1000';
+      item.name = "Добавленный объект";
+      this.ShowObjects.unshift(item);
+      this.ORIGINAL_ShowObjects.unshift(item);
+
+
+      this.ShowObjects = [...this.ShowObjects];
+      this.virtualScroll.scrollTo({top: 0});
+*/
+
+    }
+        
+    
 
 }

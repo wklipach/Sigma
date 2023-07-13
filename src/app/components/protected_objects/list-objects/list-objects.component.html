@@ -1,4 +1,7 @@
-<h1 class="m-3">Объекты</h1> 
+<h1 class="m-3">
+  Объекты
+  <button (click)="addNewObject()">add</button>
+</h1> 
        <div class="input-group rounded">
         <input id="search" 
                type="search" 
@@ -34,7 +37,8 @@
                     <th class="tl">Снят Дата</th>
                     <th class="tl">МТР</th>
                     <th class="tl">Клиент</th>
-                     <th class="tl">Тип объекта</th>
+                    <th class="tl">Тип объекта</th>
+                    <th сдфыы="tl">Удалить</th>
                 </tr>
             </thead>
                 <tbody>
@@ -161,6 +165,11 @@
                 </td> 
 
 
+                <td>
+                  <button (click)="deleteObject(objectone.id_object, objectone.name)">Удалить</button>
+                </td>
+
+
                </tr>                                
     </tbody>        
         </table>            
@@ -225,3 +234,24 @@
 </div>
 
 
+<!-- Удалить объект -->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+  DeleteOpen
+</button>
+<button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+DeleteClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Удалить объект {{this.curDeleteObject.sLink}}?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Close</button>
+      <button type="button" class="btn btn-primary" (click)="deleteSave()">Сохранить</button>
+    </div>
+  </div>
+</div>
+</div>
