@@ -86,8 +86,37 @@
                     {{ objectone.address}}
                 </td>
 
+                <!--
+                (click)="onClickYandex(objectone.id_object)"
+                (click)="onClickGoogle(objectone.id_object)"
+                -->
+
                 <td class="td"><a href="{{ objectone.yandex_maps}}" class="btn btn-primary">Яндекс</a></td>
+
+
+
+                <td class="td"> 
+                         <!-- Вызов кнопки изменения яндекса -->
+                          <button type="button" 
+                          class="btn btn-primary" 
+                          data-bs-toggle="modal" 
+                          data-bs-target="#yandexModal"
+                          (click)="onClickYandex(objectone.id_object, objectone.yandex_maps)">
+                            ...
+                        </button>
+                </td>
+
                 <td class="td"><a href="{{ objectone.google_maps}}" class="btn btn-primary">Google</a></td>
+                <td class="td"> 
+                         <!-- Вызов кнопки изменения гуггл -->                  
+                          <button  type="button" 
+                           class="btn btn-primary" 
+                           data-toggle="modal" 
+                           data-target="#googleModal"
+                           (click)="onClickGoogle(objectone.id_object, objectone.google_maps)">
+                           ...
+                           </button>
+                </td>
                 
 
                 <!--  НАЧАЛЬНИК ОХРАНЫ ОБЪЕКТА -->
@@ -146,4 +175,60 @@
 <!--
                 <input type="date"  (focus)="focusFunction($event)"  (focusout)="focusOutFunction($event)"  />
                 <input name="date" type="text" (focus)="focusFunction($event)" (focusout)="focusOutFunction($event)">
+
+                aria-labelledby="exampleModalLabel" aria-hidden="true"
 -->                                
+
+
+<!-- YANDEX modal -->
+<button id="openYandexModalButton" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yandexModal" [hidden]="true">
+   YandexOpen 
+</button>
+<button id="closeYandexModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#yandexModal" [hidden]="true"  data-dismiss="modal">
+  YandexClose
+</button>
+ 
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="yandexModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Ссылка на Яндекс</h5>
+        </div>
+        <div class="modal-body">
+          <input [(ngModel)]="this.curMaps.sLink"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="yandexClose()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="yandexSave()">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- GOOGLE modal -->
+<button id="openGoogleModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#googleModal" [hidden]="true">
+    GoogleOpen
+</button>
+<button id="closeGoogleModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#googleModal" [hidden]="true"  data-dismiss="modal">
+  GoogleClose
+</button>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="googleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ссылка на Google</h5>
+      </div>
+      <div class="modal-body">
+        <input [(ngModel)]="this.curMaps.sLink"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="googleClose()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="googleSave()">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>

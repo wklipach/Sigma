@@ -77,6 +77,7 @@ router.post('/', async function(req, res) {
         'LEFT JOIN guide_mtr gm on gm.id =po.id_mtr '+
         'LEFT JOIN guide_customers gc on gc.id =po.id_customer '+
         'LEFT JOIN guide_object_type got on got.id=po.id_object_type '+
+        'where po.bitDelete = 0 '+
         'ORDER BY po.id_object ASC';
  
         const resProtectedObjects = await conn.query(sQuery);

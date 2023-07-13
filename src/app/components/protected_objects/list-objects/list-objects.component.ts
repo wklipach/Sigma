@@ -44,6 +44,11 @@ interface IObjectOne {
 
 };
 
+interface IMaps {
+  id_objects?: number;
+  sLink?: string;
+}
+
 
 @Component({
   selector: 'app-list-objects',
@@ -52,9 +57,10 @@ interface IObjectOne {
 })
 export class ListObjectsComponent {
 
-
   // то что показывается в таблице - ограниченно строкой поиска
   ShowObjects: IObjectOne[] = [];
+
+  curMaps: IMaps = {};
 
   // все что скачано с сервера
   ORIGINAL_ShowObjects: IObjectOne[] = [];
@@ -143,10 +149,9 @@ export class ListObjectsComponent {
     console.log(text, id_object, field);
 
 
-    this.listobjectsserv.updateProtectedOne(text, id_object.toString(), field).subscribe( (res: any) =>
-    {
+    this.listobjectsserv.updateProtectedOne(text, id_object.toString(), field).subscribe( (res: any) => {
       //console.log('res update = ', res);
-    } );
+    });
 
 
   }
@@ -280,6 +285,48 @@ export class ListObjectsComponent {
         this.ShowObjects = JSON.parse(JSON.stringify(this.ORIGINAL_ShowObjects));
       }
     }
+
+
+     onClickGoogle(id_oblect: number, google_link: string) {
+      this.curMaps.id_objects = id_oblect;
+      this.curMaps.sLink = google_link;
+      document!.getElementById("openGoogleModalButton")!.click();
+     }
+      
+     onClickYandex(id_oblect: number, yandex_link: string) {
+      this.curMaps.id_objects = id_oblect;
+      this.curMaps.sLink = yandex_link;
+      document!.getElementById("openYandexModalButton")!.click();
+  }
+
+
+  googleClose() {
+    document!.getElementById("closeGoogleModalButton")!.click();
+  }
+
+  yandexClose() {
+    document!.getElementById("closeYandexModalButton")!.click();
+  }
+  
+  yandexSave() {
+    if (!this.curMaps.sLink) { this.curMaps.sLink = ''; }
+    // вставляем во все массивы
+     (this.ShowObjects.find(el => el.id_object == this.curMaps.id_objects) as IObjectOne).yandex_maps = this.curMaps.sLink;
+     (this.ORIGINAL_ShowObjects.find(el => el.id_object == this.curMaps.id_objects) as IObjectOne).yandex_maps = this.curMaps.sLink;
+    // вставляем в базу
+    this.listobjectsserv.updateProtectedOne(this.curMaps.sLink, this.curMaps.id_objects!.toString(), 'yandex_maps').subscribe();
+    this.yandexClose();
+  }
     
+  googleSave() {
+    if (!this.curMaps.sLink) { this.curMaps.sLink = ''; }
+    // вставляем во все массивы
+     (this.ShowObjects.find(el => el.id_object == this.curMaps.id_objects) as IObjectOne).google_maps = this.curMaps.sLink;
+     (this.ORIGINAL_ShowObjects.find(el => el.id_object == this.curMaps.id_objects) as IObjectOne).google_maps = this.curMaps.sLink;
+    // вставляем в базу
+    this.listobjectsserv.updateProtectedOne(this.curMaps.sLink, this.curMaps.id_objects!.toString(), 'google_maps').subscribe();
+    this.googleClose();
+  }
+ 
 
 }
