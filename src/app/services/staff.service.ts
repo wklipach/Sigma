@@ -18,4 +18,11 @@ export class StaffService {
   }
 
 
+  updateProtectedSmallGuide(id_smallguide: number, text_guide: string, id_staff: string, field: string) {
+    const sUrl = this.gr.sUrlGlobal + 'staff';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {itis_smallguide: 'itis_smallguide', id_smallguide, text_guide, id_staff, field, id_user});
+  }
+
+
 }

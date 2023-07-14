@@ -41,6 +41,9 @@ export class MainComponent implements OnInit  {
     this.router.navigate(['listobjects']);
   }
 
+  public ListStaff() {
+    this.router.navigate(['liststaff']);
+  }
   
 
 

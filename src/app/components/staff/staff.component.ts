@@ -7,6 +7,16 @@ import { Router } from '@angular/router';
 
 
 
+interface ISmallGuide { 
+  id?: string;  
+  name?: string; 
+}
+
+interface ISenjorGuardGuide { 
+  id?: string;  
+  id_staff?: string;  
+  fio?: string; 
+}
 
 interface IObjectOne { 
     id_staff?: string;  
@@ -29,9 +39,9 @@ interface IObjectOne {
     s003from?: string;  
     s003from_str?: string;  
     rank?: string;  
+    id_senjor_guard?: string;  
+    senjor_guard?: string;  
 }
-
-
 
 @Component({
   selector: 'app-staff',
@@ -46,6 +56,11 @@ export class StaffComponent {
     // все что скачано с сервера
     ORIGINAL_ShowStaff: IObjectOne[] = [];
 
+    guidePosition:  ISmallGuide[] = [];
+    guideStatus:  ISmallGuide[] = [];
+
+    guideSenjorGuard:  ISenjorGuardGuide[] = [];
+
 
     @ViewChild('fareObjects') virtualScroll!: CdkVirtualScrollViewport;
       
@@ -58,10 +73,30 @@ export class StaffComponent {
 
 ngOnInit() {
 
+
+
+
+  this.servguide.getSmallGuide('guide_position').subscribe( (value: any) => {
+    this.guidePosition = value; 
+});
+
+
+  this.servguide.getSmallGuide('guide_status').subscribe( (value: any) => {
+    this.guideStatus = value; 
+  });
+
+  this.servguide.getSenjorGuard().subscribe( (value: any) => {
+    this.guideSenjorGuard = value; 
+    //console.log('guideSenjorGuard', this.guideSenjorGuard);
+  });
+
+
+
+
   this.staffserv.getStaff_All().subscribe ( (value: any) => {
-    //console.log(value);
+    console.log('value=', value);
     this.ORIGINAL_ShowStaff = value;
-    
+    console.log('this.ORIGINAL_ShowStaff=', this.ORIGINAL_ShowStaff);
     this.ORIGINAL_ShowStaff.forEach((el)=>
     {
       el.DateBirth_str = this.datePipe.transform(el.DateBirth, 'yyyy-MM-dd') || '';
@@ -70,7 +105,7 @@ ngOnInit() {
     });
 
     // при загрузке показываем без всяких ограничений
-    this.ShowStaff = JSON.parse(JSON.stringify(this.ORIGINAL_ShowStaff));
+    this.ShowStaff = [...this.ORIGINAL_ShowStaff];     //JSON.parse(JSON.stringify(this.ORIGINAL_ShowStaff));
 
      console.log('this.ShowStaff =', this.ShowStaff);
   });
@@ -121,6 +156,28 @@ summaryOpen(id_staff: number) {
         this.ShowStaff = JSON.parse(JSON.stringify(this.ORIGINAL_ShowStaff));
       }
     }  
+  
+
+    onChangeSmallGuide(ev: any,  smallGuide:  ISmallGuide[], id_object: string, field: string) {
+      if (ev) {
+       let res = smallGuide.find( (el) => Number(el.id) == Number(ev.target.value));
+       if (res) {
+        if (!res.name) res.name='';
+        this.staffserv.updateProtectedSmallGuide(Number(res.id), res.name, id_object, field).subscribe();
+       }
+      }
+    }
+
+
+    onChangeSenjorGuard(ev: any,  senjorGuide:  ISenjorGuardGuide[], id_object: string, field: string) {
+      if (ev) {
+       let res = senjorGuide.find( (el) => Number(el.id_staff) == Number(ev.target.value));
+       if (res) {
+        if (!res.fio) res.fio='';
+        this.staffserv.updateProtectedSmallGuide(Number(res.id_staff), res.fio, id_object, field).subscribe();
+       }
+      }
+    }
   
 
 

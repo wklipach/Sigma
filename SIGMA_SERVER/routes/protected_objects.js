@@ -242,7 +242,7 @@ router.post('/', async function(req, res) {
         const resCheck = await conn.query(sCheck, paramsCheck);
         console.log('resCheck=', resCheck, 'resCheck[0]=', resCheck[0]);
 
-        if (resCheck[0].options == text_guide) {
+        if (resCheck[0][field] == text_guide) {
           return JSON.stringify(resCheck);
         } else {
           const resObectUpdate = await conn.query(sQuery, params);

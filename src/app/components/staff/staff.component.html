@@ -62,10 +62,32 @@
 <!--
          <td class="td">Фото</td>
 -->         
-         <td class="td">{{ staff.guide_status }}</td> 
+         <td class="td">
+            <select [ngModel]="staff.id_status" (change)="onChangeSmallGuide($event, this.guideStatus, staff.id_staff, 'id_status')">
+              <option *ngFor="let status of this.guideStatus" [value]="status.id">{{status.name}}</option>
+            </select>
+         </td> 
+         
          <td class="td">{{ staff.cur_organization }}</td>
-         <td class="td">{{ staff.senjor_guard }}</td>
-         <td class="td">{{ staff.guide_position }} </td>
+
+         <td class="td">
+           <select [ngModel]="staff.id_senjor_guard" (change)="onChangeSenjorGuard($event, this.guideSenjorGuard, staff.id_staff, 'id_senjor_guard')">
+              <option *ngFor="let gsg of this.guideSenjorGuard" [value]="gsg.id_staff">{{gsg.fio}}</option>
+           </select>
+         </td>
+         
+         
+         
+         <!-- Должность-->
+         <td class="td">
+             <select [ngModel]="staff.id_position" (change)="onChangeSmallGuide($event, this.guidePosition, staff.id_staff, 'id_position')">
+              <option *ngFor="let position of this.guidePosition" [value]="position.id">{{position.name}}</option>
+           </select>
+         </td>
+
+
+
+
          <td class="td"> {{ staff.guide_status }} </td>
          <td class="td">{{ staff.guide_typeperson }}</td>
          <td class="td">{{ staff.rank }}</td>
