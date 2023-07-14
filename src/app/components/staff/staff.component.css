@@ -1,0 +1,133 @@
+.container{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+  }
+  h2{
+    display: flex;
+    margin-right: auto;
+  }
+  input-group{
+    display: flex;
+    width: 350px;
+  }
+  table {
+    width: 100%;
+    font-size: 1em;
+    color: #000;
+    background-color: white;
+    border-collapse: collapse;
+  }
+  cdk-virtual-scroll-viewport {
+    height: 500px;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .example-viewport {
+    height: 500px;
+    width: 100%;
+    overflow: auto;
+  }
+  .example-item {
+    height: 30px;
+  }
+  .td{
+  width: auto;
+  border: 1px dashed #cacaca;
+  text-align: center;
+  white-space: nowrap;
+  padding-right: 1px ;
+  }
+  thead th{
+  background-color: #cacaca;
+  font-size: 1.1em;
+  font-weight: 650;
+  color: #222121;
+  text-align: center;
+  border: 1px dashed #cacaca;
+  background-clip: padding-box;
+  z-index: 999;
+  }
+  thead th {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+  }
+  
+  td a {
+    display: block; /* Блочная ссылка */
+    background: #f4f5ef; /* цвет фона */
+    color: #fff; /* Цвет ссылок */
+    padding: 5px; /* Поля вокруг текста */
+    cursor: pointer;
+   }
+    /*  
+    display: flex;
+    flex-direction: row;
+        overflow-x: auto;
+    white-space: nowrap;*img src="image.jpg">
+  </td>/
+  */
+  
+  .btn.btn-primary{
+    color: #fff;
+    background-color: #386bc0 !important;
+    font-weight: semibold !important;
+   }
+   .btn.btn-primary:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #386bc0 !important; 
+  cursor: pointer;
+  }
+  
+  .btn.btn-warning{
+    color: #fff;
+    background-color: #ffc107 !important;
+    font-weight: semibold !important;
+   }
+   .btn.btn-warning:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #ffc107 !important; 
+  cursor: pointer;
+  }
+  
+  .btn.btn-info{
+    color: #fff;
+    background-color: #138496 !important;
+    font-weight: bold !important;
+   }
+   .btn.btn-info:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #138496 !important; 
+  cursor: pointer;
+  }
+  .btn.btn-secondary{
+    color: #fff;
+    background-color: #5a6268 !important;
+    font-weight: 600 !important;
+   }
+   .btn.btn-secondary:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #5a6268 !important; 
+  cursor: pointer;
+  }
+  
+  select {
+    border: 1px solid #fff;
+    background-color: transparent;
+    -webkit-appearance: none;
+  }
+  .modal-content{
+    width: 800px !important;
+  }
+  .add-btn{
+    position:absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  

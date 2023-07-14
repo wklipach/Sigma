@@ -31,7 +31,8 @@ import { ListObjectsComponent } from './components/protected_objects/list-object
 import { AvatarService } from './services/avatar.service';
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { ListMtrComponent } from './components/mtr/list-mtr/list-mtr.component';
-
+import { StaffComponent } from './components/staff/staff.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -53,7 +54,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     SummaryComponent,
     ListObjectsComponent,
     SettingsComponent,
-    ListMtrComponent
+    ListMtrComponent,
+    StaffComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ReactiveFormsModule,
     HttpClientModule,
     ScrollingModule,
+    FontAwesomeModule,
     SocketIoModule.forRoot(config)    
   ],
   providers: [GlobalRef, DatePipe, AuthService, ChatService, SummaryService, AvatarService],

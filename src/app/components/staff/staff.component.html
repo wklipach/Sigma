@@ -1,0 +1,95 @@
+<div class="Container d-flex flex-row p-2">
+    <h2>Объекты</h2>
+     <div class="input-group rounded  w-lg-350px ml-auto">
+          <input id="search" 
+                 type="search"
+                 class="form-control rounded" 
+                 placeholder="Поиск" 
+                 aria-label="Search" 
+                 aria-describedby="search-addon" 
+                 (keyup.enter)="onEnterSearch()"/>
+          <span class="input-group-text border-0" id="search-addon">
+            <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
+          </span>
+        </div>
+  </div>
+
+
+<cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="30" class="example-viewport">
+<table>
+    <thead>
+     <tr>
+        <th class="tl">Подробности</th> 
+        <th class="tl">#</th> 
+        <th class="tl">ФИО</th>
+<!--
+        <th class="tl">Фото</th>
+-->        
+        <th class="tl">Статус</th> 
+        <th class="tl">Компания</th>
+        <th class="tl">Руководитель</th>
+        <th class="tl"> Должность</th>
+         <th class="tl">Пол</th>
+         <th class="tl">Тип сотрудника</th>
+         <th class="tl">Разряд</th>
+         <th class="tl">Телефон</th>
+         <th class="tl">Тел.2</th>
+         <th class="tl">Дата рождения</th>
+         <th class="tl">Возраст</th>
+
+<!--
+         <th class="tl">Рост</th>
+         <th class="tl">Вес</th>
+         <th class="tl">Находится на объекте</th>
+         <th class="tl">Документы ОЛЛР</th>
+         <th class="tl">Дата создания</th>
+         <th class="tl">Дата измнения</th>
+         <th class="tl">Кем создано</th>
+         <th class="tl">Кем изменено</th>
+-->         
+
+         <th class="tl">002-О/у от</th>
+         <th class="tl">003-О/у от</th> 
+      </tr>
+      </thead>
+     
+      <tbody>
+      <tr *cdkVirtualFor="let staff of this.ShowStaff" class="example-item">
+
+        <th class="tl" (click)="summaryOpen(staff.id_staff)"  > --> </th> 
+         <td class="td">{{ staff.id_staff }}</td>
+         <td class="td">{{ staff.fio }}</td>
+<!--
+         <td class="td">Фото</td>
+-->         
+         <td class="td">{{ staff.guide_status }}</td> 
+         <td class="td">{{ staff.cur_organization }}</td>
+         <td class="td">{{ staff.senjor_guard }}</td>
+         <td class="td">{{ staff.guide_position }} </td>
+         <td class="td"> {{ staff.guide_status }} </td>
+         <td class="td">{{ staff.guide_typeperson }}</td>
+         <td class="td">{{ staff.rank }}</td>
+         <td class="td">{{ staff.phone }}</td>
+         <td class="td">{{ staff.phone2 }}</td>
+         <td class="td">{{ staff.DateBirth_str }}</td>
+         <td class="td">{{ staff.sAge }}</td>
+
+<!--
+          <td class="td">Рост</td>
+          <td class="td">Вес</td>
+          <td class="td">Находится на объекте</td>
+          <td class="td">Документы ОЛЛР</td>
+          <td class="td">Дата создания</td>
+          <td class="td">Дата измнения</td>
+          <td class="td">Кем создано</td>
+          <td class="td">Кем изменено</td>
+-->          
+
+          <td class="td"> {{ staff.s002from_str }} </td>
+          <td class="td"> {{ staff.s003from_str }} </td>  
+      </tr>
+
+   </tbody>
+      </table>
+
+</cdk-virtual-scroll-viewport>      

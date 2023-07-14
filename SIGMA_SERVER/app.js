@@ -12,6 +12,7 @@ var protected_objects = require('./routes/protected_objects');
 var avatar = require('./routes/avatar');
 var mtr = require('./routes/mtr');
 var guide = require('./routes/guide');
+var staff = require('./routes/staff');
 
 
 
@@ -127,7 +128,7 @@ app.use('/protected_objects', protected_objects);
 app.use('/avatar', avatar);
 app.use('/mtr', mtr);
 app.use('/guide',guide);
-
+app.use('/staff', staff);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

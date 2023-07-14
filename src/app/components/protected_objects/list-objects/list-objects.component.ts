@@ -3,6 +3,7 @@ import { ListobjectsService } from 'src/app/services/listobjects.service';
 import {  CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { GuideService } from 'src/app/services/guide.service';
 import { DatePipe } from '@angular/common';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 
 interface ISmallGuide { 
@@ -61,6 +62,8 @@ interface IDeleteObject {
   styleUrls: ['./list-objects.component.css']
 })
 export class ListObjectsComponent {
+
+  faCoffee = faCoffee;
 
   // то что показывается в таблице - ограниченно строкой поиска
   ShowObjects: IObjectOne[] = [];
@@ -268,20 +271,17 @@ export class ListObjectsComponent {
         // console.log('ищем=',sInput);
         
         const res = this.ORIGINAL_ShowObjects.filter( (el) => {
-           return (el.name &&  el.name.toUpperCase().indexOf(sInput) != -1) ||
+           return (el.id_object &&  el.id_object.toString().toUpperCase().indexOf(sInput) != -1) ||
+                  (el.name &&  el.name.toUpperCase().indexOf(sInput) != -1) ||
                   (el.post_status && el.post_status.toUpperCase().indexOf(sInput) !=-1)  ||
-
                   (el.options && el.options?.toUpperCase().indexOf(sInput) != -1)  ||
                   (el.cur_organization && el.cur_organization?.toUpperCase().indexOf(sInput) != -1) ||
                   (el.address && el.address?.toUpperCase().indexOf(sInput) != -1) ||
                   (el.phone && el.phone?.toUpperCase().indexOf(sInput) != -1) ||
                   (el.senjor_guard && el.senjor_guard?.toUpperCase().indexOf(sInput) != -1) ||
-                  (el.postwasset_date && el.postwasset_date?.toUpperCase().indexOf(sInput) != -1) ||
                   (el.postwassetdate_str && el.postwassetdate_str?.toUpperCase().indexOf(sInput) != -1) ||
-                  (el.withdrawal_date && el.withdrawal_date?.toUpperCase().indexOf(sInput) != -1) ||
                   (el.withdrawaldate_str && el.withdrawaldate_str?.toUpperCase().indexOf(sInput) != -1) ||
                   (el.MTR && el.MTR?.toUpperCase().indexOf(sInput) != -1) ||
-                  (el.customer && el.customer?.toUpperCase().indexOf(sInput) != -1) ||
                   (el.customer && el.customer?.toUpperCase().indexOf(sInput) != -1);
         });
 
@@ -387,18 +387,6 @@ export class ListObjectsComponent {
           }
         });
       
-
-/*      
-      item.id_object = '1000';
-      item.name = "Добавленный объект";
-      this.ShowObjects.unshift(item);
-      this.ORIGINAL_ShowObjects.unshift(item);
-
-
-      this.ShowObjects = [...this.ShowObjects];
-      this.virtualScroll.scrollTo({top: 0});
-*/
-
     }
         
     
