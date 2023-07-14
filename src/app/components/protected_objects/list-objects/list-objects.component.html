@@ -13,7 +13,7 @@
         </span>
       </div>
 </div>
-    
+
        
             <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="30" class="example-viewport">
             <!-- <cdk-virtual-scroll-viewport [itemSize]="20"> -->
@@ -168,9 +168,9 @@
 
                                
                 <td>
-                  <button class="btn btn-danger" (click)="deleteObject(objectone.id_object, objectone.name)"><i class="fa fa-trash-o fa-lg"></i>Del</button>
+                  <button class="btn btn-danger" (click)="deleteObject(objectone.id_object, objectone.name)"><img src="/assets/img/delete.png" width="30" /></button>
                 </td>
-               
+                
 
                </tr>                                
     </tbody>        
@@ -236,6 +236,9 @@
 </div>
 
 <!-- Удалить объект -->
+
+<!-- <input id="openDeleteModalButton" type="button" src="assets/img/plus.png" border="0" alt="Добавить" /> -->
+
 <button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
   DeleteOpen
 </button>
@@ -250,15 +253,17 @@ DeleteClose
       <h5 class="modal-title">Удалить объект {{this.curDeleteObject.sLink}}?</h5>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Close</button>
-      <button type="button" class="btn btn-primary" (click)="deleteSave()">Сохранить</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+      <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+      
     </div>
   </div>
 </div>
 </div>
 
-<div class="add">
-<button class="btn btn-success add-btn" type="button" (click)="addNewObject()">ADD </button>
-</div>
 
 
+<div class="add-btn">
+  <button class="btn btn-success" type="button" (click)="addNewObject()"><img src="/assets/img/plus.png" width="30" /></button>
+  </div>
+ 

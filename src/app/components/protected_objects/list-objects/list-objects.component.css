@@ -67,7 +67,7 @@ td a {
 
  td:nth-child(1) {  
   background-color: #fff;
-  min-width: 2vw;
+  min-width: 15px;
 }
 
  td:nth-child(2) {  
@@ -134,6 +134,20 @@ background-color: #5a6268 !important;
 cursor: pointer;
 }
 
+.btn.btn-danger{
+  color: #fff;
+  background-color: #5a6268 !important;
+  font-weight: 600 !important;
+  background-color: #dc3545 !important;
+border-color: #dc3545 !important;
+ }
+ .btn.btn-danger:hover{
+color: white !important;
+font-weight: 600 !important;
+background-color: #dc3545 !important; 
+cursor: pointer;
+}
+
 select {
   border: 1px solid #fff;
   background-color: transparent;
@@ -143,8 +157,7 @@ select {
   width: 800px !important;
 }
 .add-btn{
-  position:absolute;
+  position:fixed;
   top: 0;
-  left: 0;
+  left: 150px;
 }
-
