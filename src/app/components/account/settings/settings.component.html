@@ -1,81 +1,49 @@
+<form class="mb-2 px-9">
 
-<form class="m-8 h-250px" [formGroup]="form">
-
-   
-    <div *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
-    
-    <ng-template #contentLoadAvatar style="display: flex; flex-direction:column;">
-        <div class="image-fluid w-125px h-125px" style="background-image: url('assets/img/blank.svg')">
-        <img class="rounded image-fluid w-125px h-125px" [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
-        </div>
+<!-- <form class="m-0 h-auto" [formGroup]="form">
+  
+    <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+    <ng-template #contentLoadAvatar class="image-input">
+    <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
     </ng-template>
-
     <ng-template #contentDefault>
-      <img class="rounded image-input-wrapper-outline w-125px h-125px"src="/assets/img/usernull.png"onclick="document.getElementById('avatar').click()">
+      <img class="rounded image-input-wrapper w-125px h-125px"src="/assets/img/usernull.jpg"onclick="document.getElementById('avatar').click()">
     </ng-template>
-
-
+</form> -->
+   <!-- <div class="one mb-0">
       <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none">
-      <label class="text-muted my-3 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</label>
-      <label class="text-muted  my-3 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" (click)="clearFile()">Очистить</label>
- 
-   
-    </form>
-
-
-<!--begin::Card body-->
-    <div class="card-body border-top p-9">
-        <!--begin::Input group-->
+      <label class="text-muted my-2 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</label>
+      <label class="text-muted  my-2 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" (click)="clearFile()">Очистить</label>
+ </div> -->
+  
+<div class="card-body mt-2 p-10">
         <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-semibold fs-6">Фото</label>
-            <!--end::Label-->
-            <!--begin::Col-->
+            <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
+                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
+              <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
+              <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
+            </div>
+            
             <div class="col-lg-8">
-                <div class="image-input image-input-outline" style="background-image: url('assets/img/blank.svg')">
-                    <!--begin::Preview existing avatar-->
-                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/img/300-1.jpg)"></div>
-                    <!--end::Preview existing avatar-->
-                    <!--begin::Label-->
-                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Загрузить фото">
-                        <i class="ki-duotone ki-pencil fs-7">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                        <!--begin::Inputs-->
-                        <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                        <input type="hidden" name="Удалить фото" />
-                        <!--end::Inputs-->
-                    </label>
-                    <!--end::Label-->
-                    <!--begin::Cancel-->
-                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                        <i class="ki-duotone ki-cross fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <!--end::Cancel-->
-                    <!--begin::Remove-->
-                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                        <i class="ki-duotone ki-cross fs-2">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </span>
-                    <!--end::Remove-->
-                </div>
-            </div>
+                
+  
+                    <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+                    <ng-template #contentLoadAvatar class="image-input">
+                    <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+                    </ng-template>
+                    <ng-template #contentDefault>
+                      <img class="rounded image-input-wrapper w-125px h-125px"src="/assets/img/usernull.jpg"onclick="document.getElementById('avatar').click()">
+                    </ng-template>
+                 
+                
             </div>
 
+            </div>
+        
 
-
-
-            <form  class="form">
-
-    <div class="card-body border-top p-9">
-        <!--begin::Input group-->
-
+    
+       
         <div class="row mb-6">
             <!--begin::Label-->
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">ФИО</label>
@@ -86,7 +54,7 @@
         </div>  
 
 
-            <div class="row mb-6">
+        <div class="row mb-6">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                     <span class="required">Компания</span>
@@ -94,18 +62,14 @@
 
                 <div class="col-lg-8 fv-row">
                     <select name="company" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
-                        <option value="">Выберите компанию...</option>
                         <option>Сигма профи 1</option>
                         <option>Сигма профи 2</option>
                         <option>Сигма профи 3</option>
                     </select>
                 </div>
-                <!--end::Col-->
-            </div>
-
         </div>
 
-        <div class="row mb-6">
+         <div class="row mb-6">
 
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Отдел</label>
 
@@ -122,39 +86,35 @@
             <!--begin::Label-->
             <label class="col-lg-4 col-form-label fw-semibold fs-6">
                 <span class="required">Телефон</span>
-                <span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
+                <span class="ms-1" data-bs-toggle="tooltip" title="Phone number">
                 </span>
             </label>
             <!--end::Label-->
             <!--begin::Col-->
             <div class="col-lg-8 fv-row">
-                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="044 3276 454 935" />
+                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="+7 999 578 46 20" />
             </div>
-            <!--end::Col-->
+            
         </div>
-        <!--end::Input group-->
-        <!--begin::Input group-->
+        
         <div class="row mb-6">
             <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-semibold fs-6">Подчинение</label>
-            <!--end::Label-->
-            <!--begin::Col-->
+            <label class="col-lg-4 col-form-label fw-semibold fs-6">Руководитель</label>
+            
             <div class="col-lg-8 fv-row">
                 <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Непосредственный начальник" value="ГенДиректор" />
             </div>
-            <!--end::Col-->
+            
         </div>
 
 
         <div class="row mb-6">
-            <!--begin::Label-->
+            
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
-            <!--end::Label-->
-            <!--begin::Col-->
+            
             <div class="col-lg-8 fv-row">
-                <!--begin::Input-->
+                
                 <select name="language" data-control="select2" class="form-select form-select-solid form-select-lg">
-                    <option value="">Выберите разряд...</option>
                     <option>4</option>
                     <option>5</option>
                     <option>6</option>
@@ -166,7 +126,7 @@
         
 
         <div class="row mb-6">
-            <!--begin::Label-->
+            
             <label class="col-lg-4 col-form-label fw-semibold fs-6">СМС</label>
 
             <div class="col-lg-8 d-flex align-items-center">
@@ -175,9 +135,9 @@
                     <label class="form-check-label" for="sms"></label>
                 </div>
             </div>
-</div>
+        </div>
            
-<div class="row mb-6">
+        <div class="row mb-6">
 
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Справочник1</label>
 
@@ -188,8 +148,43 @@
                         <option  value="Значение 2">Значение 3</option>
                     </select>
                 </div>
-</div>          
-       
+        </div>          
+ 
+        <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Рост</label>
+
+     <div class="col-lg-8 fv-row">
+        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="180" />
+    </div>
+</div>  
+
+<div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Вес</label>
+
+    <div class="col-lg-8 fv-row">
+        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="85" />
+    </div>
+</div>  
+
+<div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Собеседование</label>
+
+    <div class="col-lg-8 fv-row">
+        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="21.06.2023" />
+    </div>
+</div>  
+
+<div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label required fw-semibold fs-6">ФИО</label>
+
+    <div class="col-lg-8 fv-row">
+        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="Петров Иван Петрович" />
+    </div>
+</div>  
 
 <div class="row mb-6">
 
@@ -202,5 +197,8 @@
             <option>помощник начальника охраны</option>
         </select>
     </div>
-</div>          
-            
+</div>   
+
+</div>
+
+</form>

@@ -1,10 +1,27 @@
-.upload-photo{
+
+.image-input {
+    position: relative;
+    display: inline-block;
+    border-radius: .475rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .image-input-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: .475rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 3px solid white;
+box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(0, 0, 0, 0.075);
+  }
+  .one{
     display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-}
-.container{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column; 
-}
+    flex-direction: column !important;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #f7f9f4;
+  }
+  

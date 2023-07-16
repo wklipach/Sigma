@@ -147,3 +147,8 @@ select {
   top: 0;
   left: 0;
 }
+td:nth-child(1) {
+  width: auto;
+  min-width: 20px;
+  cursor: pointer;
+} 

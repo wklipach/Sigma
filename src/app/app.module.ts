@@ -32,7 +32,9 @@ import { AvatarService } from './services/avatar.service';
 import { SettingsComponent } from './components/account/settings/settings.component';
 import { ListMtrComponent } from './components/mtr/list-mtr/list-mtr.component';
 import { StaffComponent } from './components/staff/staff.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ObjectCardComponent } from './object-card/object-card.component';
+import { ObjectSummaryComponent } from './object-summary/object-summary.component'
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -55,7 +57,9 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ListObjectsComponent,
     SettingsComponent,
     ListMtrComponent,
-    StaffComponent
+    StaffComponent,
+    ObjectCardComponent,
+    ObjectSummaryComponent
   ],
   imports: [
     BrowserModule,
