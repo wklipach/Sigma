@@ -139,16 +139,14 @@
                 <td class="td">
                     <!--<input type="date" [value]="objectone.postwassetdate_str"  /> -->
                     <input name="date" type="text" (focus)="focusFunction($event, objectone.postwassetdate_str)" 
-                                                   (focusout)="focusOutFunction($event)" 
-                                                   (change)="setDatePostwassetdate($event, objectone.id_object)"
+                                                   (focusout)="setDatePostwassetdate($event, objectone.id_object)"
                                                    value="{{objectone.postwassetdate_str | date: 'dd.MM.yyyy'}}">
                 </td>
 
                 <!--  ДАТА СНЯТИЯ ОХРАНЫ -->
                 <td class="td">
                     <input name="date" type="text" (focus)="focusFunction($event, objectone.withdrawaldate_str)" 
-                                                   (focusout)="focusOutFunction($event)" 
-                                                   (change)="setDateWithdrawaldate($event, objectone.id_object)"
+                                                   (focusout)="setDateWithdrawaldate($event, objectone.id_object)"
                                                    value="{{objectone.withdrawaldate_str | date: 'dd.MM.yyyy'}}">
                 </td>
 

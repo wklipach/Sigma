@@ -234,19 +234,68 @@ export class ListObjectsComponent {
   setDatePostwassetdate($event: any, id_object: number) {
 
       let date = new Date($event.target.value);
+      const isDate = this.idDateisValid(date);
+
        
-      if (this.idDateisValid(date)) {
+      if (isDate) {
         // console.log($event.target.value, date);
         this.listobjectsserv.updateProtectedDate(date, id_object.toString(), 'postwasset_date').subscribe( (res: any) => { console.log('res update = ', res); } );
       } else {
         // console.log($event.target.value, 'даты нет!');
         this.listobjectsserv.updateProtectedDateNull(id_object.toString(), 'postwasset_date').subscribe( (res: any) => { console.log('res update = ', res); } );
       }
+
+
+      if (isDate) {
+        const res = this.ShowObjects.map( (el: IObjectOne) => {
+            if (el.id_object == id_object.toString()) {
+                el.postwassetdate_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+                }
+            return el;
+        });
+        this.ShowObjects = [...res];
+
+        const res2 = this.ORIGINAL_ShowObjects.map( (el: IObjectOne) => {
+          if (el.id_object == id_object.toString()) {
+              el.postwassetdate_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+              }
+          return el;
+        });
+        this.ORIGINAL_ShowObjects = [...res2];
+
+        $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '';
+    }
+
+
+    if (!isDate) {
+      const res = this.ShowObjects.map( (el: IObjectOne) => {
+          if (el.id_object == id_object.toString()) {
+              el.postwassetdate_str = '';
+              }
+          return el;
+      });
+      this.ShowObjects = [...res];
+
+      const res2 = this.ORIGINAL_ShowObjects.map( (el: IObjectOne) => {
+        if (el.id_object == id_object.toString()) {
+            el.postwassetdate_str = '';
+            }
+        return el;
+      });
+      this.ORIGINAL_ShowObjects = [...res2];
+
+      $event.target.value = '';
+  }
+
+      $event.target.type = '';
+
+
   }
 
 
   setDateWithdrawaldate($event: any, id_object: number) {
     let date = new Date($event.target.value);
+    const isDate = this.idDateisValid(date);
        
     if (this.idDateisValid(date)) {
       // console.log($event.target.value, date);
@@ -256,6 +305,51 @@ export class ListObjectsComponent {
       this.listobjectsserv.updateProtectedDateNull(id_object.toString(), 'withdrawal_date').subscribe( (res: any) => { console.log('res update = ', res); } );
     }
 
+
+    if (isDate) {
+      const res = this.ShowObjects.map( (el: IObjectOne) => {
+          if (el.id_object == id_object.toString()) {
+              el.withdrawaldate_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+              }
+          return el;
+      });
+      this.ShowObjects = [...res];
+
+      const res2 = this.ORIGINAL_ShowObjects.map( (el: IObjectOne) => {
+        if (el.id_object == id_object.toString()) {
+          el.withdrawaldate_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+            }
+        return el;
+      });
+      this.ORIGINAL_ShowObjects = [...res2];
+
+      $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '';
+  }
+
+
+      if (!isDate) {
+        const res = this.ShowObjects.map( (el: IObjectOne) => {
+            if (el.id_object == id_object.toString()) {
+                el.withdrawaldate_str = '';
+                }
+            return el;
+        });
+        this.ShowObjects = [...res];
+
+        const res2 = this.ORIGINAL_ShowObjects.map( (el: IObjectOne) => {
+          if (el.id_object == id_object.toString()) {
+            el.withdrawaldate_str = '';
+              }
+          return el;
+        });
+        this.ORIGINAL_ShowObjects = [...res2];
+
+        $event.target.value = '';
+    }
+
+
+    $event.target.type = '';
+ 
   }
 
 

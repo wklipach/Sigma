@@ -58,7 +58,14 @@
 
         <td class="td" (click)="summaryOpen(staff.id_staff)" ><img src="/assets/img/expand.png" width="30" /></td> 
          <td class="td">{{ staff.id_staff }}</td>
-         <td class="td">{{ staff.fio }}</td>
+         
+         
+         <td class="td" id="fio" contenteditable="true" (blur)="myUpdateClick($event.target, staff.id_staff, 'fio')" 
+                                                               (keypress)="maxInputLength($event,250)" 
+                                                               (paste)="maxPasteLength($event,250)" >
+             {{ staff.fio }}
+         </td> 
+
 <!--
          <td class="td">Фото</td>
 -->         
@@ -67,15 +74,24 @@
               <option *ngFor="let status of this.guideStatus" [value]="status.id">{{status.name}}</option>
             </select>
          </td> 
-         
-         <td class="td">{{ staff.cur_organization }}</td>
 
+
+         <!--
+                КОМПАНИЯ         
+         -->         
+         <td class="td">
+          <select [ngModel]="staff.id_organization" (change)="onChangeSmallGuide($event, this.guideOrganization, staff.id_staff, 'id_organization')">
+              <option *ngFor="let go of this.guideOrganization" [value]="go.id">{{go.name}}</option>
+          </select>
+         </td>
+
+
+        <!--РУКОВОДИТЕЛЬ-->
          <td class="td">
            <select [ngModel]="staff.id_senjor_guard" (change)="onChangeSenjorGuard($event, this.guideSenjorGuard, staff.id_staff, 'id_senjor_guard')">
               <option *ngFor="let gsg of this.guideSenjorGuard" [value]="gsg.id_staff">{{gsg.fio}}</option>
            </select>
          </td>
-         
          
          
          <!-- Должность-->
@@ -86,29 +102,70 @@
          </td>
 
 
+         <!-- Пол-->
+         <td class="td">
+            <select [ngModel]="staff.id_gender" (change)="onChangeSmallGuide($event, this.guideGender, staff.id_staff, 'id_gender')">
+             <option *ngFor="let gg of this.guideGender" [value]="gg.id">{{gg.name}}</option>
+            </select>
+         </td>
 
 
-         <td class="td"> {{ staff.guide_status }} </td>
-         <td class="td">{{ staff.guide_typeperson }}</td>
-         <td class="td">{{ staff.rank }}</td>
-         <td class="td">{{ staff.phone }}</td>
-         <td class="td">{{ staff.phone2 }}</td>
-         <td class="td">{{ staff.DateBirth_str }}</td>
-         <td class="td">{{ staff.sAge }}</td>
+         <!-- Тип сотрудника -->
+         <td class="td">
+            <select [ngModel]="staff.id_typeperson" (change)="onChangeSmallGuide($event, this.guideTypeperson, staff.id_staff, 'id_typeperson')">
+               <option *ngFor="let gtt of this.guideTypeperson" [value]="gtt.id">{{gtt.name}}</option>
+            </select>
+          </td>
+
+
+
+         <!-- разряд--> 
+         <td class="td" id="rank" contenteditable="true" (blur)="myUpdateClick($event.target, staff.id_staff, 'rank')" 
+                                                         (keypress)="maxInputLength($event,1)" 
+                                                         (paste)="maxPasteLength($event,1)" >
+               {{ staff.rank }}
+         </td>
+
+
+         <td class="td" id="phone" contenteditable="true" (blur)="myUpdateClick($event.target, staff.id_staff, 'phone')" 
+                                                          (keypress)="maxInputLength($event,30)" 
+                                                          (paste)="maxPasteLength($event,30)" >
+               {{ staff.phone }}
+         </td>
+
+         <td class="td" id="phone2" contenteditable="true" (blur)="myUpdateClick($event.target, staff.id_staff, 'phone2')" 
+                                                           (keypress)="maxInputLength($event,30)" 
+                                                           (paste)="maxPasteLength($event,30)" >
+               {{ staff.phone2 }}
+         </td>
+
+
+         <td class="td">
+             <input name="date" type="text" (focus)="focusFunction($event, staff.DateBirth_str)" 
+             (focusout)="setDateBirth($event, staff.id_staff)"
+             value="{{staff.DateBirth_str | date: 'dd.MM.yyyy'}}">
+         </td>
+
+
+         <!-- ВОЗРАСТ, автовычисление в запросе-->
+         <td class="td"> {{ staff.sAge }} </td>
 
 <!--
-          <td class="td">Рост</td>
-          <td class="td">Вес</td>
-          <td class="td">Находится на объекте</td>
-          <td class="td">Документы ОЛЛР</td>
-          <td class="td">Дата создания</td>
-          <td class="td">Дата измнения</td>
-          <td class="td">Кем создано</td>
-          <td class="td">Кем изменено</td>
--->          
+         (focusout)="focusOutFunction($event)" 
+         (blur)="set002from($event, staff.id_staff)"
+-->         
+      
+          <td class="td"> 
+            <input name="date" type="text" (focus)="focusFunction($event, staff.s002from_str)" 
+            (focusout)="set002from($event, staff.id_staff)"
+            value="{{staff.s002from_str | date: 'dd.MM.yyyy'}}">
+          </td>
 
-          <td class="td"> {{ staff.s002from_str }} </td>
-          <td class="td"> {{ staff.s003from_str }} </td>  
+          <td class="td"> 
+            <input name="date" type="text" (focus)="focusFunction($event, staff.s003from_str)" 
+            (focusout)="set003from($event, staff.id_staff)"
+            value="{{staff.s003from_str | date: 'dd.MM.yyyy'}}">
+          </td>  
       </tr>
 
    </tbody>

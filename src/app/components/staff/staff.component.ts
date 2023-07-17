@@ -41,6 +41,8 @@ interface IObjectOne {
     rank?: string;  
     id_senjor_guard?: string;  
     senjor_guard?: string;  
+    id_organization?: string;
+    organization?: string;
 }
 
 @Component({
@@ -58,6 +60,9 @@ export class StaffComponent {
 
     guidePosition:  ISmallGuide[] = [];
     guideStatus:  ISmallGuide[] = [];
+    guideOrganization:  ISmallGuide[] = [];
+    guideGender:  ISmallGuide[] = [];
+    guideTypeperson:  ISmallGuide[] = [];
 
     guideSenjorGuard:  ISenjorGuardGuide[] = [];
 
@@ -78,11 +83,26 @@ ngOnInit() {
 
   this.servguide.getSmallGuide('guide_position').subscribe( (value: any) => {
     this.guidePosition = value; 
-});
+  });
+
+  
+  this.servguide.getSmallGuide('guide_organization').subscribe( (value: any) => {
+    this.guideOrganization = value; 
+  });
+
 
 
   this.servguide.getSmallGuide('guide_status').subscribe( (value: any) => {
     this.guideStatus = value; 
+  });
+
+
+  this.servguide.getSmallGuide('guide_gender').subscribe( (value: any) => {
+    this.guideGender = value; 
+  });
+
+  this.servguide.getSmallGuide('guide_typeperson').subscribe( (value: any) => {
+    this.guideTypeperson = value; 
   });
 
   this.servguide.getSenjorGuard().subscribe( (value: any) => {
@@ -179,9 +199,229 @@ summaryOpen(id_staff: number) {
       }
     }
   
+    myUpdateClick(x: any, id_staff: number, field: string) {
+    
+      let text = x.innerText;
+      if (!text ) text='';
+      console.log(text, id_staff, field);
+      this.staffserv.updateStaffOne(text, id_staff.toString(), field).subscribe( (res: any) => {
+        //console.log('res update = ', res);
+      });
+    }
+
+    maxInputLength(e: Event, iLength: number) {
+      const text =(e.target! as HTMLInputElement).innerText;
+      console.log('text=', text, 'text.length=', text.length);
+      if (text.length>=iLength) {
+        e.preventDefault();
+       }
+    }
+  
+  
+    maxPasteLength(e: ClipboardEvent, iLength: number) {
+      let clipboardData = e.clipboardData;
+      var s = clipboardData!.getData('text')
+      if (s.length>=iLength) {
+        e.preventDefault();
+       }
+    }
+    
+    focusOutFunction(e: any) {
+      e.target.type = '';
+      e.target.value = this.datePipe.transform(e.target.value, 'dd.MM.yyyy') || '';
+    }
+  
+    focusFunction(e: any, datestr: any) {
+      e.target.type = 'date';
+      e.target.value =  datestr;
+    }
+  
+  
+    idDateisValid (date: Date) {
+      return date.getTime() === date.getTime();
+    } 
 
 
+    // Преобразование даты рождения
+    setDateBirth($event: any, id_staff: number) {
+      let date = new Date($event.target.value);
+      const isDate = this.idDateisValid(date);
+      if (isDate) {
+        // console.log($event.target.value, date);
+        this.staffserv.updateStaffDate(date, id_staff.toString(), 'DateBirth').subscribe( (res: any) => { console.log('res update = ', res); } );
+      } else {
+        // console.log($event.target.value, 'даты нет!');
+        this.staffserv.updateStaffDateNull(id_staff.toString(), 'DateBirth').subscribe( (res: any) => { console.log('res update = ', res); } );
+      }
+
+
+      if (isDate) {      
+              const res = this.ShowStaff.map( el => {
+                if (el.id_staff == id_staff.toString()) {
+                  el.sAge =  (new Date().getFullYear() -  date.getFullYear()).toString();
+                  el.DateBirth_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+                }
+                return el;
+              });
+            this.ShowStaff = [...res];
+
+            const res2 = this.ORIGINAL_ShowStaff.map( el => {
+              if (el.id_staff == id_staff.toString()) {
+                el.sAge =  (new Date().getFullYear() -  date.getFullYear()).toString();
+                el.DateBirth_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+               }
+               return el;
+              });
+             this.ORIGINAL_ShowStaff = [...res2];
+
+            $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '';
+       }            
+
+       if (!isDate) {      
+            const res = this.ShowStaff.map( el => {
+              if (el.id_staff == id_staff.toString()) {
+                el.sAge =  '';
+                el.DateBirth_str = '';
+              }
+              return el;
+            });
+          this.ShowStaff = [...res];
+
+
+          const res2 = this.ORIGINAL_ShowStaff.map( el => {
+            if (el.id_staff == id_staff.toString()) {
+              el.sAge =  '';
+              el.DateBirth_str = '';
+            }
+            return el;
+            });
+          this.ORIGINAL_ShowStaff = [...res2];
+
+          $event.target.value = '';
+        }            
+
+
+        $event.target.type = '';
+     
+    } 
+    
+    
 
   
+
+  set002from($event: any, id_staff: number) {
+     let date = new Date($event.target.value);
+     const isDate = this.idDateisValid(date);
+     if (isDate) {
+       // console.log($event.target.value, date);
+        this.staffserv.updateStaffDate(date, id_staff.toString(), '002from').subscribe( (res: any) => { console.log('res update = ', res); } );
+        } else {
+         this.staffserv.updateStaffDateNull(id_staff.toString(), '002from').subscribe( (res: any) => { console.log('res update = ', res); } );
+     }
+    
+     if (isDate) {
+          const res = this.ShowStaff.map( (el: IObjectOne) => {
+              if (el.id_staff == id_staff.toString()) {
+                  el.s002from_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+                  }
+              return el;
+          });
+          this.ShowStaff = [...res];
+
+          const res2 = this.ORIGINAL_ShowStaff.map( (el: IObjectOne) => {
+            if (el.id_staff == id_staff.toString()) {
+                el.s002from_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+                }
+            return el;
+          });
+          this.ORIGINAL_ShowStaff = [...res2];
+
+          $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '';
+      }
+
+      if (!isDate) {
+         const res = this.ShowStaff.map( el => {
+            if (el.id_staff == id_staff.toString()) {
+                el.s002from_str = '';
+                }
+            return el;
+        });
+        this.ShowStaff = [...res];
+
+
+        const res2 = this.ORIGINAL_ShowStaff.map( (el: IObjectOne) => {
+          if (el.id_staff == id_staff.toString()) {
+              el.s002from_str ='';
+              }
+          return el;
+        });
+        this.ORIGINAL_ShowStaff = [...res2];
+
+
+        $event.target.value = '';
+      }
+     $event.target.type = '';
+  }    
+
+  set003from($event: any, id_staff: number) {
+    let date = new Date($event.target.value);
+
+
+    const isDate = this.idDateisValid(date);
+
+
+    if (isDate) {
+      // console.log($event.target.value, date);
+       this.staffserv.updateStaffDate(date, id_staff.toString(), '003from').subscribe( (res: any) => { console.log('res update = ', res); } );
+       } else {
+        this.staffserv.updateStaffDateNull(id_staff.toString(), '003from').subscribe( (res: any) => { console.log('res update = ', res); } );
+    }
+    
+   
+    if (isDate) {
+         const res = this.ShowStaff.map( (el: IObjectOne) => {
+             if (el.id_staff == id_staff.toString()) {
+                 el.s003from_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+                 }
+             return el;
+         });
+         this.ShowStaff = [...res];
+
+         const res2 = this.ORIGINAL_ShowStaff.map( (el: IObjectOne) => {
+          if (el.id_staff == id_staff.toString()) {
+              el.s003from_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+              }
+          return el;
+        });
+        this.ORIGINAL_ShowStaff = [...res2];
+
+         $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '';
+     }
+
+
+     if (!isDate) {
+        const res = this.ShowStaff.map( el => {
+           if (el.id_staff == id_staff.toString()) {
+               el.s003from_str = '';
+               }
+           return el;
+       });
+       this.ShowStaff = [...res];
+
+       const res2 = this.ORIGINAL_ShowStaff.map( (el: IObjectOne) => {
+        if (el.id_staff == id_staff.toString()) {
+            el.s003from_str = '';
+            }
+        return el;
+      });
+      this.ORIGINAL_ShowStaff = [...res2];
+
+       $event.target.value = '';
+     }
+
+    $event.target.type = '';
+
+ }    
+
 
 }
