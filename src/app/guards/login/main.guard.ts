@@ -6,6 +6,13 @@ import { AuthService } from '../../services/auth.service';
 
 export const mainGuard: CanActivateFn = (route, state) => {
  
+
+  if (inject(AuthService).getNumberIn() == false) {
+    return inject(Router).navigate(['/number']);
+  }
+
+
+
   if (inject(AuthService).getLoggedIn()){
     return true
   } else {

@@ -12,9 +12,11 @@ import { mainGuard } from './guards/login/main.guard';
 import { ListObjectsComponent } from './components/protected_objects/list-objects/list-objects.component';
 import { ListMtrComponent } from './components/mtr/list-mtr/list-mtr.component';
 import { StaffComponent } from './components/staff/staff.component';
+import { NumberComponent } from './components/auth/number/number.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
+  { path: 'number', component: NumberComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'register', component: RegisterComponent },

@@ -60,6 +60,16 @@ export class AuthService implements IUser, IOhrArchive {
   }
 
 
+  
+  public getNumberIn() {
+    let curNumber = localStorage.getItem('number');
+    curNumber = curNumber !== null ? JSON.parse(curNumber): Boolean;
+    let boolNumber = (curNumber?.toString().toLowerCase() === "true"); 
+    return boolNumber;
+}
+
+
+
   public getLoggedIn() {
       let curOhrConnected = localStorage.getItem('curOhrConnected');
       // curOhrConnected = curOhrConnected !== null ? JSON.parse(curOhrConnected): Boolean;
@@ -94,6 +104,11 @@ export class AuthService implements IUser, IOhrArchive {
   }
 
 
+  public setNumber() {
+    window.localStorage.setItem('number', JSON.stringify('true'));
+  }
+
+
   public getStorage(): {curOhrLogin: string, curOhrConnected: boolean, curUserMariaID: string} {
     const curOhrLogin = window.localStorage.getItem('curOhrLogin') || '{}';
     const curOhrConnected = (window.localStorage.getItem('curOhrConnected') === 'true');
@@ -106,6 +121,7 @@ export class AuthService implements IUser, IOhrArchive {
   public clearStorage() {
     window.localStorage.setItem('curOhrLogin', '');
     window.localStorage.setItem('curOhrConnected', JSON.stringify(false));
+    window.localStorage.setItem('number', JSON.stringify(false));
     window.localStorage.setItem('curUserMariaID', JSON.stringify(-1));
   }
 
