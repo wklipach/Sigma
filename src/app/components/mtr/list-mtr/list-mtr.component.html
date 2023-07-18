@@ -6,30 +6,56 @@
           <div class="col-12">
 
                     <table class="table1">
+                        <thead>
+                            <tr>
+                               <th class="tl"># </th> 
+                               <th class="tl">Название</th> 
+                               <th class="tl">id_mtrvid</th>
+                               <th class="tl">color</th> 
+                               <th class="tl">status</th>
+                               <th class="tl">description</th>
+                               <th class="tl">property</th> 
+                               <th class="tl">equipment</th>
+                               <th class="tl">price</th>
+                               <th class="tl">size</th>
+                               <th class="tl">count</th>
+                               <th class="tl">date_purchase</th>
+                               <th class="tl">date_issue</th>
+                               <th class="tl">tabel_number</th>
+                               <th class="tl">invent_number</th>
+                               <th class="tl">serial_number</th>
+                               <th class="tl">barcode</th>
+                               <th class="tl">invoice</th>
+                               <th class="tl">delivery_contract</th>
+                               <th class="tl">id_organization</th>
+                               <th class="tl">id_object</th>
+                                
+                           </tr>
+                       </thead>
                         <tbody>
-                            <div *cdkVirtualFor="let objectone of this.ShowObjects" class="example-item" (click)="clicObject(objectone)">
+                            <div *cdkVirtualFor="let mtr of this.ShowMtr" class="example-item" (click)="clicObject(mtr)">
                                 <tr>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_mtr }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.name }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_mtrvid }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.color }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.status }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.description }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.property }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.equipment }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.price }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.size }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.count }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.date_purchase  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.date_issue  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.tabel_number }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.invent_number }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.serial_number }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.barcode }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.invoice }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.delivery_contract }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_organization }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ objectone.id_object }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_mtr }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.name }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_mtrvid }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.color }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.status }}</td> 
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.description }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.property }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.equipment }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.price }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.size }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.count }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.date_purchase  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.date_issue  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.tabel_number }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.invent_number }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.serial_number }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.barcode }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.invoice }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.delivery_contract }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_organization }}</td>
+                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_object }}</td>
                                 </tr>
                             </div>
                         </tbody>

@@ -39,7 +39,7 @@ interface Imtr {
 })
 export class ListMtrComponent {
 
-  ShowObjects: Imtr[] = [];
+  ShowMtr: Imtr[] = [];
   @ViewChild('fareObjects') virtualScroll!: CdkVirtualScrollViewport;
 
   constructor (private mtrserv: MtrService) {  
@@ -49,8 +49,8 @@ export class ListMtrComponent {
 
   ngOnInit() {
     this.mtrserv.getMTR().subscribe ( (value: any) => {
-      this.ShowObjects = value;
-      console.log('this.ShowObjects =', this.ShowObjects);
+      this.ShowMtr = value;
+      console.log('this.ShowMtr =', this.ShowMtr);
     });
 }
 

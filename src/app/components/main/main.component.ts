@@ -46,5 +46,9 @@ export class MainComponent implements OnInit  {
   }
   
 
+  ListMtr() {
+    this.router.navigate(['listmtr']);
+  }
+
 
 }

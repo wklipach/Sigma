@@ -193,30 +193,20 @@ router.get('/', async function(req, res, next) {
         if ((text_number == NaN) || (text_number == 'NaN')) text_number == 'null';
 
 
-
-        console.log('text_number=', text_number);
-
-
         if (text_number == 'null') sQuery = "update staff set `"+field+"`= null "+" where id_staff=?";
         else
                                    sQuery = "update staff set `"+field+"`="+"'"+text_number.toString()+"'"+" where id_staff=?";
 
 
-console.log('sQuery=', sQuery);
-
         const paramsJournal = [text_number, id_staff, field, id_user];
-        console.log('1');
         const sJournal = 
         "insert staff_log (`newvalue`, `id_staff`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
 
-        console.log('2');
 
 
         const paramsCheck = [id_staff];
         const sCheck = 
         "select `"+field+"` from staff where id_staff=?";
-
-        console.log('3');        
 
         const resCheck = await conn.query(sCheck, paramsCheck);
 
