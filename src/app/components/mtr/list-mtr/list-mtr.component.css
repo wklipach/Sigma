@@ -1,12 +1,12 @@
 
-   
   table {
     width: 100%;
     font-size: 1em;
     color: #000;
-    background-color: white;
+    background-color: inherit;
     border-collapse: collapse;
     overflow-x: scroll;
+
   }
   
   cdk-virtual-scroll-viewport {
@@ -28,18 +28,18 @@
   }
   
   .td{
-  
-  width: auto;
-  
+ 
+  min-width: 210px;
+  overflow-x: auto;
   border: 1px dashed #cacaca;
   
   text-align: center;
   
   white-space: nowrap;
   
-  padding: 2px;
+  padding: 3px;
   
-  min-width: 15px;
+
   
   }
   
@@ -52,15 +52,11 @@
   font-weight: 650;
   
   color: #222121;
-  
   text-align: center;
-  
   border: 1px dashed #cacaca;
-  
   background-clip: padding-box;
-  
   z-index: 999;
-  
+  width: 150px;
    
   
   }
@@ -75,7 +71,7 @@
   
   }
   
-   
+
   
   td a {
     display: block; /* Блочная ссылка */
@@ -94,6 +90,7 @@
     left: 0;
     overflow: hidden;
     background-clip: padding-box;
+    width: auto;
     z-index: 99;
   }
   
