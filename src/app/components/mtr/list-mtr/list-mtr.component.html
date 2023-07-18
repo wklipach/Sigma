@@ -30,7 +30,7 @@
                        </thead>
                         <tbody>
                             
-                         <tr *cdkVirtualFor="let mtr of this.ShowMtr" class="example-item"> (click)="clicObject(mtr)">
+                         <tr *cdkVirtualFor="let mtr of this.ShowMtr" class="example-item" (click)="clicObject(mtr)">
                               
                                     <td class="td">{{ mtr.id_mtr }}</td>
                                     <td class="td">{{ mtr.name }}</td> 

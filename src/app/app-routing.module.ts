@@ -13,20 +13,21 @@ import { ListObjectsComponent } from './components/protected_objects/list-object
 import { ListMtrComponent } from './components/mtr/list-mtr/list-mtr.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { NumberComponent } from './components/auth/number/number.component';
+import { numberGuard } from './guards/login/number.guard';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
-  { path: 'number', component: NumberComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'general', component: GeneralComponent },
-  { path: 'overview', component: OverviewComponent },
-  { path: 'summary', component: SummaryComponent },
-  { path: 'settings', component: SettingsComponent },
-  { path: 'listobjects', component: ListObjectsComponent },
-  { path: 'listmtr', component: ListMtrComponent },
-  { path: 'liststaff', component: StaffComponent }
+  { path: 'number', component: NumberComponent},
+  { path: 'login', component: LoginComponent, canActivate: [numberGuard]},
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [numberGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [numberGuard]},
+  { path: 'general', component: GeneralComponent, canActivate: [mainGuard] },
+  { path: 'overview', component: OverviewComponent, canActivate: [mainGuard] },
+  { path: 'summary', component: SummaryComponent, canActivate: [mainGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [mainGuard] },
+  { path: 'listobjects', component: ListObjectsComponent, canActivate: [mainGuard] },
+  { path: 'listmtr', component: ListMtrComponent, canActivate: [mainGuard] },
+  { path: 'liststaff', component: StaffComponent, canActivate: [mainGuard] }
 ];
 
 
