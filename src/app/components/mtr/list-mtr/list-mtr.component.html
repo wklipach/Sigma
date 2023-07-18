@@ -1,14 +1,9 @@
-<app-basement></app-basement>
-
-<cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="50" class="example-viewport">
 
 
-    <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
+<cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="30" class="example-viewport">
 
-                    <table class="table1">
-                        <thead>
+            <table>
+                <thead>
                             <tr>
                                <th class="tl"># </th> 
                                <th class="tl">Название</th> 
@@ -31,38 +26,36 @@
                                <th class="tl">delivery_contract</th>
                                <th class="tl">id_organization</th>
                                <th class="tl">id_object</th>
-                                
                            </tr>
                        </thead>
                         <tbody>
-                            <div *cdkVirtualFor="let mtr of this.ShowMtr" class="example-item" (click)="clicObject(mtr)">
-                                <tr>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_mtr }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.name }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_mtrvid }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.color }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.status }}</td> 
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.description }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.property }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.equipment }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.price }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.size }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.count }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.date_purchase  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.date_issue  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.tabel_number }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.invent_number }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.serial_number }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.barcode }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.invoice }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.delivery_contract }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_organization }}</td>
-                                    <td class="tl" width="150"><span class="masha"></span>{{ mtr.id_object }}</td>
+                            
+                         <tr *cdkVirtualFor="let mtr of this.ShowMtr" class="example-item"> (click)="clicObject(mtr)">
+                              
+                                    <td class="td">{{ mtr.id_mtr }}</td>
+                                    <td class="td">{{ mtr.name }}</td> 
+                                    <td class="td">{{ mtr.id_mtrvid }}</td> 
+                                    <td class="td">{{ mtr.color }}</td>
+                                    <td class="td">{{ mtr.status }}</td> 
+                                    <td class="td">{{ mtr.description }}</td>
+                                    <td class="td">{{ mtr.property }}</td>
+                                    <td class="td">{{ mtr.equipment }}</td>
+                                    <td class="td">{{ mtr.price }}</td>
+                                    <td class="td">{{ mtr.size }}</td>
+                                    <td class="td">{{ mtr.count }}</td>
+                                    <td class="td">{{ mtr.date_purchase  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="td">{{ mtr.date_issue  | date: "MMM d, y, h:mm:ss"  }}</td>
+                                    <td class="td">{{ mtr.tabel_number }}</td>
+                                    <td class="td">{{ mtr.invent_number }}</td>
+                                    <td class="td">{{ mtr.serial_number }}</td>
+                                    <td class="td">{{ mtr.barcode }}</td>
+                                    <td class="td">{{ mtr.invoice }}</td>
+                                    <td class="td">{{ mtr.delivery_contract }}</td>
+                                    <td class="td">{{ mtr.id_organization }}</td>
+                                    <td class="td">{{ mtr.id_object }}</td>
                                 </tr>
-                            </div>
+                  
                         </tbody>
                     </table>            
-          </div>
-       </div>
-    </div>
+
 </cdk-virtual-scroll-viewport>
