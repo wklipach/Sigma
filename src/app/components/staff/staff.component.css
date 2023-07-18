@@ -161,3 +161,10 @@ td:nth-child(1) {
   min-width: 20px;
   cursor: pointer;
 } 
+
+.add-btn{
+  height: 20px !important;
+  position:fixed;
+  top: 0;
+  left: 210px;
+}

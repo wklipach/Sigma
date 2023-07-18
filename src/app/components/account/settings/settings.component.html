@@ -1,204 +1,182 @@
 <form class="mb-2 px-9">
 
-<!-- <form class="m-0 h-auto" [formGroup]="form">
-  
-    <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
-    <ng-template #contentLoadAvatar class="image-input">
-    <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
-    </ng-template>
-    <ng-template #contentDefault>
-      <img class="rounded image-input-wrapper w-125px h-125px"src="/assets/img/usernull.jpg"onclick="document.getElementById('avatar').click()">
-    </ng-template>
-</form> -->
-   <!-- <div class="one mb-0">
-      <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none">
-      <label class="text-muted my-2 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</label>
-      <label class="text-muted  my-2 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" (click)="clearFile()">Очистить</label>
- </div> -->
-  
-<div class="card-body mt-2 p-10">
-        <div class="row mb-6">
-            <!--begin::Label-->
-            <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
-                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
-              <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
-              <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
-            </div>
-            
-            <div class="col-lg-8">
+    <!-- <form class="m-0 h-auto" [formGroup]="form">
+      
+        <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+        <ng-template #contentLoadAvatar class="image-input">
+        <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+        </ng-template>
+        <ng-template #contentDefault>
+          <img class="rounded image-input-wrapper w-125px h-125px"src="/assets/img/usernull.jpg"onclick="document.getElementById('avatar').click()">
+        </ng-template>
+    </form> -->
+       <!-- <div class="one mb-0">
+          <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none">
+          <label class="text-muted my-2 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</label>
+          <label class="text-muted  my-2 fs-4" style="display: block; cursor: pointer; text-decoration: underline;" (click)="clearFile()">Очистить</label>
+     </div> -->
+      
+    <div class="card-body mt-2 p-10">
+            <div class="row mb-6">
+                <!--begin::Label-->
+                <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
+                    <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
+                  <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
+                  <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
+                </div>
                 
-  
-                    <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
-                    <ng-template #contentLoadAvatar class="image-input">
-                    <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
-                    </ng-template>
-                    <ng-template #contentDefault>
-                      <img class="rounded image-input-wrapper w-125px h-125px"src="/assets/img/usernull.jpg"onclick="document.getElementById('avatar').click()">
-                    </ng-template>
-                 
-                
-            </div>
-
-            </div>
-        
-
+                <div class="col-lg-8">
+                    
+      
+                        <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+                        <ng-template #contentLoadAvatar class="image-input">
+                        <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+                        </ng-template>
+                        <ng-template #contentDefault>
+                          <img class="rounded image-input-wrapper w-125px h-125px"src="/assets/img/usernull.jpg"onclick="document.getElementById('avatar').click()">
+                        </ng-template>
+                   
+           </div>
     
-       
-        <div class="row mb-6">
-            <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">ФИО</label>
-
-            <div class="col-lg-8 fv-row">
-                <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="Петров Иван Петрович" />
+                </div>
+            
+             <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">ФИО</label>
+    
+                <div class="col-lg-8 fv-row">
+                    <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="Петров Иван Петрович" />
+                </div>
+            </div>  
+    
+            <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span class="required">Компания</span>
+                        </label>
+    
+                    <div class="col-lg-8 fv-row">
+                        <select name="company" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
+                            <option>Сигма профи 1</option>
+                            <option>Сигма профи 2</option>
+                            <option>Сигма профи 3</option>
+                        </select>
+                    </div>
             </div>
-        </div>  
-
-
-        <div class="row mb-6">
+    
+             <div class="row mb-6">
+    
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Отдел</label>
+    
+                <div class="col-lg-8 fv-row">
+                    <select name="Guid1" data-control="Guid1" data-placeholder="" class="form-select form-select-solid form-select-lg fw-semibold">
+                        <option>Отдел кадров.</option>
+                        <option>Отдел лицензионно-разрешительной работы.</option>
+                        <option>Администрация.</option>
+                        <option>Начальник охраны объекта.</option>
+                        <option>Начальник физической охраны.</option>
+                         <option>Начальник личной охраны.</option>
+                        <option>Руководство.</option>
+                    </select>
+                </div>
+            </div>       
+    
+            <div class="row mb-6">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                    <span class="required">Компания</span>
-                    </label>
-
+                    <span class="required">Телефон</span>
+                    <span class="ms-1" data-bs-toggle="tooltip" title="Phone number">
+                    </span>
+                </label>
+                <!--end::Label-->
+                <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
-                    <select name="company" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
-                        <option>Сигма профи 1</option>
-                        <option>Сигма профи 2</option>
-                        <option>Сигма профи 3</option>
+                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" value="+7 999 578 46 20" />
+                </div>
+                
+            </div>
+            
+            <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">Руководитель</label>
+                
+                <div class="col-lg-8 fv-row">
+                    <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Непосредственный начальник" value="ГенДиректор" />
+                </div>
+                
+            </div>
+    
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Должность</label>
+                <div class="col-lg-8 fv-row">
+                    <select name="Guid1" data-control="Guid1" class="form-select form-select-solid form-select-lg">
+                        <option>Охранник</option>
+                        <option>Начальник охраны</option>
+                        <option>помощник начальника охраны</option>
                     </select>
                 </div>
-        </div>
-
-         <div class="row mb-6">
-
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Отдел</label>
-
-            <div class="col-lg-8 fv-row">
-                <select name="Guid1" data-control="Guid1" data-placeholder="" class="form-select form-select-solid form-select-lg">
-                    <option>Отдел кадров</option>
-                    <option>ОЛЛР</option>
-                    <option>Администрация</option>
-                </select>
-            </div>
-        </div>       
-
-        <div class="row mb-6">
-            <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                <span class="required">Телефон</span>
-                <span class="ms-1" data-bs-toggle="tooltip" title="Phone number">
-                </span>
-            </label>
-            <!--end::Label-->
-            <!--begin::Col-->
-            <div class="col-lg-8 fv-row">
-                <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="+7 999 578 46 20" />
-            </div>
-            
-        </div>
-        
-        <div class="row mb-6">
-            <!--begin::Label-->
-            <label class="col-lg-4 col-form-label fw-semibold fs-6">Руководитель</label>
-            
-            <div class="col-lg-8 fv-row">
-                <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Непосредственный начальник" value="ГенДиректор" />
-            </div>
-            
-        </div>
-
-
-        <div class="row mb-6">
-            
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
-            
-            <div class="col-lg-8 fv-row">
-                
-                <select name="language" data-control="select2" class="form-select form-select-solid form-select-lg">
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>Нет</option>
-                </select>
-                
-            </div>
-        </div>
-        
-
-        <div class="row mb-6">
-            
-            <label class="col-lg-4 col-form-label fw-semibold fs-6">СМС</label>
-
-            <div class="col-lg-8 d-flex align-items-center">
-                <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                    <input class="form-check-input w-45px h-30px" type="checkbox" id="sms" checked="checked" />
-                    <label class="form-check-label" for="sms"></label>
-                </div>
-            </div>
-        </div>
+            </div>   
            
-        <div class="row mb-6">
-
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Справочник1</label>
-
+    
+            <div class="row mb-6">
+                
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
+                
                 <div class="col-lg-8 fv-row">
-                    <select name="Guid1" aria-label="Справочник1" data-control="Guid1" data-placeholder="" class="form-select form-select-solid form-select-lg">
-                        <option value="">выберите..</option>
-                        <option  value="Значение 1">Значение 1</option>
-                        <option  value="Значение 2">Значение 3</option>
+                    
+                    <select name="language" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>Нет</option>
                     </select>
+                    
                 </div>
-        </div>          
- 
-        <div class="row mb-6">
-    <!--begin::Label-->
-    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Рост</label>
-
-     <div class="col-lg-8 fv-row">
-        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="180" />
+            </div>
+         
+            
+                    
+            <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Рост</label>
+    
+         <div class="col-lg-8 fv-row">
+            <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="180" />
+        </div>
+    </div>  
+    
+    <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Вес</label>
+    
+        <div class="col-lg-8 fv-row">
+            <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="85" />
+        </div>
+    </div>  
+    
+    <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Собеседование</label>
+    
+        <div class="col-lg-8 fv-row">
+            <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="21.06.2023" />
+        </div>
+    </div>  
+    
+    <div class="row mb-6">
+             
+        <label class="col-lg-4 col-form-label fw-semibold fs-6">СМС</label>
+    
+        <div class="col-lg-8 d-flex align-items-center">
+            <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                <input class="form-check-input w-45px h-30px" type="checkbox" id="sms" checked="checked" />
+                <label class="form-check-label" for="sms"></label>
+            </div>
+        </div>
     </div>
-</div>  
-
-<div class="row mb-6">
-    <!--begin::Label-->
-    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Вес</label>
-
-    <div class="col-lg-8 fv-row">
-        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="85" />
-    </div>
-</div>  
-
-<div class="row mb-6">
-    <!--begin::Label-->
-    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Собеседование</label>
-
-    <div class="col-lg-8 fv-row">
-        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="21.06.2023" />
-    </div>
-</div>  
-
-<div class="row mb-6">
-    <!--begin::Label-->
-    <label class="col-lg-4 col-form-label required fw-semibold fs-6">ФИО</label>
-
-    <div class="col-lg-8 fv-row">
-        <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="Петров Иван Петрович" />
-    </div>
-</div>  
-
-<div class="row mb-6">
-
-    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Должность</label>
-
-    <div class="col-lg-8 fv-row">
-        <select name="Guid1" data-control="Guid1" class="form-select form-select-solid form-select-lg">
-            <option>Охранник</option>
-            <option>Начальник охраны</option>
-            <option>помощник начальника охраны</option>
-        </select>
-    </div>
-</div>   
-
-</div>
-
-</form>
+    
+      </div>
+    
+    </form>
+    
+    
