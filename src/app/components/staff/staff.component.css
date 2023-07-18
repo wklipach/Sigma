@@ -70,7 +70,7 @@ td a {
   min-width: 2vw;
 }
 
- td:nth-child(2) {  
+ td:nth-child(3) {  
   background-color: #fcf7f6;
   position: -webkit-sticky; /* for Safari */
   position: sticky;
@@ -134,14 +134,18 @@ background-color: #5a6268 !important;
 cursor: pointer;
 }
 
+.modal-content{
+  width: 800px !important;
+}
 select {
   border: 1px solid #fff;
   background-color: transparent;
   -webkit-appearance: none;
 }
-.modal-content{
-  width: 800px !important;
+input{
+  border: none;
 }
+
 .add-btn{
   position:absolute;
   top: 0;

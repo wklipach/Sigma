@@ -1,63 +1,38 @@
 .container{
-
   width: 100vw;
-
   display: flex;
-
   justify-content: space-between;
-
 }
 
 h2{
-
   display: flex;
-
   margin-right: auto;
-
 }
 
 input-group{
-
   display: flex;
-
   width: 350px;
-
 }
 
 table {
-
   width: 100%;
-
   font-size: 1em;
-
   color: #000;
-
   background-color: white;
-
   border-collapse: collapse;
-
   overflow-x: scroll;
-
 }
 
 cdk-virtual-scroll-viewport {
-
   height: 500px;
-
   width: 100%;
-
   overflow-x: auto;
-
 }
 
 .example-viewport {
-
   height: 90vh;
-
   width: 100%;
-
   overflow: auto;
-
 }
 
 .example-item {
@@ -117,43 +92,31 @@ thead th {
  
 
 td a {
-
   display: block; /* Блочная ссылка */
-
   background: #f4f5ef; /* цвет фона */
-
   color: #fff; /* Цвет ссылок */
-
   padding: 5px; /* Поля вокруг текста */
-
   cursor: pointer;
-
  }
 
- 
-
  td:nth-child(1) {  
-
   background-color: #fff;
-
   min-width: 15px;
-
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-clip: padding-box;
+  z-index: 99;
 }
 
- 
-
  td:nth-child(2) {  
-
   background-color: #fcf7f6;
-
   position: -webkit-sticky; /* for Safari */
-
   position: sticky;
-
   top: 0;
-
   left: 15px;
-
   overflow: hidden;
   background-clip: padding-box;
 }
@@ -296,16 +259,15 @@ cursor: pointer;
 
 }
 
- 
 
 select {
-
   border: 1px solid #fff;
-
   background-color: transparent;
-
   -webkit-appearance: none;
+}
 
+input{
+  border: none;
 }
 
 .modal-content{
