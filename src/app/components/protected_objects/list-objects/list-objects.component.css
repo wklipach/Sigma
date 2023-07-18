@@ -43,19 +43,15 @@ cdk-virtual-scroll-viewport {
 
 .td{
 
-width: auto;
-
-border: 1px dashed #cacaca;
-
-text-align: center;
-
-white-space: nowrap;
-
-padding: 2px;
-
-min-width: 15px;
-
-}
+  min-width: 120px;
+  max-width: 220px;
+  overflow-x: auto;
+  border: 1px dashed #cacaca;
+  text-align: center;
+  white-space: nowrap;
+  padding: 3px;
+    
+  }
 
 thead th{
 
