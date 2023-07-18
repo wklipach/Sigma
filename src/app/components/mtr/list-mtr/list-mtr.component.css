@@ -107,7 +107,14 @@
     background-clip: padding-box;
   }
   
-   
+  td:nth-child(6) {  
+    background-color: #fff;
+    min-width: 150px !important;
+    max-width: 450px !important;
+    overflow: hidden;
+    background-clip: padding-box;
+    z-index: 99;
+  }
   
     /*  
   
