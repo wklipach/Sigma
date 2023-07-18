@@ -76,6 +76,10 @@ td a {
   position: sticky;
   top: 0;
   left: 15px;
+  border-right: 2px solid #cacaca;
+  border-bottom: 1px dashed #cacaca;
+  border-top: 1px dashed #918e8e;
+  background-clip: padding-box;
   overflow: hidden;
 }
 
@@ -141,6 +145,7 @@ select {
   border: 1px solid #fff;
   background-color: transparent;
   -webkit-appearance: none;
+  -moz-appearance: none;
 }
 input{
   border: none;
