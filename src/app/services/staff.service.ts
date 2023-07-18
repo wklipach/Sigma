@@ -27,7 +27,14 @@ export class StaffService {
   updateStaffOne(text: string, id_staff: string, field: string) {
     const sUrl = this.gr.sUrlGlobal + 'staff';
     const id_user = this.auth.getSessionUser().id_user;
-    return this.http.post(sUrl, {text, id_staff, field, id_user});
+    return this.http.post(sUrl, {text: text, id_staff, field, id_user});
+  }
+
+
+  updateStaffNumber(text_number: string, id_staff: string, field: string) {
+    const sUrl = this.gr.sUrlGlobal + 'staff';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {text_number: text_number, id_staff, field, id_user});
   }
 
   updateStaffDate(date: Date | null, id_staff: string, field: string) {
@@ -42,6 +49,19 @@ export class StaffService {
     const pNull = 'pNull';
     const id_user = this.auth.getSessionUser().id_user;
     return this.http.post(sUrl, {pNull, id_staff, field, id_user});
+  }
+
+
+  addStaff(text_name: string) {
+    const sUrl = this.gr.sUrlGlobal + 'staff';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {addStaff: 'addStaff', id_user, text_name});
+  }
+
+  deleteStaff(id_staff: string) {
+    const sUrl = this.gr.sUrlGlobal + 'staff';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {deleteStaff: 'deleteStaff', id_staff, id_user});
   }
 
 

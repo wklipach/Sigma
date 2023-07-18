@@ -45,6 +45,12 @@ interface IObjectOne {
     organization?: string;
 }
 
+interface IDeleteObject {
+  id_staff?: number;
+  sLink?: string;
+}
+
+
 @Component({
   selector: 'app-staff',
   templateUrl: './staff.component.html',
@@ -63,8 +69,10 @@ export class StaffComponent {
     guideOrganization:  ISmallGuide[] = [];
     guideGender:  ISmallGuide[] = [];
     guideTypeperson:  ISmallGuide[] = [];
-
     guideSenjorGuard:  ISenjorGuardGuide[] = [];
+    //объект для модального окна удаления
+    curDeleteObject: IDeleteObject = {};
+
 
 
     @ViewChild('fareObjects') virtualScroll!: CdkVirtualScrollViewport;
@@ -198,14 +206,39 @@ summaryOpen(id_staff: number) {
        }
       }
     }
+
+
+
+
+       isNumeric (n: string) {
+        return !!Number(n);
+       }
+
+        myUpdateNumberClick(x: any, id_staff: number, field: string) {
+    
+
+     
+
+      let text = x.innerText;
+      text = text.replace('\n', '');
+ 
+      if (!this.isNumeric(text)) {
+         text = 'null';
+      } 
+      console.log('text =', text);
+      this.staffserv.updateStaffNumber(text, id_staff.toString(), field).subscribe( (res: any) => {
+        console.log('res update = ', res);
+      });
+    }
+
   
     myUpdateClick(x: any, id_staff: number, field: string) {
     
       let text = x.innerText;
       if (!text ) text='';
-      console.log(text, id_staff, field);
+
       this.staffserv.updateStaffOne(text, id_staff.toString(), field).subscribe( (res: any) => {
-        //console.log('res update = ', res);
+        console.log('res update = ', res);
       });
     }
 
@@ -421,7 +454,65 @@ summaryOpen(id_staff: number) {
 
     $event.target.type = '';
 
- }    
+ }
+ 
+ 
+ addNewStaff() {
+
+  let item: IObjectOne = {};
+  const s = 'Новый сотрудник';
+
+  
+  this.staffserv.addStaff(s).subscribe( (res: any) =>
+    {
+      if (res.insertId) {
+        item.id_staff = res.insertId;
+        item.fio = s;
+        this.ShowStaff.unshift(item);
+        this.ORIGINAL_ShowStaff.unshift(item);
+        this.ShowStaff = [...this.ShowStaff];
+        this.virtualScroll.scrollTo({top: 0});
+      }
+    });
+  
+
+  
+}
+
+
+
+deleteStaff(id_staff: number, sLink: string) {
+  //openDeleteModalButton
+  this.curDeleteObject.sLink = sLink;
+  this.curDeleteObject.id_staff = id_staff;
+  document!.getElementById("openDeleteModalButton")!.click();
+}
+
+
+
+deleteClose() {
+  document!.getElementById("closeDeleteModalButton")!.click();
+}
+  
+deleteSave() {
+
+
+  if (this.curDeleteObject.id_staff) {
+
+    let idStaff = this.curDeleteObject.id_staff;
+    let indexShowObjects = this.ShowStaff.findIndex( (el  =>  el.id_staff == idStaff.toString()));
+    this.ShowStaff.splice(indexShowObjects,1);
+    let indexOriginalShowStaff = this.ORIGINAL_ShowStaff.findIndex( (el  =>  el.id_staff == idStaff.toString()));
+    this.ORIGINAL_ShowStaff = this.ORIGINAL_ShowStaff.splice(indexOriginalShowStaff,1);
+
+    //refresh data
+    this.ShowStaff = [...this.ShowStaff];
+    this.ORIGINAL_ShowStaff = [...this.ORIGINAL_ShowStaff];
+
+    this.staffserv.deleteStaff(idStaff.toString()).subscribe();
+  }
+  this.deleteClose();
+}
 
 
 }

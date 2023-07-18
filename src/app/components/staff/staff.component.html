@@ -50,6 +50,7 @@
 
          <th class="tl">002-О/у от</th>
          <th class="tl">003-О/у от</th> 
+         <th class="tl">...</th> 
       </tr>
       </thead>
      
@@ -120,9 +121,9 @@
 
 
          <!-- разряд--> 
-         <td class="td" id="rank" contenteditable="true" (blur)="myUpdateClick($event.target, staff.id_staff, 'rank')" 
-                                                         (keypress)="maxInputLength($event,1)" 
-                                                         (paste)="maxPasteLength($event,1)" >
+         <td class="td" id="rank" contenteditable="true" (blur)="myUpdateNumberClick($event.target, staff.id_staff, 'rank')" 
+                                                         (keypress)="maxInputLength($event,5)" 
+                                                         (paste)="maxPasteLength($event,5)" >
                {{ staff.rank }}
          </td>
 
@@ -166,9 +167,43 @@
             (focusout)="set003from($event, staff.id_staff)"
             value="{{staff.s003from_str | date: 'dd.MM.yyyy'}}">
           </td>  
-      </tr>
+
+          <td>
+            <button class="btn btn-danger" (click)="deleteStaff(staff.id_staff, staff.fio)"><img src="/assets/img/delete.png" width="30" /></button>
+          </td>
+
+       </tr>
 
    </tbody>
       </table>
 
 </cdk-virtual-scroll-viewport>      
+
+<div class="add-btn">
+  <button class="btn btn-success" type="button" (click)="addNewStaff()"><img src="/assets/img/plus.png" width="30" /></button>
+  </div>
+
+
+
+<!-- Удалить объект -->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+  DeleteOpen
+</button>
+<button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+DeleteClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Удалить сотрудника {{this.curDeleteObject.sLink}}?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+      <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+      
+    </div>
+  </div>
+</div>
+</div>  
