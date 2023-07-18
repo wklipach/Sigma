@@ -21,7 +21,10 @@ router.get('/', async function(req, res, next) {
     }
 
 
-    
+    if (req.query.get_protected_object) {
+      const result = await asyncGuideProtectedObject();
+      res.send(result);
+    }
 
   });
 
@@ -59,5 +62,23 @@ router.get('/', async function(req, res, next) {
     }
   }
 
+
+
+  async function asyncGuideProtectedObject() {
+    let conn = await pool.getConnection();
+    try {
+  
+        const sQuery = 
+        "select id_object as `id`, `name` from protected_object where bitDelete = 0 and `name`<>'' "+
+        "order by `name` asc ";
+
+        const resProtectedObject = await conn.query(sQuery);
+        return JSON.stringify(resProtectedObject);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
 
 module.exports = router;

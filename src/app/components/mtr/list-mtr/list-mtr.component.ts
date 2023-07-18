@@ -7,6 +7,7 @@ interface Imtr {
   id_mtr?: string;
   name?: string;
   id_mtrvid?: string;
+  mtrvid?: string;
   color?: string;
   status?: string;
   description?: string;
@@ -24,12 +25,10 @@ interface Imtr {
   invoice?: string;
   delivery_contract?: string;
   id_organization?: string;
+  organization?: string;
   id_object?: string;
+  ProtectedObject?: string;
   };
-
-
-
-
 
 
 @Component({

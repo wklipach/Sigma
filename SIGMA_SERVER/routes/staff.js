@@ -58,7 +58,6 @@ router.get('/', async function(req, res, next) {
      }
 
      if (req.body['addStaff']) {
-      console.log('addStaff');
       const result = await asyncAddStaff(req.body['id_user'], req.body['text_name']);
       res.send(result);
      }
