@@ -55,7 +55,7 @@
   background-clip: padding-box;
   z-index: 999;
   width: 150px;
-   
+  white-space: nowrap;
   
   }
   
