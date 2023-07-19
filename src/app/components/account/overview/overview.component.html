@@ -2,9 +2,9 @@
 
 <table>
   <tr>
-    <td><div>one</div></td>
-    <td><div>two</div></td>
-    <td><div>three</div></td>
+    <td id = "col1"><div>one</div></td>
+    <td id = "col2"><div>two</div></td>
+    <td id = "col3"><div>three</div></td>
   </tr>
   <tr>
     <td><div>four</div></td>
@@ -18,7 +18,13 @@
   </tr>   
 </table>
 
+<div>
+  <label id="label1">{{this.str1}}</label>
+  <label id="label2">{{this.str2}}</label>
+  <label id="label3">{{this.str3}}</label>
+</div>
 
+ <button (click) = "clickWigth()">Получить ширину столбцов</button>
 
 
 
