@@ -113,11 +113,40 @@ td a {
   position: sticky;
   top: 0;
   left: 15px;
+  min-width: 250px;
   overflow: hidden;
+  white-space: pre-wrap;
   background-clip: padding-box;
 }
 
+td:nth-child(5) {  
+  background-color: #fcf7f6;
+  overflow: hidden;
+  white-space: pre-wrap;
+  background-clip: padding-box;
+}
+
+td:nth-child(6) {  
+  background-color: #fcf7f6;
+  overflow: hidden;
+  min-width: 280px;
+  background-clip: padding-box;
+}
+
+td:nth-child(8) {  
+  background-color: #fff;
+  overflow: hidden;
+  white-space: pre-wrap;
+  background-clip: padding-box;
+}
  
+td:nth-child(17) {  
+  background-color: #fff;
+  min-width: 180px;
+  overflow: hidden;
+  white-space: pre-wrap;
+  background-clip: padding-box;
+}
 
   /*  
 

@@ -1,3 +1,16 @@
+.container{
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+h2{
+  display: flex;
+  margin-right: auto;
+}
+input-group{
+  display: flex;
+  width: 550px;
+}
 
   table {
     width: 100%;
@@ -257,6 +270,18 @@
     background-color: transparent;
     -webkit-appearance: none;
   }
+
+  .btn.btn-success{
+    color: #fff;
+    background-color: #218838 !important;
+    font-weight: 600 !important;
+ }
+    .btn.btn-success:hover{
+    color: white !important;
+    font-weight: 600 !important;
+    background-color: #218838 !important; 
+    cursor: pointer;
+    }
   
   input{
     border: none;

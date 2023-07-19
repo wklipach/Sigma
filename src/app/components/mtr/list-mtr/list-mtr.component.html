@@ -1,7 +1,7 @@
 
 <div class="Container d-flex flex-row p-2">
     <h2>МТР</h2>
-     <div class="input-group rounded  w-lg-550px ml-auto">
+     <div class="d-flex rounded w-lg-550px ml-auto">
           <input id="search" 
                  type="search"
                  class="form-control rounded" 
@@ -9,7 +9,7 @@
                  aria-label="Search" 
                  aria-describedby="search-addon" 
                  (keyup.enter)="onEnterSearch()"/>
-          <span class="input-group-text border-0" id="search-addon">
+          <span class="input-group-text border-0 pl-15px" id="search-addon">
             <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
           </span>
         </div>
@@ -21,7 +21,7 @@
                 <thead>
                             <tr>
                                <th class="tl"><div class="rzh">#</div></th> 
-                               <th class="tl">Название</th> 
+                               <th class="tl"><div class="rzh">Название</div></th> 
                                <th class="tl">Вид</th>
                                <th class="tl">Цвет</th> 
                                <th class="tl"> Статус </th>
