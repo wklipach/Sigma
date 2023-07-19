@@ -155,17 +155,11 @@ export class ListObjectsComponent {
  
 
   myUpdateClick(x: any, id_object: number, field: string) {
-    
     let text = x.innerText;
     if (!text ) text='';
-    console.log(text, id_object, field);
-
-
     this.listobjectsserv.updateProtectedOne(text, id_object.toString(), field).subscribe( (res: any) => {
       //console.log('res update = ', res);
     });
-
-
   }
 
 
@@ -288,7 +282,6 @@ export class ListObjectsComponent {
   }
 
       $event.target.type = '';
-
 
   }
 
@@ -452,7 +445,7 @@ export class ListObjectsComponent {
         let indexShowObjects = this.ShowObjects.findIndex( (el  =>  el.id_object == idObject.toString()));
         this.ShowObjects.splice(indexShowObjects,1);
         let indexOriginalShowObjects = this.ORIGINAL_ShowObjects.findIndex( (el  =>  el.id_object == idObject.toString()));
-        this.ORIGINAL_ShowObjects = this.ORIGINAL_ShowObjects.splice(indexOriginalShowObjects,1);
+        this.ORIGINAL_ShowObjects.splice(indexOriginalShowObjects,1);
 
         //refresh data
         this.ShowObjects = [...this.ShowObjects];

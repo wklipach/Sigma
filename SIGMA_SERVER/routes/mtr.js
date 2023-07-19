@@ -101,7 +101,8 @@ router.get('/', async function(req, res, next) {
                 "m.`name`, "+
                 "      m.`id_mtrvid`, "+
                 "      mtrvid.name as `mtrvid`, "+
-                "m.`color`, "+
+                "m.id_mtrcolor, "+
+                "c.name as mtrcolor, " +
                 "m.`status`, "+
                 "m.`description`, "+ 
                 "m.`property`, "+
@@ -125,6 +126,7 @@ router.get('/', async function(req, res, next) {
                 "left join guide_mtrvid as mtrvid on mtrvid.id=m.id_mtrvid "+
                 "left join guide_organization as go on go.id=m.id_organization "+
                 "left join protected_object as p on p.id_object=m.id_object "+
+                "left join guide_mtrcolor as c on c.id=m.id_mtrcolor "+
                 "where m.bitDelete = 0";
 
 

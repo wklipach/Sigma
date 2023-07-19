@@ -1,4 +1,19 @@
 
+<div class="Container d-flex flex-row p-2">
+    <h2>МТР</h2>
+     <div class="input-group rounded  w-lg-550px ml-auto">
+          <input id="search" 
+                 type="search"
+                 class="form-control rounded" 
+                 placeholder="Поиск" 
+                 aria-label="Search" 
+                 aria-describedby="search-addon" 
+                 (keyup.enter)="onEnterSearch()"/>
+          <span class="input-group-text border-0" id="search-addon">
+            <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
+          </span>
+        </div>
+  </div>
 
 <cdk-virtual-scroll-viewport #fareObjects appendOnly itemSize="30" class="example-viewport">
 
@@ -7,55 +22,221 @@
                             <tr>
                                <th class="tl"># </th> 
                                <th class="tl">Название</th> 
-                               <th class="tl">id_mtrvid</th>
-                               <th class="tl">color</th> 
-                               <th class="tl">status</th>
-                               <th class="tl">description</th>
-                               <th class="tl">property</th> 
-                               <th class="tl">equipment</th>
-                               <th class="tl">price</th>
-                               <th class="tl">size</th>
-                               <th class="tl">count</th>
-                               <th class="tl">date_purchase</th>
-                               <th class="tl">date_issue</th>
-                               <th class="tl">tabel_number</th>
-                               <th class="tl">invent_number</th>
-                               <th class="tl">serial_number</th>
-                               <th class="tl">barcode</th>
-                               <th class="tl">invoice</th>
-                               <th class="tl">delivery_contract</th>
-                               <th class="tl">id_organization</th>
-                               <th class="tl">id_object</th>
+                               <th class="tl">Вид</th>
+                               <th class="tl">Цвет</th> 
+                               <th class="tl"> Статус </th>
+                               <th class="tl">Описание</th>
+                               <th class="tl">Характеристики</th> 
+                               <th class="tl">Комплектация</th>
+
+                               <th class="tl">Цена</th>
+                               <th class="tl">Размер</th>
+                               <th class="tl">Количество</th>                               
+                               <th class="tl">Дата покупки</th>
+                               <th class="tl">Дата выдачи</th>
+
+                               <th class="tl">Табельный №</th>
+                               <th class="tl">Инв. №</th>
+                               <th class="tl">Серийный номер</th>
+                               <th class="tl">Штрихкод</th>
+                               <th class="tl">Счёт на оплату</th>
+                               <th class="tl">Договор на поставку</th>
+                               <th class="tl">Компания</th>
+                               <th class="tl">Объект</th>
+                               <th class="tl">...</th>
                            </tr>
                        </thead>
                         <tbody>
                             
-                         <tr *cdkVirtualFor="let mtr of this.ShowMtr" class="example-item" (click)="clicObject(mtr)">
+                         <tr *cdkVirtualFor="let mtr of this.ShowMtr" class="example-item">
                               
                                     <td class="td">{{ mtr.id_mtr }}</td>
-                                    <td class="td">{{ mtr.name }}</td> 
-                                    <td class="td">{{ mtr.id_mtrvid }}</td> 
-                                    <td class="td">{{ mtr.color }}</td>
-                                    <td class="td">{{ mtr.status }}</td> 
-                                    <td class="td">{{ mtr.description }}</td>
-                                    <td class="td">{{ mtr.property }}</td>
-                                    <td class="td">{{ mtr.equipment }}</td>
-                                    <td class="td">{{ mtr.price }}</td>
-                                    <td class="td">{{ mtr.size }}</td>
-                                    <td class="td">{{ mtr.count }}</td>
-                                    <td class="td">{{ mtr.date_purchase  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="td">{{ mtr.date_issue  | date: "MMM d, y, h:mm:ss"  }}</td>
-                                    <td class="td">{{ mtr.tabel_number }}</td>
-                                    <td class="td">{{ mtr.invent_number }}</td>
-                                    <td class="td">{{ mtr.serial_number }}</td>
-                                    <td class="td">{{ mtr.barcode }}</td>
-                                    <td class="td">{{ mtr.invoice }}</td>
-                                    <td class="td">{{ mtr.delivery_contract }}</td>
-                                    <td class="td">{{ mtr.id_organization }}</td>
-                                    <td class="td">{{ mtr.id_object }}</td>
+
+                                    <!-- НАИМЕНОВАНИЕ -->
+                                    <td class="td" id="name" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'name')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                       {{ mtr.name }}
+                                    </td>
+ 
+                                    <!--GUIDE ВИД-->
+                                    <td class="td">
+                                        <select [ngModel]="mtr.id_mtrvid" (change)="onChangeSmallGuide($event, this.guideMtrVid, mtr.id_mtr, 'id_mtrvid')">
+                                            <option *ngFor="let vid of this.guideMtrVid" [value]="vid.id">{{vid.name}}</option>
+                                        </select>
+                                    </td> 
+
+                                    <!--GUIDE COLOR-->
+                                    <td class="td">
+                                        <select [ngModel]="mtr.id_mtrcolor" (change)="onChangeSmallGuide($event, this.guideMtrColor, mtr.id_mtr, 'id_mtrcolor')">
+                                            <option *ngFor="let mtrcolor of this.guideMtrColor" [value]="mtrcolor.id">{{mtrcolor.name}}</option>
+                                        </select>
+                                    </td>
+
+                                    <!--статус-->                                    
+                                    <td class="td" id="status" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'status')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                       {{ mtr.status }}
+                                    </td>
+
+                                    <!--ОПИСАНИЕ-->                                    
+                                    <td class="td" id="description" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'description')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                      {{ mtr.description }}
+                                    </td>
+
+                                    <!-- ХАРАКТЕРИСТИКИ -->
+                                   <td class="td" id="property" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'property')" 
+                                   (keypress)="maxInputLength($event,250)" 
+                                   (paste)="maxPasteLength($event,250)" >
+                                   {{ mtr.property }}
+                                   </td>
+
+                                   <!--КОМПЛЕКТАЦИЯ-->
+                                    <td class="td" id="equipment" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'equipment')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                    {{ mtr.equipment }}
+                                    </td>
+ 
+                                    <!--ЦЕНА ТОЛЬКО ЦИФРЫ-->
+                                    <td class="td" contenteditable="true" 
+                                               (keypress)="numberpress($event)"
+                                               id="price" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'price')">
+                                        {{ mtr.price }}
+                                    </td>
+
+
+                                    <!--РАЗМЕР ТОЛЬКО ЦИФРЫ-->
+                                    <td class="td" contenteditable="true" 
+                                               (keypress)="numberpress($event)"
+                                               id="size" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'size')">
+                                        {{ mtr.size }}
+                                    </td>
+
+                                    <!--КОЛИЧЕСТВО ТОЛЬКО ЦИФРЫ-->
+                                    <td class="td" contenteditable="true" 
+                                               (keypress)="numberpress($event)"
+                                               id="count" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'count')">
+                                        {{ mtr.count }}
+                                    </td>
+
+
+                                    <td class="td">
+                                        <input name="date" type="text" (focus)="focusFunction($event, mtr.date_purchase_str)" 
+                                                                       (focusout)="setDatePurchase($event, mtr.id_mtr)"
+                                                                       value="{{mtr.date_purchase_str | date: 'dd.MM.yyyy'}}">
+                                    </td>
+                    
+
+
+<!--NENENENENNE-->
+                                    <td class="td">
+                                        <input name="date" type="text" (focus)="focusFunction($event, mtr.date_issue_str)"
+                                                                       (focusout)="setDateIssue($event, mtr.id_mtr)"
+                                                                       value="{{mtr.date_issue_str | date: 'dd.MM.yyyy'}}">
+                                    </td>
+<!---NENENENENENENENNE-->                                    
+                    
+
+
+                                   <!--Табельный №-->
+                                   <td class="td" id="tabel_number" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'tabel_number')" 
+                                   (keypress)="maxInputLength($event,250)" 
+                                   (paste)="maxPasteLength($event,250)" >
+                                   {{ mtr.tabel_number }}
+                                   </td>
+
+                                   <!--Инв. №-->
+                                   <td class="td" id="invent_number" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'invent_number')" 
+                                   (keypress)="maxInputLength($event,250)" 
+                                   (paste)="maxPasteLength($event,250)" >
+                                   {{ mtr.invent_number }}
+                                   </td>
+
+                                   <!-- Серийный номер -->
+                                    <td class="td" id="serial_number" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'serial_number')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                    {{ mtr.serial_number }}
+                                    </td>
+
+                                    <!-- Штрихкод -->
+                                    <td class="td" id="barcode" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'barcode')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                    {{ mtr.barcode }}
+                                    </td>
+
+                                    <!-- Счёт на оплату -->
+                                    <td class="td" id="invoice" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'invoice')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                    {{ mtr.invoice }}
+                                    </td>
+
+                                    <!--Договор на поставку-->
+                                    <td class="td" id="delivery_contract" contenteditable="true" (blur)="myUpdateClick($event.target, mtr.id_mtr, 'delivery_contract')" 
+                                    (keypress)="maxInputLength($event,250)" 
+                                    (paste)="maxPasteLength($event,250)" >
+                                    {{ mtr.delivery_contract }}
+                                    </td>
+
+                                    <!--GUIDE  Компания -->
+                                    <td class="td">
+                                        <select [ngModel]="mtr.id_organization" (change)="onChangeSmallGuide($event, this.guideOrganization, mtr.id_mtr, 'id_organization')">
+                                            <option *ngFor="let org of this.guideOrganization" [value]="org.id">{{org.name}}</option>
+                                        </select>
+                                    </td>                                     
+
+
+                                    <!-- GUIDE Объект -->
+                                    <td class="td">
+                                        <select [ngModel]="mtr.id_object" (change)="onChangeSmallGuide($event, this.guideProtectedObject, mtr.id_mtr, 'id_object')">
+                                            <option *ngFor="let po of this.guideProtectedObject" [value]="po.id">{{po.name}}</option>
+                                        </select>
+                                    </td>    
+                                    
+                                    <!-- delete -->
+                                    <td>
+                                        <button class="btn btn-danger" (click)="deleteMtr(mtr.id_mtr, mtr.name)"><img src="/assets/img/delete.png" width="30" /></button>
+                                    </td>
+
+
                                 </tr>
                   
                         </tbody>
                     </table>            
 
 </cdk-virtual-scroll-viewport>
+
+
+<div class="add-btn">
+    <button class="btn btn-success" type="button" (click)="addNewMTR()"><img src="/assets/img/plus.png" width="30" /></button>
+</div>
+
+
+<!-- Удалить объект -->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+    DeleteOpen
+  </button>
+  <button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+  DeleteClose
+  </button>
+  
+  <div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Удалить ресурс {{this.curDeleteObject.sLink}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+        <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+        
+      </div>
+    </div>
+  </div>
+  </div>  

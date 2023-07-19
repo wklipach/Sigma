@@ -21,5 +21,10 @@ export class GuideService {
     return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
   }
 
+  getProtectedObjectGuide() {
+    const params = new HttpParams()
+         .set('get_protected_object', 'get_protected_object');
+    return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
+  }
   
 }

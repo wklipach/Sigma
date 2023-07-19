@@ -211,7 +211,7 @@ summaryOpen(id_staff: number) {
 
 
        isNumeric (n: string) {
-        return !!Number(n);
+        if (n == '0') return true; else return !!Number(n);
        }
 
         myUpdateNumberClick(x: any, id_staff: number, field: string) {
@@ -503,7 +503,7 @@ deleteSave() {
     let indexShowObjects = this.ShowStaff.findIndex( (el  =>  el.id_staff == idStaff.toString()));
     this.ShowStaff.splice(indexShowObjects,1);
     let indexOriginalShowStaff = this.ORIGINAL_ShowStaff.findIndex( (el  =>  el.id_staff == idStaff.toString()));
-    this.ORIGINAL_ShowStaff = this.ORIGINAL_ShowStaff.splice(indexOriginalShowStaff,1);
+    this.ORIGINAL_ShowStaff.splice(indexOriginalShowStaff,1);
 
     //refresh data
     this.ShowStaff = [...this.ShowStaff];
