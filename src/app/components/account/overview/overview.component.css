@@ -11,14 +11,15 @@ table {
   }
   
   div {
-    resize: both;
+    resize: horizontal;
     overflow: auto;
     width: 120px;
     height: 120px;
     margin: 0px;
     padding: 0px;
-    border: 1px solid black;
+    border: inherit;
     display:block;
+    cursor: [w-resize];
   
   }
   
