@@ -2,12 +2,12 @@
 
 <table>
   <tr>
-    <td id = "col1"><div>one</div></td>
-    <td id = "col2"><div>two</div></td>
-    <td id = "col3"><div>three</div></td>
+    <td (resize)="col2resize($event)" id = "col1"><div>one</div></td>
+    <td (resize)="col2resize($event)" id = "col2"><div>two</div></td>
+    <td (resize)="col2resize($event)" id = "col3"><div>three</div></td>
   </tr>
   <tr>
-    <td><div>four</div></td>
+    <td><div (resize)="col2resize($event)" >four</div></td>
     <td><div>five</div></td>
     <td><div>six</div></td>        
   </tr>
@@ -24,7 +24,7 @@
   <label id="label3">{{this.str3}}</label>
 </div>
 
- <button (click) = "clickWigth()">Получить ширину столбцов</button>
+ <button [style.color] = "'green'" [style.width.px]="width"  (click) = "clickWigth()">Получить ширину столбцов</button>
 
 
 

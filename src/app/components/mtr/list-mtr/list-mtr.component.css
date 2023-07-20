@@ -42,11 +42,11 @@ input-group{
   
   .td{
     resize: horizontal;
-  min-width: 210px;
+  /* min-width: 210px; */
   overflow-x: auto;
   border: 1px dashed #cacaca;
   text-align: center;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   padding: 3px;
   cursor: [w-resize];  
   }
@@ -65,7 +65,7 @@ input-group{
   background-clip: padding-box;
   z-index: 999;
   width: 150px;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   
   }
   

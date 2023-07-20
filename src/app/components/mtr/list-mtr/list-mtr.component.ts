@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DatePipe } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, Renderer2, ViewChild } from '@angular/core';
 import { GuideService } from 'src/app/services/guide.service';
 import { MtrService } from 'src/app/services/mtr.service';
 
@@ -73,7 +73,10 @@ export class ListMtrComponent {
 
 
 
-  constructor (private mtrserv: MtrService, private servguide: GuideService, private datePipe: DatePipe) {  
+  constructor (private mtrserv: MtrService, 
+               private servguide: GuideService, 
+               private datePipe: DatePipe,
+               private renderer: Renderer2) {  
 
   }
 
@@ -96,7 +99,6 @@ export class ListMtrComponent {
 
     });
 
-
     this.servguide.getSmallGuide('guide_mtr').subscribe( (value: any) => {
       this.guideMtrVid = value; 
    });
@@ -113,9 +115,6 @@ export class ListMtrComponent {
    this.servguide.getProtectedObjectGuide().subscribe( (value: any) => {
     this.guideProtectedObject = value; 
    });
-
-   
-   
 
 }
 
@@ -411,6 +410,44 @@ onEnterSearch() {
     this.deleteClose();
   }
   
+
+
+  // divColName
+  ngAfterViewInit() {
+
+/*    
+    const htmlElem = document.getElementById("divColName")!;
+    const thColName = document.getElementById("thColName")!;
+
+    const resizeObserver = new ResizeObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.contentBoxSize) {
+            // contentBoxSize is an array:
+            console.log("entry.contentBoxSize: " + entry.contentBoxSize[0].inlineSize, 'htmlElem=', htmlElem.clientWidth)
+            this.renderer.setStyle(thColName, "width", `${htmlElem.clientWidth}px`);
+          } else {
+            console.log("entry.contentRect: " + entry.contentRect.width)
+          }
+        }
+      }
+    )
+    resizeObserver.observe(htmlElem);
+*/    
+  }
+
+
+  test() {
+
+    //const htmlElem = document.getElementById("divColName")!;
+    //const thColName = document.getElementById("thColName")!;
+    const tdColName = document.getElementById("name")!;
+    //console.log('htmlElem.clientWidth*3', htmlElem.clientWidth*3);
+    //this.renderer.setStyle(thColName, "width", `${htmlElem.clientWidth*3}px`);
+
+    //this.renderer.setStyle(thColName, "width", `500px`);
+    this.renderer.setStyle(tdColName, "width", `${tdColName.clientWidth+30}px`);
+  }
 
 
 }
