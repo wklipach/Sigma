@@ -439,16 +439,16 @@ onEnterSearch() {
 
   test() {
 
-    //const htmlElem = document.getElementById("divColName")!;
+    const divColName = document.getElementById("divColName")!;
     const thColName = document.getElementById("thColName")!;
     const tdColName = document.getElementById("name")!;
     //console.log('htmlElem.clientWidth*3', htmlElem.clientWidth*3);
     //this.renderer.setStyle(thColName, "width", `${htmlElem.clientWidth*3}px`);
 
 
-    console.log(thColName);
-    this.renderer.setStyle(thColName, "width", `500px`);
-    this.renderer.setStyle(tdColName, "width", `${tdColName.clientWidth+30}px`);
+    console.log(thColName, divColName);
+    //this.renderer.setStyle(thColName, "width", `500px`);
+    this.renderer.setStyle(divColName, "width", `${divColName.clientWidth+30}px`);
   }
 
 
