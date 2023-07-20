@@ -64,7 +64,7 @@ input-group{
   border: 1px dashed #cacaca;
   background-clip: padding-box;
   z-index: 999;
-  width: 150px;
+  /* width: 150px; */
   /* white-space: nowrap; */
   
   }
