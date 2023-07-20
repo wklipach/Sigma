@@ -35,9 +35,7 @@ input-group{
   }
   
   .example-item {
-  
-    height: 30px;
-  
+   height: 30px;
   }
   
   .td{
@@ -45,10 +43,10 @@ input-group{
   overflow-x: auto;
   border: 1px dashed #cacaca;
   text-align: center;
-  min-width: 100px !important;
+  min-width: 50px !important;
   /* white-space: nowrap; */
   padding: 3px;
-  cursor: [resize-se];  
+  cursor: [w-resize];  
   }
   
   thead th{
@@ -80,13 +78,12 @@ input-group{
   height: 20px !important;
   white-space: nowrap;  
     top: 0;
-  
   }
   
   .rzh {
     resize: horizontal;
     overflow: hidden;
-    min-width: 150px !important;
+    min-width: 50px !important;
     height: auto;
     margin: 0px;
     padding: 0px;
@@ -104,7 +101,7 @@ input-group{
   
    td:nth-child(1) {  
     background-color: #fff;
-    min-width: 15px;
+    min-width: 50px;
     position: -webkit-sticky; /* for Safari */
     position: sticky;
     top: 0;

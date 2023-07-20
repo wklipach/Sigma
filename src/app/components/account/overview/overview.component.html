@@ -1,71 +1,50 @@
 
 
-<table>
-  <tr>
-    <td (resize)="col2resize($event)" id = "col1"><div>one</div></td>
-    <td (resize)="col2resize($event)" id = "col2"><div>two</div></td>
-    <td (resize)="col2resize($event)" id = "col3"><div>three</div></td>
-  </tr>
-  <tr>
-    <td><div (resize)="col2resize($event)" >four</div></td>
-    <td><div>five</div></td>
-    <td><div>six</div></td>        
-  </tr>
-  <tr>
-    <td><div>seven</div></td>
-    <td><div>eight</div></td>
-    <td><div>nine</div></td>       
-  </tr>   
-</table>
-
-<div>
-  <label id="label1">{{this.str1}}</label>
-  <label id="label2">{{this.str2}}</label>
-  <label id="label3">{{this.str3}}</label>
-</div>
-
+<!-- 
  <button [style.color] = "'green'" [style.width.px]="width"  (click) = "clickWigth()">Получить ширину столбцов</button>
 
+<div class="card-body mt-9 mb-3 p-8 h-lg-300px w-lg-500px"> -->
 
-
-
-
-
-
-<!-- <div class="card-body mt-9 mb-3 p-8 h-lg-300px w-lg-500px">
-
-  
+  <div class="card-body lg-w-100%">
   
   <div class="row mb-6">
-    <label class="col-lg-4 col-form-label required fw-semibold fs-4">Имя фильтра</label>
-      <div class="col-lg-8 fv-row">
-        <div class="col-lg-8 fv-row">
-          <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="Петров Иван Петрович" />
-      </div> 
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Имя фильтра</label>
+          <div class="col-lg-8 fv-row">
+          <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="Кадры" />
+          </div> 
       </div>
-  </div>
 
-
-  
-
-  <div class="row mb-6">
-    <label class="col-lg-4 col-form-label required fw-semibold fs-4"></label>
+<div class="row mb-6">
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Статус</label>
       <div class="col-lg-8 fv-row">
       <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
-        <option>Резерв</option>
-        <option>Соискатель</option>
+        <option>Сюда выбор значения из справочника</option>
+        
       </select>
       </div>
   </div>
 
   <div class="row mb-6">
-    <label class="col-lg-4 col-form-label required fw-semibold fs-4">Звонок =</label>
+    <label class="col-lg-4 col-form-label fw-semibold fs-4"></label>
       <div class="col-lg-8 fv-row">
-      <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
+      
+        <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
         <option>Резерв</option>
         <option>Соискатель</option>
       </select>
+
       </div>
-  </div> -->
+  </div>
+
+  <div class="row mb-6">
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Статус</label>
+      <div class="col-lg-8 fv-row">
+      <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
+        <option>Сюда выбор значения из справочника</option>
+        
+      </select>
+      </div>
+  </div>
 
 
+ </div>
