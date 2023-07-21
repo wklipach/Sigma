@@ -14,6 +14,7 @@ export class TestComponent {
     ["Sir Lancelot", "The Brave", "Arrested"],
     ["Sir Galahad", "The Chaste", "Killed"],
     ["Sir Robin", "The Not-Quite-So-Brave-As-Sir-Lancelot", "Killed"],
+    ["Sir TestRobin", "The Not-Quite-So-Brave-As-Sir-Lancelot", "LIFE"],
   ];
 
 
