@@ -1,0 +1,15 @@
+<h1>Knights of the Round Table</h1>
+<table>
+	<thead>
+		<tr>
+			<th resizable>Member</th>
+			<th resizable>Nickname</th>
+			<th>Fate</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let row of rows">
+			<td *ngFor="let cell of row">{{cell}}</td>
+		</tr>
+	</tbody>
+</table>

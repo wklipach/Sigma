@@ -35,7 +35,9 @@ import { StaffComponent } from './components/staff/staff.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ObjectCardComponent } from './object-card/object-card.component';
 import { ObjectSummaryComponent } from './object-summary/object-summary.component';
-import { NumberComponent } from './components/auth/number/number.component'
+import { NumberComponent } from './components/auth/number/number.component';
+import { TestComponent } from './components/test/test.component';
+import { ResizableModule } from './directives/resizable.module';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -61,7 +63,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     StaffComponent,
     ObjectCardComponent,
     ObjectSummaryComponent,
-    NumberComponent
+    NumberComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     HttpClientModule,
     ScrollingModule,
     FontAwesomeModule,
+    ResizableModule,
     SocketIoModule.forRoot(config)    
   ],
   providers: [GlobalRef, DatePipe, AuthService, ChatService, SummaryService, AvatarService],

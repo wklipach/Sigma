@@ -14,6 +14,7 @@ import { ListMtrComponent } from './components/mtr/list-mtr/list-mtr.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { NumberComponent } from './components/auth/number/number.component';
 import { numberGuard } from './guards/login/number.guard';
+import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -27,7 +28,9 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent, canActivate: [mainGuard] },
   { path: 'listobjects', component: ListObjectsComponent, canActivate: [mainGuard] },
   { path: 'listmtr', component: ListMtrComponent, canActivate: [mainGuard] },
-  { path: 'liststaff', component: StaffComponent, canActivate: [mainGuard] }
+  { path: 'liststaff', component: StaffComponent, canActivate: [mainGuard] },
+  { path: 'test', component: TestComponent }
+  
 ];
 
 
