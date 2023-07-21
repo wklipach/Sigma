@@ -37,5 +37,8 @@ export class ResizableDirective {
     @Inject(DOCUMENT) private readonly documentRef: Document,
     @Inject(ElementRef)
     private readonly elementRef: ElementRef<HTMLElement>
-  ) {}
+  ) {
+
+    console.log('elementRef=' ,elementRef, documentRef);
+  }
 }

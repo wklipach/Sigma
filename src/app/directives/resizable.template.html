@@ -1,6 +1,11 @@
 <div class="wrapper">
+
+
 	<div class="content">
 		<ng-content></ng-content>
 	</div>
-	<div class="bar" (resizable)="onResize($event)"></div>
+
+
+
+	<div class="bar" (resizable)="onResize($event)" (mousemove)="mm($event)"  ></div>
 </div>

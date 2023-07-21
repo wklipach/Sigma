@@ -9,7 +9,14 @@ export class ResizableComponent {
   @HostBinding("style.width.px")
   width: number | null = null;
 
+
   onResize(width: number) {
     this.width = width;
   }
+
+  mm($event: MouseEvent) {
+       console.log('mm=', $event);
+    }
+    
+
 }
