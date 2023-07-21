@@ -1,17 +1,28 @@
 table {
-    position: relative;
-    width: 100%;
-    /* border-radius: 100%; */
-    background: rgba(0, 0, 0, 0.1);
-  }
-  
-  th,
-  td {
-    text-align: left;
-    padding: 12px;
-    box-sizing: border-box;
-  }
-  
-  tr:nth-child(odd) {
-    background: rgba(0, 0, 0, 0.05);
-  }
+  position: relative;
+  width: 60%;
+  height: 30vh;
+  background: rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+th{
+  border: 2px dashed rgb(47, 0, 255);
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 1.2em;
+
+}
+
+td {
+  border: 2px dashed red;
+  text-align: center;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+tr:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.05);
+}
