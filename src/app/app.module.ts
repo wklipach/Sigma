@@ -38,6 +38,7 @@ import { ObjectSummaryComponent } from './object-summary/object-summary.componen
 import { NumberComponent } from './components/auth/number/number.component';
 import { TestComponent } from './components/test/test.component';
 import { ResizableModule } from './directives/resizable.module';
+import { EventsComponent } from './events/events.component';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -64,7 +65,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ObjectCardComponent,
     ObjectSummaryComponent,
     NumberComponent,
-    TestComponent
+    TestComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

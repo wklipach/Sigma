@@ -196,3 +196,9 @@ td:nth-child(1) {
   top: 0;
   left: 210px;
 }
+.scale {
+  transition: .5s; /* Время эффекта */
+ }
+ .scale:hover {
+  transform: scale(2.1); /* Увеличиваем масштаб */
+ }
