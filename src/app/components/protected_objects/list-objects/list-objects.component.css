@@ -66,8 +66,6 @@ border: 1px dashed #cacaca;
 background-clip: padding-box;
 z-index: 999;
 
- 
-
 }
 
 thead th {
@@ -125,6 +123,7 @@ td:nth-child(6) {
   background-color: white;
   overflow: hidden;
   min-width: 280px;
+  white-space: pre-wrap;
   background-clip: padding-box;
 }
 
@@ -137,9 +136,9 @@ td:nth-child(8) {
  
 td:nth-child(17) {  
   background-color: #fff;
-  min-width: 180px;
+  min-width: 220px;
   overflow: hidden;
-  white-space: pre-wrap;
+  white-space: pre-wrap !important;
   background-clip: padding-box;
 }
 
@@ -162,9 +161,7 @@ td:nth-child(17) {
 .btn.btn-primary{
 
   color: #fff;
-
   background-color: #386bc0 !important;
-
   font-weight: semibold !important;
 
  }
@@ -269,9 +266,8 @@ background-color: #dc3545 !important;
 cursor: pointer;
 
 }
-
 select {
-  border: 1px solid #fff;
+  border: none;
   background-color: transparent;
   -webkit-appearance: none;
   appearance:none;
