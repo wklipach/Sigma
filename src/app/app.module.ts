@@ -39,6 +39,8 @@ import { NumberComponent } from './components/auth/number/number.component';
 import { TestComponent } from './components/test/test.component';
 import { ResizableModule } from './directives/resizable.module';
 import { EventsComponent } from './events/events.component';
+import { Mtr2Component } from './components/mtr2/mtr2.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -66,7 +68,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ObjectSummaryComponent,
     NumberComponent,
     TestComponent,
-    EventsComponent
+    EventsComponent,
+    Mtr2Component
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ScrollingModule,
     FontAwesomeModule,
     ResizableModule,
+    NgxDatatableModule,
     SocketIoModule.forRoot(config)    
   ],
   providers: [GlobalRef, DatePipe, AuthService, ChatService, SummaryService, AvatarService],
