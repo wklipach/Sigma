@@ -10,14 +10,507 @@
 id="myTable"
 class="material striped"
 [rows]="this.ShowMtr"
-[columns]="columns"
 [columnMode]="ColumnMode.force"
 [headerHeight]="50"
 [footerHeight]="50"
 [rowHeight]="50"
-[limit]="10"
+[limit]="100"
+[scrollbarV]="true"
 >
 
+
+
+<ngx-datatable-column prop = "id_mtr" name = "#" [width]="300">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop="name" name="ресурс">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+      <span
+        title="Double click to edit"
+        (dblclick)="editing[rowIndex + '-name'] = true"
+        *ngIf="!editing[rowIndex + '-name']"
+      >
+        {{ value}} 
+      </span>
+      <input
+        (blur)="myUpdateClick($event.target, row.id_mtr, 'name', 'name')"
+        (keyup.enter)="myEnter($event)"
+        *ngIf="editing[rowIndex + '-name']"
+        type="text"
+        [value]="value"
+      />
+    </ng-template>
+  </ngx-datatable-column>
+
+
+
+<!-- НАЧАЛО СПРАВОЧНИКА ВИД   (dblclick)="editing[rowIndex + '-mtrvid'] = true" --> 
+<ngx-datatable-column prop = "mtrvid" name = "вид">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-mtrvid'] = true"
+        *ngIf="!editing[rowIndex + '-mtrvid']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-mtrvid']"
+        (blur)="editing[rowIndex + '-mtrvid'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guideMtrVid, row.id_mtr, 'id_mtrvid', 'mtrvid')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let vid of this.guideMtrVid" [value]="vid.name">{{vid.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ СПРАВОЧНИКА ВИД --> 
+  
+                 
+<!-- НАЧАЛО СПРАВОЧНИКА COLOR --> 
+<ngx-datatable-column prop = "mtrcolor" name = "цвет">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-mtrcolor'] = true"
+        *ngIf="!editing[rowIndex + '-mtrcolor']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-mtrcolor']"
+        (blur)="editing[rowIndex + '-mtrcolor'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guideMtrColor, row.id_mtr, 'id_mtrcolor', 'mtrcolor')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let mtrcolor of this.guideMtrColor" [value]="mtrcolor.name">{{mtrcolor.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ СПРАВОЧНИКА COLOR --> 
+
+
+  <!-- НАЧАЛО ПОЛЯ СТАТУС --> 
+  <ngx-datatable-column prop="status" name="статус">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-status'] = true"
+                            *ngIf="!editing[rowIndex + '-status']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'status', 'status')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-status']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ СТАТУС --> 
+
+<!-- НАЧАЛО ПОЛЯ ОПИСАНИЕ --> 
+  <ngx-datatable-column prop="description" name="описание">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-description'] = true"
+                            *ngIf="!editing[rowIndex + '-description']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'description', 'description')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-description']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ ОПИСАНИЕ --> 
+
+
+ <!-- НАЧАЛО ПОЛЯ ХАРАКТЕРИСТИКИ --> 
+ <ngx-datatable-column prop="property" name="характеристики">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-property'] = true"
+                            *ngIf="!editing[rowIndex + '-property']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'property', 'property')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-property']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ ХАРАКТЕРИСТИКИ --> 
+
+
+ <!-- НАЧАЛО ПОЛЯ КОМПЛЕКТАЦИЯ --> 
+ <ngx-datatable-column prop="equipment" name="комплектация">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-equipment'] = true"
+                            *ngIf="!editing[rowIndex + '-equipment']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'equipment', 'equipment')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-equipment']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ КОМПЛЕКТАЦИЯ --> 
+
+
+
+<!-- НАЧАЛО ПОЛЯ ЦЕНА ТОЛЬКО ЦИФРЫ --> 
+<ngx-datatable-column prop="price" name="цена">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-price'] = true"
+                            *ngIf="!editing[rowIndex + '-price']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="numberpress($event)"
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'price', 'price')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-price']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ ЦЕНА ТОЛЬКО ЦИФРЫ -->
+
+<!-- НАЧАЛО ПОЛЯ РАЗМЕР ТОЛЬКО ЦИФРЫ --> 
+<ngx-datatable-column prop="size" name="размер">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-size'] = true"
+                            *ngIf="!editing[rowIndex + '-size']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="numberpress($event)"
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'size', 'size')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-size']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ РАЗМЕР ТОЛЬКО ЦИФРЫ -->
+
+
+
+<!-- НАЧАЛО ПОЛЯ КОЛИЧЕСТВО ТОЛЬКО ЦИФРЫ --> 
+<ngx-datatable-column prop="count" name="количество">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-count'] = true"
+                            *ngIf="!editing[rowIndex + '-count']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="numberpress($event)"
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'count', 'count')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-count']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ КОЛИЧЕСТВО ТОЛЬКО ЦИФРЫ -->                                    
+
+
+<!-- НАЧАЛО ПОЛЯ ДАТА ПОКУПКИ --> 
+<ngx-datatable-column prop="date_purchase_str" name="дата покупки">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        placeholder="Choose a date"
+                        (dblclick)="editing[rowIndex + '-date_purchase_str'] = true"
+                            *ngIf="!editing[rowIndex + '-date_purchase_str']"
+            >
+                                {{ value }} 
+            </span>
+            <input
+                (focus)="focusFunction($event, row.date_purchase_str)" 
+                (focusout)="setDatePurchase($event, row.id_mtr)"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-date_purchase_str']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ ДАТА ПОКУПКИ --> 
+
+
+
+<!-- НАЧАЛО ПОЛЯ Дата выдачи --> 
+<ngx-datatable-column prop="date_issue_str" name="дата выдачи">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        placeholder="Choose a date"
+                        (dblclick)="editing[rowIndex + '-date_issue_str'] = true"
+                            *ngIf="!editing[rowIndex + '-date_issue_str']"
+            >
+                                {{ value }} 
+            </span>
+            <input
+                (focus)="focusFunction($event, row.date_issue_str)" 
+                (focusout)="setDateIssue($event, row.id_mtr)"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-date_issue_str']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Дата выдачи --> 
+
+
+
+ <!-- НАЧАЛО ПОЛЯ Табельный № --> 
+ <ngx-datatable-column prop="tabel_number" name="Табельный №">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-tabel_number'] = true"
+                            *ngIf="!editing[rowIndex + '-tabel_number']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'tabel_number', 'tabel_number')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-tabel_number']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Табельный № -->   
+
+
+ <!-- НАЧАЛО ПОЛЯ Инв. № --> 
+ <ngx-datatable-column prop="invent_number" name="Инв. №">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-invent_number'] = true"
+                            *ngIf="!editing[rowIndex + '-invent_number']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'invent_number', 'invent_number')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-invent_number']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Инв. № -->          
+
+
+ <!-- НАЧАЛО ПОЛЯ Серийный № --> 
+ <ngx-datatable-column prop="serial_number" name="Серийный №">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-serial_number'] = true"
+                            *ngIf="!editing[rowIndex + '-serial_number']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'serial_number', 'serial_number')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-serial_number']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Серийный № -->    
+
+
+<!-- НАЧАЛО ПОЛЯ Штрихкод --> 
+<ngx-datatable-column prop="barcode" name="Штрихкод">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-barcode'] = true"
+                            *ngIf="!editing[rowIndex + '-barcode']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'barcode', 'barcode')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-barcode']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Штрихкод --> 
+
+
+<!-- НАЧАЛО ПОЛЯ Счёт на оплату --> 
+<ngx-datatable-column prop="invoice" name="Счёт на оплату">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-invoice'] = true"
+                            *ngIf="!editing[rowIndex + '-invoice']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'invoice', 'invoice')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-invoice']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Счёт на оплату -->                                    
+
+
+<!-- НАЧАЛО ПОЛЯ Договор на поставку --> 
+<ngx-datatable-column prop="delivery_contract" name="Договор на поставку">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span
+                        title="Double click to edit"
+                        (dblclick)="editing[rowIndex + '-delivery_contract'] = true"
+                            *ngIf="!editing[rowIndex + '-delivery_contract']"
+            >
+                                {{ value}} 
+            </span>
+            <input
+                (keypress)="maxInputLength($event,250)"
+                (paste)="maxPasteLength($event,250)"
+
+                (blur)="myUpdateClick($event.target, row.id_mtr, 'delivery_contract', 'delivery_contract')"
+                (keyup.enter)="myEnter($event)"
+                *ngIf="editing[rowIndex + '-delivery_contract']"
+                type="text"
+                [value]="value"
+            />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Договор на поставку -->   
+
+
+<!-- НАЧАЛО СПРАВОЧНИКА Компания --> 
+<ngx-datatable-column prop = "organization" name = "Компания">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-organization'] = true"
+        *ngIf="!editing[rowIndex + '-organization']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-organization']"
+        (blur)="editing[rowIndex + '-organization'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guideOrganization, row.id_mtr, 'id_organization', 'organization')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let org of this.guideOrganization" [value]="org.name">{{org.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ СПРАВОЧНИКА Компания -->  
+
+
+
+<!-- НАЧАЛО СПРАВОЧНИКА Объект --> 
+<ngx-datatable-column prop = "ProtectedObject" name = "Объект">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-ProtectedObject'] = true"
+        *ngIf="!editing[rowIndex + '-ProtectedObject']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-ProtectedObject']"
+        (blur)="editing[rowIndex + '-ProtectedObject'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guideProtectedObject, row.id_mtr, 'id_object', 'ProtectedObject')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let po of this.guideProtectedObject" [value]="po.name">{{po.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ СПРАВОЧНИКА Объект --> 
 
 <!--
 <ngx-datatable-footer>

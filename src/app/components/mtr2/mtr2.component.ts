@@ -54,7 +54,7 @@ interface Imtr {
     id_mtr?: number;
     sLink?: string;
   }
-  
+
 
 @Component({
   selector: 'app-mtr2',
@@ -62,7 +62,6 @@ interface Imtr {
   styleUrls: ['./mtr2.component.css']
 })
 export class Mtr2Component {
-
 
 
   ColumnMode = ColumnMode;
@@ -116,12 +115,6 @@ export class Mtr2Component {
 ];  
 
 
-
-
-
-
-
-
   ORIGINAL_ShowMtr: Imtr[] = [];
 
   guideMtrVid:  ISmallGuide[] = [];
@@ -130,6 +123,19 @@ export class Mtr2Component {
   guideProtectedObject:  ISmallGuide[] = [];
       //объект для модального окна удаления
   curDeleteObject: IDeleteObject = {};
+  editing: any = {};
+
+
+  guideMtrVid2:  ISmallGuide[] = [
+
+    { id: '1', name: "Комплект формы"},
+    { id: '2', name: "Форма"},
+    { id: '3', name: "три"},
+    { id: '4', name: "четыре"},
+    { id: '5', name: "пять"},
+    { id: '6', name: "шесть"}
+
+  ];
 
 
   constructor (private mtrserv: MtrService, 
@@ -137,10 +143,8 @@ export class Mtr2Component {
                private datePipe: DatePipe,
                private renderer: Renderer2,
                public gr: GlobalRef) {  
-
-
-
   }
+
 
 
   fetch(cb: any) {
@@ -173,10 +177,30 @@ export class Mtr2Component {
       this.ORIGINAL_ShowMtr = value;
       // posts.forEach((post)=>post.id===1?post.text='other text':post.text=post.text)
       
+
       this.ORIGINAL_ShowMtr.forEach((el)=>
       {
-        el.date_purchase_str = this.datePipe.transform(el.date_purchase, 'yyyy-MM-dd') || '';
-        el.date_issue_str = this.datePipe.transform(el.date_issue, 'yyyy-MM-dd') || '';
+        el.date_purchase_str = this.datePipe.transform(el.date_purchase, 'yyyy-MM-dd') || '--';
+        el.date_issue_str = this.datePipe.transform(el.date_issue, 'yyyy-MM-dd') || '--';
+        if (el.mtrvid == null) el.mtrvid = "--" ; 
+        if (el.mtrcolor == null) el.mtrcolor = "--" ; 
+        if (el.status?.trim() === "") el.status = "--" ; 
+        if (el.description?.trim() === "") el.description = "--" ; 
+        if (el.property?.trim() === "") el.property = "--" ; 
+        if (el.equipment?.trim() === "") el.equipment = "--" ; 
+        if (el.price?.trim() == null) el.price = "--" ; 
+        if (el.size?.trim() == null) el.size = "--" ; 
+        if (el.count?.trim() == null) el.count = "--" ; 
+        if (el.tabel_number?.trim() === "") el.tabel_number = "--" ; 
+        if (el.invent_number?.trim() === "") el.invent_number = "--" ; 
+        if (el.serial_number?.trim() === "") el.serial_number = "--" ; 
+        if (el.barcode?.trim() === "") el.barcode = "--" ; 
+        if (el.invoice?.trim() === "") el.invoice = "--" ; 
+        if (el.delivery_contract?.trim() === "") el.delivery_contract = "--" ; 
+        if (el.organization?.trim() === "") el.organization = "--" ; 
+        if (el.organization?.trim() === "" || el.organization?.trim() == null) el.organization = "--" ; 
+        if (el.ProtectedObject?.trim() === "" || el.ProtectedObject?.trim() == null ) el.ProtectedObject = "--" ; 
+
       });
 
 
@@ -191,7 +215,7 @@ export class Mtr2Component {
     });
 
 
-    this.servguide.getSmallGuide('guide_mtr').subscribe( (value: any) => {
+    this.servguide.getSmallGuide('guide_mtrvid').subscribe( (value: any) => {
       this.guideMtrVid = value; 
    });
 
@@ -216,28 +240,97 @@ clicObject(objectmtr: Imtr) {
     // alert(objectmtr.name );
 }
 
-onChangeSmallGuide(ev: any,  smallGuide:  ISmallGuide[], id_object: string, field: string) {
+
+myTest() {
+console.log('!!!!!!!!');  
+}
+
+
+
+
+onChangeSmallGuide(ev: any,  smallGuide:  ISmallGuide[], id_mtr: string, field: string, strField: string) {
+
+  //console.log('onChangeSmallGuide', ev.target.value);
+
+
   if (ev) {
-   let res = smallGuide.find( (el) => Number(el.id) == Number(ev.target.value));
+   let res = smallGuide.find( (el) => el.name == ev.target.value);
    if (res) {
-    if (!res.name) res.name='';
-    this.mtrserv.updateMtrSmallGuide(Number(res.id), res.name, id_object, field).subscribe(value => {
-      //console.log(value);
-    })
+   if (!res.name) res.name='';
+
+   let resShowMtr = this.ShowMtr.find( (el) => el.id_mtr == id_mtr);
+   if (resShowMtr) {
+    resShowMtr[strField as keyof Imtr] = res.name;
+   console.log('resShowMtr2=', resShowMtr);
+   this.ShowMtr = [...this.ShowMtr];
    }
+
+   let resShowMtrOriginal = this.ORIGINAL_ShowMtr.find( (el) => el.id_mtr == id_mtr);
+   if (resShowMtrOriginal) {
+    resShowMtrOriginal[strField as keyof Imtr] = res.name;
+    this.ORIGINAL_ShowMtr = [...this.ORIGINAL_ShowMtr];
+   }
+
+    this.mtrserv.updateMtrSmallGuide(Number(res.id), res.name, id_mtr, field).subscribe(value => {
+      //console.log(value);
+    });
+
+   }
+  }
+
+}
+
+
+
+myEnter(event: Event) {
+
+  if (event.target) {
+    const elem = <HTMLElement>event.target;
+    if (elem) elem.blur();
   }
 }
 
-myUpdateClick(x: any, id_mtr: number, field: string) {
-  let text = x.innerText;
-  if (!text ) text='';
-  this.mtrserv.updateMtrOne(text, id_mtr.toString(), field).subscribe( (res: any) => {
+gDblClick(rowIndex: any) {
+  this.editing[rowIndex + '-mtrvid'] = true;
+  console.log('DBLBV');
+}
+
+myValue(value: string) {
+  console.log(value);
+  if (value==="") return "--"; else return value;
+}
+
+
+myUpdateClick(element: any, id_mtr: number, field: string, strField: string) {
+  let text = element.value;
+  if (!text ) text='--';
+  if (text === '') text='--';
+  this.mtrserv.updateMtrOne(text.toString().trim(), id_mtr.toString(), field).subscribe( (res: any) => {
     //console.log('res update = ', res);
   });
+
+
+  if (text="--") {
+      let resShowMtr = this.ShowMtr.find( (el) => el.id_mtr == id_mtr.toString());
+      if (resShowMtr) {
+      resShowMtr[strField as keyof Imtr] = text;
+
+      console.log('resShowMtr=', resShowMtr);
+
+      this.ShowMtr = [...this.ShowMtr];
+      }
+      let resShowMtrOriginal = this.ORIGINAL_ShowMtr.find( (el) => el.id_mtr == id_mtr.toString());
+      if (resShowMtrOriginal) {
+      resShowMtrOriginal[strField as keyof Imtr] = text;
+      this.ORIGINAL_ShowMtr = [...this.ORIGINAL_ShowMtr];
+    }
+  }
+
+
 }
 
 maxInputLength(e: Event, iLength: number) {
-  const text =(e.target! as HTMLInputElement).innerText;
+  const text =(e.target! as HTMLInputElement).value;
   if (text.length>=iLength) {
     e.preventDefault();
    }
@@ -250,6 +343,11 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
   if (s.length>=iLength) {
     e.preventDefault();
    }
+
+   const text =(e.target! as HTMLInputElement).value;
+   if (text.length>=iLength) {
+     e.preventDefault();
+    }
 }
 
 focusFunction(e: any, datestr: any) {
@@ -265,10 +363,10 @@ idDateisValid (date: Date) {
 
 setDatePurchase($event: any, id_mtr: number) {
 
-    let date = new Date($event.target.value);
+      let date = new Date($event.target.value);
     const isDate = this.idDateisValid(date);
 
-     
+    
     if (isDate) {
       // console.log($event.target.value, date);
       this.mtrserv.updateMtrDate(date, id_mtr.toString(), 'date_purchase').subscribe( (res: any) => { console.log('res update = ', res); } );
@@ -280,27 +378,45 @@ setDatePurchase($event: any, id_mtr: number) {
 
 
     if (isDate) {
+
+      /*
       const res = this.ShowMtr.map( (el: Imtr) => {
           if (el.id_mtr == id_mtr.toString()) {
-              el.date_purchase_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+            //
+            let s: string =this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
+              el.date_purchase_str = s;
+              console.log('el.date_purchase_str =', el.date_purchase_str);
+            //  
               }
           return el;
       });
+*/
 
+      this.ShowMtr.forEach((el: Imtr)=> {
+        if (el.id_mtr == id_mtr.toString()) {
+          let s: string =this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
+            el.date_purchase_str = s;
+            console.log('el.date_purchase_str =', el.date_purchase_str);
+         }
+      });
 
-
-      this.ShowMtr = [...res];
+      console.log('this.ShowMtr1=', this.ShowMtr);
+      this.ShowMtr = [...this.ShowMtr];
+      console.log('this.ShowMtr2=', this.ShowMtr);
 
       const res2 = this.ORIGINAL_ShowMtr.map( (el: Imtr) => {
         if (el.id_mtr == id_mtr.toString()) {
-            el.date_purchase_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+            el.date_purchase_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '--';
             }
         return el;
       });
       this.ORIGINAL_ShowMtr = [...res2];
     
 
-      $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '';
+      
+
+      $event.target.type = '';
+      $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
     }
 
   if (!isDate) {
@@ -319,12 +435,9 @@ setDatePurchase($event: any, id_mtr: number) {
       return el;
     });
     this.ORIGINAL_ShowMtr = [...res2];
-
-    $event.target.value = '';
+    $event.target.value= '--';
 }
-
-
-    $event.target.type = '';
+     $event.target.type = '';
   
 }
 
