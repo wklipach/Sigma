@@ -1,11 +1,8 @@
 import { Component, Renderer2, ViewChild } from '@angular/core';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { DatePipe } from '@angular/common';
 import { GuideService } from 'src/app/services/guide.service';
 import { MtrService } from 'src/app/services/mtr.service';
-
-// import { Observable, Subject, Subscribable, Subscription } from 'rxjs';
 import { GlobalRef } from 'globalref';
 
 
@@ -65,54 +62,8 @@ export class Mtr2Component {
 
 
   ColumnMode = ColumnMode;
-
-  /*
-  @ViewChild('fareObjects') virtualScroll!: CdkVirtualScrollViewport;
-  */
-
   @ViewChild('myTable') myTable!: DatatableComponent;
-
-
-
-
-
   ShowMtr: Imtr[] = [];
-
-
-  // ShowMtr$?:Observable<Imtr[]>; 
-
-  
-  
-/*
-  data$: Observable<Imtr[]> = new Observable<Imtr[]>();
-  // data$: Subscribable  Subscription<Imtr[]> = new Subscription<Imtr[]>();
-  public itemsUsers: any = [];
-*/
-// mtr = [{"id_mtr": "Моя первая строка", "n": "1", "test": "1"}, {"id_mtr": "Моя вторая строка", "n": "1", "test": "1"}, {"id_mtr": "Моя третья строка", "n": "1", "test": "1"}];
-
-
-  columns = [ { prop: 'id_mtr', name: "#"}, 
-  { prop: 'name', name: "ресурс"}, 
-  { prop: 'mtrvid', name: "вид"}, 
-  { prop: 'mtrcolor', name: "цвет"}, 
-  { prop: 'status', name: "статус"}, 
-  { prop: 'description', name: "описание"}, 
-  { prop: 'property', name: "свойства"}, 
-  { prop: 'equipment', name: "комплектация"}, 
-  { prop: 'price', name: "цена"}, 
-  { prop: 'size', name: "размер"}, 
-  { prop: 'count', name: "количество"}, 
-  { prop: 'date_purchase_str', name: "дата покупки"}, 
-  { prop: 'date_issue_str', name: "дата постановки"}, 
-  { prop: 'tabel_number', name: "табельный номер"}, 
-  { prop: 'invent_number', name: "инвент. номер"}, 
-  { prop: 'serial_number', name: "серийный номер"}, 
-  { prop: 'barcode', name: "штрих-код"}, 
-  { prop: 'invoice', name: "счет"}, 
-  { prop: 'delivery_contract', name: "контракт"}, 
-  { prop: 'organization', name: "оргнизация"}, 
-  { prop: 'ProtectedObject', name: "объект"}, 
-];  
 
 
   ORIGINAL_ShowMtr: Imtr[] = [];
@@ -147,35 +98,12 @@ export class Mtr2Component {
 
 
 
-  fetch(cb: any) {
-    const req = new XMLHttpRequest();
-    var params = "get_mtr=get_mtr";
-    req.open('GET', this.gr.sUrlGlobal + 'mtr'+"?"+params);
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-
-    req.send();
-  }
-
 
   ngOnInit() {
-
-
-/*
-    this.ShowMtr$ = new Observable( (subscriber: any) => {
-      this.fetch( (data: any) => {
-        subscriber.next(data);
-      });
-    });
-*/    
-
-
 
       this.mtrserv.getMTR().subscribe ( (value: any) => {
 
       this.ORIGINAL_ShowMtr = value;
-      // posts.forEach((post)=>post.id===1?post.text='other text':post.text=post.text)
       
 
       this.ORIGINAL_ShowMtr.forEach((el)=>
@@ -184,20 +112,20 @@ export class Mtr2Component {
         el.date_issue_str = this.datePipe.transform(el.date_issue, 'yyyy-MM-dd') || '--';
         if (el.mtrvid == null) el.mtrvid = "--" ; 
         if (el.mtrcolor == null) el.mtrcolor = "--" ; 
-        if (el.status?.trim() === "") el.status = "--" ; 
-        if (el.description?.trim() === "") el.description = "--" ; 
-        if (el.property?.trim() === "") el.property = "--" ; 
-        if (el.equipment?.trim() === "") el.equipment = "--" ; 
-        if (el.price?.trim() == null) el.price = "--" ; 
-        if (el.size?.trim() == null) el.size = "--" ; 
-        if (el.count?.trim() == null) el.count = "--" ; 
-        if (el.tabel_number?.trim() === "") el.tabel_number = "--" ; 
-        if (el.invent_number?.trim() === "") el.invent_number = "--" ; 
-        if (el.serial_number?.trim() === "") el.serial_number = "--" ; 
-        if (el.barcode?.trim() === "") el.barcode = "--" ; 
-        if (el.invoice?.trim() === "") el.invoice = "--" ; 
-        if (el.delivery_contract?.trim() === "") el.delivery_contract = "--" ; 
-        if (el.organization?.trim() === "") el.organization = "--" ; 
+        if (el.status?.trim() === "" || el.status?.trim() == null ) el.status = "--" ; 
+        if (el.description?.trim() === "" || el.description?.trim() == null) el.description = "--" ; 
+        if (el.property?.trim() === "" || el.property?.trim() == null) el.property = "--" ; 
+        if (el.equipment?.trim() === "" || el.equipment?.trim() == null) el.equipment = "--" ; 
+        if (el.price?.trim() == null || el.price?.trim() === "") el.price = "--" ; 
+        if (el.size?.trim() == null || el.size?.trim() === "") el.size = "--" ; 
+        if (el.count?.trim() == null || el.count?.trim() === "") el.count = "--" ; 
+        if (el.tabel_number?.trim() === "" || el.tabel_number?.trim() == null) el.tabel_number = "--" ; 
+        if (el.invent_number?.trim() === "" || el.invent_number?.trim() == null) el.invent_number = "--" ; 
+        if (el.serial_number?.trim() === "" || el.serial_number?.trim() == null) el.serial_number = "--" ; 
+        if (el.barcode?.trim() === "" || el.barcode?.trim() == null) el.barcode = "--" ; 
+        if (el.invoice?.trim() === "" || el.invoice?.trim() == null) el.invoice = "--" ; 
+        if (el.delivery_contract?.trim() === "" || el.delivery_contract?.trim() == null) el.delivery_contract = "--" ; 
+        if (el.organization?.trim() === "" || el.organization?.trim() == null) el.organization = "--" ; 
         if (el.organization?.trim() === "" || el.organization?.trim() == null) el.organization = "--" ; 
         if (el.ProtectedObject?.trim() === "" || el.ProtectedObject?.trim() == null ) el.ProtectedObject = "--" ; 
 
@@ -206,10 +134,6 @@ export class Mtr2Component {
 
       // при загрузке показываем без всяких ограничений
       this.ShowMtr = [...this.ORIGINAL_ShowMtr];
-
-      // this.itemsUsers = [...value];
-
-      console.log('this.ShowMtr=', this.ShowMtr);
 
 
     });
@@ -230,28 +154,15 @@ export class Mtr2Component {
 
    this.servguide.getProtectedObjectGuide().subscribe( (value: any) => {
     this.guideProtectedObject = value; 
+    console.log(this.guideProtectedObject);
    });
 
 
 }
 
 
-clicObject(objectmtr: Imtr) {
-    // alert(objectmtr.name );
-}
-
-
-myTest() {
-console.log('!!!!!!!!');  
-}
-
-
-
 
 onChangeSmallGuide(ev: any,  smallGuide:  ISmallGuide[], id_mtr: string, field: string, strField: string) {
-
-  //console.log('onChangeSmallGuide', ev.target.value);
-
 
   if (ev) {
    let res = smallGuide.find( (el) => el.name == ev.target.value);
@@ -378,19 +289,6 @@ setDatePurchase($event: any, id_mtr: number) {
 
 
     if (isDate) {
-
-      /*
-      const res = this.ShowMtr.map( (el: Imtr) => {
-          if (el.id_mtr == id_mtr.toString()) {
-            //
-            let s: string =this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
-              el.date_purchase_str = s;
-              console.log('el.date_purchase_str =', el.date_purchase_str);
-            //  
-              }
-          return el;
-      });
-*/
 
       this.ShowMtr.forEach((el: Imtr)=> {
         if (el.id_mtr == id_mtr.toString()) {
@@ -528,7 +426,7 @@ onEnterSearch() {
    if (sInput) {
        // console.log('ищем=',sInput);
        
-       const res = this.ORIGINAL_ShowMtr.filter( (el) => {
+       const res = this.ORIGINAL_ShowMtr.filter( (el: Imtr) => {
           return        (el.id_mtr &&  el.id_mtr.toString().toUpperCase().indexOf(sInput) != -1) ||
           (el.name &&  el.name.toString().toUpperCase().indexOf(sInput) != -1) ||
           (el.mtrvid &&  el.mtrvid.toString().toUpperCase().indexOf(sInput) != -1) ||
@@ -554,7 +452,10 @@ onEnterSearch() {
 
 
        // console.log('find=', res)
-       this.ShowMtr =  JSON.parse(JSON.stringify(res));
+       //this.ShowMtr =  JSON.parse(JSON.stringify(res));
+       this.ShowMtr =  [...res];
+
+       console.log(this.ShowMtr);
 
      } else {
        console.log('обнуляем поиск');
@@ -566,31 +467,45 @@ onEnterSearch() {
 
 
    addNewMTR() {
-
-    let item: Imtr = {};
+    let el: Imtr = {};
     const s = 'Новый ресурс';
   
     
     this.mtrserv.addMtr(s).subscribe( (res: any) =>
       {
         if (res.insertId) {
-          item.id_mtr = res.insertId;
-          item.name = s;
-          this.ShowMtr.unshift(item);
-          this.ShowMtr = [...this.ShowMtr];
+          el.id_mtr = res.insertId;
+          el.name = s;
+          if (el.date_purchase_str?.trim() === "" || el.date_purchase_str?.trim() == null )  el.date_purchase_str='--';
+          if (el.date_issue_str?.trim() === "" || el.date_issue_str?.trim() == null)  el.date_issue_str='--';
+          if (el.mtrvid == null) el.mtrvid = "--" ; 
+          if (el.mtrcolor == null) el.mtrcolor = "--" ; 
 
-          this.ORIGINAL_ShowMtr.unshift(item);
+          if (el.status?.trim() === "" || el.status?.trim() == null ) el.status = "--" ; 
+          if (el.description?.trim() === "" || el.description?.trim() == null ) el.description = "--" ; 
+          if (el.property?.trim() === "" || el.property?.trim() == null ) el.property = "--" ; 
+          if (el.equipment?.trim() === "" || el.equipment?.trim() == null) el.equipment = "--" ; 
+          if (el.price?.trim() == null || el.price?.trim() == null) el.price = "--" ; 
+          if (el.size?.trim() == null || el.size?.trim() == null) el.size = "--" ; 
+          if (el.count?.trim() == null || el.count?.trim() == null) el.count = "--" ; 
+
+          if (el.tabel_number?.trim() === "" || el.tabel_number?.trim() == null) el.tabel_number = "--" ; 
+          if (el.invent_number?.trim() === "" || el.invent_number?.trim() == null) el.invent_number = "--" ; 
+          if (el.serial_number?.trim() === "" || el.serial_number?.trim() == null) el.serial_number = "--" ; 
+          if (el.barcode?.trim() === "" || el.barcode?.trim() == null) el.barcode = "--" ; 
+          if (el.invoice?.trim() === "" || el.invoice?.trim() == null) el.invoice = "--" ; 
+          if (el.delivery_contract?.trim() === "" || el.delivery_contract?.trim() == null) el.delivery_contract = "--" ; 
+          if (el.organization?.trim() === "" || el.organization?.trim() == null) el.organization = "--" ; 
+          if (el.ProtectedObject?.trim() === "" || el.ProtectedObject?.trim() == null ) el.ProtectedObject = "--" ; 
+  
+          this.ShowMtr.unshift(el);
+          this.ShowMtr = [...this.ShowMtr];
+          this.ORIGINAL_ShowMtr.unshift(el);
           this.ORIGINAL_ShowMtr = [...this.ORIGINAL_ShowMtr];
-          
-         //  this.virtualScroll.scrollTo({top: 0});
+         
         }
       });
-    
-  
-    
   }
-
- 
 
 
   deleteMtr(id_mtr: number, sLink: string) {
@@ -626,48 +541,6 @@ onEnterSearch() {
     this.deleteClose();
   }
   
-
-
-  // divColName
-  ngAfterViewInit() {
-
-/*    
-    const htmlElem = document.getElementById("divColName")!;
-    const thColName = document.getElementById("thColName")!;
-
-    const resizeObserver = new ResizeObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.contentBoxSize) {
-            // contentBoxSize is an array:
-            console.log("entry.contentBoxSize: " + entry.contentBoxSize[0].inlineSize, 'htmlElem=', htmlElem.clientWidth)
-            this.renderer.setStyle(thColName, "width", `${htmlElem.clientWidth}px`);
-          } else {
-            console.log("entry.contentRect: " + entry.contentRect.width)
-          }
-        }
-      }
-    )
-    resizeObserver.observe(htmlElem);
-*/    
-  }
-
-
-  test() {
-
-    const divColName = document.getElementById("divColName")!;
-    const thColName = document.getElementById("thColName")!;
-    const tdColName = document.getElementById("name")!;
-    //console.log('htmlElem.clientWidth*3', htmlElem.clientWidth*3);
-    //this.renderer.setStyle(thColName, "width", `${htmlElem.clientWidth*3}px`);
-
-
-    console.log(thColName, divColName);
-    //this.renderer.setStyle(thColName, "width", `500px`);
-    this.renderer.setStyle(divColName, "width", `${divColName.clientWidth+30}px`);
-  }
-
-
 }
 
 

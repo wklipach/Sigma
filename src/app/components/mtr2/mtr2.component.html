@@ -1,9 +1,18 @@
-<!--
-<ngx-datatable class="material"
-[rows]="rows"
-[columns]="column">
-</ngx-datatable>
--->
+<div class="Container d-flex flex-row p-2">
+  <h2>МТР</h2>
+   <div class="d-flex rounded w-lg-550px ml-auto">
+        <input id="search" 
+               type="search"
+               class="form-control rounded" 
+               placeholder="Поиск" 
+               aria-label="Search" 
+               aria-describedby="search-addon" 
+               (keyup.enter)="onEnterSearch()"/>
+        <span class="input-group-text border-0 pl-15px" id="search-addon">
+          <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
+        </span>
+      </div>
+</div>
 
 
 <ngx-datatable
@@ -492,13 +501,15 @@ class="material striped"
 <!-- НАЧАЛО СПРАВОЧНИКА Объект --> 
 <ngx-datatable-column prop = "ProtectedObject" name = "Объект">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
-       <span
-        title="Double click to edit"
-        (dblclick)="this.editing[rowIndex + '-ProtectedObject'] = true"
-        *ngIf="!editing[rowIndex + '-ProtectedObject']"
-       >
-        {{ value }}
-      </span>
+
+      <span
+      title="Double click to edit"
+      (dblclick)="this.editing[rowIndex + '-ProtectedObject'] = true"
+      *ngIf="!editing[rowIndex + '-ProtectedObject']"
+      >       
+      {{ value }}
+    </span>
+
       <select
         *ngIf="editing[rowIndex + '-ProtectedObject']"
         (blur)="editing[rowIndex + '-ProtectedObject'] = false"
@@ -512,6 +523,19 @@ class="material striped"
   </ngx-datatable-column>
 <!-- КОНЕЦ СПРАВОЧНИКА Объект --> 
 
+
+<!-- НАЧАЛО ПОЛЯ delete --> 
+
+<ngx-datatable-column name="Удалить">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <button class="btn btn-danger" (click)="deleteMtr(row.id_mtr, row.name)"><img src="/assets/img/delete.png" width="30" /></button>
+  </ng-template>
+</ngx-datatable-column>
+
+<!-- КОНЕЦ ПОЛЯ delete -->  
+
+
+
 <!--
 <ngx-datatable-footer>
     <ng-template ngx-datatable-footer-template></ng-template>
@@ -521,4 +545,33 @@ class="material striped"
 </ngx-datatable>
 
 
+<!-- Добавить ресурс -->
+<div class="add-btn">
+  <button class="btn btn-success" type="button" (click)="addNewMTR()"><img src="/assets/img/plus.png" width="30" /></button>
+</div>
+<!-- конец Добавить ресурс -->
 
+
+<!-- Удалить ресурс -->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+  DeleteOpen
+</button>
+<button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+DeleteClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Удалить ресурс {{this.curDeleteObject.sLink}}?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+      <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+      
+    </div>
+  </div>
+</div>
+</div>  
+<!-- конец удалить ресурс -->  
