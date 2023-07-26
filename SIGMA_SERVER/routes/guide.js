@@ -21,11 +21,11 @@ router.get('/', async function(req, res, next) {
     }
 
 
+    // для справочника - тут есть строка номер один
     if (req.query.get_protected_object) {
       const result = await asyncGuideProtectedObject();
       res.send(result);
     }
-
   });
 
   async function asyncSmallGuide(sGuide) {
@@ -69,7 +69,7 @@ router.get('/', async function(req, res, next) {
     try {
   
         const sQuery = 
-        "select id_object as `id`, `name` from protected_object where (bitDelete = 0 and `name`<>'') or id_object=1 "+
+        "select id_object as `id`, `name` from protected_object where (bitDelete = 0 and `name`<>'--') or id_object=1 "+
         "order by `name` asc ";
 
         const resProtectedObject = await conn.query(sQuery);
@@ -80,5 +80,6 @@ router.get('/', async function(req, res, next) {
           if (conn) conn.release(); 
     }
   }
+
 
 module.exports = router;

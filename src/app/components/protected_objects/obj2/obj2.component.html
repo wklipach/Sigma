@@ -1,0 +1,497 @@
+<div class="Container d-flex flex-row p-2">
+  <h2>Объекты</h2>
+   <div class="input-group rounded  w-lg-550px ml-auto">
+        <input id="search" 
+               type="search"
+               class="form-control rounded" 
+               placeholder="Поиск" 
+               aria-label="Search" 
+               aria-describedby="search-addon" 
+               (keyup.enter)="onEnterSearch()"/>
+        <span class="input-group-text border-0" id="search-addon">
+          <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
+        </span>
+      </div>
+</div>
+
+
+<ngx-datatable
+id="Obj2Table"
+class="material striped"
+[rows]="this.ShowObjects"
+[columnMode]="ColumnMode.force"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="50"
+[limit]="100"
+[scrollbarV]="true"
+>
+
+
+
+<ngx-datatable-column prop = "id_object" name = "#" [width]="300">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+
+<!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
+<ngx-datatable-column prop="name" name="Объект">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+      <span
+        title="Double click to edit"
+        (dblclick)="editing[rowIndex + '-name'] = true"
+        *ngIf="!editing[rowIndex + '-name']"
+      >
+        {{ value}} 
+      </span>
+      <input
+        (blur)="myUpdateClick($event.target, row.id_object, 'name', 'name')"
+        (keyup.enter)="myEnter($event)"
+        *ngIf="editing[rowIndex + '-name']"
+        type="text"
+        [value]="value"
+      />
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ НАИМЕНОВАНИЕ-->
+
+
+  <!-- НАЧАЛО СПРАВОЧНИКА тип объекта --> 
+  <ngx-datatable-column prop = "object_type" name = "Тип объекта">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-object_type'] = true"
+        *ngIf="!editing[rowIndex + '-object_type']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-object_type']"
+        (blur)="editing[rowIndex + '-object_type'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guideObjectType, row.id_object, 'id_object_type', 'object_type')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let got of this.guideObjectType" [value]="got.name">{{got.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ СПРАВОЧНИКА тип объекта  --> 
+
+
+  <!-- НАЧАЛО СПРАВОЧНИКА post_status --> 
+<ngx-datatable-column prop = "post_status" name = "Статус">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-post_status'] = true"
+        *ngIf="!editing[rowIndex + '-post_status']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-post_status']"
+        (blur)="editing[rowIndex + '-post_status'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guidePostStatus, row.id_object, 'post_status', 'post_status')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let ps of this.guidePostStatus" [value]="ps.name">{{ps.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ СПРАВОЧНИКА post_status  --> 
+
+
+
+<!-- НАЧАЛО ПОЛЯ Опции-->
+<ngx-datatable-column prop="options" name="Опции">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    <span
+      title="Double click to edit"
+      (dblclick)="editing[rowIndex + '-options'] = true"
+      *ngIf="!editing[rowIndex + '-options']"
+    >
+      {{ value}} 
+    </span>
+    <input
+      (blur)="myUpdateClick($event.target, row.id_object, 'options', 'options')"
+      (keyup.enter)="myEnter($event)"
+      *ngIf="editing[rowIndex + '-options']"
+      type="text"
+      [value]="value"
+    />
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Опции-->
+
+
+
+  <!-- НАЧАЛО СПРАВОЧНИКА Под охраной организации --> 
+  <ngx-datatable-column prop = "cur_organization" name = "Под охраной">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-cur_organization'] = true"
+        *ngIf="!editing[rowIndex + '-cur_organization']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-cur_organization']"
+        (blur)="editing[rowIndex + '-cur_organization'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guideOrganization, row.id_object, 'id_organization', 'cur_organization')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let or of this.guideOrganization" [value]="or.name">{{or.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ СПРАВОЧНИКА Под охраной  --> 
+
+
+<!-- НАЧАЛО ПОЛЯ Телефон-->
+<ngx-datatable-column prop="phone" name="Телефон">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    <span
+      title="Double click to edit"
+      (dblclick)="editing[rowIndex + '-phone'] = true"
+      *ngIf="!editing[rowIndex + '-phone']"
+    >
+      {{ value}} 
+    </span>
+    <input
+      (blur)="myUpdateClick($event.target, row.id_object, 'phone', 'phone')"
+      (keyup.enter)="myEnter($event)"
+      *ngIf="editing[rowIndex + '-phone']"
+      type="text"
+      [value]="value"
+    />
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Телефон-->
+
+
+<!-- НАЧАЛО ПОЛЯ Адрес-->
+<ngx-datatable-column prop="address" name="Адрес">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    <span
+      title="Double click to edit"
+      (dblclick)="editing[rowIndex + '-address'] = true"
+      *ngIf="!editing[rowIndex + '-address']"
+    >
+      {{ value}} 
+    </span>
+    <input
+      (blur)="myUpdateClick($event.target, row.id_object, 'address', 'address')"
+      (keyup.enter)="myEnter($event)"
+      *ngIf="editing[rowIndex + '-address']"
+      type="text"
+      [value]="value"
+    />
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ Адрес-->
+
+
+<!-- НАЧАЛО ПОЛЯ Яндекс-ссылка --> 
+<ngx-datatable-column name="Яндекс Карта">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <a href="{{ row.yandex_maps}}" class="btn btn-primary">Яндекс</a>
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ  Яндекс-ссылка -->  
+
+<!-- ПОЛЕ Вызов кнопки изменения яндекса -->
+<ngx-datatable-column name="ссылка Y">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    <button type="button" 
+    class="btn btn-info" 
+    data-bs-toggle="modal" 
+    data-bs-target="#yandexModal"
+    (click)="onClickYandex(row.id_object, row.yandex_maps)">
+      ...
+    </button>
+  </ng-template>
+</ngx-datatable-column>
+<!-- Конец ПОЛЕ Вызов кнопки изменения яндекса -->
+
+
+<!-- НАЧАЛО ПОЛЯ гугл-ссылка --> 
+<ngx-datatable-column name="Google">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <a href="{{ row.google_maps}}" class="btn btn-primary">Google</a>
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ  гугл-ссылка -->  
+
+<!-- ПОЛЕ Вызов кнопки изменения гугла -->
+<ngx-datatable-column name="ссылка G">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    <button type="button" 
+    class="btn btn-info" 
+    data-bs-toggle="modal" 
+    data-bs-target="#googleModal"
+    (click)="onClickGoogle(row.id_object, row.google_maps)">
+      ...
+    </button>
+  </ng-template>
+</ngx-datatable-column>
+<!-- Конец ПОЛЕ Вызов кнопки изменения гугла -->
+
+
+<!-- ПОЛЕ НАЧАЛЬНИК ОХРАНЫ ОБЪЕКТА -->                  
+<ngx-datatable-column prop = "senjor_guard" name = "НОО">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+     <span
+      title="Double click to edit"
+      (dblclick)="this.editing[rowIndex + '-senjor_guard'] = true"
+      *ngIf="!editing[rowIndex + '-senjor_guard']"
+     >
+      {{ value }}
+    </span>
+    <select
+      *ngIf="editing[rowIndex + '-senjor_guard']"
+      (blur)="editing[rowIndex + '-senjor_guard'] = false"
+      (keyup.enter)="myEnter($event)"
+      (change)="onChangeSenjorGuard($event, this.guideSenjorGuard, row.id_object, 'id_senjor_guard', 'senjor_guard')"
+      [ngModel]="value"       
+    >
+      <option *ngFor="let sg of this.guideSenjorGuard" [value]="sg.fio">{{sg.fio}}</option>
+    </select>
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЕ НАЧАЛЬНИК ОХРАНЫ ОБЪЕКТА -->                  
+
+
+
+<!--
+                        <td class="td">
+                          <input name="date" type="text" (focus)="focusFunction($event, objectone.postwassetdate_str)" 
+                                                        (focusout)="setDatePostwassetdate($event, objectone.id_object)"
+                                                        value="{{objectone.postwassetdate_str | date: 'dd.MM.yyyy'}}">
+                        </td>
+-->                        
+
+
+<!-- НАЧАЛО ПОЛЕ ДАТА ПОСТАНОВКИ ОХРАНЫ -->
+<ngx-datatable-column prop="postwassetdate_str" name="Выставлен Дата">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <span
+                      title="Double click to edit"
+                      placeholder="Choose a date"
+                      (dblclick)="editing[rowIndex + '-postwassetdate_str'] = true"
+                          *ngIf="!editing[rowIndex + '-postwassetdate_str']"
+          >
+                              {{ value }} 
+          </span>
+          <input
+              (focus)="focusFunction($event, row.postwassetdate_str)" 
+              (focusout)="setDatePostwassetdate($event, row.id_object)"
+              (keyup.enter)="myEnter($event)"
+              *ngIf="editing[rowIndex + '-postwassetdate_str']"
+              type="text"
+              [value]="value"
+          />
+  </ng-template>
+</ngx-datatable-column>
+<!--  КОНЕЦ ПОЛЕ ДАТА ПОСТАНОВКИ ОХРАНЫ -->
+
+
+<!-- НАЧАЛО ПОЛЕ ДАТА Снят Дата -->
+<ngx-datatable-column prop="withdrawaldate_str" name="Снят Дата">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <span
+                      title="Double click to edit"
+                      placeholder="Choose a date"
+                      (dblclick)="editing[rowIndex + '-withdrawaldate_str'] = true"
+                          *ngIf="!editing[rowIndex + '-withdrawaldate_str']"
+          >
+                              {{ value }} 
+          </span>
+          <input
+              (focus)="focusFunction($event, row.withdrawaldate_str)" 
+              (focusout)="setDateWithdrawaldate($event, row.id_object)"
+              (keyup.enter)="myEnter($event)"
+              *ngIf="editing[rowIndex + '-withdrawaldate_str']"
+              type="text"
+              [value]="value"
+          />
+  </ng-template>
+</ngx-datatable-column>
+<!--  КОНЕЦ ПОЛЕ ДАТА Снят Дата -->
+
+
+<!-- НАЧАЛО СПРАВОЧНИКА МТР --> 
+  <ngx-datatable-column prop = "MTR" name = "МТР">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+       <span
+        title="Double click to edit"
+        (dblclick)="this.editing[rowIndex + '-MTR'] = true"
+        *ngIf="!editing[rowIndex + '-MTR']"
+       >
+        {{ value }}
+      </span>
+      <select
+        *ngIf="editing[rowIndex + '-MTR']"
+        (blur)="editing[rowIndex + '-MTR'] = false"
+        (keyup.enter)="myEnter($event)"
+        (change)="onChangeSmallGuide($event, this.guideMTR, row.id_object, 'id_mtr', 'MTR')"
+        [ngModel]="value"       
+      >
+        <option *ngFor="let mtr of this.guideMTR" [value]="mtr.name">{{mtr.name}}</option>
+      </select>
+    </ng-template>
+  </ngx-datatable-column>
+<!-- КОНЕЦ СПРАВОЧНИКА МТР  -->           
+
+
+<!-- НАЧАЛО СПРАВОЧНИКА Клиент --> 
+<ngx-datatable-column prop = "customer" name = "Клиент">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+     <span
+      title="Double click to edit"
+      (dblclick)="this.editing[rowIndex + '-customer'] = true"
+      *ngIf="!editing[rowIndex + '-customer']"
+     >
+      {{ value }}
+    </span>
+    <select
+      *ngIf="editing[rowIndex + '-customer']"
+      (blur)="editing[rowIndex + '-customer'] = false"
+      (keyup.enter)="myEnter($event)"
+      (change)="onChangeSmallGuide($event, this.guideCustomers, row.id_object, 'id_customer', 'customer')"
+      [ngModel]="value"       
+    >
+      <option *ngFor="let gc of this.guideCustomers" [value]="gc.name">{{gc.name}}</option>
+    </select>
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ СПРАВОЧНИКА Клиент  -->
+
+
+<ngx-datatable-column name="Удалить">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <button class="btn btn-danger" (click)="deleteObject(row.id_object, row.name)"><img src="/assets/img/delete.png" width="30" /></button>
+  </ng-template>
+</ngx-datatable-column>
+
+<!-- КОНЕЦ ПОЛЯ delete -->  
+
+<!-- новые столбцы -->
+
+</ngx-datatable>
+
+
+
+<!-- МОДАЛЬНЫЕ ОКНА УДАЛЕНИЯ ОБЪЕКТА-->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+  DeleteOpen
+</button>
+<button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+DeleteClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Удалить объект {{this.curDeleteObject.sLink}}?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+      <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+      
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- КОНЕЦ МОДАЛЬНЫЕ ОКНА УДАЛЕНИЕ ОБЪЕКТА-->
+
+
+<!-- КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
+<div class="add-btn">
+  <button class="btn btn-success" type="button" (click)="addNewObject()"><img src="/assets/img/plus.png" width="30" /></button>
+  </div>
+<!--  КОНЕЦ КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
+
+
+<!-- YANDEX modal -->
+<button id="openYandexModalButton" type="button" class="btn btn-Warning" data-bs-toggle="modal" data-bs-target="#yandexModal" [hidden]="true">
+  YandexOpen 
+</button>
+<button id="closeYandexModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#yandexModal" [hidden]="true"  data-dismiss="modal">
+ YandexClose
+</button>
+
+
+ <div class="modal fade" tabindex="-1" role="dialog" id="yandexModal">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title">Внесите ссылку  Яндекс.</h5>
+       </div>
+       <div class="modal-body">
+         <input [(ngModel)]="this.curMaps.sLink" style="width: 100%;"/>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="yandexClose()">Закрыть</button>
+         <button type="button" class="btn btn-primary" (click)="yandexSave()">Сохранить</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+ <!-- GOOGLE modal -->
+<button id="openGoogleModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#googleModal" [hidden]="true">
+  GoogleOpen
+</button>
+<button id="closeGoogleModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#googleModal" [hidden]="true"  data-dismiss="modal">
+GoogleClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="googleModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Внесите ссылку Google.</h5>
+    </div>
+    <div class="modal-body">
+      <input [(ngModel)]="this.curMaps.sLink" style="width: 100%;"/>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="googleClose()">Закрыть</button>
+      <button type="button" class="btn btn-primary" (click)="googleSave()">Сохранить</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--
+id_post_status?: string; 
+post_status?: string; 
+options?: string; 
+id_organization?: string; 
+cur_organization?: string;   
+address?: string; 
+yandex_maps?: string;  
+google_maps?: string;  
+phone?: string; 
+id_senjor_guard?: string; 
+senjor_guard?: string; 
+postwasset_date?: string; 
+postwassetdate_str?: string; 
+withdrawal_date?: string;  
+withdrawaldate_str?: string;  
+id_mtr?: string; 
+MTR?: string; 
+id_customer?: string; 
+customer?: string; 
+id_object_type?: string; 
+object_type?: string; 
+-->

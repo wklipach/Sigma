@@ -62,7 +62,7 @@ export class Mtr2Component {
 
 
   ColumnMode = ColumnMode;
-  @ViewChild('myTable') myTable!: DatatableComponent;
+  @ViewChild('Mtr2Table') Mtr2Table!: DatatableComponent;
   ShowMtr: Imtr[] = [];
 
 
@@ -225,19 +225,15 @@ myUpdateClick(element: any, id_mtr: number, field: string, strField: string) {
       let resShowMtr = this.ShowMtr.find( (el) => el.id_mtr == id_mtr.toString());
       if (resShowMtr) {
       resShowMtr[strField as keyof Imtr] = text;
-
-      console.log('resShowMtr=', resShowMtr);
-
       this.ShowMtr = [...this.ShowMtr];
       }
+
       let resShowMtrOriginal = this.ORIGINAL_ShowMtr.find( (el) => el.id_mtr == id_mtr.toString());
       if (resShowMtrOriginal) {
       resShowMtrOriginal[strField as keyof Imtr] = text;
       this.ORIGINAL_ShowMtr = [...this.ORIGINAL_ShowMtr];
     }
   }
-
-
 }
 
 maxInputLength(e: Event, iLength: number) {

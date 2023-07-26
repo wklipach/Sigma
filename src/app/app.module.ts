@@ -41,6 +41,7 @@ import { ResizableModule } from './directives/resizable.module';
 import { EventsComponent } from './events/events.component';
 import { Mtr2Component } from './components/mtr2/mtr2.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Obj2Component } from './components/protected_objects/obj2/obj2.component';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -69,7 +70,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     NumberComponent,
     TestComponent,
     EventsComponent,
-    Mtr2Component
+    Mtr2Component,
+    Obj2Component
   ],
   imports: [
     BrowserModule,

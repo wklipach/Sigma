@@ -26,5 +26,7 @@ export class GuideService {
          .set('get_protected_object', 'get_protected_object');
     return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
   }
+
+  // get_realprotected_object
   
 }
