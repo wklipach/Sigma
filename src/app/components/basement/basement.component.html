@@ -1,25 +1,37 @@
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="/liststaff">Сотрудники</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/listobjects">Объекты</a>
-    </li>
-
-<!--
-    <li class="nav-item">
-      <a class="nav-link" href="#">Документы</a>
-    </li>
--->        
-
-<!--
-    <li class="nav-item">
-        <a class="nav-link" href="#">События</a>
-      </li>
--->
-
+<div class="container-fluid d-flex justify-content-evenly m-0 p-0">
+  <nav class="navbar w-100 nav-tabs  position: sticky navbar-expand-lg navbar-light bg-light fs-5 fw-semibold my-0 top- 0 w-lg-100%">
+   <a class="navbar-brand mx-9 fs-5 fw-semibold" href="#">
+    SIGMA-PROFI
+    </a>
+  
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Переключатель навигации">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav w-lg-950px justify-content-evenly">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/liststaff">Сотрудники</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/listobjects">Объекты</a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="">События</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="">Компании</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Договора</a>
+        </li><li class="nav-item">
+          <a class="nav-link" href="">Акты</a>
+        </li>
       <li class="nav-item">
-        <a class="nav-link" href="/listmtr">МТР</a>
+        <a class="nav-link" href="">Тендеры</a>
       </li>
-    
-  </ul>
+      </ul>
+    </div>
+</nav>
+  </div>
+
+ <!-- <button [style.color] = "'green'" [style.width.px]="width"  (click) = "clickWigth()">
+  Получить ширину столбцов</button> -->

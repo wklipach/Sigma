@@ -1,3 +1,35 @@
 .material {
     height: 800px
 }
+:host ::ng-deep.ngx-datatable.material .datatable-header {
+    background-color: #f5f5f5 !important;
+    
+
+font-weight: 600;
+color: #222121;
+text-align: center !important;
+border: 1px dashed #cacaca !important;
+background-clip: padding-box;
+
+  }
+
+:host ::ng-deep .datatable-body-cell {
+    background-color: rgb(255, 255, 255);
+    font-size: 1em !important;
+    overflow-x: auto;
+    border: 1px dashed #cacaca;
+    text-align: center !important;
+  white-space: nowrap;
+  padding: 3px;
+  overflow-x: auto;
+  border: 1px dashed #cacaca !important;
+  text-align: center;
+  white-space: nowrap;
+
+  }
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell, .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-group-cell {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
