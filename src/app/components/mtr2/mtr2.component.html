@@ -22,18 +22,18 @@ class="material striped"
 [columnMode]="ColumnMode.force"
 [headerHeight]="50"
 [footerHeight]="50"
-[rowHeight]="50"
+[rowHeight]="0"
 [limit]="100"
 [scrollbarV]="true"
 >
 
-<ngx-datatable-column prop = "id_mtr" name = "#" [width]="300">
+<ngx-datatable-column prop = "id_mtr" name = "№" [width]="150">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}
       </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column prop="name" name="ресурс">
+<ngx-datatable-column prop="name" name="Ресурс" [width]="350">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"
@@ -55,7 +55,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА ВИД   (dblclick)="editing[rowIndex + '-mtrvid'] = true" --> 
-<ngx-datatable-column prop = "mtrvid" name = "вид">
+<ngx-datatable-column prop = "mtrvid" name = "Вид" [width]="250">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -79,7 +79,7 @@ class="material striped"
   
                  
 <!-- НАЧАЛО СПРАВОЧНИКА COLOR --> 
-<ngx-datatable-column prop = "mtrcolor" name = "цвет">
+<ngx-datatable-column prop = "mtrcolor" name = "Цвет" [width]="250">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -103,7 +103,7 @@ class="material striped"
 
 
   <!-- НАЧАЛО ПОЛЯ СТАТУС --> 
-  <ngx-datatable-column prop="status" name="статус">
+  <ngx-datatable-column prop="status" name="Статус"  [width]="250">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -127,7 +127,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ СТАТУС --> 
 
 <!-- НАЧАЛО ПОЛЯ ОПИСАНИЕ --> 
-  <ngx-datatable-column prop="description" name="описание">
+  <ngx-datatable-column prop="description" name="Описание" [width]="300">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
