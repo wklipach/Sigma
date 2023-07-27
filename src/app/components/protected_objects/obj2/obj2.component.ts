@@ -179,7 +179,7 @@ export class Obj2Component {
       //console.log('res update = ', res);
     });
   
-    if (text="--") {
+    //if (text="--") {
         let resShowObjects = this.ShowObjects.find( (el: IObjectOne) => el.id_object == id_object.toString());
         if (resShowObjects) {
           resShowObjects[strField as keyof IObjectOne] = text;
@@ -191,7 +191,7 @@ export class Obj2Component {
         resShowObjectsOriginal[strField as keyof IObjectOne] = text;
         this.ORIGINAL_ShowObjects = [...this.ORIGINAL_ShowObjects];
       }
-    }
+    //}
   }
 
 

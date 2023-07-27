@@ -110,8 +110,8 @@ export class Mtr2Component {
       {
         el.date_purchase_str = this.datePipe.transform(el.date_purchase, 'yyyy-MM-dd') || '--';
         el.date_issue_str = this.datePipe.transform(el.date_issue, 'yyyy-MM-dd') || '--';
-        if (el.mtrvid == null) el.mtrvid = "--" ; 
-        if (el.mtrcolor == null) el.mtrcolor = "--" ; 
+        if (el.mtrvid?.trim() === "" || el.mtrvid?.trim() == null ) el.mtrvid = "--" ; 
+        if (el.mtrcolor?.trim() === "" || el.mtrcolor?.trim() == null ) el.mtrcolor = "--" ; 
         if (el.status?.trim() === "" || el.status?.trim() == null ) el.status = "--" ; 
         if (el.description?.trim() === "" || el.description?.trim() == null) el.description = "--" ; 
         if (el.property?.trim() === "" || el.property?.trim() == null) el.property = "--" ; 
@@ -221,7 +221,7 @@ myUpdateClick(element: any, id_mtr: number, field: string, strField: string) {
   });
 
 
-  if (text="--") {
+  //if (text="--") {
       let resShowMtr = this.ShowMtr.find( (el) => el.id_mtr == id_mtr.toString());
       if (resShowMtr) {
       resShowMtr[strField as keyof Imtr] = text;
@@ -233,7 +233,7 @@ myUpdateClick(element: any, id_mtr: number, field: string, strField: string) {
       resShowMtrOriginal[strField as keyof Imtr] = text;
       this.ORIGINAL_ShowMtr = [...this.ORIGINAL_ShowMtr];
     }
-  }
+  //}
 }
 
 maxInputLength(e: Event, iLength: number) {
@@ -472,6 +472,7 @@ onEnterSearch() {
         if (res.insertId) {
           el.id_mtr = res.insertId;
           el.name = s;
+          if (el.name?.trim() === "" || el.name?.trim() == null )  el.name='--';
           if (el.date_purchase_str?.trim() === "" || el.date_purchase_str?.trim() == null )  el.date_purchase_str='--';
           if (el.date_issue_str?.trim() === "" || el.date_issue_str?.trim() == null)  el.date_issue_str='--';
           if (el.mtrvid == null) el.mtrvid = "--" ; 
