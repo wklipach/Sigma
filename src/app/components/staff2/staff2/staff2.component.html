@@ -12,6 +12,18 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
+
+      <div class="input-group rounded  w-lg-550px ml-auto">
+        Фильтры
+          <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold" 
+              (change)="onChangeFilter($event.target)">
+              <option  [value]="0"> -- </option>
+              <option *ngFor="let lf of this.listFilters" [value]="lf.id"> {{lf.name}}</option>
+          </select>
+      </div>
+      <button (click)="clickFilters()">Создать фильтр</button>
+
+
 </div>
 
 
@@ -30,11 +42,12 @@ class="material striped"
 
 
 <ngx-datatable-column prop = "id_staff" name = "#" [width]="300">
-    <ng-template let-value="value" ngx-datatable-cell-template>
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span (dblclick)="Summary(row.id_staff)">
         {{ value }}
+      </span>
       </ng-template>
 </ngx-datatable-column>
-
 
 <!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
 <ngx-datatable-column prop="fio" name="ФИО">
@@ -351,6 +364,14 @@ class="material striped"
   </ng-template>
 </ngx-datatable-column>
 <!-- КОНЕЦ ПОЛЯ ДАТА 003-O/y от --> 
+
+
+<ngx-datatable-column prop = "DateCreation" name = "Дата создания">
+  <ng-template let-value="value" ngx-datatable-cell-template>
+      {{ value | date: "yyyy-MM-dd" }}
+    </ng-template>
+</ngx-datatable-column>
+
 
 
 <!-- НАЧАЛО ПОЛЯ delete --> 

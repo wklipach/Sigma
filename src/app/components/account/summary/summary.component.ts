@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SummaryService } from 'src/app/services/summary.service';
 
 
@@ -54,7 +54,7 @@ export class SummaryComponent  implements OnInit  {
 
 
 
-  constructor(private route: ActivatedRoute, private summaryServ: SummaryService ) { 
+  constructor(private route: ActivatedRoute, private summaryServ: SummaryService, private router: Router) { 
         this.route.queryParams.subscribe((params) => { this.id_staff = params['id_staff'];
       });
   }
@@ -92,6 +92,10 @@ export class SummaryComponent  implements OnInit  {
       this.ShowOLLR = value;
     });
 
+  }
+
+  backStaff() {
+    this.router.navigate(['staff2']);
   }
 
 }

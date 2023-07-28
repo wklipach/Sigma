@@ -6,6 +6,7 @@ import { StaffService } from 'src/app/services/staff.service';
 import { Router } from '@angular/router';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { FiltersService } from 'src/app/services/filters.service';
 
 
 
@@ -19,6 +20,21 @@ interface ISenjorGuardGuide {
   id_staff?: string;  
   fio?: string; 
 }
+
+
+interface IFilter { 
+  id?: string;  
+  name?: string;  
+  dateBegin?: string;  
+  dateEnd?: string;  
+  field1?: string;  
+  field2?: string;  
+  value1?: string;   
+  value2?: string;  
+}
+
+
+
 
 interface IObjectOne { 
     id_staff?: string;  
@@ -45,6 +61,7 @@ interface IObjectOne {
     senjor_guard?: string;  
     id_organization?: string;
     organization?: string;
+    DateCreation?: string;
 }
 
 interface IDeleteObject {
@@ -81,6 +98,9 @@ export class Staff2Component {
     //объект для модального окна удаления
     curDeleteObject: IDeleteObject = {};
 
+    // фильтры
+    listFilters:  any[] = [];
+
 
     // для работы таблицы
     editing: any = {};
@@ -88,14 +108,11 @@ export class Staff2Component {
   constructor (private staffserv: StaffService, 
     private servguide: GuideService, 
     private datePipe: DatePipe,
-    private router: Router) {  
-}
+    private router: Router,
+    private servfilter: FiltersService ) {  }
 
 
 ngOnInit() {
-
-
-
 
   this.servguide.getSmallGuide('guide_position').subscribe( (value: any) => {
     this.guidePosition = value; 
@@ -131,8 +148,8 @@ ngOnInit() {
   this.staffserv.getStaff_All().subscribe ( (value: any) => {
     this.ORIGINAL_ShowStaff = value;
 
-    this.ORIGINAL_ShowStaff.forEach((el)=>
-    {
+    this.ORIGINAL_ShowStaff.forEach((el)=>  {
+
       el.DateBirth_str = this.datePipe.transform(el.DateBirth, 'yyyy-MM-dd') || '--';
       el.s002from_str = this.datePipe.transform(el.s002from, 'yyyy-MM-dd') || '--';
       el.s003from_str = this.datePipe.transform(el.s003from, 'yyyy-MM-dd') || '--';
@@ -155,8 +172,16 @@ ngOnInit() {
     // при загрузке показываем без всяких ограничений
     this.ShowStaff = [...this.ORIGINAL_ShowStaff];     //JSON.parse(JSON.stringify(this.ORIGINAL_ShowStaff));
 
-     console.log('this.ShowStaff =', this.ShowStaff);
+     //console.log('this.ShowStaff =', this.ShowStaff);
+    });
+
+
+
+   // список фильтров
+   this.servfilter.getFilrers().subscribe( (value: any) => {
+    this.listFilters = value; 
   });
+     
 
 }
 
@@ -631,5 +656,68 @@ myEnter(event: Event) {
   }
 }
 
+
+loadFiltersNull() {
+  this.ShowStaff = [...this.ORIGINAL_ShowStaff];
+}
+
+
+  onChangeFilter(curEl: any) {
+
+    if (curEl.value.toString() == "0") {
+      this.loadFiltersNull();
+      return;
+    }
+
+    let res: IFilter = this.listFilters.find( (el: any) =>  el.id.toString() == curEl.value.toString());
+
+    if (!res) {
+      this.loadFiltersNull();
+      return;
+    }
+
+    if (res) {
+     
+          let resFilter: IObjectOne[] = this.ORIGINAL_ShowStaff.filter( (el) => {
+            return (el[res.field1 as keyof IObjectOne] == res.​value1)
+          });
+
+          if (res.field2?.trim() !== "" && res.field2?.trim() !== null) {
+            resFilter = resFilter.filter( (el) => {
+              return (el[res.field2 as keyof IObjectOne] == res.​value2)
+            });
+          }
+
+          const dateBegin = Date.parse(res.dateBegin || '');
+          const dateEnd = Date.parse(res.dateEnd || '');
+
+          if (dateBegin && dateEnd) {
+            console.log(dateBegin, dateEnd );
+            resFilter = resFilter.filter( (el) => {
+              return ( (Date.parse(el.DateCreation || '') >= dateBegin) && (Date.parse(el.DateCreation || '') <= dateEnd));
+            });
+
+
+          } else {
+            // console.log('неправильные даты' )
+          }
+
+
+          this.ShowStaff = [...resFilter];
+
+
+    }
+
+  }
+
+  clickFilters() {
+    this.router.navigate(['filter']);
+  }
+
+  public Summary(id_staff: string) {
+    console.log(id_staff); 
+    this.router.navigate(['summary'], { queryParams: { id_staff }});
+  }
+  
 
 }

@@ -13,6 +13,7 @@ var avatar = require('./routes/avatar');
 var mtr = require('./routes/mtr');
 var guide = require('./routes/guide');
 var staff = require('./routes/staff');
+var filters = require('./routes/filters.js');
 
 
 
@@ -129,6 +130,7 @@ app.use('/avatar', avatar);
 app.use('/mtr', mtr);
 app.use('/guide',guide);
 app.use('/staff', staff);
+app.use('/filters', filters);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

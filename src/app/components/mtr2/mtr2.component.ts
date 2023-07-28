@@ -101,6 +101,10 @@ export class Mtr2Component {
 
   ngOnInit() {
 
+
+
+    console.log('--1--');
+
       this.mtrserv.getMTR().subscribe ( (value: any) => {
 
       this.ORIGINAL_ShowMtr = value;
@@ -135,8 +139,11 @@ export class Mtr2Component {
       // при загрузке показываем без всяких ограничений
       this.ShowMtr = [...this.ORIGINAL_ShowMtr];
 
+      console.log('--3--', this.ShowMtr);
 
     });
+
+    console.log('--2--');
 
 
     this.servguide.getSmallGuide('guide_mtrvid').subscribe( (value: any) => {

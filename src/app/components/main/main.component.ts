@@ -51,4 +51,9 @@ export class MainComponent implements OnInit  {
   }
 
 
+  procFilter() {
+    this.router.navigate(['filter']);
+  }
+
+
 }

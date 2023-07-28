@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // providers
-import {DatePipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {GlobalRef} from '../../globalref';
 
 // components
@@ -81,6 +81,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

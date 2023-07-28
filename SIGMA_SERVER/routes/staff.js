@@ -92,7 +92,8 @@ router.get('/', async function(req, res, next) {
             "    s.id_senjor_guard, "+
             "    s3.fio as senjor_guard, "+
             "    s.id_organization, "+
-            "    go.`name` as `organization` "+
+            "    go.`name` as `organization`, "+
+            "    s.`DateCreation` "+
              "FROM staff s "+
             "join staff s3 on s3.id_staff = s.id_senjor_guard "+
             "LEFT JOIN guide_position gp on gp.id = s.id_position "+
