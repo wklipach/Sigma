@@ -1,11 +1,24 @@
+.container{
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+h2{
+  display: flex;
+  margin-right: auto;
+}
+input-group{
+  display: flex;
+  width: 550px;
+}
+
 .material {
-  height: 800px
+  height: 600px;
 }
 
 .ngx-datatable.material .datatable-header {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid #4244c2 !important;
+
+  border: 5px solid #c40960 !important;
   font-size: 13px;
 }
 
@@ -33,12 +46,12 @@
 
 :host ::ng-deep .datatable-body-cell {
   background-color: rgb(255, 255, 255);
-  height: auto !important;
+  /* height: auto !important; */
   font-size: 1em !important;
   overflow: auto;
   border: 1px dashed #cacaca;
   text-align: center !important;
-  white-space: pre-wrap !important;
+  /* white-space: pre-wrap !important; */
   padding: 1px;
   border: 1px dashed #cacaca !important;
   text-align: center;
@@ -54,7 +67,7 @@
  
 }
  
-} */
+ */
 
 select {
   border: none;

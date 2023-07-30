@@ -1,6 +1,6 @@
 <div class="Container d-flex flex-row p-2">
   <h2>Сотрудники</h2>
-   <div class="input-group rounded  w-lg-550px ml-auto">
+   <div class="input-group rounded  w-lg-550px ml-auto mr-300px">
         <input id="search" 
                type="search"
                class="form-control rounded" 
@@ -12,21 +12,8 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
-
-      <div class="input-group rounded  w-lg-550px ml-auto">
-        Фильтры
-          <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold" 
-              (change)="onChangeFilter($event.target)">
-              <option  [value]="0"> -- </option>
-              <option *ngFor="let lf of this.listFilters" [value]="lf.id"> {{lf.name}}</option>
-          </select>
-      </div>
-      <button (click)="clickFilters()">Создать фильтр</button>
-
-
 </div>
-
-
+ 
 <ngx-datatable
 id="Staff2Table"
 class="material striped"
@@ -39,9 +26,7 @@ class="material striped"
 [scrollbarV]="true"
 >
 
-
-
-<ngx-datatable-column prop = "id_staff" name = "#" [width]="300">
+<ngx-datatable-column prop = "id_staff" name = "#" [width]="150">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
       <span (dblclick)="Summary(row.id_staff)">
         {{ value }}
@@ -50,7 +35,7 @@ class="material striped"
 </ngx-datatable-column>
 
 <!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
-<ngx-datatable-column prop="fio" name="ФИО">
+<ngx-datatable-column prop="fio" name="ФИО" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"
@@ -73,7 +58,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА  Статус -->
-<ngx-datatable-column prop = "guide_status" name = "Статус">
+<ngx-datatable-column prop = "guide_status" name = "Статус" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -97,7 +82,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА  Компания -->
-<ngx-datatable-column prop = "organization" name = "Компания">
+<ngx-datatable-column prop = "organization" name = "Компания" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -120,7 +105,7 @@ class="material striped"
   <!-- КОНЕЦ СПРАВОЧНИКА  Компания -->
 
 <!-- НАЧАЛО СПРАВОЧНИКА РУКОВОДИТЕЛЬ -->         
-<ngx-datatable-column prop = "senjor_guard" name = "Руководитель">
+<ngx-datatable-column prop = "senjor_guard" name = "Руководитель" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -145,7 +130,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА  Должность -->
-<ngx-datatable-column prop = "guide_position" name = "Должность">
+<ngx-datatable-column prop = "guide_position" name = "Должность" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -169,7 +154,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА  Пол -->
-<ngx-datatable-column prop = "guide_gender" name = "Пол">
+<ngx-datatable-column prop = "guide_gender" name = "Пол" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -192,7 +177,7 @@ class="material striped"
   <!-- КОНЕЦ СПРАВОЧНИКА Пол --> 
 
   <!-- НАЧАЛО СПРАВОЧНИКА  Тип сотрудника -->
-<ngx-datatable-column prop = "guide_typeperson" name = "Тип сотрудника">
+<ngx-datatable-column prop = "guide_typeperson" name = "Тип сотрудника" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -216,7 +201,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Разряд-->
-<ngx-datatable-column prop="rank" name="Разряд">
+<ngx-datatable-column prop="rank" name="Разряд" [width]="400">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"
@@ -240,7 +225,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Телефон-->
-<ngx-datatable-column prop="phone" name="Телефон">
+<ngx-datatable-column prop="phone" name="Телефон" [width]="400">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <span
       title="Double click to edit"
@@ -263,7 +248,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ Телефон -->
 
 <!-- НАЧАЛО ПОЛЯ Телефон2-->
-<ngx-datatable-column prop="phone2" name="Телефон 2">
+<ngx-datatable-column prop="phone2" name="Телефон 2" [width]="400">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <span
       title="Double click to edit"
@@ -288,7 +273,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ ДАТА РОЖДЕНИЯ --> 
-<ngx-datatable-column prop="DateBirth_str" name="Дата рождения">
+<ngx-datatable-column prop="DateBirth_str" name="Дата рождения" [width]="400">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <span
                       title="Double click to edit"
@@ -311,7 +296,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ ДАТА РОЖДЕНИЯ --> 
 
 <!-- НАЧАЛО ПОЛЯ ВОЗРАСТ, автовычисление в запросе --> 
-<ngx-datatable-column prop = "sAge" name = "Возраст">
+<ngx-datatable-column prop = "sAge" name = "Возраст" [width]="400">
   <ng-template let-value="value" ngx-datatable-cell-template>
       {{ value }}
     </ng-template>
@@ -320,7 +305,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ ДАТА 002-O/y от --> 
-<ngx-datatable-column prop="s002from_str" name="002-O/y от">
+<ngx-datatable-column prop="s002from_str" name="002-O/y от" [width]="400">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <span
                       title="Double click to edit"
@@ -343,7 +328,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ ДАТА 002-O/y от --> 
 
 <!-- НАЧАЛО ПОЛЯ ДАТА 003-O/y от --> 
-<ngx-datatable-column prop="s003from_str" name="003-O/y от">
+<ngx-datatable-column prop="s003from_str" name="003-O/y от" [width]="400">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <span
                       title="Double click to edit"
@@ -366,7 +351,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ ДАТА 003-O/y от --> 
 
 
-<ngx-datatable-column prop = "DateCreation" name = "Дата создания">
+<ngx-datatable-column prop = "DateCreation" name = "Дата создания" [width]="400">
   <ng-template let-value="value" ngx-datatable-cell-template>
       {{ value | date: "yyyy-MM-dd" }}
     </ng-template>
@@ -375,7 +360,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ delete --> 
-<ngx-datatable-column name="Удалить">
+<ngx-datatable-column name="Удалить" [width]="400">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <button class="btn btn-danger" (click)="deleteStaff(row.id_staff, row.fio)"><img src="/assets/img/delete.png" width="30" /></button>
   </ng-template>
@@ -418,3 +403,14 @@ DeleteClose
 </div>
 </div>  
 <!-- Конец Удалить сотрудника -->
+
+<div class="input-group rounded  w-lg-550px ml-auto">
+  Фильтры
+    <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold" 
+        (change)="onChangeFilter($event.target)">
+        <option  [value]="0"> -- </option>
+        <option *ngFor="let lf of this.listFilters" [value]="lf.id"> {{lf.name}}</option>
+    </select>
+
+<button (click)="clickFilters()">Создать фильтр</button>
+  </div>
