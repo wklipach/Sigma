@@ -1,7 +1,7 @@
 
 <div class="Container d-flex flex-row p-2">
   <h2>МТР</h2>
-   <div class="d-flex rounded w-lg-550px ml-auto">
+  <div class="input-group rounded  w-lg-500px">
         <input id="search" 
                type="search"
                class="form-control rounded" 
@@ -13,6 +13,10 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
+
+      <button class="btn btn-success" type="button" (click)="addNewMTR()"><img src="/assets/img/plus.png" width="30" />
+      </button>
+
 </div>
 
 <ngx-datatable
@@ -25,6 +29,8 @@ class="material striped"
 [rowHeight]="50"
 [limit]="100"
 [scrollbarV]="true"
+[scrollbarH]="true"
+
 >
 
 <ngx-datatable-column prop = "id_mtr" name = "#">
@@ -33,7 +39,7 @@ class="material striped"
       </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column prop="name" name="Ресурс" [width]="400">
+<ngx-datatable-column prop="name" name="Ресурс">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"
@@ -55,7 +61,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА ВИД   (dblclick)="editing[rowIndex + '-mtrvid'] = true" --> 
-<ngx-datatable-column prop = "mtrvid" name = "Вид" [width]="350">
+<ngx-datatable-column prop = "mtrvid" name = "Вид">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -79,7 +85,7 @@ class="material striped"
   
                  
 <!-- НАЧАЛО СПРАВОЧНИКА COLOR --> 
-<ngx-datatable-column prop = "mtrcolor" name = "Цвет" [width]="350">
+<ngx-datatable-column prop = "mtrcolor" name = "Цвет">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -103,7 +109,7 @@ class="material striped"
 
 
   <!-- НАЧАЛО ПОЛЯ СТАТУС --> 
-  <ngx-datatable-column prop="status" name="Статус"  [width]="350">
+  <ngx-datatable-column prop="status" name="Статус">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -127,7 +133,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ СТАТУС --> 
 
 <!-- НАЧАЛО ПОЛЯ ОПИСАНИЕ --> 
-  <ngx-datatable-column prop="description" name="Описание" [width]="350">
+  <ngx-datatable-column prop="description" name="Описание">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -152,7 +158,7 @@ class="material striped"
 
 
  <!-- НАЧАЛО ПОЛЯ ХАРАКТЕРИСТИКИ --> 
- <ngx-datatable-column prop="property" name="характеристики" [width]="350">
+ <ngx-datatable-column prop="property" name="характеристики">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -177,7 +183,7 @@ class="material striped"
 
 
  <!-- НАЧАЛО ПОЛЯ КОМПЛЕКТАЦИЯ --> 
- <ngx-datatable-column prop="equipment" name="комплектация" [width]="350">
+ <ngx-datatable-column prop="equipment" name="комплектация">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -203,7 +209,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ ЦЕНА ТОЛЬКО ЦИФРЫ --> 
-<ngx-datatable-column prop="price" name="цена" [width]="350">
+<ngx-datatable-column prop="price" name="цена">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -225,7 +231,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ ЦЕНА ТОЛЬКО ЦИФРЫ -->
 
 <!-- НАЧАЛО ПОЛЯ РАЗМЕР ТОЛЬКО ЦИФРЫ --> 
-<ngx-datatable-column prop="size" name="размер" [width]="350">
+<ngx-datatable-column prop="size" name="размер">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -249,7 +255,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ КОЛИЧЕСТВО ТОЛЬКО ЦИФРЫ --> 
-<ngx-datatable-column prop="count" name="количество" [width]="250">
+<ngx-datatable-column prop="count" name="количество">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -272,7 +278,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ ДАТА ПОКУПКИ --> 
-<ngx-datatable-column prop="date_purchase_str" name="дата покупки" [width]="350">
+<ngx-datatable-column prop="date_purchase_str" name="дата покупки">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -297,7 +303,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Дата выдачи --> 
-<ngx-datatable-column prop="date_issue_str" name="дата выдачи" [width]="350">
+<ngx-datatable-column prop="date_issue_str" name="дата выдачи">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -544,9 +550,9 @@ class="material striped"
 
 
 <!-- Добавить ресурс -->
-<div class="add-btn">
+<!-- <div class="add-btn">
   <button class="btn btn-success" type="button" (click)="addNewMTR()"><img src="/assets/img/plus.png" width="30" /></button>
-</div>
+</div> -->
 <!-- конец Добавить ресурс -->
 
 

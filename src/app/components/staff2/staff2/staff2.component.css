@@ -9,12 +9,15 @@ h2{
 }
 input-group{
   display: flex;
-  width: 550px;
+  width: 550px !important;
+   margin-right: 100px !important;
 }
 
+
 .material {
-  height: 800px
+  height: 800px;
 }
+
 
 .ngx-datatable.material .datatable-header {
   display: flex;
@@ -185,6 +188,18 @@ color: white !important;
 font-weight: 600 !important;
 background-color: #dc3545 !important; 
 cursor: pointer;
+
+.btn.btn-success{
+  color: #fff;
+  background-color: #218838 !important;
+  font-weight: 600 !important;
+}
+  .btn.btn-success:hover{
+  color: white !important;
+  font-weight: 600 !important;
+  background-color: #218838 !important; 
+  cursor: pointer;
+  }
 
 }
 select {
