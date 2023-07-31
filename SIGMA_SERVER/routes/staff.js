@@ -65,7 +65,6 @@ router.get('/', async function(req, res, next) {
 
   });   
 
-
   async function asyncStaffObjects() {
     let conn = await pool.getConnection();
     try {
@@ -93,12 +92,16 @@ router.get('/', async function(req, res, next) {
             "    s3.fio as senjor_guard, "+
             "    s.id_organization, "+
             "    go.`name` as `organization`, "+
-            "    s.`DateCreation` "+
+            "    s.`DateCreation`, "+
+            "    s.date_interview, "+
+            "    s.id_sms, "+
+            "    gsms.name as  guide_sms "+
              "FROM staff s "+
             "join staff s3 on s3.id_staff = s.id_senjor_guard "+
             "LEFT JOIN guide_position gp on gp.id = s.id_position "+
             "LEFT JOIN guide_status gs on gs.id = s.id_status "+
             "LEFT JOIN guide_gender gg on gg.id = s.id_gender "+
+            "LEFT JOIN guide_sms gsms on gsms.id = s.id_sms "+
             "LEFT JOIN guide_typeperson gt on gt.id = s.id_typeperson "+ 
             "left join guide_organization go on go.id = s.id_organization "+
             "WHERE s.bitDelete=0 "+ 

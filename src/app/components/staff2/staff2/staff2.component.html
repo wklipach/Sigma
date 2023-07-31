@@ -365,6 +365,53 @@ class="material striped"
     </ng-template>
 </ngx-datatable-column>
 
+<!-- НАЧАЛО ПОЛЯ ДАТА СОБЕСЕДОВАНИЯ--> 
+<ngx-datatable-column prop="date_interview_str" name="Дата собеседования">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <span
+                      title="Double click to edit"
+                      placeholder="Choose a date"
+                      (dblclick)="editing[rowIndex + '-date_interview_str'] = true"
+                          *ngIf="!editing[rowIndex + '-date_interview_str']"
+          >
+                              {{ value }} 
+          </span>
+          <input
+              (focus)="focusFunction($event, row.date_interview_str)" 
+              (focusout)="setDateInterview($event, row.id_staff)"
+              (keyup.enter)="myEnter($event)"
+              *ngIf="editing[rowIndex + '-date_interview_str']"
+              type="text"
+              [value]="value"
+          />
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ ДАТА СОБЕСЕДОВАНИЯ --> 
+
+
+<!-- НАЧАЛО СПРАВОЧНИКА  SMS -->
+<ngx-datatable-column prop = "guide_sms" name = "Смс">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+     <span
+      title="Double click to edit"
+      (dblclick)="this.editing[rowIndex + '-guide_sms'] = true"
+      *ngIf="!editing[rowIndex + '-guide_sms']"
+     >
+      {{ value }}
+    </span>
+    <select
+      *ngIf="editing[rowIndex + '-guide_sms']"
+      (blur)="editing[rowIndex + '-guide_sms'] = false"
+      (keyup.enter)="myEnter($event)"
+      (change)="onChangeSmallGuide($event, this.guideSMS, row.id_staff, 'id_sms', 'guide_sms')"
+      [ngModel]="value"       
+    >
+      <option *ngFor="let gsms of this.guideSMS" [value]="gsms.name">{{gsms.name}}</option>
+    </select>
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ СПРАВОЧНИКА SMS --> 
+
 
 
 <!-- НАЧАЛО ПОЛЯ delete --> 

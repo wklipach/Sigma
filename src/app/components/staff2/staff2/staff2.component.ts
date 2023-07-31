@@ -62,6 +62,11 @@ interface IObjectOne {
     id_organization?: string;
     organization?: string;
     DateCreation?: string;
+    
+    date_interview?: string;
+    date_interview_str?: string;  
+    id_sms?: string;
+    guide_sms?: string;
 }
 
 interface IDeleteObject {
@@ -94,6 +99,7 @@ export class Staff2Component {
     guideOrganization:  ISmallGuide[] = [];
     guideGender:  ISmallGuide[] = [];
     guideTypeperson:  ISmallGuide[] = [];
+    guideSMS:  ISmallGuide[] = [];
     guideSenjorGuard:  ISenjorGuardGuide[] = [];
     //объект для модального окна удаления
     curDeleteObject: IDeleteObject = {};
@@ -138,6 +144,10 @@ ngOnInit() {
     this.guideTypeperson = value; 
   });
 
+  this.servguide.getSmallGuide('guide_sms').subscribe( (value: any) => {
+    this.guideSMS = value; 
+  });
+
   this.servguide.getSenjorGuard().subscribe( (value: any) => {
     this.guideSenjorGuard = value; 
     //console.log('guideSenjorGuard', this.guideSenjorGuard);
@@ -153,6 +163,8 @@ ngOnInit() {
       el.DateBirth_str = this.datePipe.transform(el.DateBirth, 'yyyy-MM-dd') || '--';
       el.s002from_str = this.datePipe.transform(el.s002from, 'yyyy-MM-dd') || '--';
       el.s003from_str = this.datePipe.transform(el.s003from, 'yyyy-MM-dd') || '--';
+      el.date_interview_str = this.datePipe.transform(el.date_interview, 'yyyy-MM-dd') || '--';
+
       if (el.fio?.trim() === "" || el.fio?.trim() == null ) el.fio = "--" ; 
       if (el.phone?.trim() === "" || el.phone?.trim() == null ) el.phone = "--" ; 
       if (el.phone2?.trim() === "" || el.phone2?.trim() == null ) el.phone2 = "--" ; 
@@ -166,7 +178,7 @@ ngOnInit() {
       if (el.rank?.toString().trim() === "" || el.rank?.toString().trim() == null || el.rank?.toString().trim() == "null" ) el.rank = "--" ; 
       if (el.senjor_guard?.trim() === "" || el.senjor_guard?.trim() == null ) el.senjor_guard = "--" ; 
       if (el.organization?.trim() === "" || el.organization?.trim() == null ) el.organization = "--" ; 
-
+      if (el.guide_sms?.trim() === "" || el.guide_sms?.trim() == null ) el.guide_sms = "--" ; 
     });
 
     // при загрузке показываем без всяких ограничений
@@ -215,10 +227,10 @@ summaryOpen(id_staff: number) {
                   (el.DateBirth_str &&  el.DateBirth_str.toUpperCase().indexOf(sInput) != -1) ||                                                      
                   (el.s002from_str &&  el.s002from_str.toUpperCase().indexOf(sInput) != -1) ||                                                      
                   (el.s003from_str &&  el.s003from_str.toUpperCase().indexOf(sInput) != -1) ||                                                                                          
-                  (el.rank &&  el.rank.toString().toUpperCase().indexOf(sInput) != -1);
+                  (el.rank &&  el.rank.toString().toUpperCase().indexOf(sInput) != -1) ||
+                  (el.date_interview_str &&  el.date_interview_str.toUpperCase().indexOf(sInput) != -1) ||                                                      
+                  (el.guide_sms &&  el.guide_sms.toUpperCase().indexOf(sInput) != -1);
         });
-
-
 
         // console.log('find=', res)
         this.ShowStaff =  JSON.parse(JSON.stringify(res));
@@ -601,6 +613,8 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
         if (el.rank?.toString().trim() === "" || el.rank?.toString().trim() == null ) el.rank = "--" ; 
         if (el.senjor_guard?.trim() === "" || el.senjor_guard?.trim() == null ) el.senjor_guard = "--" ; 
         if (el.organization?.trim() === "" || el.organization?.trim() == null ) el.organization = "--" ; 
+        if (el.date_interview_str?.trim() === "" || el.date_interview_str?.trim() == null ) el.date_interview_str = "--" ;         
+        if (el.guide_sms?.trim() === "" || el.guide_sms?.trim() == null ) el.guide_sms = "--" ; 
 
         this.ShowStaff.unshift(el);
         this.ORIGINAL_ShowStaff.unshift(el);
@@ -718,6 +732,69 @@ loadFiltersNull() {
     console.log(id_staff); 
     this.router.navigate(['summary'], { queryParams: { id_staff }});
   }
+
   
+
+  setDateInterview($event: any, id_staff: number) {
+    let date = new Date($event.target.value);
+
+
+    const isDate = this.idDateisValid(date);
+
+
+    if (isDate) {
+      // console.log($event.target.value, date);
+       this.staffserv.updateStaffDate(date, id_staff.toString(), 'date_interview').subscribe( (res: any) => { console.log('res update = ', res); } );
+       } else {
+        this.staffserv.updateStaffDateNull(id_staff.toString(), 'date_interview').subscribe( (res: any) => { console.log('res update = ', res); } );
+    }
+    
+   
+    if (isDate) {
+         const res = this.ShowStaff.map( (el: IObjectOne) => {
+             if (el.id_staff == id_staff.toString()) {
+                 el.date_interview_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '--';
+                 }
+             return el;
+         });
+         this.ShowStaff = [...res];
+
+         const res2 = this.ORIGINAL_ShowStaff.map( (el: IObjectOne) => {
+          if (el.id_staff == id_staff.toString()) {
+              el.date_interview_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '--';
+              }
+          return el;
+        });
+        this.ORIGINAL_ShowStaff = [...res2];
+
+         $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
+     }
+
+
+     if (!isDate) {
+        const res = this.ShowStaff.map( el => {
+           if (el.id_staff == id_staff.toString()) {
+               el.date_interview_str = '--';
+               }
+           return el;
+       });
+       this.ShowStaff = [...res];
+
+       const res2 = this.ORIGINAL_ShowStaff.map( (el: IObjectOne) => {
+        if (el.id_staff == id_staff.toString()) {
+            el.date_interview_str = '--';
+            }
+        return el;
+      });
+      this.ORIGINAL_ShowStaff = [...res2];
+
+       $event.target.value = '--';
+     }
+
+    $event.target.type = '';
+
+ }
+
+
 
 }
