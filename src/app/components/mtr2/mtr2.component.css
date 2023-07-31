@@ -166,3 +166,8 @@ select {
   top: 0;
   right: 0;
 }
+
+::ng-deep .ngx-datatable .datatable-body {
+  max-height: 300px !important;
+  overflow: hidden auto;
+}

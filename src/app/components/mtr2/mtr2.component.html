@@ -19,18 +19,20 @@
 
 </div>
 
+
+
 <ngx-datatable
 id="Mtr2Table"
-class="material striped"
+class="material striped"  
 [rows]="this.ShowMtr"
 [columnMode]="ColumnMode.force"
 [headerHeight]="50"
 [footerHeight]="50"
-[rowHeight]="50"
 [limit]="100"
-[scrollbarV]="true"
-[scrollbarH]="true"
 
+
+style="height: 600px; overflow-y:visible"
+rowHeight="auto"
 >
 
 <ngx-datatable-column prop = "id_mtr" name = "#">

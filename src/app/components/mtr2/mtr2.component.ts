@@ -61,6 +61,9 @@ interface Imtr {
 export class Mtr2Component {
 
 
+  loadingIndicator = true;
+  reorderable = true;
+  
   ColumnMode = ColumnMode;
   @ViewChild('Mtr2Table') Mtr2Table!: DatatableComponent;
   ShowMtr: Imtr[] = [];
