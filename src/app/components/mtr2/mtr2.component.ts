@@ -4,6 +4,8 @@ import { DatePipe } from '@angular/common';
 import { GuideService } from 'src/app/services/guide.service';
 import { MtrService } from 'src/app/services/mtr.service';
 import { GlobalRef } from 'globalref';
+import { ITable } from 'src/app/interface/table';
+import { TableService } from 'src/app/services/table.service';
 
 
 
@@ -65,9 +67,14 @@ export class Mtr2Component {
   reorderable = true;
   
   ColumnMode = ColumnMode;
-  @ViewChild('Mtr2Table') Mtr2Table!: DatatableComponent;
+
+  @ViewChild('Mtr2Table') datatableComponent!: DatatableComponent;
+
   ShowMtr: Imtr[] = [];
 
+
+  //содержит ширины столбцов, взятые из хранилища
+  ColumnSizeObj:  ITable[] = [];
 
   ORIGINAL_ShowMtr: Imtr[] = [];
 
@@ -95,8 +102,8 @@ export class Mtr2Component {
   constructor (private mtrserv: MtrService, 
                private servguide: GuideService, 
                private datePipe: DatePipe,
-               private renderer: Renderer2,
-               public gr: GlobalRef) {  
+               public gr: GlobalRef,
+               private tableServ:  TableService) {  
   }
 
 
@@ -105,6 +112,7 @@ export class Mtr2Component {
   ngOnInit() {
 
 
+    this.ColumnSizeObj =   this.tableServ.getTableWidth('Mtr2Table');
 
     console.log('--1--');
 
@@ -547,6 +555,43 @@ onEnterSearch() {
 
     this.deleteClose();
   }
+
+
+  getColumnSize(col_name: string) {
+
+    let res: number = 150;
+    let resFind = this.ColumnSizeObj.find( el => el.column_name == col_name);
+      if (resFind) {
+          res = Number(resFind.column_width);
+      }
+    return res;
+  }
+
+
+
+
+saveColumnSize(table: DatatableComponent, storage_name: string, new_column: string, newValue: string) {
+  let saveObj: ITable[] = [];
+  table.bodyComponent.columns.forEach ( col => {
+    if (col.prop && col.width) {
+      if (col.prop == new_column) {
+        saveObj.push({column_name: new_column, column_width: newValue});
+      } else {
+        saveObj.push({column_name: col.prop.toString(), column_width: col.width.toString()});
+      }
+    }
+  });
+
+
+  this.tableServ.setTableWidth(saveObj, storage_name);
+} 
+
+
+onResize(e: any) {
+    if (e && e.column && e.column.prop && e.newValue) {
+      this.saveColumnSize(this.datatableComponent, 'Mtr2Table', e.column.prop, e.newValue);
+    }
+}
   
 }
 

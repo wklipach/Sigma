@@ -25,11 +25,12 @@ class="material striped"
 [rowHeight]="50"
 [limit]="100"
 [scrollbarV]="true"
+[scrollbarH]="true"
+#Obj2Table
+(resize)="onResize($event)"
 >
 
-
-
-<ngx-datatable-column prop = "id_object" name = "#" [width]="300">
+<ngx-datatable-column prop = "id_object" name = "#" [width]="getColumnSize('id_object')">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}
       </ng-template>
@@ -37,7 +38,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
-<ngx-datatable-column prop="name" name="Объект">
+<ngx-datatable-column prop="name" name="Объект" [width]="getColumnSize('name')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"
@@ -59,7 +60,7 @@ class="material striped"
 
 
   <!-- НАЧАЛО СПРАВОЧНИКА тип объекта --> 
-  <ngx-datatable-column prop = "object_type" name = "Тип объекта">
+  <ngx-datatable-column prop = "object_type" name = "Тип объекта" [width]="getColumnSize('object_type')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -83,7 +84,7 @@ class="material striped"
 
 
   <!-- НАЧАЛО СПРАВОЧНИКА post_status --> 
-<ngx-datatable-column prop = "post_status" name = "Статус">
+<ngx-datatable-column prop = "post_status" name = "Статус" [width]="getColumnSize('post_status')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -108,7 +109,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Опции-->
-<ngx-datatable-column prop="options" name="Опции">
+<ngx-datatable-column prop="options" name="Опции" [width]="getColumnSize('options')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <span
       title="Double click to edit"
@@ -131,7 +132,7 @@ class="material striped"
 
 
   <!-- НАЧАЛО СПРАВОЧНИКА Под охраной организации --> 
-  <ngx-datatable-column prop = "cur_organization" name = "Под охраной">
+  <ngx-datatable-column prop = "cur_organization" name = "Под охраной" [width]="getColumnSize('cur_organization')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -155,7 +156,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Телефон-->
-<ngx-datatable-column prop="phone" name="Телефон">
+<ngx-datatable-column prop="phone" name="Телефон" [width]="getColumnSize('phone')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <span
       title="Double click to edit"
@@ -177,7 +178,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Адрес-->
-<ngx-datatable-column prop="address" name="Адрес">
+<ngx-datatable-column prop="address" name="Адрес" [width]="getColumnSize('address')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <span
       title="Double click to edit"
@@ -199,7 +200,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Яндекс-ссылка --> 
-<ngx-datatable-column name="Яндекс Карта">
+<ngx-datatable-column prop="yandex_map_el" name="Яндекс Карта" [width]="getColumnSize('yandex_map_el')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <a href="{{ row.yandex_maps}}" class="btn btn-primary">Яндекс</a>
   </ng-template>
@@ -207,7 +208,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ  Яндекс-ссылка -->  
 
 <!-- ПОЛЕ Вызов кнопки изменения яндекса -->
-<ngx-datatable-column name="ссылка Y">
+<ngx-datatable-column prop="yandex_map_btn" name="ссылка Y" [width]="getColumnSize('yandex_map_btn')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <button type="button" 
     class="btn btn-info" 
@@ -222,7 +223,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ гугл-ссылка --> 
-<ngx-datatable-column name="Google">
+<ngx-datatable-column prop="google_map_el" name="Google" [width]="getColumnSize('google_map_el')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <a href="{{ row.google_maps}}" class="btn btn-primary">Google</a>
   </ng-template>
@@ -230,7 +231,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ  гугл-ссылка -->  
 
 <!-- ПОЛЕ Вызов кнопки изменения гугла -->
-<ngx-datatable-column name="ссылка G">
+<ngx-datatable-column prop="google_map_btn" name="ссылка G" [width]="getColumnSize('google_map_btn')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <button type="button" 
     class="btn btn-info" 
@@ -245,7 +246,7 @@ class="material striped"
 
 
 <!-- ПОЛЕ НАЧАЛЬНИК ОХРАНЫ ОБЪЕКТА -->                  
-<ngx-datatable-column prop = "senjor_guard" name = "НОО">
+<ngx-datatable-column prop = "senjor_guard" name = "НОО" [width]="getColumnSize('senjor_guard')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
      <span
       title="Double click to edit"
@@ -279,7 +280,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЕ ДАТА ПОСТАНОВКИ ОХРАНЫ -->
-<ngx-datatable-column prop="postwassetdate_str" name="Выставлен Дата">
+<ngx-datatable-column prop="postwassetdate_str" name="Выставлен Дата" [width]="getColumnSize('postwassetdate_str')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <span
                       title="Double click to edit"
@@ -303,7 +304,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЕ ДАТА Снят Дата -->
-<ngx-datatable-column prop="withdrawaldate_str" name="Снят Дата">
+<ngx-datatable-column prop="withdrawaldate_str" name="Снят Дата" [width]="getColumnSize('withdrawaldate_str')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <span
                       title="Double click to edit"
@@ -327,7 +328,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА МТР --> 
-  <ngx-datatable-column prop = "MTR" name = "МТР">
+  <ngx-datatable-column prop = "MTR" name = "МТР" [width]="getColumnSize('MTR')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -351,7 +352,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА Клиент --> 
-<ngx-datatable-column prop = "customer" name = "Клиент">
+<ngx-datatable-column prop = "customer" name = "Клиент" [width]="getColumnSize('customer')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
      <span
       title="Double click to edit"
@@ -374,7 +375,7 @@ class="material striped"
 <!-- КОНЕЦ СПРАВОЧНИКА Клиент  -->
 
 
-<ngx-datatable-column name="Удалить">
+<ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <button class="btn btn-danger" (click)="deleteObject(row.id_object, row.name)"><img src="/assets/img/delete.png" width="30" /></button>
   </ng-template>

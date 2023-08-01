@@ -5,6 +5,8 @@ import {  CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { GuideService } from 'src/app/services/guide.service';
 import { DatePipe } from '@angular/common';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { TableService } from 'src/app/services/table.service';
+import { ITable } from 'src/app/interface/table';
 
 
 interface ISmallGuide { 
@@ -65,10 +67,13 @@ interface IDeleteObject {
 export class Obj2Component {
 
   ColumnMode = ColumnMode;
-  @ViewChild('Obj2Table') Obj2Table!: DatatableComponent;
-
+  @ViewChild('Obj2Table') datatableComponent!: DatatableComponent;
 
   faCoffee = faCoffee;
+
+    //содержит ширины столбцов, взятые из хранилища
+  ColumnSizeObj:  ITable[] = [];
+
 
   // то что показывается в таблице - ограниченно строкой поиска
   ShowObjects: IObjectOne[] = [];
@@ -95,13 +100,15 @@ export class Obj2Component {
 
   constructor (private listobjectsserv: ListobjectsService, 
                private servguide: GuideService, 
-               private datePipe: DatePipe) {  
+               private datePipe: DatePipe,
+               private tableServ:  TableService ) {  
 
   }
 
 
   ngOnInit() {
 
+    this.ColumnSizeObj =   this.tableServ.getTableWidth('Obj2Table');
 
     this.servguide.getSenjorGuard().subscribe( (value: any) => {
       this.guideSenjorGuard = value; 
@@ -571,5 +578,42 @@ export class Obj2Component {
         if (elem) elem.blur();
       }
     }
+
+    getColumnSize(col_name: string) {
+
+      let res: number = 150;
+      let resFind = this.ColumnSizeObj.find( el => el.column_name == col_name);
+        if (resFind) {
+            res = Number(resFind.column_width);
+        }
+      return res;
+    }
+  
+  
+  
+  
+  saveColumnSize(table: DatatableComponent, storage_name: string, new_column: string, newValue: string) {
+    let saveObj: ITable[] = [];
+    table.bodyComponent.columns.forEach ( col => {
+      if (col.prop && col.width) {
+        if (col.prop == new_column) {
+          saveObj.push({column_name: new_column, column_width: newValue});
+        } else {
+          saveObj.push({column_name: col.prop.toString(), column_width: col.width.toString()});
+        }
+      }
+    });
+  
+  
+    this.tableServ.setTableWidth(saveObj, storage_name);
+  } 
+    
+  onResize(e: any) {
+
+      if (e && e.column && e.column.prop && e.newValue) {
+        this.saveColumnSize(this.datatableComponent, 'Obj2Table', e.column.prop, e.newValue);
+      }
+  }
+  
 
 }

@@ -21,6 +21,7 @@
 
 <ngx-datatable
 id="Mtr2Table"
+#Mtr2Table
 class="material striped"  
 [rows]="this.ShowMtr"
 [columnMode]="ColumnMode.force"
@@ -30,15 +31,16 @@ class="material striped"
 [scrollbarH]="true"
 [scrollbarV]="true"
 [rowHeight]="50"
+(resize)="onResize($event)"
 >
 
-<ngx-datatable-column prop = "id_mtr" name = "#">
+<ngx-datatable-column prop = "id_mtr" name = "#" [width]="getColumnSize('id_mtr')">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}
       </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column prop="name" name="Ресурс">
+<ngx-datatable-column prop="name" name="Ресурс" [width]="getColumnSize('name')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"
@@ -60,7 +62,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА ВИД   (dblclick)="editing[rowIndex + '-mtrvid'] = true" --> 
-<ngx-datatable-column prop = "mtrvid" name = "Вид">
+<ngx-datatable-column prop = "mtrvid" name = "Вид" [width]="getColumnSize('mtrvid')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -84,7 +86,7 @@ class="material striped"
   
                  
 <!-- НАЧАЛО СПРАВОЧНИКА COLOR --> 
-<ngx-datatable-column prop = "mtrcolor" name = "Цвет">
+<ngx-datatable-column prop = "mtrcolor" name = "Цвет" [width]="getColumnSize('mtrcolor')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -108,7 +110,7 @@ class="material striped"
 
 
   <!-- НАЧАЛО ПОЛЯ СТАТУС --> 
-  <ngx-datatable-column prop="status" name="Статус">
+  <ngx-datatable-column prop="status" name="Статус" [width]="getColumnSize('status')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -132,7 +134,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ СТАТУС --> 
 
 <!-- НАЧАЛО ПОЛЯ ОПИСАНИЕ --> 
-  <ngx-datatable-column prop="description" name="Описание">
+  <ngx-datatable-column prop="description" name="Описание" [width]="getColumnSize('description')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -157,7 +159,7 @@ class="material striped"
 
 
  <!-- НАЧАЛО ПОЛЯ ХАРАКТЕРИСТИКИ --> 
- <ngx-datatable-column prop="property" name="характеристики">
+ <ngx-datatable-column prop="property" name="характеристики" [width]="getColumnSize('property')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -182,7 +184,7 @@ class="material striped"
 
 
  <!-- НАЧАЛО ПОЛЯ КОМПЛЕКТАЦИЯ --> 
- <ngx-datatable-column prop="equipment" name="комплектация">
+ <ngx-datatable-column prop="equipment" name="комплектация" [width]="getColumnSize('equipment')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -208,7 +210,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ ЦЕНА ТОЛЬКО ЦИФРЫ --> 
-<ngx-datatable-column prop="price" name="цена">
+<ngx-datatable-column prop="price" name="цена" [width]="getColumnSize('price')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -230,7 +232,7 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ ЦЕНА ТОЛЬКО ЦИФРЫ -->
 
 <!-- НАЧАЛО ПОЛЯ РАЗМЕР ТОЛЬКО ЦИФРЫ --> 
-<ngx-datatable-column prop="size" name="размер">
+<ngx-datatable-column prop="size" name="размер" [width]="getColumnSize('size')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -254,7 +256,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ КОЛИЧЕСТВО ТОЛЬКО ЦИФРЫ --> 
-<ngx-datatable-column prop="count" name="количество">
+<ngx-datatable-column prop="count" name="количество" [width]="getColumnSize('count')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -277,7 +279,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ ДАТА ПОКУПКИ --> 
-<ngx-datatable-column prop="date_purchase_str" name="дата покупки">
+<ngx-datatable-column prop="date_purchase_str" name="дата покупки" [width]="getColumnSize('date_purchase_str')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -302,7 +304,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Дата выдачи --> 
-<ngx-datatable-column prop="date_issue_str" name="дата выдачи">
+<ngx-datatable-column prop="date_issue_str" name="дата выдачи" [width]="getColumnSize('date_issue_str')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -327,7 +329,7 @@ class="material striped"
 
 
  <!-- НАЧАЛО ПОЛЯ Табельный № --> 
- <ngx-datatable-column prop="tabel_number" name="Табельный №">
+ <ngx-datatable-column prop="tabel_number" name="Табельный №" [width]="getColumnSize('tabel_number')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -352,7 +354,7 @@ class="material striped"
 
 
  <!-- НАЧАЛО ПОЛЯ Инв. № --> 
- <ngx-datatable-column prop="invent_number" name="Инв. №">
+ <ngx-datatable-column prop="invent_number" name="Инв. №" [width]="getColumnSize('invent_number')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -377,7 +379,7 @@ class="material striped"
 
 
  <!-- НАЧАЛО ПОЛЯ Серийный № --> 
- <ngx-datatable-column prop="serial_number" name="Серийный №">
+ <ngx-datatable-column prop="serial_number" name="Серийный №" [width]="getColumnSize('serial_number')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -402,7 +404,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Штрихкод --> 
-<ngx-datatable-column prop="barcode" name="Штрихкод">
+<ngx-datatable-column prop="barcode" name="Штрихкод" [width]="getColumnSize('barcode')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -427,7 +429,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Счёт на оплату --> 
-<ngx-datatable-column prop="invoice" name="Счёт на оплату">
+<ngx-datatable-column prop="invoice" name="Счёт на оплату" [width]="getColumnSize('invoice')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -452,7 +454,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Договор на поставку --> 
-<ngx-datatable-column prop="delivery_contract" name="Договор на поставку">
+<ngx-datatable-column prop="delivery_contract" name="Договор на поставку" [width]="getColumnSize('delivery_contract')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span
                         title="Double click to edit"
@@ -477,7 +479,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА Компания --> 
-<ngx-datatable-column prop = "organization" name = "Компания">
+<ngx-datatable-column prop = "organization" name = "Компания" [width]="getColumnSize('organization')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
        <span
         title="Double click to edit"
@@ -502,7 +504,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО СПРАВОЧНИКА Объект --> 
-<ngx-datatable-column prop = "ProtectedObject" name = "Объект">
+<ngx-datatable-column prop = "ProtectedObject" name = "Объект" [width]="getColumnSize('ProtectedObject')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
 
       <span
@@ -529,7 +531,7 @@ class="material striped"
 
 <!-- НАЧАЛО ПОЛЯ delete --> 
 
-<ngx-datatable-column name="Удалить">
+<ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <button class="btn btn-danger" (click)="deleteMtr(row.id_mtr, row.name)"><img src="/assets/img/delete.png" width="30" /></button>
   </ng-template>

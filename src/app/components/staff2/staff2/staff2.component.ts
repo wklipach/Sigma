@@ -239,7 +239,7 @@ saveColumnSize(table: DatatableComponent, storage_name: string, new_column: stri
     }
   });
 
-  console.log(saveObj);
+
   this.tableServ.setTableWidth(saveObj, storage_name);
 } 
 
