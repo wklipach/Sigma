@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import {  CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { GuideService } from 'src/app/services/guide.service';
 import { StaffService } from 'src/app/services/staff.service';
@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { FiltersService } from 'src/app/services/filters.service';
+import { TableService } from 'src/app/services/table.service';
+import { ITable } from 'src/app/interface/table';
+
+//import {NgxDatatableResizer} from "@swimlane/model/Ngx-datatable-resizer";
 
 
 
@@ -84,10 +88,14 @@ export class Staff2Component {
 
 
   ColumnMode = ColumnMode;
-  @ViewChild('Staff2Table') Obj2Table!: DatatableComponent;
+  @ViewChild('Staff2Table') datatableComponent!: DatatableComponent;
+
   faCoffee = faCoffee;
 
 
+
+    //содержит ширины столбцов, взятые из хранилища
+    ColumnSizeObj:  ITable[] = [];
 
     // то что показывается в таблице - ограниченно строкой поиска
     ShowStaff: IObjectOne[] = [];
@@ -115,11 +123,15 @@ export class Staff2Component {
     private servguide: GuideService, 
     private datePipe: DatePipe,
     private router: Router,
-    private servfilter: FiltersService ) {  }
+    private servfilter: FiltersService,
+    private tableServ:  TableService ) {  }
 
 
 ngOnInit() {
 
+  this.ColumnSizeObj =   this.tableServ.getTableWidth('staff2table');
+
+  
   this.servguide.getSmallGuide('guide_position').subscribe( (value: any) => {
     this.guidePosition = value; 
   });
@@ -193,9 +205,52 @@ ngOnInit() {
    this.servfilter.getFilrers().subscribe( (value: any) => {
     this.listFilters = value; 
   });
-     
 
 }
+
+
+  ngAfterViewInit() {
+    // this.ColumnSizeObj =   this.tableServ.getTableWidth('staff2table');
+   }
+
+
+  getColumnSize(col_name: string) {
+
+    let res: number = 150;
+    let resFind = this.ColumnSizeObj.find( el => el.column_name == col_name);
+      if (resFind) {
+          res = Number(resFind.column_width);
+      }
+    return res;
+  }
+
+
+
+
+saveColumnSize(table: DatatableComponent, storage_name: string, new_column: string, newValue: string) {
+  let saveObj: ITable[] = [];
+  table.bodyComponent.columns.forEach ( col => {
+    if (col.prop && col.width) {
+      if (col.prop == new_column) {
+        saveObj.push({column_name: new_column, column_width: newValue});
+      } else {
+        saveObj.push({column_name: col.prop.toString(), column_width: col.width.toString()});
+      }
+    }
+  });
+
+  console.log(saveObj);
+  this.tableServ.setTableWidth(saveObj, storage_name);
+} 
+
+
+onResize(e: any) {
+    if (e && e.column && e.column.prop && e.newValue) {
+      this.saveColumnSize(this.datatableComponent, 'staff2table', e.column.prop, e.newValue);
+    }
+}
+
+
 
 summaryOpen(id_staff: number) {
   this.router.navigate(['summary'], { queryParams: { id_staff }});
