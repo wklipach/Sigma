@@ -1,26 +1,24 @@
 
 <!-- Карточка задачи -->
 
-<div class="card-body pt-2 mb-5 p-8 h-lg-550px w-lg-600px">
 
-
+<div class="card-body pt-2 mb-5 p-8 h-lg-650px w-lg-650px">
 
   <h4 class="card-title mb-6">Новая задача</h4>
 
-  <div class="row mb-6">
+    <div class="row mb-6">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Объект:</label>
       <div class="col-lg-8 fv-row">
-
-        <div>{{ ProtectedObject.name }}</div> 
-        
-  </div>
-  </div>
+        <div class="col-lg-8 fv-row fw-semibold fs-5 text-muted">{{ ProtectedObject.name }}</div> 
+      
+      </div>  
+    </div>
 
     
     <div class="row mb-3">
-    <label class="col-lg-4 col-form-label fw-semibold fs-6">Выбрать отдел</label>
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Кому</label>
         <div class="col-lg-8 fv-row">
-          <select name="choice-departtment" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold" [(ngModel)]="id_department">
+          <select name="choice-departtment" data-control="select2" class="form-select form-select-solid form-select-lg" [(ngModel)]="id_department">
             <option *ngFor="let depart of this.guideDepartment" [value] = "depart.id">{{ depart.name }}</option>
           </select>
         </div> 
@@ -28,42 +26,36 @@
   
   
   <div class="row mb-6">
-    <label class="col-lg-4 col-form-label fw-semibold fs-6">Значение</label>
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Комментарий</label>
       <div class="col-lg-8 fv-row">
-        <textarea id="areaNote" name="textTask" cols="40" rows="5"></textarea>
+        <textarea id="areaNote" name="textTask" cols="54" rows="6"></textarea>
+      </div> 
   </div>
-  </div>
-  
-
-  
-  <div class="row mb-6">
-    <label class="col-lg-4 col-form-label fw-semibold fs-6">Срок исполнения</label>
+ 
+ <div class="row mb-6">
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата начала</label>
       <div class="col-lg-8 fv-row">
-        <span>Дата начала</span>
-        <input id="dateBegin" type="date"/>
-  </div>
-   </div>
-
+    <input id="dateBegin" type="date"/>
+</div>
+     </div>
 
    <div class="row mb-6">
-    <label class="col-lg-4 col-form-label fw-semibold fs-6">Срок исполнения</label>
-      <div class="col-lg-8 fv-row">
-        <span>Дата окончания</span>
-        <input id="dateEnd" type="date"/>
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата окончания</label>
+    <div class="col-lg-8 fv-row">
+         <input id="dateEnd" type="date"/>
        </div>
    </div>
 
-
   
-  </div>
+<div class="btns w-lg-500px">
   
-
-  <div class="row mb-6">
-    <button class="col-lg-4 col-form-label fw-semibold fs-6" (click)="clickBack()">Отмена</button>
-    <div class="col-lg-8 fv-row"><button (click)="clickApply()">Принять</button> </div>
-  </div>
+    <button class="btn btn-secondary w-lg-150px ml-5" (click)="clickBack()">Отмена</button>
+    <button type="button" class="btn btn-success w-lg-150px ml-5" (click)="clickApply()">Создать</button> 
+</div>
 
   <!-- Конец  Карточка задачи -->
+
+  </div>
 
 
 
@@ -78,4 +70,4 @@
       </select>
   </div>
   </div>
--->
+не-->
