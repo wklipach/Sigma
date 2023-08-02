@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { TableService } from 'src/app/services/table.service';
 import { ITable } from 'src/app/interface/table';
+import { Router } from '@angular/router';
+import { GlobalRef } from 'globalref';
 
 
 interface ISmallGuide { 
@@ -101,7 +103,9 @@ export class Obj2Component {
   constructor (private listobjectsserv: ListobjectsService, 
                private servguide: GuideService, 
                private datePipe: DatePipe,
-               private tableServ:  TableService ) {  
+               private tableServ:  TableService,
+               private router: Router,
+               public gr: GlobalRef ) {  
 
   }
 
@@ -587,6 +591,24 @@ export class Obj2Component {
             res = Number(resFind.column_width);
         }
       return res;
+    }
+
+
+    newTask(id_object: number, name: string) {
+
+      const url = this.router.serializeUrl(this.router.createUrlTree(['addtask'], {
+        queryParams: {
+          id_object: id_object,
+          name: name
+        }
+      }));
+
+      const newTab = window.open(url, '_blank'); 
+      if(newTab) {
+          newTab.opener = null;
+      }
+
+
     }
   
   

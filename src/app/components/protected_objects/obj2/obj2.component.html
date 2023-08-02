@@ -30,6 +30,14 @@ class="material striped"
 (resize)="onResize($event)"
 >
 
+
+<ngx-datatable-column prop = "itis_task" name = "Задача" [width]="getColumnSize('itis_task')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+       <div (click)="newTask(row.id_object, row.name)" >T*</div>
+    </ng-template>
+</ngx-datatable-column>
+
+
 <ngx-datatable-column prop = "id_object" name = "#" [width]="getColumnSize('id_object')">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}

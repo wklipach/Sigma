@@ -20,6 +20,7 @@ import { Obj2Component } from './components/protected_objects/obj2/obj2.componen
 import { Staff2Component } from './components/staff2/staff2/staff2.component';
 import { AddFilterComponent } from './add-filter/add-filter.component';
 import { BasementComponent } from './components/basement/basement.component';
+import { AddTaskComponent } from './components/task/add-task/add-task.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -39,7 +40,8 @@ const routes: Routes = [
   { path: 'staff2', component: Staff2Component, canActivate: [mainGuard] },
   { path: 'test', component: TestComponent },
   { path: 'filter', component: AddFilterComponent, canActivate: [mainGuard] },
-  { path: 'basement', component: BasementComponent, canActivate: [mainGuard] }
+  { path: 'basement', component: BasementComponent, canActivate: [mainGuard] },
+  { path: 'addtask', component: AddTaskComponent, canActivate: [mainGuard] }
   
 ];
 

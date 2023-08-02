@@ -14,6 +14,7 @@ var mtr = require('./routes/mtr');
 var guide = require('./routes/guide');
 var staff = require('./routes/staff');
 var filters = require('./routes/filters.js');
+var task = require('./routes/task.js');
 
 
 
@@ -131,6 +132,7 @@ app.use('/mtr', mtr);
 app.use('/guide',guide);
 app.use('/staff', staff);
 app.use('/filters', filters);
+app.use('/task', task);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

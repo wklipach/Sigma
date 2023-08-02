@@ -44,7 +44,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Obj2Component } from './components/protected_objects/obj2/obj2.component';
 import { Staff2Component } from './components/staff2/staff2/staff2.component';
 import { AddFilterComponent } from './add-filter/add-filter.component';
-import { AddTaskComponent } from './add-task/add-task.component';
+import { AddTaskComponent } from './components/task/add-task/add-task.component';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
