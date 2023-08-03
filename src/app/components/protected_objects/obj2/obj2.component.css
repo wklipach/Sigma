@@ -1,15 +1,36 @@
-.material {
-    height: 800px
+.container{
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+h2{
+  display: flex;
+  margin-right: auto;
+}
+input-group{
+  display: flex;
+  width: 550px !important;
+   margin-right: 100px !important;
+}
+.add-btn{
+  height: 20px !important;
+  position:fixed;
+  top: 0;
+  right: 0;
+  }
+
+img:hover{
+cursor: pointer;
 }
 
 .material {
     height: 800px
-  }
+}
+
   
   .ngx-datatable.material .datatable-header {
     display: flex;
     flex-direction: row;
-    border: 1px solid #4244c2 !important;
     font-size: 13px;
   }
   
@@ -25,7 +46,7 @@
   
   :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell.sortable .datatable-header-cell-wrapper {
     cursor: pointer;
-    padding: 0 5px;
+    padding: 0 1px;
   }
   
   :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell .sort-btn {
@@ -47,18 +68,89 @@
     border: 1px dashed #cacaca !important;
     text-align: center;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: middle !important;
   }
   
-  /* :host ::ng-deep.ngx-datatable.material .datatable-header {
+  :host ::ng-deep.datatable-body-cell-label {
     display: flex;
     flex-direction: row;
-    border: 1px solid #4244c2;
-    font-size: 14px;
-   
+    font-size: 13px;
+   vertical-align: middle !important;
+   height: auto;
+   white-space: pre-wrap;
   }
+
+  /* } */
    
-  } */
+  .btn.btn-primary{
+    color: #fff;
+    background-color: #386bc0 !important;
+    font-weight: semibold !important;
+ }
+    .btn.btn-primary:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #386bc0 !important; 
+    cursor: pointer;
+    }
+      .btn.btn-warning{
+      color: #fff;
+      background-color: #ffc107 !important;
+      font-weight: semibold !important;
+     }
+     .btn.btn-warning:hover{
+    color: white !important;
+   font-weight: bold !important;
+    background-color: #ffc107 !important; 
+    cursor: pointer;
+    }
+  .btn.btn-info{
+      color: #fff;
+      background-color: #138496 !important;
+      font-weight: bold !important;
+     }
+     .btn.btn-info:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #138496 !important; 
+    cursor: pointer;
+    }
+    .btn.btn-secondary{
+      color: #fff;
+      background-color: #5a6268 !important;
+      font-weight: 600 !important;
+     }
+     .btn.btn-secondary:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #5a6268 !important; 
+    cursor: pointer;
+    }
+
+  .btn.btn-danger{
+  color: #fff;
+  background-color: #5a6268 !important;
+  font-weight: 600 !important;
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  }
+   .btn.btn-danger:hover{
+   color: white !important;
+   font-weight: 600 !important;
+   background-color: hsl(354, 70%, 54%) !important; 
+   cursor: pointer;
+    }
+    .btn.btn-success{
+        color: #fff;
+        background-color: #218838 !important;
+        font-weight: 600 !important;
+     }
+        .btn.btn-success:hover{
+        color: white !important;
+        font-weight: 600 !important;
+        background-color: #218838 !important; 
+        cursor: pointer;
+        }
   
   select {
     border: none;
@@ -67,6 +159,10 @@
     appearance:none;
     text-align: center;
     vertical-align: middle;
+  }
+  
+  input{
+    border: none;
   }
   
   
