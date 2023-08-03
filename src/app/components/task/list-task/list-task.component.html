@@ -1,0 +1,142 @@
+<div>Задачи</div>
+
+<fieldset>
+    <legend>Выберите тип задач</legend>
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+            <input  [(ngModel)]="checkboxFlagUnsucc" (change)="onChangeSuccUsucc('checkboxFlagUnsucc')" name="type_task" type="checkbox" value="unsucc" id="unsucc" checked aria-label="Checkbox for following text input">
+            <label for="unsucc">Невыполненные</label>
+            </div>
+        </div>
+
+        <div class="input-group-prepend">
+            <div class="input-group-text">
+            <input  [(ngModel)]="checkboxFlagSucc" (change)="onChangeSuccUsucc('checkboxFlagSucc')" name="type_task" type="checkbox" value="succ" id="succ"  checked aria-label="Checkbox for following text input">
+            <label for="succ">Выполненные</label>
+            </div>
+        </div>
+</fieldset>
+
+<ngx-datatable
+id="TaskTable"
+class="material striped"
+[rows]="this.taskArray"
+[columnMode]="ColumnMode.force"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="50"
+[limit]="100"
+[scrollbarV]="true"
+[scrollbarH]="true"
+#Obj2Table
+(resize)="onResize($event)"
+>
+
+<ngx-datatable-column prop = "id_task" name = "#" [width]="getColumnSize('id_task')">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+
+<ngx-datatable-column prop = "department_name" name = "Отдел" [width]="getColumnSize('department_name')">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "note" name = "Задача" [width]="getColumnSize('note')">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "date_begin" name = "Дата начала" [width]="getColumnSize('date_begin')">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "date_end" name = "Дата окончания" [width]="getColumnSize('date_end')">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+
+<ngx-datatable-column prop = "bitSuccess" name = "Выполнена" [width]="getColumnSize('bitSuccess')">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+</ngx-datatable-column>
+
+
+<!-- НАЧАЛО ПОЛЯ Выполнить -->  
+<ngx-datatable-column prop="succesfull" name="Выполнить" [width]="getColumnSize('succesfull')">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <button class="btn btn-danger" (click)="succesfullTask(row.id_task, row.id_task)"><img src="/assets/img/addwork.png" width="30" /></button>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ ПОЛЯ Выплнить -->  
+  
+
+
+
+
+<ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <button class="btn btn-danger" (click)="deleteTask(row.id_task, row.id_task)"><img src="/assets/img/delete.png" width="30" /></button>
+    </ng-template>
+  </ngx-datatable-column>
+  
+
+
+</ngx-datatable>
+
+
+<!-- МОДАЛЬНЫЕ ОКНА УДАЛЕНИЯ ЗАДАЧИ-->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+    DeleteOpen
+  </button>
+  <button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+  DeleteClose
+  </button>
+  
+  <div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Удалить задачу {{this.curDeleteTask.sLink}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+        <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- КОНЕЦ МОДАЛЬНЫЕ ОКНА УДАЛЕНИЕ ЗАДАЧИ-->
+
+  <!-- МОДАЛЬНЫЕ ОКНА ВЫПОЛНЕНИЯ ЗАДАЧИ-->
+<button id="openSuccesfullModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#succesfullModal" [hidden]="true">
+    SuccesfullOpen
+  </button>
+  <button id="closeSuccesfullModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#succesfullModal" [hidden]="true"  data-dismiss="modal">
+    SuccesfullClose
+  </button>
+  
+  <div class="modal fade" tabindex="-1" role="dialog" id="succesfullModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Выполнить задачу {{this.curSuccesfullTask.sLink}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="succesfullClose()">Нет</button>
+        <button type="button" class="btn btn-primary" (click)="succesfullSave()">Да</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- КОНЕЦ МОДАЛЬНЫХ ОКОН ВЫПОЛНЕНИЯ ЗАДАЧИ-->

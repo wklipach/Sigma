@@ -383,13 +383,12 @@ class="material striped"
 </ngx-datatable-column>
 <!-- КОНЕЦ СПРАВОЧНИКА Клиент  -->
 
-
+<!-- НАЧАЛО ПОЛЯ delete -->  
 <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         <button class="btn btn-danger" (click)="deleteObject(row.id_object, row.name)"><img src="/assets/img/delete.png" width="30" /></button>
   </ng-template>
 </ngx-datatable-column>
-
 <!-- КОНЕЦ ПОЛЯ delete -->  
 
 <!-- новые столбцы -->

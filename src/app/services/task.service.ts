@@ -32,5 +32,19 @@ export class TaskService {
     return this.http.post(sUrl, params);
   }
 
+  deleteTask(id_task: string) {
+    const sUrl = this.gr.sUrlGlobal + 'task';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {deleteTask: 'deleteTask', id_task, id_user});
+  }
+
+  succesfullTask(id_task: string) {
+    const sUrl = this.gr.sUrlGlobal + 'task';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {succesfullTask: 'succesfullTask', id_task, id_user});
+  }
+
+
+
 
 }

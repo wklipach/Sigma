@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { ListobjectsService } from 'src/app/services/listobjects.service';
-import {  CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { GuideService } from 'src/app/services/guide.service';
 import { DatePipe } from '@angular/common';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -98,7 +97,6 @@ export class Obj2Component {
   guideCustomers:  ISmallGuide[] = [];
   guideObjectType:  ISmallGuide[] = [];
 
-  @ViewChild('fareObjects') virtualScroll!: CdkVirtualScrollViewport;
 
   constructor (private listobjectsserv: ListobjectsService, 
                private servguide: GuideService, 
@@ -625,8 +623,6 @@ export class Obj2Component {
         }
       }
     });
-  
-  
     this.tableServ.setTableWidth(saveObj, storage_name);
   } 
     

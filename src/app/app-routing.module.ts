@@ -21,6 +21,7 @@ import { Staff2Component } from './components/staff2/staff2/staff2.component';
 import { AddFilterComponent } from './add-filter/add-filter.component';
 import { BasementComponent } from './components/basement/basement.component';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
+import { ListTaskComponent } from './components/task/list-task/list-task.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -41,9 +42,9 @@ const routes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'filter', component: AddFilterComponent, canActivate: [mainGuard] },
   { path: 'basement', component: BasementComponent, canActivate: [mainGuard] },
-  { path: 'addtask', component: AddTaskComponent, canActivate: [mainGuard] }
-  
-];
+  { path: 'addtask', component: AddTaskComponent, canActivate: [mainGuard] },
+  { path: 'listtask', component: ListTaskComponent, canActivate: [mainGuard] }
+  ];
 
 
 @NgModule({

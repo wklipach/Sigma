@@ -28,6 +28,17 @@ router.get('/', async function(req, res, next) {
                                            req.body['id_user']);
       res.send(result);
     }  
+
+    if (req.body['deleteTask']) {
+      const result = await asyncDeleteTask(req.body['id_task'], req.body['id_user']);
+      res.send(result);
+     }
+
+     if (req.body['succesfullTask']) {
+      const result = await asyncSuccesfullTask(req.body['id_task'], req.body['id_user']);
+      res.send(result);
+     }
+
 });
 
 
@@ -101,12 +112,13 @@ router.get('/', async function(req, res, next) {
         "t.note, "+
         "gd.name as department_name, "+
         "t.date_begin, "+
-        "t.date_end "+
+        "t.date_end, "+
+        "t.bitSuccess "+
         "from task t, guide_department gd "+
         "where gd.id=t.id_department and "+
-        "t.bitDelete = 0 and "+
-        "t.bitSuccess = 0 "+
+        "t.bitDelete = 0 "+
         "order by t.date_begin ";
+
         const resTask = await conn.query(sQuery);
         return JSON.stringify(resTask);
       } catch (err) {
@@ -116,6 +128,55 @@ router.get('/', async function(req, res, next) {
     }
   }
 
+  async function asyncDeleteTask(id_task, id_user) {
+    let conn = await pool.getConnection();
+    try {
+
+        const params = [id_task];
+        const sQuery = 
+        "update task set bitDelete=1 where id=?";
+
+        const paramsJournal = [id_task, id_user];
+        const sJournal = 
+        "insert task_log (`newvalue`, `id_task`, `field`, `id_user`, `date_oper`) value('delete', ?, '', ?, now())";
+
+
+          const resDeleteTask = await conn.query(sQuery, params);
+          await conn.query(sJournal, paramsJournal);
+          return JSON.stringify(resDeleteTask);
+
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+
+  async function asyncSuccesfullTask(id_task, id_user) {
+    let conn = await pool.getConnection();
+    try {
+
+        const params = [id_task];
+        const sQuery = 
+        "update task set bitSuccess=1 where id=?";
+
+        const paramsJournal = [id_task, id_user];
+        const sJournal = 
+        "insert task_log (`newvalue`, `id_task`, `field`, `id_user`, `date_oper`) value('true', ?, 'bitSuccess', ?, now())";
+
+        const resSuccesfullTask = await conn.query(sQuery, params);
+        await conn.query(sJournal, paramsJournal);
+        return JSON.stringify(resSuccesfullTask);
+
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
 
 
   module.exports = router;
