@@ -1,0 +1,69 @@
+.btn.btn-primary{
+    color: #fff;
+    background-color: #386bc0 !important;
+    font-weight: semibold !important;
+ }
+    .btn.btn-primary:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #386bc0 !important; 
+    cursor: pointer;
+    }
+      .btn.btn-warning{
+      color: #fff;
+      background-color: #ffc107 !important;
+      font-weight: semibold !important;
+     }
+     .btn.btn-warning:hover{
+    color: white !important;
+   font-weight: bold !important;
+    background-color: #ffc107 !important; 
+    cursor: pointer;
+    }
+  .btn.btn-info{
+      color: #fff;
+      background-color: #138496 !important;
+      font-weight: bold !important;
+     }
+     .btn.btn-info:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #138496 !important; 
+    cursor: pointer;
+    }
+    .btn.btn-secondary{
+      color: #fff;
+      background-color: #5a6268 !important;
+      font-weight: 600 !important;
+     }
+     .btn.btn-secondary:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #5a6268 !important; 
+    cursor: pointer;
+    }
+
+  .btn.btn-danger{
+  color: #fff;
+  background-color: #5a6268 !important;
+  font-weight: 600 !important;
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  }
+   .btn.btn-danger:hover{
+   color: white !important;
+   font-weight: 600 !important;
+   background-color: #dc3545 !important; 
+   cursor: pointer;
+    }
+    .btn.btn-success{
+        color: #fff;
+        background-color: #218838 !important;
+        font-weight: 600 !important;
+     }
+        .btn.btn-success:hover{
+        color: white !important;
+        font-weight: 600 !important;
+        background-color: #218838 !important; 
+        cursor: pointer;
+        }
