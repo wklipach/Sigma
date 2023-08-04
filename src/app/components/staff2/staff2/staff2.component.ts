@@ -71,6 +71,7 @@ interface IObjectOne {
     date_interview_str?: string;  
     id_sms?: string;
     guide_sms?: string;
+    Color?: string;
 }
 
 interface IDeleteObject {
@@ -91,6 +92,8 @@ export class Staff2Component {
   @ViewChild('Staff2Table') datatableComponent!: DatatableComponent;
 
   faCoffee = faCoffee;
+
+  temp_var: string = "<a href='#' class='badge badge-primary'>Primary</a>'";
 
 
 
@@ -168,6 +171,10 @@ ngOnInit() {
 
 
   this.staffserv.getStaff_All().subscribe ( (value: any) => {
+
+
+    console.log('res=', value);
+
     this.ORIGINAL_ShowStaff = value;
 
     this.ORIGINAL_ShowStaff.forEach((el)=>  {

@@ -313,7 +313,19 @@ class="material striped"
 <!-- КОНЕЦ ПОЛЯ ВОЗРАСТ, автовычисление в запросе --> 
 
 
+
+<ngx-datatable-column prop = "Color" name = "ОЛЛР" [width]="getColumnSize('Color')">
+  <ng-template let-value="value" ngx-datatable-cell-template>
+
+    <span [innerHTML]="value"></span>
+        
+    </ng-template>
+</ngx-datatable-column>
+
+
+
 <!-- НАЧАЛО ПОЛЯ ДАТА 002-O/y от --> 
+<!--
 <ngx-datatable-column prop="s002from_str" name="002-O/y от" [width]="getColumnSize('s002from_str')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <span
@@ -334,9 +346,11 @@ class="material striped"
           />
   </ng-template>
 </ngx-datatable-column>
+-->
 <!-- КОНЕЦ ПОЛЯ ДАТА 002-O/y от --> 
 
 <!-- НАЧАЛО ПОЛЯ ДАТА 003-O/y от --> 
+<!--
 <ngx-datatable-column prop="s003from_str" name="003-O/y от" [width]="getColumnSize('s003from_str')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <span
@@ -357,6 +371,8 @@ class="material striped"
           />
   </ng-template>
 </ngx-datatable-column>
+-->
+
 <!-- КОНЕЦ ПОЛЯ ДАТА 003-O/y от --> 
 
 

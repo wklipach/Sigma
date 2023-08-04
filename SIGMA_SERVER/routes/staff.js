@@ -3,6 +3,10 @@ var router = express.Router();
 
 const mariadb = require("mariadb");
 const mariadbSettings =  require('../DB');
+
+const sqlStringBadge = require("../sql_query/staff_badge.js");      
+
+
 const pool = mariadb.createPool(mariadbSettings);
 
 
@@ -95,7 +99,8 @@ router.get('/', async function(req, res, next) {
             "    s.`DateCreation`, "+
             "    s.date_interview, "+
             "    s.id_sms, "+
-            "    gsms.name as  guide_sms "+
+            "    gsms.name as  guide_sms, "+
+            "    '' as Color "+
              "FROM staff s "+
             "join staff s3 on s3.id_staff = s.id_senjor_guard "+
             "LEFT JOIN guide_position gp on gp.id = s.id_position "+
@@ -107,8 +112,14 @@ router.get('/', async function(req, res, next) {
             "WHERE s.bitDelete=0 "+ 
             "ORDER BY s.id_staff asc";
    
+        const resStringBadge = await conn.query(sqlStringBadge);            
         const resStaffObjects = await conn.query(sQuery);
-        return JSON.stringify(resStaffObjects);
+
+        for (key in resStringBadge) {
+          resStaffObjects.find(staff => staff.id_staff.toString() === resStringBadge[key].id_staff.toString()).Color = resStringBadge[key].Color;
+        }
+
+        return  JSON.stringify(resStaffObjects);
       } catch (err) {
         return  err;
       } finally  {
