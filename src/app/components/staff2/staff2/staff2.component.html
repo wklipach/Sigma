@@ -1,6 +1,6 @@
 <div class="Container d-flex flex-row p-2">
   <h2>Сотрудники</h2>
-   <div class="input-group rounded  w-lg-500px">
+   <div class="input-group rounded w-lg-500px">
         <input id="search" 
                type="search"
                class="form-control rounded" 
@@ -12,7 +12,7 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
-<!-- Добавить ресурс -->
+<!-- Добавить сотрудника -->
   <button class="btn btn-success" type="button" (click)="addNewStaff()">
     <img src="/assets/img/plus.png" width="25" />
   </button>
@@ -434,7 +434,7 @@ class="material striped"
 <!-- НАЧАЛО ПОЛЯ delete --> 
 <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <button class="btn btn-danger" (click)="deleteStaff(row.id_staff, row.fio)"><img src="/assets/img/delete.png" width="30" /></button>
+        <div (click)="deleteStaff(row.id_staff, row.fio)"><img src="/assets/img/delete.png" width="30" /></div>
   </ng-template>
 </ngx-datatable-column>
 <!-- КОНЕЦ ПОЛЯ delete -->  

@@ -13,11 +13,13 @@ input-group{
    margin-right: 100px !important;
 }
 
+img:hover{
+  cursor: pointer;
+  }
 
 .material {
   height: 800px;
 }
-
 
 .ngx-datatable.material .datatable-header {
   display: flex;

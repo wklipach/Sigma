@@ -1,6 +1,6 @@
 <div class="Container d-flex flex-row p-2">
   <h2>Объекты</h2>
-   <div class="input-group rounded  w-lg-550px ml-auto">
+   <div class="input-group rounded w-lg-500px">
         <input id="search" 
                type="search"
                class="form-control rounded" 
@@ -12,8 +12,13 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
-</div>
 
+<!-- КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
+<div class="add-btn">
+  <button class="btn btn-success mx-10" type="button" (click)="addNewObject()"><img src="/assets/img/plus.png" width="30" /></button>
+  </div>
+<!--  КОНЕЦ КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
+</div>
 
 <ngx-datatable
 id="Obj2Table"
@@ -211,7 +216,7 @@ class="material striped"
 <!-- НАЧАЛО ПОЛЯ Яндекс-ссылка --> 
 <ngx-datatable-column prop="yandex_map_el" name="Яндекс Карта" [width]="getColumnSize('yandex_map_el')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <a href="{{ row.yandex_maps}}" class="btn btn-primary">Яндекс</a>
+        <a href="{{ row.yandex_maps}}" class="btn btn-primary btn-sm">Яндекс</a>
   </ng-template>
 </ngx-datatable-column>
 <!-- КОНЕЦ ПОЛЯ  Яндекс-ссылка -->  
@@ -220,7 +225,7 @@ class="material striped"
 <ngx-datatable-column prop="yandex_map_btn" name="ссылка Y" [width]="getColumnSize('yandex_map_btn')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <button type="button" 
-    class="btn btn-info" 
+    class="btn btn-info btn-sm" 
     data-bs-toggle="modal" 
     data-bs-target="#yandexModal"
     (click)="onClickYandex(row.id_object, row.yandex_maps)">
@@ -243,7 +248,7 @@ class="material striped"
 <ngx-datatable-column prop="google_map_btn" name="ссылка G" [width]="getColumnSize('google_map_btn')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
     <button type="button" 
-    class="btn btn-info" 
+    class="btn btn-info btn-sm" 
     data-bs-toggle="modal" 
     data-bs-target="#googleModal"
     (click)="onClickGoogle(row.id_object, row.google_maps)">
@@ -386,7 +391,7 @@ class="material striped"
 <!-- НАЧАЛО ПОЛЯ delete -->  
 <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <button class="btn btn-danger" (click)="deleteObject(row.id_object, row.name)"><img src="/assets/img/delete.png" width="30" /></button>
+    <div (click)="deleteObject(row.id_object, row.name)"><img src="/assets/img/delete.png" width="30" /></div>
   </ng-template>
 </ngx-datatable-column>
 <!-- КОНЕЦ ПОЛЯ delete -->  
@@ -423,11 +428,7 @@ DeleteClose
 <!-- КОНЕЦ МОДАЛЬНЫЕ ОКНА УДАЛЕНИЕ ОБЪЕКТА-->
 
 
-<!-- КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
-<div class="add-btn">
-  <button class="btn btn-success" type="button" (click)="addNewObject()"><img src="/assets/img/plus.png" width="30" /></button>
-  </div>
-<!--  КОНЕЦ КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
+
 
 
 <!-- YANDEX modal -->
