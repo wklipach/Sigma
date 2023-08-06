@@ -15,8 +15,8 @@ input-group{
 .add-btn{
   height: 20px !important;
   position:fixed;
-  top: 0;
-  right: 0;
+  top: 10px;
+  left: 150px;
   }
 
 img:hover{
@@ -27,6 +27,9 @@ cursor: pointer;
     height: 800px
 }
 
+/* .ngx-datatable{
+  overflow-y: visible;
+} */
   
   .ngx-datatable.material .datatable-header {
     display: flex;
@@ -64,7 +67,7 @@ cursor: pointer;
     border: 1px dashed #cacaca;
     text-align: center !important;
     white-space: pre-wrap !important;
-    padding: 1px;
+    padding: 1px !important;
     border: 1px dashed #cacaca !important;
     text-align: center;
     display: inline-block;
@@ -75,8 +78,10 @@ cursor: pointer;
     display: flex;
     flex-direction: row;
     font-size: 13px;
-   vertical-align: middle !important;
-   height: auto;
+   line-height: 1.5;
+   width: 100%;
+   height: auto !important;
+   justify-content: center;
    white-space: pre-wrap;
   }
 

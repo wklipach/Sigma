@@ -2,9 +2,9 @@
 <!-- Карточка задачи -->
 
 
-<div class="card-body pt-2 mb-5 p-8 h-lg-650px w-lg-650px">
+<div class="card-body pt-2 mb-1 p-7 h-lg-500px w-lg-650px">
 
-  <h4 class="card-title mb-6">Новая задача</h4>
+  <h4 class="card-title m-2 text-center h-30px info">Новая задача</h4>
 
     <div class="row mb-6">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Объект:</label>
@@ -18,7 +18,7 @@
     <div class="row mb-3">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Кому</label>
         <div class="col-lg-8 fv-row">
-          <select name="choice-departtment" data-control="select2" class="form-select form-select-solid form-select-lg" [(ngModel)]="id_department">
+          <select name="choice-departtment" data-control="select2" class="form-select" [(ngModel)]="id_department">
             <option *ngFor="let depart of this.guideDepartment" [value] = "depart.id">{{ depart.name }}</option>
           </select>
         </div> 
@@ -28,29 +28,29 @@
   <div class="row mb-6">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Комментарий</label>
       <div class="col-lg-8 fv-row">
-        <textarea id="areaNote" name="textTask" cols="54" rows="6"></textarea>
+        <textarea id="areaNote" name="textTask" cols="52" rows="6"></textarea>
       </div> 
   </div>
  
  <div class="row mb-6">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата начала</label>
       <div class="col-lg-8 fv-row">
-    <input id="dateBegin" type="date"/>
+    <input id="dateBegin" type="date" class="dateB"/>
 </div>
      </div>
 
    <div class="row mb-6">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата окончания</label>
     <div class="col-lg-8 fv-row">
-         <input id="dateEnd" type="date"/>
+         <input id="dateEnd" type="date" class="dateE"/>
        </div>
    </div>
 
   
-<div class="btns w-lg-500px">
+<div class="btns mt-5">
   
-    <button class="btn btn-secondary w-lg-150px ml-5" (click)="clickBack()">Отмена</button>
-    <button type="button" class="btn btn-success w-lg-150px ml-5" (click)="clickApply()">Создать</button> 
+    <button class="btn btn-secondary" (click)="clickBack()">Отмена</button>
+    <button type="button" class="btn btn-primary" (click)="clickApply()">Создать</button> 
 </div>
 
   <!-- Конец  Карточка задачи -->

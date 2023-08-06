@@ -1,6 +1,9 @@
 
 <div class="Container d-flex flex-row p-2">
   <h2>МТР</h2>
+  <div class="add-btn" title="Добавить новый рксурс">
+    <div (click)="addNewMTR()"><img src="/assets/img/plus.png" width="30" /></div>
+  </div>
   <div class="input-group rounded  w-lg-500px">
         <input id="search" 
                type="search"
@@ -13,10 +16,7 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
-
-      <button class="btn btn-success" type="button" (click)="addNewMTR()"><img src="/assets/img/plus.png" width="30" />
-      </button>
-
+  
 </div>
 
 <ngx-datatable
@@ -533,7 +533,7 @@ class="material striped"
 
 <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <button class="btn btn-danger" (click)="deleteMtr(row.id_mtr, row.name)"><img src="/assets/img/delete.png" width="30" /></button>
+        <div (click)="deleteMtr(row.id_mtr, row.name)"><img src="/assets/img/delete.png" width="30" /></div>
   </ng-template>
 </ngx-datatable-column>
 

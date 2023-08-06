@@ -472,13 +472,12 @@ DeleteClose
 </div>  
 <!-- Конец Удалить сотрудника -->
 
-<div class="input-group rounded  w-lg-550px ml-auto">
-  Фильтры
-    <select name="choice-status" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold" 
+<div class="input-group rounded  w-lg-350px mt-8">
+      <!-- <select name="choice-status" data-control="select2" class="form-select w-20" 
         (change)="onChangeFilter($event.target)">
         <option  [value]="0"> -- </option>
         <option *ngFor="let lf of this.listFilters" [value]="lf.id"> {{lf.name}}</option>
-    </select>
+    </select> -->
 
 <button (click)="clickFilters()">Создать фильтр</button>
   </div>

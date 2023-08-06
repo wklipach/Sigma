@@ -1,5 +1,10 @@
+<app-basement></app-basement>
+
 <div class="Container d-flex flex-row p-2">
   <h2>Объекты</h2>
+  <div class="add-btn" title="Добавить новый объект">
+  <div (click)="addNewObject()"><img src="/assets/img/plus.png" width="30" /></div>
+  </div>
    <div class="input-group rounded w-lg-500px">
         <input id="search" 
                type="search"
@@ -14,9 +19,7 @@
       </div>
 
 <!-- КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
-<div class="add-btn">
-  <button class="btn btn-success mx-10" type="button" (click)="addNewObject()"><img src="/assets/img/plus.png" width="30" /></button>
-  </div>
+
 <!--  КОНЕЦ КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
 </div>
 
@@ -32,6 +35,7 @@ class="material striped"
 [scrollbarV]="true"
 [scrollbarH]="true"
 #Obj2Table
+
 (resize)="onResize($event)"
 >
 
@@ -239,7 +243,7 @@ class="material striped"
 <!-- НАЧАЛО ПОЛЯ гугл-ссылка --> 
 <ngx-datatable-column prop="google_map_el" name="Google" [width]="getColumnSize('google_map_el')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        <a href="{{ row.google_maps}}" class="btn btn-primary">Google</a>
+        <a href="{{ row.google_maps}}" class="btn btn-primary btn-sm">Google</a>
   </ng-template>
 </ngx-datatable-column>
 <!-- КОНЕЦ ПОЛЯ  гугл-ссылка -->  
@@ -403,7 +407,7 @@ class="material striped"
 
 
 <!-- МОДАЛЬНЫЕ ОКНА УДАЛЕНИЯ ОБЪЕКТА-->
-<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
   DeleteOpen
 </button>
 <button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
@@ -418,7 +422,7 @@ DeleteClose
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
-      <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="deleteSave()">Да</button>
       
     </div>
   </div>
@@ -458,7 +462,7 @@ DeleteClose
  </div>
 
  <!-- GOOGLE modal -->
-<button id="openGoogleModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#googleModal" [hidden]="true">
+<button id="openGoogleModalButton"  type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#googleModal" [hidden]="true">
   GoogleOpen
 </button>
 <button id="closeGoogleModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#googleModal" [hidden]="true"  data-dismiss="modal">

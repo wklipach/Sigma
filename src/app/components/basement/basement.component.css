@@ -1,3 +1,10 @@
 li:hover{
     cursor: pointer;
 }
+.user{
+    border-radius: 50%;
+    border: 1px solid transparent;
+}
+img:hover{
+    cursor: pointer;
+}

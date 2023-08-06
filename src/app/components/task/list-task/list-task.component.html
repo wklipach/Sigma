@@ -1,21 +1,32 @@
-<div>Задачи</div>
+<app-basement></app-basement>
 
-<fieldset>
-    <legend>Выберите тип задач</legend>
-        <div class="input-group-prepend">
+
+<fieldset class="d-flex flex-row p-3 h-lg-60px">
+    
+        <div class="input-group">
             <div class="input-group-text">
-            <input  [(ngModel)]="checkboxFlagUnsucc" (change)="onChangeSuccUsucc('checkboxFlagUnsucc')" name="type_task" type="checkbox" value="unsucc" id="unsucc" checked aria-label="Checkbox for following text input">
+            <input  [(ngModel)]="checkboxFlagUnsucc" (change)="onChangeSuccUsucc('checkboxFlagUnsucc')" name="type_task" type="checkbox" value="unsucc" id="unsucc" checked aria-label="">
             <label for="unsucc">Невыполненные</label>
             </div>
-        </div>
+          </div>
 
-        <div class="input-group-prepend">
+        <div class="input-group">
             <div class="input-group-text">
-            <input  [(ngModel)]="checkboxFlagSucc" (change)="onChangeSuccUsucc('checkboxFlagSucc')" name="type_task" type="checkbox" value="succ" id="succ"  checked aria-label="Checkbox for following text input">
+            <input  [(ngModel)]="checkboxFlagSucc" (change)="onChangeSuccUsucc('checkboxFlagSucc')" name="type_task" type="checkbox" value="succ" id="succ"  checked aria-label="Checkbox для показа завершенных задач">
             <label for="succ">Выполненные</label>
             </div>
         </div>
+
+        <div class="input-group">
+          <div class="input-group-text">
+          <input   type="checkbox" value="own" id="own"  checked aria-label="Checkbox для показа только своих задач">
+          <label for="own">Только свои</label>
+          </div>
+      </div>
+   
+
 </fieldset>
+  
 
 <ngx-datatable
 id="TaskTable"
@@ -63,7 +74,7 @@ class="material striped"
       </ng-template>
 </ngx-datatable-column>
 
-
+g
 <ngx-datatable-column prop = "bitSuccess" name = "Выполнена" [width]="getColumnSize('bitSuccess')">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}
@@ -74,7 +85,7 @@ class="material striped"
 <!-- НАЧАЛО ПОЛЯ Выполнить -->  
 <ngx-datatable-column prop="succesfull" name="Выполнить" [width]="getColumnSize('succesfull')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          <button class="btn btn-danger" (click)="succesfullTask(row.id_task, row.id_task)"><img src="/assets/img/addwork.png" width="30" /></button>
+          <div (click)="succesfullTask(row.id_task, row.id_task)"><img src="/assets/img/done.png" width="30" /></div>
     </ng-template>
   </ngx-datatable-column>
   <!-- КОНЕЦ ПОЛЯ Выплнить -->  
@@ -85,7 +96,7 @@ class="material striped"
 
 <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          <button class="btn btn-danger" (click)="deleteTask(row.id_task, row.id_task)"><img src="/assets/img/delete.png" width="30" /></button>
+          <div (click)="deleteTask(row.id_task, row.id_task)"><img src="/assets/img/delete.png" width="30" /></div>
     </ng-template>
   </ngx-datatable-column>
   
@@ -130,7 +141,7 @@ class="material striped"
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Выполнить задачу {{this.curSuccesfullTask.sLink}}?</h5>
+        <h5 class="modal-title">Задача {{this.curSuccesfullTask.sLink}} исполнена?</h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="succesfullClose()">Нет</button>

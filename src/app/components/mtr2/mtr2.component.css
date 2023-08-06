@@ -17,6 +17,9 @@ input-group{
   height: 800px;
   width: 100%;
 }
+.ngx-datatable{
+  overflow-y: visible !important;
+}
 
 .ngx-datatable.material .datatable-header {
 
@@ -70,6 +73,9 @@ input-group{
 }
  
  */
+ img:hover{
+  cursor: pointer;
+ }
 
  .btn.btn-primary{
   color: #fff;
@@ -161,11 +167,10 @@ select {
 }
 
 .add-btn{
-  height: 20px !important;
   position:fixed;
-  top: 0;
-  right: 0;
-}
+  top: 10px;
+  left: 150px;
+  }
 
 /* ::ng-deep .ngx-datatable .datatable-body {
   overflow: auto;

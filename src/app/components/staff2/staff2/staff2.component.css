@@ -21,6 +21,10 @@ img:hover{
   height: 800px;
 }
 
+/* .ngx-datatable{
+  overflow-y: visible;
+} */
+
 .ngx-datatable.material .datatable-header {
   display: flex;
   flex-direction: row;
@@ -224,6 +228,6 @@ input{
 .add-btn{
   height: 20px !important;
   position:fixed;
-  top: 0;
-  right: 0;
-}
+  top: 10px;
+  left: 150px;
+  }
