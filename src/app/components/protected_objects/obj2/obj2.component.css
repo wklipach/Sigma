@@ -6,6 +6,7 @@
 h2{
   display: flex;
   margin-right: auto;
+  margin-left: 20px;
 }
 input-group{
   display: flex;
@@ -24,12 +25,12 @@ cursor: pointer;
 }
 
 .material {
-    height: 800px
+    height: 800px;
 }
 
-/* .ngx-datatable{
+.ngx-datatable{
   overflow-y: visible;
-} */
+}
   
   .ngx-datatable.material .datatable-header {
     display: flex;
@@ -170,4 +171,10 @@ cursor: pointer;
     border: none;
   }
   
+  .add-btn{
+    position: relative;
+    height: 20px;
+    top: 0;
+    left: 0;
+  }
   

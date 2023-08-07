@@ -6,6 +6,7 @@
 h2{
   display: flex;
   margin-right: auto;
+  margin-left: 20px;
 }
 input-group{
   display: flex;
@@ -167,10 +168,11 @@ select {
 }
 
 .add-btn{
-  position:fixed;
-  top: 10px;
-  left: 150px;
-  }
+  position: relative;
+  height: 20px;
+  top: 0;
+  left: 0;
+}
 
 /* ::ng-deep .ngx-datatable .datatable-body {
   overflow: auto;

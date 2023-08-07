@@ -1,4 +1,12 @@
+<app-basement></app-basement>
 <div class="Container d-flex flex-row p-2">
+  <!-- Добавить сотрудника -->
+  <button type="button" (click)="addNewStaff()">
+    <img src="/assets/img/plus.png" width="30" title="Добавить сотрудника"/>
+  </button>
+
+<!-- конец Добавить сотрудника -->
+  
   <h2>Сотрудники</h2>
    <div class="input-group rounded w-lg-500px">
         <input id="search" 
@@ -12,12 +20,7 @@
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
       </div>
-<!-- Добавить сотрудника -->
-  <button class="btn btn-success" type="button" (click)="addNewStaff()">
-    <img src="/assets/img/plus.png" width="25" />
-  </button>
 
-<!-- конец Добавить сотрудника -->
 
 </div>
  
@@ -473,11 +476,11 @@ DeleteClose
 <!-- Конец Удалить сотрудника -->
 
 <div class="input-group rounded  w-lg-350px mt-8">
-      <!-- <select name="choice-status" data-control="select2" class="form-select w-20" 
+      <select name="choice-status" data-control="select2" class="form-select w-20" 
         (change)="onChangeFilter($event.target)">
         <option  [value]="0"> -- </option>
         <option *ngFor="let lf of this.listFilters" [value]="lf.id"> {{lf.name}}</option>
-    </select> -->
+    </select>
 
 <button (click)="clickFilters()">Создать фильтр</button>
   </div>

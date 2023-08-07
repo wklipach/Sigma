@@ -6,6 +6,7 @@
 h2{
   display: flex;
   margin-right: auto;
+  margin-left: 20px;
 }
 input-group{
   display: flex;
@@ -21,9 +22,9 @@ img:hover{
   height: 800px;
 }
 
-/* .ngx-datatable{
+.ngx-datatable{
   overflow-y: visible;
-} */
+}
 
 .ngx-datatable.material .datatable-header {
   display: flex;
