@@ -30,11 +30,21 @@ export class SummaryService {
     return this.http.get(this.gr.sUrlGlobal + 'summary', {params: params});
   }  
 
-
   getOLLR(id_staff: number) {
     const params = new HttpParams()
       .set('get_ollr', id_staff.toString());
     return this.http.get(this.gr.sUrlGlobal + 'summary', {params: params});
   }  
+
+  getCurrentOLLR(id_staff: number) {
+    const params = new HttpParams()
+      .set('get_current_ollr', id_staff.toString());
+    return this.http.get(this.gr.sUrlGlobal + 'summary', {params: params});
+  }  
+
+
+  
+
+
 
 }

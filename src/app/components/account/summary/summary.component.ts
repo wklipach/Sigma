@@ -1,6 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SummaryService } from 'src/app/services/summary.service';
+import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { ITable } from 'src/app/interface/table';
+import { TableService } from 'src/app/services/table.service';
 
 
 
@@ -29,9 +33,16 @@ interface ICompany  {
 };
 
 interface IOLLR  {
+  ​​id_ollr?: string; 
   name?: string; 
-  bitOverdue: boolean;
-};
+  Color?: string; 
+  DateBegin?: string; 
+  ​​​​period?: string;  
+ };
+
+
+
+
 
 
 
@@ -45,22 +56,31 @@ export class SummaryComponent  implements OnInit  {
 
 
 
-  id_staff: number = 0;
+  @Input()  id_staff: number = 0;
+
+  ColumnMode = ColumnMode;
+  @ViewChild('Staff2OllrTable') datatableComponent!: DatatableComponent;
+  faCoffee = faCoffee;
+
   ShowRes: IShowRes = <IShowRes>{};
   ShowObjectSenjor: IObjectSenjor[] = [];
   ShowCompany: ICompany[] = [];
   ShowOLLR: IOLLR[] = [];
 
+  //содержит ширины столбцов, взятые из хранилища
+  ColumnSizeObj:  ITable[] = [];
 
 
 
-  constructor(private route: ActivatedRoute, private summaryServ: SummaryService, private router: Router) { 
-        this.route.queryParams.subscribe((params) => { this.id_staff = params['id_staff'];
-      });
+  constructor(private route: ActivatedRoute, private summaryServ: SummaryService, private router: Router, private tableServ:  TableService) { 
+        // this.route.queryParams.subscribe((params) => { this.id_staff = params['id_staff'];
+      //});
   }
 
   
    ngOnInit() {
+
+    this.ColumnSizeObj =   this.tableServ.getTableWidth('Staff2OllrTable');
 
     this.summaryServ.getStaffOne(this.id_staff).subscribe ( (value: any) => {
 
@@ -88,7 +108,13 @@ export class SummaryComponent  implements OnInit  {
       this.ShowCompany = value;
     });
 
-    this.summaryServ.getOLLR(this.id_staff).subscribe ( (value: any) => {
+    this.summaryServ.getCurrentOLLR(this.id_staff).subscribe ( (value: any) => {
+      value.forEach ( (el: any) => {
+        if (el.period.toString()=== "0") {
+          el.period = "Бессрочно";
+        }
+       });
+
       this.ShowOLLR = value;
     });
 
@@ -97,5 +123,44 @@ export class SummaryComponent  implements OnInit  {
   backStaff() {
     this.router.navigate(['staff2']);
   }
+
+
+  getColumnSize(col_name: string) {
+
+    let res: number = 150;
+    let resFind = this.ColumnSizeObj.find( el => el.column_name == col_name);
+      if (resFind) {
+          res = Number(resFind.column_width);
+      }
+    return res;
+  }
+
+
+
+
+saveColumnSize(table: DatatableComponent, storage_name: string, new_column: string, newValue: string) {
+  let saveObj: ITable[] = [];
+  table.bodyComponent.columns.forEach ( col => {
+    if (col.prop && col.width) {
+      if (col.prop == new_column) {
+        saveObj.push({column_name: new_column, column_width: newValue});
+      } else {
+        saveObj.push({column_name: col.prop.toString(), column_width: col.width.toString()});
+      }
+    }
+  });
+
+
+  this.tableServ.setTableWidth(saveObj, storage_name);
+} 
+
+
+onResize(e: any) {
+    if (e && e.column && e.column.prop && e.newValue) {
+      this.saveColumnSize(this.datatableComponent, 'Staff2OllrTable', e.column.prop, e.newValue);
+    }
+}
+
+
 
 }

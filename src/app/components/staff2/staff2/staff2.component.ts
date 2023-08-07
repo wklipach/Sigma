@@ -857,6 +857,22 @@ loadFiltersNull() {
 
  }
 
+ newGeneral(id_staff: number) {
+
+  const url = this.router.serializeUrl(this.router.createUrlTree(['general'], {
+    queryParams: {
+      id_staff: id_staff
+    }
+  }));
+
+  const newTab1 = window.open(url, '_blank'); 
+  if(newTab1) {
+      newTab1.opener = null;
+  }
+
+
+}
+
 
 
 }

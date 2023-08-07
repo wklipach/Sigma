@@ -37,7 +37,7 @@ class="material striped"
 
 <ngx-datatable-column prop = "id_staff" name = "#" [width]="getColumnSize('id_staff')" >
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span (dblclick)="Summary(row.id_staff)">
+      <span (dblclick)="newGeneral(row.id_staff)">
         {{ value }}
       </span>
       </ng-template>

@@ -5,6 +5,8 @@ const mariadb = require("mariadb");
 const mariadbSettings =  require('../DB');
 const pool = mariadb.createPool(mariadbSettings);
 
+const sqlStringOllrGeneral = require("../sql_query/ollr_general.js");     
+
 
 
 /* GET users listing. */
@@ -30,6 +32,14 @@ router.get('/', async function(req, res, next) {
         const result = await asyncOLLR(req.query.get_ollr);
         res.send(result);
       }
+
+      if (req.query.get_current_ollr) {
+        const result = await asyncCurrentOLLR(req.query.get_current_ollr);
+        res.send(result);
+      }
+
+
+      
 
  
   });
@@ -121,5 +131,24 @@ router.get('/', async function(req, res, next) {
           if (conn) conn.release(); 
     }
   }
+
+
+  async function asyncCurrentOLLR(id_staff) {
+    let conn = await pool.getConnection();
+    try {
+        const params = [id_staff];
+        const sQuery =  sqlStringOllrGeneral;      
+
+        const resOLLR = await conn.query(sQuery, params);
+        return JSON.stringify(resOLLR);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+
+
 
   module.exports = router;
