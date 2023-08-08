@@ -25,6 +25,8 @@ export class GeneralComponent {
 
    ngOnInit(): void {
 
+    console.log('general onInit');
+
     this.route.queryParams.subscribe((params) => { 
       if (params['id_staff']) {
           this.id_staff = params['id_staff'];
@@ -62,6 +64,13 @@ export class GeneralComponent {
       }
     }
   });
+}
+
+
+settings() {
+
+   const id_staff = this.id_staff;
+   this.router.navigate(['settings'], { queryParams: { id_staff }});
 }
 
 

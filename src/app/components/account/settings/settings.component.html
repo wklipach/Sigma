@@ -45,7 +45,9 @@
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">ФИО</label>
     
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="Петров Иван Петрович" />
+                    <input type="text" name="fio" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                           [value]="this.settingData.fio"
+                           (blur)="myUpdateClick($event.target, 'fio')"/>
                 </div>
             </div>  
     
@@ -56,52 +58,71 @@
                         </label>
     
                     <div class="col-lg-8 fv-row">
-                        <select name="company" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
-                            <option>Сигма профи 1</option>
-                            <option>Сигма профи 2</option>
-                            <option>Сигма профи 3</option>
-                        </select>
+                        <select name="organization" data-control="selectOrganization" class="form-select form-select-solid form-select-lg fw-semibold" 
+                            (change)="onChangeSmallGuide($event, this.guideOrganization, 'id_organization')"
+                            [(ngModel)]="this.settingData.organization">
+                            <option *ngFor="let go of this.guideOrganization" [value]="go.name">{{go.name}}</option>
+                       </select>
                     </div>
             </div>
     
              <div class="row mb-6">
     
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Отдел</label>
-    
                 <div class="col-lg-8 fv-row">
-                    <select name="Guid1" data-control="Guid1" data-placeholder="" class="form-select form-select-solid form-select-lg fw-semibold">
-                        <option>Отдел кадров.</option>
-                        <option>Отдел лицензионно-разрешительной работы.</option>
-                        <option>Администрация.</option>
-                        <option>Начальник охраны объекта.</option>
-                        <option>Начальник физической охраны.</option>
-                         <option>Начальник личной охраны.</option>
-                        <option>Руководство.</option>
+                    <select name="department" data-control="selectDepartment" class="form-select form-select-solid form-select-lg fw-semibold" 
+                            (change)="onChangeSmallGuide($event, this.guideDepartment, 'id_department')"
+                            [(ngModel)]="this.settingData.department">
+                            <option *ngFor="let gd of this.guideDepartment" [value]="gd.name">{{gd.name}}</option>
                     </select>
-                </div>
+                  </div>
             </div>       
     
             <div class="row mb-6">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                    <span class="required">Телефон</span>
-                    <span class="ms-1" data-bs-toggle="tooltip" title="Phone number">
+                    <span class="required">Телефон 1</span>
+                    <span class="ms-1" data-bs-toggle="tooltip" title="Phone number1">
                     </span>
                 </label>
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
-                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" value="+7 999 578 46 20" />
+                    <input type="tel" name="phone1" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
+                           [value]="this.settingData.phone"
+                           (blur)="myUpdateClick($event.target, 'phone')"/>
                 </div>
                 
             </div>
+
+            <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                    <span class="required">Телефон 2</span>
+                    <span class="ms-1" data-bs-toggle="tooltip" title="Phone number2">
+                    </span>
+                </label>
+                <!--end::Label-->
+                <!--begin::Col-->
+                <div class="col-lg-8 fv-row">
+                    <input type="tel" name="phone2" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
+                    [value]="this.settingData.phone2"
+                    (blur)="myUpdateClick($event.target, 'phone2')"/>
+                </div>
+                
+            </div>
+
             
             <div class="row mb-6">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">Руководитель</label>
                 
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Непосредственный начальник" value="ГенДиректор" />
+                    <select name="senjorguard" data-control="selectSenjorGuard" class="form-select form-select-solid form-select-lg fw-semibold" 
+                            (change)="onChangeSenjorGuard($event, this.guideSenjorGuard, 'id_senjor_guard')"
+                            [(ngModel)]="this.settingData.senjor_guard"  >
+                        <option *ngFor="let sg of this.guideSenjorGuard" [value]="sg.fio">{{sg.fio}}</option>
+                    </select>
                 </div>
                 
             </div>
@@ -109,28 +130,51 @@
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Должность</label>
                 <div class="col-lg-8 fv-row">
-                    <select name="Guid1" data-control="Guid1" class="form-select form-select-solid form-select-lg">
-                        <option>Охранник</option>
-                        <option>Начальник охраны</option>
-                        <option>помощник начальника охраны</option>
+                    <select name="position" data-control="selectPosition" class="form-select form-select-solid form-select-lg fw-semibold" 
+                        (change)="onChangeSmallGuide($event, this.guidePosition, 'id_position')"
+                        [(ngModel)]="this.settingData.position">
+                        <option *ngFor="let gp of this.guidePosition" [value]="gp.name">{{gp.name}}</option>
                     </select>
                 </div>
             </div>   
+
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пол</label>
+                <div class="col-lg-8 fv-row">
+                    <select name="gender" data-control="selectGender" class="form-select form-select-solid form-select-lg fw-semibold" 
+                        (change)="onChangeSmallGuide($event, this.guideGender, 'id_gender')"
+                        [(ngModel)]="this.settingData.gender">
+                        <option *ngFor="let gg of this.guideGender" [value]="gg.name">{{gg.name}}</option>
+                    </select>
+                </div>
+            </div>               
+
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Тип</label>
+                <div class="col-lg-8 fv-row">
+                    <select name="typeperson" data-control="selectTypeperson" class="form-select form-select-solid form-select-lg fw-semibold" 
+                        (change)="onChangeSmallGuide($event, this.guideTypeperson, 'id_typeperson')"
+                        [(ngModel)]="this.settingData.type">
+                        <option *ngFor="let gtp of this.guideTypeperson" [value]="gtp.name">{{gtp.name}}</option>
+                    </select>
+                </div>
+            </div>               
+
            
     
             <div class="row mb-6">
-                
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
-                
                 <div class="col-lg-8 fv-row">
-                    
-                    <select name="language" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
+                    <select name="rank" data-control="selectRank" class="form-select form-select-solid form-select-lg fw-semibold" 
+                            (change)="myUpdateNumberClick($event, 'rank')"
+                            [(ngModel)]="this.settingData.rank" >
                         <option>4</option>
                         <option>5</option>
                         <option>6</option>
                         <option>Нет</option>
                     </select>
-                    
                 </div>
             </div>
          
@@ -141,38 +185,62 @@
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Рост</label>
     
          <div class="col-lg-8 fv-row">
-            <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="180" />
+            <input type="text" name="staffheight" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                    [value]="this.settingData.height"
+                    (blur)="myUpdateNumberClick($event, 'height')"/>
         </div>
-    </div>  
+    </div>
+      
     
     <div class="row mb-6">
         <!--begin::Label-->
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Вес</label>
     
         <div class="col-lg-8 fv-row">
-            <input type="text" name="company" class="form-control form-control-lg form-control-solid" value="85" />
+            <input type="text" name="staffweight" class="form-control form-control-lg form-control-solid" 
+                   [value]="this.settingData.weight"
+                   (blur)="myUpdateNumberClick($event, 'weight')" />
         </div>
     </div>  
+    
+
+    <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Дата рождения</label>
+    
+        <div class="col-lg-8 fv-row">
+            <input type="date" name="staffDateBirth" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                    [value]="this.settingData.DateBirth_str"
+                   (change)="setDate($event, 'DateBirth')" />
+        </div>
+        
+    </div> 
+
     
     <div class="row mb-6">
         <!--begin::Label-->
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Собеседование</label>
     
         <div class="col-lg-8 fv-row">
-            <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="21.06.2023" />
+            <input type="date" name="staffDateInterview" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                   [value]="this.settingData.date_interview_str"
+                   (change)="setDate($event, 'date_interview')" />
         </div>
-    </div>  
+        
+    </div>    
     
     <div class="row mb-6">
              
         <label class="col-lg-4 col-form-label fw-semibold fs-6">СМС</label>
     
-        <div class="col-lg-8 d-flex align-items-center">
-            <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                <input class="form-check-input w-45px h-30px" type="checkbox" id="sms" checked="checked" />
-                <label class="form-check-label" for="sms"></label>
-            </div>
-        </div>
+        <div class="col-lg-8 fv-row">
+            <select name="sms" data-control="selectSms" class="form-select form-select-solid form-select-lg fw-semibold" 
+                    (change)="onChangeSmallGuide($event, this.guideSMS, 'id_sms')"
+                    [(ngModel)]="this.settingData.sms">
+               <option *ngFor="let gsms of this.guideSMS" [value]="gsms.name">{{gsms.name}}</option>
+             </select>
+         </div>
+
     </div>
 
     <div class="row mb-6">
@@ -180,13 +248,17 @@
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Статус</label>
     
         <div class="col-lg-8 fv-row">
-            <input type="text" name="company" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" value="21.06.2023" />
+           <select name="status" data-control="selectStatus" class="form-select form-select-solid form-select-lg fw-semibold" 
+                   (change)="onChangeSmallGuide($event, this.guideStatus, 'id_status')" 
+                   [(ngModel)]="this.settingData.status">
+              <option *ngFor="let gs of this.guideStatus" [value]="gs.name">{{gs.name}}</option>
+            </select>
         </div>
     </div>  
 
     
       </div>
     
-    </form>
+  
     
-    
+<button (click)="backGeneral()">Назад</button>    
