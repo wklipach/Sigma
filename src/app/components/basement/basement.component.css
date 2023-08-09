@@ -8,3 +8,14 @@ li:hover{
 img:hover{
     cursor: pointer;
 }
+.btn.btn-info{
+    color: #fff;
+    background-color: #138496 !important;
+    font-weight: bold !important;
+   }
+   .btn.btn-info:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #138496 !important; 
+  cursor: pointer;
+  }

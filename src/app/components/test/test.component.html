@@ -1,18 +1,46 @@
-<h1>Knights of the Round Table</h1>
-<table>
-	<thead>
-		<tr>
-			<th resizable>Member</th>
-			<th resizable>Nickname</th>
-			<th resizable>Fate</th>
+<div class="container">
 
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let row of rows">
-			<td *ngFor="let cell of row">{{cell}}</td>
-		</tr>
-	</tbody>
-</table>
+<div class="card-body">
+	<span class="text-bs-gray-400 text-hover-primary fs-2 fw-bold me-1">ОЛЛР</span>
 
- <!-- <h6>Для выгрузки</h6> -->
+	<div class="row mb-3">
+		<label class="col-lg-6 fw-semibold fs-5 text-muted">Разрешения</label>
+		<div class="col-lg-8">
+		<span class="text-bs-gray-400 text-hover-primary fs-2 fw-bold me-1">
+			Сюда баджи разрешений
+		</span>
+		</div>
+	</div>
+
+	<div class="row mb-3">
+		
+		<label class="col-lg-6"><img src="/assets/img/plus.png"  width="30px" height="30px" /></label>
+		<div class="col-lg-10">
+		
+	<select name="company" data-control="select1" class="form-select">
+				<option>ЛК СПК</option>
+				<option>Учо</option>
+	</select>	
+
+		</div>
+	</div>
+
+
+
+</div> <!-- card-body -->
+
+<div class="card">
+    <div class="card-body">
+		<h4 class="card-title">Список задач</h4>
+        <ul class="list-group">
+            <li class="list-group-item">Задача 1</li>
+            <li class="list-group-item">Задача 2</li>
+            <li class="list-group-item">Задача 3</li>
+            <li class="list-group-item">Задача 4</li>
+            <li class="list-group-item">Задача 5</li>
+        </ul>
+
+    </div>
+</div> <!-- card-2 -->
+
+</div> <!-- container -->

@@ -3,7 +3,7 @@ var mariadbSettings = {
     user: "root",
     password: "12345",
     database: "sigma",
-    connectionLimit: 100
+    connectionLimit: 30
 };
  
 module.exports = mariadbSettings;
