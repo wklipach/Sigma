@@ -18,27 +18,22 @@
       
     <div class="card-body mt-2 p-10">
             <div class="row mb-6">
-                <!--begin::Label-->
                 <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
-                    <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
-                  <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
-                  <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
+                        <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
+                    <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
+                    <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
                 </div>
-                
-                <div class="col-lg-8">
                     
-      
-                        <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
-                        <ng-template #contentLoadAvatar class="image-input">
-                        <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
-                        </ng-template>
-                        <ng-template #contentDefault>
-                          <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
-                        </ng-template>
-                   
-           </div>
-    
+                <div class="col-lg-8">
+                            <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+                            <ng-template #contentLoadAvatar class="image-input">
+                            <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+                            </ng-template>
+                            <ng-template #contentDefault>
+                            <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
+                            </ng-template>
                 </div>
+            </div>
             
              <div class="row mb-6">
                 <!--begin::Label-->

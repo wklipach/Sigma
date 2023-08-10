@@ -4,6 +4,7 @@ var router = express.Router();
 const mariadb = require("mariadb");
 const mariadbSettings =  require('../DB');
 const pool = mariadb.createPool(mariadbSettings);
+var fs = require('fs');
 
 
 /* GET users listing. */
@@ -14,6 +15,18 @@ router.get('/', async function(req, res, next) {
       const result = await asyncProtectedObjects();
       res.send(result);
     }
+
+
+    if (req.query.get_current_objects) {
+      const result = await asyncCurrentObjects(req.query.get_current_objects);
+      res.send(result);
+    }
+
+    if (req.query.clear_object) {
+      const result = await asyncClearObject(req.query.clear_object);
+      res.send(result);
+    }  
+    
  
   });
 
@@ -55,9 +68,17 @@ router.post('/', async function(req, res) {
       res.send(result);
      }
 
+     if (req.body.imageObject) {
+      const result = await asyncUpdatePhotoObject(req.body.id_object, req.body.imageObject.Name, req.body.imageObject.imageObject);
+      res.send(result);
+     }
+
 
 
 });
+
+
+
 
 
   async function asyncProtectedObjects() {
@@ -100,6 +121,53 @@ router.post('/', async function(req, res) {
           if (conn) conn.release(); 
     }
   }
+
+  async function  asyncCurrentObjects(id_object) {
+
+   let conn = await pool.getConnection();
+    try {
+  
+        const sQuery = 
+        'SELECT po.id_object, po.`name`, po.photo_name, '+
+        'gps.`id` as id_post_status, '+
+        'gps.`name` as post_status, '+
+        '`options`, '+
+        'gor.`id` as id_organization, '+
+        'gor.`name` as cur_organization, '+
+        'po.address, po.yandex_maps, po.google_maps, po.phone, '+
+        'po.id_senjor_guard, '+
+        's.fio as `senjor_guard`, '+
+        'po.postwasset_date, po.withdrawal_date, '+
+        'gm.`id` as id_mtr, '+
+        'gm.name as MTR, '+
+        'po.id_customer, '+
+        'gc.name AS customer, '+
+        'po.id_object_type, '+
+        'got.name AS object_type '+
+        ''+
+        'FROM protected_object po '+
+        'LEFT JOIN guide_post_status gps on gps.id = po.post_status '+
+        'LEFT JOIN guide_organization gor on po.id_organization=gor.id '+
+        'LEFT JOIN staff s on s.id_staff=po.id_senjor_guard '+
+        'LEFT JOIN guide_mtr gm on gm.id =po.id_mtr '+
+        'LEFT JOIN guide_customers gc on gc.id =po.id_customer '+
+        'LEFT JOIN guide_object_type got on got.id=po.id_object_type '+
+        'where po.bitDelete = 0 and po.id_object<>1 and po.id_object=? '+
+        'ORDER BY po.id_object ASC';
+
+        const params = [id_object];
+ 
+        const resCurrentObjects = await conn.query(sQuery, params);
+        return JSON.stringify(resCurrentObjects);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+
+
 
 
   async function asyncUpdateProtectedObject(text, id_object, field, id_user) {
@@ -311,5 +379,124 @@ router.post('/', async function(req, res) {
           if (conn) conn.release(); 
     }
   } 
+
+
+  async function asyncClearObject(id_object) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        let sql = "select * from protected_object where id_object=?";
+        const rows = await conn.query(sql, [id_object]);
+        if (rows[0]) {
+            if (rows[0].photo_name) {
+                // удаляем старый аватар
+                deleteOldPhotoObject(rows[0].photo_name);
+            }
+
+        };
+        const sSql = 'update protected_object set photo_name=null where id_object=?';
+        const resupdate = await conn.query(sSql, [id_object]);
+
+        return JSON.stringify(resupdate);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+function deleteOldPhotoObject(photo_name) {
+  const sOldFileName = appRoot + '/public/images/protected_object/' + photo_name;
+  fs.access(sOldFileName, fs.F_OK, (err) => {
+      if (!err) {
+          fs.unlink(sOldFileName, (err) => {
+              if (err) console.log('ErrFileDeleted', err);
+              if (!err) console.log('FileDeleted', sOldFileName);
+          });
+          if (err) console.error('ErrFileAccess', err);
+      }
+  }); // file exists
+}
+
+
+
+
+
+
+
+async function  asyncUpdatePhotoObject(id_object, object_name, imageObject) {
+  let conn;
+  try {
+
+      conn = await pool.getConnection();
+      let sql = "select * from protected_object where id_object=?";
+      const rows = await conn.query(sql, [id_object]);
+      if (rows[0]) {
+          if (rows[0].photo_name) {
+          // удаляем старый аватар
+            deleteOldPhotoObject(rows[0].photo_name);
+          }
+          //создаем новое имя файла
+           const sNewFileName = newName(id_object, object_name);
+          //сохраняем новое имя файла в базе
+          if (sNewFileName) {
+              const sSql = 'update protected_object set photo_name=? where id_object=?';
+              const resupdate = await conn.query(sSql, [sNewFileName, id_object]);
+              // сохраняем файл на диске
+              if (CreateObjectDir()) {
+                  var data = imageObject.replace('{"value":', "").replace('}', "");
+
+                  fs.writeFile(appRoot + '/public/images/protected_object/' + sNewFileName, data, 'base64', function (err) {
+                      if (err) console.log('errSaveObjectToDisc', err);
+                      if (!err) console.log('File saved.')
+                  });
+              }
+              //
+          }
+      };
+      return JSON.stringify(rows);
+  } catch (err) {
+      throw err;
+  } finally {
+      if (conn) conn.release(); //release to pool
+  }
+}
+
+
+function newName(id_object, object_name) {
+  let sNewFileName = '';
+  const sPrefix = new Date().getTime().toString();
+  sNewFileName = id_object.toString() + '_' + sPrefix + '.' + getFileExtension(object_name);
+  return sNewFileName;
+}
+
+function getFileExtension(a) {
+  var a = a.split('.');
+  if (a.length === 1 || (a[0] === "" && a.length === 2)) {
+      return '';
+  }
+  return a.pop();    // feel free to tack .toLowerCase() here if you want
+}
+
+
+function CreateObjectDir() {
+  try {
+      fs.statSync(appRoot + '/public/images/protected_object/');
+      console.log('file or directory exists:', appRoot + '/public/images/protected_object/');
+      return true;
+  }
+  catch (errCreateObjectDir) {
+      if (errCreateObjectDir.code === 'ENOENT') {
+          fs.mkdir(appRoot + '/public/images/protected_object', {recursive: true}, (err) => {
+              if (err) { console.log('errCreateDirObject', err); return false;}
+              if (!err) { return true;}
+          });
+      } else {console.log('errCreateObjectDir',errCreateObjectDir); return false;}
+
+  }
+}
 
   module.exports = router;

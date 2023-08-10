@@ -33,7 +33,7 @@ import { SettingsComponent } from './components/account/settings/settings.compon
 import { ListMtrComponent } from './components/mtr/list-mtr/list-mtr.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ObjectCardComponent } from './object-card/object-card.component';
+import { ObjectCardComponent } from './components/protected_objects/object-card/object-card.component';
 import { ObjectSummaryComponent } from './object-summary/object-summary.component';
 import { NumberComponent } from './components/auth/number/number.component';
 import { TestComponent } from './components/test/test.component';
@@ -47,6 +47,7 @@ import { AddFilterComponent } from './add-filter/add-filter.component';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
 import { ListTaskComponent } from './components/task/list-task/list-task.component';
 import { TaskComponent } from './components/task/task/task.component';
+import { Obj2settingsComponent } from './components/protected_objects/obj2settings/obj2settings.component';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -81,7 +82,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     AddFilterComponent,
     AddTaskComponent,
     ListTaskComponent,
-    TaskComponent
+    TaskComponent,
+    Obj2settingsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,135 @@
+<div class="me-7 mb-4">
+    <div class="image-input-wrapper" *ngIf="this.sObjectPath.length>0; then contentLoadObject else contentObjectDefault">Объект</div>
+    <ng-template #contentLoadObject class="image-input">
+    <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sObjectPath" alt="Объект" id="img">
+    </ng-template>
+    <ng-template #contentObjectDefault>
+      <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/free-icon-blank-house.png">
+    </ng-template>
+</div>
+
+<form class="mb-2 px-9">
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Объект</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.name}}</label>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Тип объекта</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.object_type}}</label>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Статус</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.post_status}}</label>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Опции</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.options}}</label>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Под охраной</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.cur_organization}}</label>
+    </div>
+  </div>  
+
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Телефон</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.phone}}</label>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Адрес</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.address}}</label>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Яндекс Карта</label>
+    <div class="col-lg-8 fv-row">
+      <a href="{{ this.currentObject.yandex_maps}}" class="btn btn-primary btn-sm">Яндекс</a>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Google Карта</label>
+    <div class="col-lg-8 fv-row">
+      <a href="{{ this.currentObject.google_maps}}" class="btn btn-primary btn-sm">Google</a>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">НОО</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.senjor_guard}}</label>
+    </div>
+  </div>  
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Выставлен Дата</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.postwassetdate_str}}</label>
+    </div>
+  </div>  
+
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Снят Дата</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.withdrawaldate_str}}</label>
+    </div>
+  </div>  
+
+  --
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">МТР</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.MTR}}</label>
+    </div>
+  </div>  
+
+
+  <div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label  fw-semibold fs-6">Клиент</label>
+    <div class="col-lg-8 fv-row">
+      <label>{{this.currentObject.customer}}</label>
+    </div>
+  </div>  
+
+
+</form>
+
+
+<button (click)="clickBack()">Выход</button>
+<button (click)="clickSettings()">Settings</button>

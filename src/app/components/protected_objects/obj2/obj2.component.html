@@ -53,8 +53,8 @@ class="material striped"
 
 
 <ngx-datatable-column prop = "id_object" name = "#" [width]="getColumnSize('id_object')">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-        {{ value }}
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <div (click)="openObj2Card(row.id_object, row.name)"> {{ value }} </div>
       </ng-template>
 </ngx-datatable-column>
 

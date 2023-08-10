@@ -11,11 +11,33 @@ export class ListobjectsService {
   constructor(private http: HttpClient, public gr: GlobalRef, private auth: AuthService) { }
 
 
+
+  clearPhotoObject(id_object: number) {
+
+    const params = new HttpParams()
+                  .set('clear_object', id_object);
+    return this.http.get(this.gr.sUrlGlobal + 'protected_objects', {params: params});
+  }
+
+  updatePhotoObject(imageObject: any, id_object: number) {
+    const data_object = { 'imageObject': imageObject, 'id_object' : id_object};
+    return this.http.post(this.gr.sUrlGlobal + 'protected_objects', data_object);
+  }
+
+
+
   getProtectedObjectsOne() {
     const params = new HttpParams()
       .set('get_protected_objects', 'get_protected_objects');
     return this.http.get(this.gr.sUrlGlobal + 'protected_objects', {params: params});
   }
+
+  getCurrentProtectedObjects(id_object: number) {
+    const params = new HttpParams()
+      .set('get_current_objects', id_object);
+    return this.http.get(this.gr.sUrlGlobal + 'protected_objects', {params: params});
+  }
+
 
 
   updateProtectedOne(text: string, id_object: string, field: string) {

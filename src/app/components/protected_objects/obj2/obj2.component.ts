@@ -46,7 +46,6 @@ interface IObjectOne {
   customer?: string; 
   id_object_type?: string; 
   object_type?: string; 
-
 };
 
 interface IMaps {
@@ -606,8 +605,26 @@ export class Obj2Component {
           newTab.opener = null;
       }
 
-
     }
+
+
+    openObj2Card(id_object: number, name: string) {
+
+      const url = this.router.serializeUrl(this.router.createUrlTree(['obj2card'], {
+        queryParams: {
+          id_object: id_object,
+          name: name
+        }
+      }));
+  
+      const newTab = window.open(url, '_blank'); 
+      if(newTab) {
+          newTab.opener = null;
+      }
+  
+  
+    }
+  
   
   
   
