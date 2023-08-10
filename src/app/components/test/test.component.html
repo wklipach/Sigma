@@ -1,46 +1,28 @@
-<div class="container">
-
-<div class="card-body">
-	<span class="text-bs-gray-400 text-hover-primary fs-2 fw-bold me-1">ОЛЛР</span>
-
-	<div class="row mb-3">
-		<label class="col-lg-6 fw-semibold fs-5 text-muted">Разрешения</label>
-		<div class="col-lg-8">
-		<span class="text-bs-gray-400 text-hover-primary fs-2 fw-bold me-1">
-			Сюда баджи разрешений
-		</span>
-		</div>
+<a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+	Ссылка с помощью атрибута href
+  </a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+	Кнопка с атрибутом data-bs-target
+  </button>
+  
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+	<div class="offcanvas-header">
+	  <h5 class="offcanvas-title" id="offcanvasExampleLabel">Вне холста</h5>
+	  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
 	</div>
-
-	<div class="row mb-3">
-		
-		<label class="col-lg-6"><img src="/assets/img/plus.png"  width="30px" height="30px" /></label>
-		<div class="col-lg-10">
-		
-	<select name="company" data-control="select1" class="form-select">
-				<option>ЛК СПК</option>
-				<option>Учо</option>
-	</select>	
-
-		</div>
+	<div class="offcanvas-body">
+	  <div>
+		Какой-то текст в качестве заполнителя. В реальной жизни у вас могут быть элементы, которые Вы выбрали. Нравится, текст, изображения, списки и т. д.
+	  </div>
+	  <div class="dropdown mt-3">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+		  Кнопка раскрывающегося списка
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		  <li><a class="dropdown-item" href="#">Действие</a></li>
+		  <li><a class="dropdown-item" href="#">Другое действие</a></li>
+		  <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+		</ul>
+	  </div>
 	</div>
-
-
-
-</div> <!-- card-body -->
-
-<div class="card">
-    <div class="card-body">
-		<h4 class="card-title">Список задач</h4>
-        <ul class="list-group">
-            <li class="list-group-item">Задача 1</li>
-            <li class="list-group-item">Задача 2</li>
-            <li class="list-group-item">Задача 3</li>
-            <li class="list-group-item">Задача 4</li>
-            <li class="list-group-item">Задача 5</li>
-        </ul>
-
-    </div>
-</div> <!-- card-2 -->
-
-</div> <!-- container -->
+  </div>
