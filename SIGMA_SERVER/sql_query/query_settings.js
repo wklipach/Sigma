@@ -18,7 +18,8 @@ var sqlStringSettings =
 "gg.name as `gender`, "+
 "gt.name as `type`, "+
 "sms.name as sms, "+
-"st.name as `status` "+
+"st.name as `status`, "+
+"s.`comment` "+
 "from staff s "+
 "left join guide_organization go on go.id = s.id_organization "+
 "left join guide_department gd on gd.id = s.id_department "+

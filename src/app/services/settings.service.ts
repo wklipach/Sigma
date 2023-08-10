@@ -13,9 +13,6 @@ export class SettingsService {
     const params = new HttpParams()
       .set('get_current_settings', id_staff.toString());
 
-
-      console.log(params);
-
     return this.http.get(this.gr.sUrlGlobal + 'settings', {params: params});
   }
 

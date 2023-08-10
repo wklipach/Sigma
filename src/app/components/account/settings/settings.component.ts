@@ -44,6 +44,7 @@ interface ISetting {
   sms?: string; 
   status?: string;  
   rank?: string;  
+  comment?: string;  
 }
 
 

@@ -257,8 +257,19 @@
     </div>  
 
     
+
+             <div class="row mb-6">
+                <!--begin::Label-->
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Комментарий</label>
+    
+                <div class="col-lg-8 fv-row">
+                    <input name="comment" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                               [value]="this.settingData.comment"
+                               (blur)="myUpdateClick($event.target, 'comment')"/>
+                </div>
+            </div>      
+
       </div>
     
-  
     
 <button (click)="backGeneral()">Назад</button>    
