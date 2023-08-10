@@ -38,6 +38,7 @@ class="material striped"
 (resize)="onResize($event)"
 >
 
+
 <ngx-datatable-column prop = "id_staff" name = "#" [width]="getColumnSize('id_staff')" >
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
       <span (dblclick)="newGeneral(row.id_staff)">
@@ -45,6 +46,17 @@ class="material striped"
       </span>
       </ng-template>
 </ngx-datatable-column>
+
+
+<ngx-datatable-column prop = "avatar_name" name = "Фото" [width]="getColumnSize('avatar_name')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+       <div>
+             <img [src]="value" width="30" />
+       </div>
+    </ng-template>
+</ngx-datatable-column>
+
+
 
 <!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
 <ngx-datatable-column prop="fio" name="ФИО" [width]="getColumnSize('fio')">

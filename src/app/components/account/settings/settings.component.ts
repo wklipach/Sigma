@@ -227,8 +227,6 @@ export class SettingsComponent {
 
       const S = aRes[0].avatar_name;
 
-      console.log('this.sAvatarPath S=', S);
-
       if (S !== '""' && (S)) {
         if (typeof S !== 'undefined') {
           if (S.length > 0) {
@@ -236,6 +234,8 @@ export class SettingsComponent {
           }
         }
       }
+
+
     });
   }
 

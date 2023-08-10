@@ -8,6 +8,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { FiltersService } from 'src/app/services/filters.service';
 import { TableService } from 'src/app/services/table.service';
 import { ITable } from 'src/app/interface/table';
+import { GlobalRef } from 'globalref';
 
 //import {NgxDatatableResizer} from "@swimlane/model/Ngx-datatable-resizer";
 
@@ -72,6 +73,8 @@ interface IObjectOne {
     guide_sms?: string;
     Color?: string;
     comment?: string;
+    avatar_name?: string;
+    ItIsAvatar?: string;
 }
 
 interface IDeleteObject {
@@ -127,7 +130,8 @@ export class Staff2Component {
     private datePipe: DatePipe,
     private router: Router,
     private servfilter: FiltersService,
-    private tableServ:  TableService ) {  }
+    private tableServ:  TableService,
+    private gr: GlobalRef ) {  }
 
 
 ngOnInit() {
@@ -199,6 +203,16 @@ ngOnInit() {
       if (el.senjor_guard?.trim() === "" || el.senjor_guard?.trim() == null ) el.senjor_guard = "--" ; 
       if (el.organization?.trim() === "" || el.organization?.trim() == null ) el.organization = "--" ; 
       if (el.guide_sms?.trim() === "" || el.guide_sms?.trim() == null ) el.guide_sms = "--" ; 
+
+
+
+      if ( Number(el.ItIsAvatar)>0) {
+        el.avatar_name = this.gr.sUrlAvatarGlobal+ el.avatar_name;
+      } else {
+        el.avatar_name ="/assets/img/usernull.jpg";
+      }
+
+
     });
 
     // при загрузке показываем без всяких ограничений
@@ -315,7 +329,7 @@ summaryOpen(id_staff: number) {
        if (!res.name) res.name='';
     
        let resShowStaff = this.ShowStaff.find( (el: IObjectOne) => el.id_staff == id_staff);
-       if (resShowStaff) {
+       if (resShowStaff)  {
         resShowStaff[strField as keyof IObjectOne] = res.name;
        this.ShowStaff = [...this.ShowStaff];
        }
