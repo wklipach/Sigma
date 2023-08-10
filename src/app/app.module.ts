@@ -46,6 +46,7 @@ import { Staff2Component } from './components/staff2/staff2/staff2.component';
 import { AddFilterComponent } from './add-filter/add-filter.component';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
 import { ListTaskComponent } from './components/task/list-task/list-task.component';
+import { TaskComponent } from './components/task/task/task.component';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -79,7 +80,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     Staff2Component,
     AddFilterComponent,
     AddTaskComponent,
-    ListTaskComponent
+    ListTaskComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

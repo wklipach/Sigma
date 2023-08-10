@@ -25,4 +25,9 @@ export class BasementComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+
+  public unreadTask() {
+    this.router.navigate(['/task']);
+  }
+
 }
