@@ -433,6 +433,28 @@ class="material striped"
 <!-- КОНЕЦ СПРАВОЧНИКА SMS --> 
 
 
+<!-- НАЧАЛО ПОЛЯ КОММЕНТАРИЙ-->
+<ngx-datatable-column prop="comment" name="Комментарий" [width]="getColumnSize('comment')">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    <span
+      title="Double click to edit"
+      (dblclick)="editing[rowIndex + '-comment'] = true"
+      *ngIf="!editing[rowIndex + '-comment']"
+    >
+      {{ value}} 
+    </span>
+    <input
+      (blur)="myUpdateClick($event.target, row.id_staff, 'comment', 'comment')"
+      (keyup.enter)="myEnter($event)"
+      *ngIf="editing[rowIndex + '-comment']"
+      type="text"
+      [value]="value"
+    />
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ КОММЕНТАРИЙ-->
+
+
 
 <!-- НАЧАЛО ПОЛЯ delete --> 
 <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">

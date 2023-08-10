@@ -1,6 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import {  CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Component, ViewChild } from '@angular/core';
 import { GuideService } from 'src/app/services/guide.service';
 import { StaffService } from 'src/app/services/staff.service';
 import { Router } from '@angular/router';
@@ -72,6 +71,7 @@ interface IObjectOne {
     id_sms?: string;
     guide_sms?: string;
     Color?: string;
+    comment?: string;
 }
 
 interface IDeleteObject {
@@ -185,6 +185,7 @@ ngOnInit() {
       el.date_interview_str = this.datePipe.transform(el.date_interview, 'yyyy-MM-dd') || '--';
 
       if (el.fio?.trim() === "" || el.fio?.trim() == null ) el.fio = "--" ; 
+      if (el.comment?.trim() === "" || el.comment?.trim() == null ) el.comment = "--" ; 
       if (el.phone?.trim() === "" || el.phone?.trim() == null ) el.phone = "--" ; 
       if (el.phone2?.trim() === "" || el.phone2?.trim() == null ) el.phone2 = "--" ; 
       if (el.guide_position?.trim() === "" || el.guide_position?.trim() == null ) el.guide_position = "--" ; 
@@ -290,7 +291,8 @@ summaryOpen(id_staff: number) {
                   (el.s002from_str &&  el.s002from_str.toUpperCase().indexOf(sInput) != -1) ||                                                      
                   (el.s003from_str &&  el.s003from_str.toUpperCase().indexOf(sInput) != -1) ||                                                                                          
                   (el.rank &&  el.rank.toString().toUpperCase().indexOf(sInput) != -1) ||
-                  (el.date_interview_str &&  el.date_interview_str.toUpperCase().indexOf(sInput) != -1) ||                                                      
+                  (el.date_interview_str &&  el.date_interview_str.toUpperCase().indexOf(sInput) != -1) ||    
+                  (el.comment &&  el.comment.toUpperCase().indexOf(sInput) != -1) ||
                   (el.guide_sms &&  el.guide_sms.toUpperCase().indexOf(sInput) != -1);
         });
 
@@ -675,7 +677,8 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
         if (el.rank?.toString().trim() === "" || el.rank?.toString().trim() == null ) el.rank = "--" ; 
         if (el.senjor_guard?.trim() === "" || el.senjor_guard?.trim() == null ) el.senjor_guard = "--" ; 
         if (el.organization?.trim() === "" || el.organization?.trim() == null ) el.organization = "--" ; 
-        if (el.date_interview_str?.trim() === "" || el.date_interview_str?.trim() == null ) el.date_interview_str = "--" ;         
+        if (el.date_interview_str?.trim() === "" || el.date_interview_str?.trim() == null ) el.date_interview_str = "--" ;   
+        if (el.comment?.trim() === "" || el.comment?.trim() == null ) el.comment = "--" ; 
         if (el.guide_sms?.trim() === "" || el.guide_sms?.trim() == null ) el.guide_sms = "--" ; 
 
         this.ShowStaff.unshift(el);

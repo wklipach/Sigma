@@ -77,6 +77,7 @@ router.get('/', async function(req, res, next) {
             "SELECT "+
             "    s.`id_staff`, "+ 
             "    s.`fio`, "+
+            "    s.`comment`, "+
             "    s.`phone`, "+
             "    s.`phone2`, "+
             "        s.`id_position`, "+
