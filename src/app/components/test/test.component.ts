@@ -8,6 +8,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class TestComponent {
 
 
+  classApplied = false;
+
+
   readonly rows = [
     ["King Arthur", "-", "Arrested"],
     ["Sir Bedevere", "The Wise", "Arrested"],
@@ -18,5 +21,9 @@ export class TestComponent {
   ];
 
 
+  clickToggle() {
+     this.classApplied = !this.classApplied;
+     console.log('!!!!!!', this.classApplied);
+  }
 
 }

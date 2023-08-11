@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 <div class="wrapper">
 	<!-- Sidebar  -->
-	<nav id="sidebar">
+	<nav id="sidebar" [class.active]="classApplied">
 		<div class="sidebar-header">
 			<h3>Bootstrap Sidebar</h3>
 		</div>
@@ -70,7 +70,7 @@ $(document).ready(function () {
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
 
-				<button type="button" id="sidebarCollapse" class="btn btn-info">
+				<button type="button" id="sidebarCollapse" class="btn btn-info" (click)="clickToggle()">
 					<i class="fas fa-align-left"></i>
 					<span>Toggle Sidebar</span>
 				</button>
