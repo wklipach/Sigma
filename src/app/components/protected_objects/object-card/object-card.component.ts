@@ -116,6 +116,9 @@ onLoadFromBase() {
 
 loadTextInfo (aRes: any) {
   this.currentObject = aRes[0];
+  this.currentObject.postwassetdate_str = this.datePipe.transform(this.currentObject.postwasset_date, 'yyyy-MM-dd') || '';
+  this.currentObject.withdrawaldate_str = this.datePipe.transform(this.currentObject.withdrawal_date, 'yyyy-MM-dd') || '';
+
 }
 
 
