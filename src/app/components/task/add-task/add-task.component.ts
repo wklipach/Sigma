@@ -90,11 +90,19 @@ export class AddTaskComponent {
     }
 
 
+    let nameTask = (document.getElementById('nameTask') as HTMLInputElement).value.trim();
+    if (!nameTask) {
+      alert("Введите наименование задачи.");
+      return;      
+    }
+
+
+
     //console.log(this.id_department);
     //console.log(sNote);
     //console.log(dateEnd);
 
-    this.servTask.insertTask(this.ProtectedObject.id_object, this.id_department, sNote, dateBegin, dateEnd).subscribe( (value: any) => {
+    this.servTask.insertTask(this.ProtectedObject.id_object, nameTask, this.id_department, sNote, dateBegin, dateEnd).subscribe( (value: any) => {
 
 
         if (value.insertId) {

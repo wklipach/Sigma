@@ -21,6 +21,7 @@ router.get('/', async function(req, res, next) {
 
     if (req.body['insert_task']) {
       const result = await asyncInsertTask(req.body['id_object'], 
+                                           req.body['name_task'], 
                                            req.body['id_department'], 
                                            req.body['note'], 
                                            req.body['date_begin'],
@@ -43,14 +44,14 @@ router.get('/', async function(req, res, next) {
 
 
 
-    async function   asyncInsertTask(id_object, id_department, note, date_begin, date_end, id_user) {
+    async function   asyncInsertTask(id_object, name_task, id_department, note, date_begin, date_end, id_user) {
 
         let conn = await pool.getConnection();
         try {
     
-            const params = [id_object, id_department, note, date_begin, date_end, id_user];
+            const params = [id_object, name_task, id_department, note, date_begin, date_end, id_user];
             const sQuery = 
-            "insert task (id_object, id_department, note, date_begin, date_end, id_user, DateCreate) value(?,?,?,?,?,?, now())";
+            "insert task (id_object, name_task, id_department, note, date_begin, date_end, id_user, DateCreate) value(?,?,?,?,?,?,?, now())";
             
             const resAddTask = await conn.query(sQuery, params);
             
@@ -68,6 +69,10 @@ router.get('/', async function(req, res, next) {
                 "insert task_log (`id_task`, `newvalue`,  `field`, `id_user`, `date_oper`) value(?, ?, ? , ?, ?)";
                 await conn.query(sJournal, paramsJournal);
 
+                paramsJournal = [resAddTask.insertId, name_task, 'name_task', id_user, cur_date];
+                sJournal = 
+                "insert task_log (`id_task`, `newvalue`,  `field`, `id_user`, `date_oper`) value(?, ?, ? , ?, ?)";
+                await conn.query(sJournal, paramsJournal);
 
                 paramsJournal = [resAddTask.insertId, id_department, 'id_department', id_user, cur_date];
                 sJournal = 

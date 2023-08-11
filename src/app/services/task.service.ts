@@ -18,11 +18,12 @@ export class TaskService {
   }
 
 
-  insertTask(id_object: number, id_department: number, note: string, date_begin: string, date_end: string) {
+  insertTask(id_object: number, name_task: string, id_department: number, note: string, date_begin: string, date_end: string) {
     const sUrl = this.gr.sUrlGlobal + 'task';
     const id_user = this.auth.getSessionUser().id_user;
     const params = {insert_task: 'insert_task', 
-                    id_object: id_object, 
+                    id_object: id_object,
+                    name_task: name_task, 
                     id_department: id_department, 
                     note: note,
                     date_begin: date_begin,
