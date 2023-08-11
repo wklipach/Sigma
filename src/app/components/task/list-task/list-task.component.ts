@@ -16,7 +16,10 @@ note? : string,
 department_name? : string, 
 date_begin? : string, 
 date_end? : string, 
-bitSuccess? : boolean
+bitSuccess? : boolean;
+Success?: string;
+RESFIO? : string;
+name_task? : string; 
 }
 
 interface IDeleteTask {
@@ -67,6 +70,14 @@ export class ListTaskComponent {
 
     this.servTask.getTask_All().subscribe( (value: any) => {
       this.taskArray = value; 
+
+
+      this.taskArray.forEach ( el => {
+
+        if (el.bitSuccess)  el.Success = "Да"; else el.Success = "Нет"
+      });
+
+
       this.taskOriginal = [...this.taskArray]
     });
 

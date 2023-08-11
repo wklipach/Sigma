@@ -50,7 +50,20 @@ class="material striped"
       </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column prop = "note" name = "Задача" [width]="getColumnSize('note')">
+<ngx-datatable-column prop = "RESFIO" name = "От кого" [width]="getColumnSize('RESFIO')">
+  <ng-template let-value="value" ngx-datatable-cell-template>
+      {{ value }}
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "name_task" name = "Задача" [width]="getColumnSize('note')">
+  <ng-template let-value="value" ngx-datatable-cell-template>
+      {{ value }}
+    </ng-template>
+</ngx-datatable-column>
+
+
+<ngx-datatable-column prop = "note" name = "Описание" [width]="getColumnSize('note')">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}
       </ng-template>
@@ -69,7 +82,7 @@ class="material striped"
 </ngx-datatable-column>
 
 g
-<ngx-datatable-column prop = "bitSuccess" name = "Выполнена" [width]="getColumnSize('bitSuccess')">
+<ngx-datatable-column prop = "Success" name = "Выполнена" [width]="getColumnSize('Success')">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}
       </ng-template>

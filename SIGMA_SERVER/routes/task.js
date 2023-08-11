@@ -113,15 +113,22 @@ router.get('/', async function(req, res, next) {
   
         const sQuery = 
         "select t.id as id_task, "+
-        "t.id_department,  "+
+        "t.id_department, "+
         "t.note, "+
-        "gd.name as department_name, "+
+        "gd.name as department_name,  "+
         "t.date_begin, "+
         "t.date_end, "+
-        "t.bitSuccess "+
-        "from task t, guide_department gd "+
-        "where gd.id=t.id_department and "+
-        "t.bitDelete = 0 "+
+        "t.bitSuccess, "+
+        "t.name_task, "+
+        "case "+
+        "when s.fio is null then u.login "+
+        "else s.fio "+
+        "end as RESFIO "+
+        "from task t "+
+        "left join staff s on t.id_user = s.id_staff "+
+        "left join tuser u on t.id_user = u.id "+
+        "inner join guide_department gd on gd.id=t.id_department "+
+        "where t.bitDelete = 0 "+
         "order by t.date_begin ";
 
         const resTask = await conn.query(sQuery);
