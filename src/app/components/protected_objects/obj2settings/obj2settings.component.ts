@@ -6,6 +6,19 @@ import { GlobalRef } from 'globalref';
 import { GuideService } from 'src/app/services/guide.service';
 import { ListobjectsService } from 'src/app/services/listobjects.service';
 import { TableService } from 'src/app/services/table.service';
+import { Observable, forkJoin } from 'rxjs';
+
+
+interface ISmallGuide { 
+  id?: string;  
+  name?: string; 
+}
+
+interface ISenjorGuardGuide { 
+  id?: string;  
+  id_staff?: string;  
+  fio?: string; 
+}
 
 interface ICurrentObject { 
   id_object?: string;  
@@ -48,6 +61,12 @@ export class Obj2settingsComponent {
   currentObject: ICurrentObject = {};
   public sObjectPath  = '';
 
+  guideSenjorGuard:  ISenjorGuardGuide[] = [];
+  guideObjectType:  ISmallGuide[] = [];
+  guidePostStatus:  ISmallGuide[] = [];
+  guideOrganization:  ISmallGuide[] = [];
+  guideMTR:  ISmallGuide[] = [];
+  guideCustomers:  ISmallGuide[] = [];
 
   constructor (
     private servguide: GuideService, 
@@ -69,11 +88,36 @@ export class Obj2settingsComponent {
       if (params['id_object']) {
           this.id_object = params['id_object'];
       }
-      this.onLoadFromBase();
-     
+      this.loadGuide();
     });      
-
   }
+
+
+
+  loadGuide() {
+
+  //загружаем справочники Компания, Отдел, Руководитель, Должность, Разряд, Статус
+  let sources: Observable<any>[] = [
+    this.servguide.getSenjorGuard(),
+    this.servguide.getSmallGuide('guide_object_type'),
+    this.servguide.getSmallGuide('guide_post_status'),
+    this.servguide.getSmallGuide('guide_organization'),
+    this.servguide.getSmallGuide('guide_mtr'),
+    this.servguide.getSmallGuide('guide_customers'),
+  ];
+
+  forkJoin(sources)
+  .subscribe(([res1, res2, res3, res4, res5, res6]) => {
+      this.guideSenjorGuard = res1; 
+      this.guideObjectType = res2; 
+      this.guidePostStatus = res3;
+      this.guideOrganization = res4;
+      this.guideMTR = res5;
+      this.guideCustomers = res6;
+      this.onLoadFromBase();
+  }); 
+
+}
 
   onLoadFromBase() {
     this.sObjectPath = '';
@@ -104,6 +148,11 @@ export class Obj2settingsComponent {
 
   loadTextInfo (aRes: any) {
     this.currentObject = aRes[0];
+
+    this.currentObject.postwassetdate_str = this.datePipe.transform(this.currentObject.postwasset_date, 'yyyy-MM-dd') || '';
+    this.currentObject.withdrawaldate_str = this.datePipe.transform(this.currentObject.withdrawal_date, 'yyyy-MM-dd') || '';
+
+
     console.log('currentObject', this.currentObject);
   
   }
@@ -221,5 +270,54 @@ export class Obj2settingsComponent {
 
     return dataURL;
   }
+
+  myUpdateClick(element: any, field: string) {
+    let text = element.value;
+    if (!text ) text='--';
+    if (text === '') text='--';
+
+    this.objserv.updateProtectedOne(text, this.id_object.toString(), field).subscribe( (res: any) => {
+      console.log('res update = ', res);
+    });
+ }
+
+
+ idDateisValid (date: Date) {
+  return date.getTime() === date.getTime();
+} 
+
+ setDate($event: any, field: string) {
+  let date = new Date($event.target.value);
+  const isDate = this.idDateisValid(date);
+  if (isDate) {
+    // console.log($event.target.value, date);
+    this.objserv.updateProtectedDate(date, this.id_object.toString(), field).subscribe( (res: any) => { console.log('res update = ', res); } );
+  } else {
+    // console.log($event.target.value, 'даты нет!');
+    this.objserv.updateProtectedDateNull(this.id_object.toString(), field).subscribe( (res: any) => { console.log('res update = ', res); } );
+  }
+} 
+
+onChangeSenjorGuard(ev: any,  senjorGuide:  ISenjorGuardGuide[], field: string) {
+  if (ev) {
+   let res = senjorGuide.find( (el) => el.fio == ev.target.value);
+   if (res) {
+    if (!res.fio) res.fio='';
+       this.objserv.updateProtectedSmallGuide(Number(res.id_staff), res.fio, this.id_object.toString(), field).subscribe();
+   }
+  }
+}
+
+onChangeSmallGuide(ev: any,  smallGuide:  ISmallGuide[], field: string) {
+  if (ev) {
+   let res = smallGuide.find( (el) => el.name == ev.target.value);
+   if (res) {
+   if (!res.name) res.name='';
+    this.objserv.updateProtectedSmallGuide(Number(res.id), res.name, this.id_object.toString(), field).subscribe();
+   }
+  }
+}
+
+
 
 }

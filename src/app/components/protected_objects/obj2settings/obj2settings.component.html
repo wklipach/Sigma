@@ -27,14 +27,10 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Объект</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.name}}</label>
+      <input type="text" name="name" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.name"
+      (blur)="myUpdateClick($event.target, 'name')"/>
     </div>
-
-<!--
-    <input type="text" name="fio" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
-    [value]="this.settingData.fio"
-    (blur)="myUpdateClick($event.target, 'fio')"/>
--->    
 
 
   </div>  
@@ -43,7 +39,11 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Тип объекта</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.object_type}}</label>
+        <select name="ObjectType" data-control="selectObjectType" class="form-select form-select-solid form-select-lg fw-semibold" 
+            (change)="onChangeSmallGuide($event, this.guideObjectType, 'id_object_type')"
+            [(ngModel)]="this.currentObject.object_type">
+            <option *ngFor="let got of this.guideObjectType" [value]="got.name">{{got.name}}</option>
+        </select>
     </div>
   </div>  
 
@@ -51,7 +51,11 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Статус</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.post_status}}</label>
+      <select name="PostStatus" data-control="selectPostStatus" class="form-select form-select-solid form-select-lg fw-semibold" 
+              (change)="onChangeSmallGuide($event, this.guidePostStatus, 'post_status')"
+              [(ngModel)]="this.currentObject.post_status">
+         <option *ngFor="let gps of this.guidePostStatus" [value]="gps.name">{{gps.name}}</option>
+      </select>
     </div>
   </div>  
 
@@ -59,7 +63,9 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Опции</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.options}}</label>
+      <input type="text" name="options" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.options"
+      (blur)="myUpdateClick($event.target, 'options')"/>
     </div>
   </div>  
 
@@ -67,7 +73,11 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Под охраной</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.cur_organization}}</label>
+      <select name="organization" data-control="selectOrganization" class="form-select form-select-solid form-select-lg fw-semibold" 
+              (change)="onChangeSmallGuide($event, this.guideOrganization, 'id_organization')"
+              [(ngModel)]="this.currentObject.cur_organization">
+          <option *ngFor="let go of this.guideOrganization" [value]="go.name">{{go.name}}</option>
+      </select>
     </div>
   </div>  
 
@@ -76,7 +86,9 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Телефон</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.phone}}</label>
+      <input type="text" name="phone" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.phone"
+      (blur)="myUpdateClick($event.target, 'phone')"/>
     </div>
   </div>  
 
@@ -84,7 +96,9 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Адрес</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.address}}</label>
+      <input type="text" name="address" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.address"
+      (blur)="myUpdateClick($event.target, 'address')"/>
     </div>
   </div>  
 
@@ -92,23 +106,35 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Яндекс Карта</label>
     <div class="col-lg-8 fv-row">
+      <input type="text" name="yandex_maps" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.yandex_maps"
+      (blur)="myUpdateClick($event.target, 'yandex_maps')"/>
       <a href="{{ this.currentObject.yandex_maps}}" class="btn btn-primary btn-sm">Яндекс</a>
     </div>
   </div>  
+
 
   <div class="row mb-6">
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Google Карта</label>
     <div class="col-lg-8 fv-row">
+      <input type="text" name="google_maps" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.google_maps"
+      (blur)="myUpdateClick($event.target, 'google_maps')"/>
       <a href="{{ this.currentObject.google_maps}}" class="btn btn-primary btn-sm">Google</a>
     </div>
   </div>  
+
 
   <div class="row mb-6">
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">НОО</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.senjor_guard}}</label>
+        <select name="senjorguard" data-control="selectSenjorGuard" class="form-select form-select-solid form-select-lg fw-semibold" 
+                (change)="onChangeSenjorGuard($event, this.guideSenjorGuard, 'id_senjor_guard')"
+                [(ngModel)]="this.currentObject.senjor_guard">
+        <option *ngFor="let sg of this.guideSenjorGuard" [value]="sg.fio">{{sg.fio}}</option>
+      </select>
     </div>
   </div>  
 
@@ -116,7 +142,9 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Выставлен Дата</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.postwassetdate_str}}</label>
+      <input type="date" name="postwassetdate" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.postwassetdate_str"
+      (change)="setDate($event, 'postwasset_date')" />
     </div>
   </div>  
 
@@ -125,7 +153,10 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Снят Дата</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.withdrawaldate_str}}</label>
+      <input type="date" name="withdrawaldate" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+      [value]="this.currentObject.withdrawaldate_str"
+      (change)="setDate($event, 'withdrawal_date')" />
+
     </div>
   </div>  
 
@@ -135,7 +166,11 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">МТР</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.MTR}}</label>
+      <select name="MTR" data-control="selectMTR" class="form-select form-select-solid form-select-lg fw-semibold" 
+              (change)="onChangeSmallGuide($event, this.guideMTR, 'id_mtr')"
+              [(ngModel)]="this.currentObject.MTR">
+          <option *ngFor="let gm of this.guideMTR" [value]="gm.name">{{gm.name}}</option>
+      </select>
     </div>
   </div>  
 
@@ -144,7 +179,11 @@
     <!--begin::Label-->
     <label class="col-lg-4 col-form-label  fw-semibold fs-6">Клиент</label>
     <div class="col-lg-8 fv-row">
-      <label>{{this.currentObject.customer}}</label>
+      <select name="customer" data-control="selectCustomer" class="form-select form-select-solid form-select-lg fw-semibold" 
+              (change)="onChangeSmallGuide($event, this.guideCustomers, 'id_customer')"
+              [(ngModel)]="this.currentObject.customer">
+          <option *ngFor="let gc of this.guideCustomers" [value]="gc.name">{{gc.name}}</option>
+      </select>
     </div>
   </div>  
 
