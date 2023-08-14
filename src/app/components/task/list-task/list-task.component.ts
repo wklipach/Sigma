@@ -68,6 +68,7 @@ export class ListTaskComponent {
 
     this.ColumnSizeObj =   this.tableServ.getTableWidth('TaskTable');
 
+    
     this.servTask.getTask_All().subscribe( (value: any) => {
       this.taskArray = value; 
 
