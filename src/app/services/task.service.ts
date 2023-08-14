@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalRef } from 'globalref';
 import { AuthService } from './auth.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ export class TaskService {
 
 
   getTask_All() {
+    const id_user = this.auth.getSessionUser().id_user;
     const params = new HttpParams()
-      .set('get_task', 'get_task');
+      .set('get_task', id_user);
     return this.http.get(this.gr.sUrlGlobal + 'task', {params: params});
   }
 
@@ -45,7 +47,23 @@ export class TaskService {
     return this.http.post(sUrl, {succesfullTask: 'succesfullTask', id_task, id_user});
   }
 
+  acceptTask(id_task: string) {
+    const sUrl = this.gr.sUrlGlobal + 'task';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {acceptTask: 'acceptTask', id_task, id_user});
+  }
+
+  unAceptTaskCount() {
+    const sUrl = this.gr.sUrlGlobal + 'task';
+    const id_user = this.auth.getSessionUser().id_user;
+    return this.http.post(sUrl, {unAceptTaskCount: 'unAceptTaskCount', id_user});
+  }
 
 
+  public countTask$ = new Subject<number>();
+
+		public changeCount(count: number) {
+   		this.countTask$.next(count); 
+  }
 
 }

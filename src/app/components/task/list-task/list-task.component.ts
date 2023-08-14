@@ -20,6 +20,8 @@ bitSuccess? : boolean;
 Success?: string;
 RESFIO? : string;
 name_task? : string; 
+Acceptor? : string; 
+bitAccept? : string; 
 }
 
 interface IDeleteTask {
@@ -54,6 +56,7 @@ export class ListTaskComponent {
   //объект для модального окна удаления
   curDeleteTask: IDeleteTask = {};
   curSuccesfullTask: ISuccesfullTask = {};
+  curAcceptTask: ISuccesfullTask = {};
 
 
 
@@ -68,7 +71,7 @@ export class ListTaskComponent {
 
     this.ColumnSizeObj =   this.tableServ.getTableWidth('TaskTable');
 
-    
+
     this.servTask.getTask_All().subscribe( (value: any) => {
       this.taskArray = value; 
 
@@ -80,6 +83,10 @@ export class ListTaskComponent {
 
 
       this.taskOriginal = [...this.taskArray]
+
+
+      console.log(this.taskArray);
+
     });
 
   }
@@ -125,9 +132,24 @@ export class ListTaskComponent {
     document!.getElementById("openSuccesfullModalButton")!.click();
   }
 
+
+
+  acceptTask(id_task: number, sLink: string) {
+    this.curAcceptTask.sLink = sLink;
+    this.curAcceptTask.id_task = id_task;
+    console.log('s1');
+    document!.getElementById("openAcceptModalButton")!.click();
+  }
+
+
   succesfullClose() {
     document!.getElementById("closeSuccesfullModalButton")!.click();
   }
+
+  acceptClose() {
+    document!.getElementById("closeAcceptModalButton")!.click();
+  }
+
     
   succesfullSave() {
 
@@ -150,6 +172,34 @@ export class ListTaskComponent {
   }
 
 
+  acceptSave() {
+
+    if (this.curAcceptTask.id_task) {
+
+      let idTask = this.curAcceptTask.id_task;
+      this.servTask.acceptTask(idTask.toString()).subscribe( (res: any) => {
+
+        console.log(res, res[0].RES);
+
+        let indexShowTask = this.taskArray.findIndex( (el  =>  el.id_task == idTask.toString()));
+        this.taskArray[indexShowTask].bitAccept = '1';
+        this.taskArray[indexShowTask].Acceptor = res[0].RES;
+        let indexShowOriginal = this.taskOriginal.findIndex( (el  =>  el.id_task == idTask.toString()));
+        this.taskOriginal[indexShowOriginal].bitAccept = '1';
+        this.taskOriginal[indexShowOriginal].Acceptor = res[0].RES;
+  
+        //refresh data
+        this.taskOriginal = [...this.taskOriginal];
+        this.taskArray = [...this.taskArray];
+
+        console.log(this.taskArray);
+  
+
+      });
+
+    }
+    this.acceptClose();
+  }
 
 
 

@@ -33,7 +33,7 @@ class="material striped"
 [limit]="100"
 [scrollbarV]="true"
 [scrollbarH]="true"
-#Obj2Table
+#TaskTable
 (resize)="onResize($event)"
 >
 
@@ -81,7 +81,23 @@ class="material striped"
       </ng-template>
 </ngx-datatable-column>
 
-g
+
+<ngx-datatable-column prop = "Acceptor" name = "Исполнитель" [width]="getColumnSize('Acceptor')">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+         <div *ngIf="row.bitAccept !== 0">
+              {{ value }}
+         </div>
+
+         <div *ngIf="row.bitAccept === 0">
+              <button (click)="acceptTask(row.id_task, row.name_task)">Принять</button>
+         </div>
+
+      
+    </ng-template>
+</ngx-datatable-column>
+
+
 <ngx-datatable-column prop = "Success" name = "Выполнена" [width]="getColumnSize('Success')">
     <ng-template let-value="value" ngx-datatable-cell-template>
         {{ value }}
@@ -92,7 +108,7 @@ g
 <!-- НАЧАЛО ПОЛЯ Выполнить -->  
 <ngx-datatable-column prop="succesfull" name="Выполнить" [width]="getColumnSize('succesfull')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          <div (click)="succesfullTask(row.id_task, row.id_task)"><img src="/assets/img/done.png" width="30" /></div>
+          <div (click)="succesfullTask(row.id_task, row.name_task)"><img src="/assets/img/done.png" width="30" /></div>
     </ng-template>
   </ngx-datatable-column>
   <!-- КОНЕЦ ПОЛЯ Выплнить -->  
@@ -158,3 +174,27 @@ g
   </div>
   </div>
   <!-- КОНЕЦ МОДАЛЬНЫХ ОКОН ВЫПОЛНЕНИЯ ЗАДАЧИ-->
+
+
+    <!-- МОДАЛЬНЫЕ ОКНА ПРИНЯТИЯ ЗАДАЧИ-->
+<button id="openAcceptModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#acceptModal" [hidden]="true">
+  AcceptOpen
+</button>
+<button id="closeAcceptModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#acceptModal" [hidden]="true"  data-dismiss="modal">
+  AccessClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="acceptModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Принять к исполнению задачу {{this.curAcceptTask.sLink}}?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="acceptClose()">Нет</button>
+      <button type="button" class="btn btn-primary" (click)="acceptSave()">Да</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- КОНЕЦ МОДАЛЬНЫХ ОКОН ПРИНЯТИЯ ЗАДАЧИ-->
