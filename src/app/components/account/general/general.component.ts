@@ -73,5 +73,12 @@ settings() {
    this.router.navigate(['settings'], { queryParams: { id_staff }});
 }
 
+ollr() {
+    const id_staff = this.id_staff;
+    this.router.navigate(['ollr'], { queryParams: { id_staff }});
+}
+
+
+
 
 }

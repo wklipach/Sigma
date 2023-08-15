@@ -25,6 +25,7 @@ import { ListTaskComponent } from './components/task/list-task/list-task.compone
 import { TaskComponent } from './components/task/task/task.component';
 import { ObjectCardComponent } from './components/protected_objects/object-card/object-card.component';
 import { Obj2settingsComponent } from './components/protected_objects/obj2settings/obj2settings.component';
+import { OllrComponent } from './components/account/general/ollr/ollr.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'overview', component: OverviewComponent, canActivate: [mainGuard] },
   { path: 'summary', component: SummaryComponent, canActivate: [mainGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [mainGuard] },
+  { path: 'ollr', component: OllrComponent, canActivate: [mainGuard] },
   { path: 'listobjects', component: ListObjectsComponent, canActivate: [mainGuard] },
   { path: 'obj2', component: Obj2Component, canActivate: [mainGuard] },
   { path: 'listmtr', component: ListMtrComponent, canActivate: [mainGuard] },
