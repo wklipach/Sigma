@@ -5,6 +5,8 @@ const mariadb = require("mariadb");
 const mariadbSettings =  require('../DB');
 const pool = mariadb.createPool(mariadbSettings);
 
+const sqlStringTask = require("../sql_query/query_task");      
+
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
@@ -144,34 +146,9 @@ async function asyncCountTask(id_user) {
     let conn = await pool.getConnection();
     try {
   
-        const sQuery = 
-        "select t.id as id_task, "+
-        "t.id_department, "+
-        "t.note, "+
-        "gd.name as department_name,  "+
-        "t.date_begin, "+
-        "t.date_end, "+
-        "t.bitSuccess, "+
-        "t.name_task, "+
-        "case "+
-        "when s.fio is null then u.login "+
-        "else s.fio "+
-        "end as RESFIO, "+
-        "s2.fio as Acceptor, "+
-        "case "+
-        "when ifnull(s2.fio, '') = '' then false "+
-        "else true "+
-        "end as bitAccept	"+
-        "from task t "+
-        "left join staff s on t.id_user = s.id_staff "+
-        "left join tuser u on t.id_user = u.id "+
-        "left join staff s2 on s2.id_staff = t.id_user_accept "+
-        "inner join guide_department gd on gd.id=t.id_department "+
-        "where t.bitDelete = 0  and t.bitSuccess=0 and "+
-        "t.id_department in (select id_department from staff where id_staff=?) "+
-        "order by t.date_begin ";
+        const sQuery = sqlStringTask;
 
-        const params = [id_user];
+        const params = [id_user, id_user, id_user];
 
         const resTask = await conn.query(sQuery, params);
         return JSON.stringify(resTask);
@@ -241,8 +218,6 @@ async function asyncCountTask(id_user) {
         const sQuery = 
         "update task set id_user_accept=? where id=?";
 
-        console.log('a1');
-
         const paramsJournal = [id_user, id_task, id_user];
         const sJournal = 
         "insert task_log (`newvalue`, `id_task`, `field`, `id_user`, `date_oper`) value(?, ?, 'id_user_accept', ?, now())";
@@ -261,11 +236,8 @@ async function asyncCountTask(id_user) {
         " where t.id=?";
 
         const resSuccesfullTask = await conn.query(sQuery, params);
-        console.log('a3');
         await conn.query(sJournal, paramsJournal);
-        console.log('a4');
         const resAccessorTask = await conn.query(sAcceptor, paramsAcceptor);
-        console.log('a5');
         return JSON.stringify(resAccessorTask);
 
 
