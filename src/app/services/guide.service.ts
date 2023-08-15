@@ -27,6 +27,12 @@ export class GuideService {
     return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
   }
 
+  getOllrGuide() {
+    const params = new HttpParams()
+         .set('get_ollr_guide', 'get_ollr_guide');
+    return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
+  }
+
   // get_realprotected_object
   
 }

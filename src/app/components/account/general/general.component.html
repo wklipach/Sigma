@@ -48,7 +48,7 @@
   <!--end::Nav item-->
     
   <li class="nav-item mt-2">
-    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="">
+    <a class="nav-link text-active-primary ms-0 me-10 py-5" (click)="AddStaff()">
       <img style="margin-right: 10px;" src="/assets/img/plus.png" width="30 height=30" />
       Добавить сотрудника</a>
     </li>
@@ -70,3 +70,28 @@
 
 
 <button (click)="clickBack()"> Закрыть </button>
+
+
+<!-- Удалить сотрудника -->
+<button id="openAddModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" [hidden]="true">
+  DeleteOpen
+</button>
+<button id="closeAddModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#addModal" [hidden]="true"  data-dismiss="modal">
+DeleteClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Добавить нового сотрудника?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="addClose()">Нет</button>
+      <button type="button" class="btn btn-primary" (click)="addNewStaff()">Да</button>
+      
+    </div>
+  </div>
+</div>
+</div>  
+<!-- Конец Удалить сотрудника -->

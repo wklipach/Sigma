@@ -1,0 +1,253 @@
+.material {
+    height: 400px;
+    width: 100%;
+  }
+  
+  /* .ngx-datatable{
+  overflow-y: visible;
+  } */
+  
+  .ngx-datatable.material .datatable-header {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+  }
+  
+  :host ::ng-deep.ngx-datatable.material .datatable-header .datatable-header-cell {
+    text-align: center;
+    font-weight: 650;
+    background-color:#f5f5f5;
+    color: #222122;
+    font-size: 13px;
+    border:1px dashed#cacaca !important;
+  
+  }
+  
+  :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell.sortable .datatable-header-cell-wrapper {
+    cursor: pointer;
+    padding: 0 1px;
+  }
+  
+  :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell .sort-btn {
+    line-height: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  :host ::ng-deep .datatable-body-cell {
+    background-color: rgb(255, 255, 255);
+    height: auto !important;
+    font-size: 1em !important;
+    overflow: auto;
+    border: 1px dashed #cacaca;
+    text-align: center !important;
+    white-space: pre-wrap !important;
+    padding: 1px !important;
+    border: 1px dashed #cacaca !important;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle !important;
+  }
+  
+  :host ::ng-deep.datatable-body-cell-label {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+   line-height: 1.5;
+   width: 100%;
+   height: auto !important;
+   justify-content: center;
+   white-space: pre-wrap;
+  }
+  
+  /* } */
+   
+  .btn.btn-primary{
+    color: #fff;
+    background-color: #386bc0 !important;
+    font-weight: semibold !important;
+  }
+    .btn.btn-primary:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #386bc0 !important; 
+    cursor: pointer;
+    }
+      .btn.btn-warning{
+      color: #fff;
+      background-color: #ffc107 !important;
+      font-weight: semibold !important;
+     }
+     .btn.btn-warning:hover{
+    color: white !important;
+   font-weight: bold !important;
+    background-color: #ffc107 !important; 
+    cursor: pointer;
+    }
+  .btn.btn-info{
+      color: #fff;
+      background-color: #138496 !important;
+      font-weight: bold !important;
+     }
+     .btn.btn-info:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #138496 !important; 
+    cursor: pointer;
+    }
+    .btn.btn-secondary{
+      color: #fff;
+      background-color: #5a6268 !important;
+      font-weight: 600 !important;
+     }
+     .btn.btn-secondary:hover{
+    color: white !important;
+    font-weight: bold !important;
+    background-color: #5a6268 !important; 
+    cursor: pointer;
+    }
+  
+  .btn.btn-danger{
+  color: #fff;
+  background-color: #5a6268 !important;
+  font-weight: 600 !important;
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  }
+   .btn.btn-danger:hover{
+   color: white !important;
+   font-weight: 600 !important;
+   background-color: hsl(354, 70%, 54%) !important; 
+   cursor: pointer;
+    }
+    .btn.btn-success{
+        color: #fff;
+        background-color: #218838 !important;
+        font-weight: 600 !important;
+     }
+        .btn.btn-success:hover{
+        color: white !important;
+        font-weight: 600 !important;
+        background-color: #218838 !important; 
+        cursor: pointer;
+        }
+  
+  select {
+    border: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    appearance:none;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  input{
+    border: none;
+  }
+  
+  
+  
+  
+  /* Пример CSS Для таблицы с фиксированным первым столбцом
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-top: 1px solid grey;
+  }
+  
+  td,
+  th {
+    margin: 0;
+    border: 1px solid rgb(239, 16, 16);
+    white-space: nowrap;
+    border-top-width: 0px;
+  }
+  
+  div {
+    width: 30%;
+    overflow-x: scroll;
+    margin-left: 5em;
+    overflow-y: visible;
+    padding: 0;
+  }
+  
+  .headcol {
+    position: absolute;
+    width: 5em;
+    left: 0;
+    top: auto;
+    border-top-width: 1px;
+    margin-top: -1px;
+    
+  }
+  
+  .headcol:before {
+    content: 'Row ';
+  }
+  
+  .long {
+    background: yellow;
+    letter-spacing: 2em;
+  }
+  
+  
+  <div>   <span>Пример таблицы с фиксированным первым столбцом</span>
+      <table>
+        <tr>
+          <th class="headcol">1</th>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+        </tr>
+        <tr>
+          <th class="headcol">2</th>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+        </tr>
+        <tr>
+          <th class="headcol">3</th>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+        </tr>
+        <tr>
+          <th class="headcol">4</th>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+        </tr>
+        <tr>
+          <th class="headcol">5</th>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+        </tr>
+        <tr>
+          <th class="headcol">6</th>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+          <td class="long">QWERTYUIOPASDFGHJKLZXCVBNM</td>
+        </tr>
+      </table>
+    </div>
+    
+  
+  
+  */
+
+
+  /deep/ .row-green-color {
+    background-color: green;
+  }
+
+  /deep/ .row-red-color {
+    background-color: red;
+  }
+
+  /deep/ .row-gray-color {
+    background-color: lightgray;
+  }
+
+  /deep/ .row-crossedout {
+    font-style: inherit;
+  }
+
+/*
+  https://stackblitz.com/edit/angular-ngx-datatable-row-color?file=app%2Fapp.component.html
+*/  

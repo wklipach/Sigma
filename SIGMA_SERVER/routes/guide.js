@@ -15,6 +15,13 @@ router.get('/', async function(req, res, next) {
       res.send(result);
     }
 
+
+    if (req.query.get_ollr_guide) {
+      const result = await asyncOllrGuide();
+      res.send(result);
+    }
+
+
     if (req.query.get_senjor_guard) {
       const result = await asyncGuideSenjorGuard();
       res.send(result);
@@ -27,6 +34,26 @@ router.get('/', async function(req, res, next) {
       res.send(result);
     }
   });
+
+
+
+  async function asyncOllrGuide() {
+    let conn = await pool.getConnection();
+    try {
+  
+        const sQuery = 
+        "SELECT `id_ollr`, `name`, `period` FROM  guide_ollr where bitDelete = 0 order by `name` asc";
+        const resOllr = await conn.query(sQuery);
+        return JSON.stringify(resOllr);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+
+
+  } 
+
 
   async function asyncSmallGuide(sGuide) {
     let conn = await pool.getConnection();

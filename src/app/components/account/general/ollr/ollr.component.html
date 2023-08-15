@@ -1,1 +1,154 @@
-<p>ollr works!</p>
+<ngx-datatable
+#EditOllrTable
+class="material striped"
+[rows]="this.ShowOLLR"
+[columnMode]="ColumnMode.force"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="50"
+[limit]="100"
+[scrollbarV]="true"
+[scrollbarH]="true"
+(resize)="onResize($event)"
+[messages]="{emptyMessage: ''}"
+[rowClass]="getRowClass"
+>
+
+  <ngx-datatable-column prop = "gname" name = "Документ" [width]="getColumnSize('gname')" >
+      <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+          <span> {{value}} </span>
+      </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop = "DateBegin" name = "Выдан" [width]="getColumnSize('DateBegin')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+        <span> {{value | date: "yyyy-MM-dd" }} </span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop = "period" name = "Период" [width]="getColumnSize('period')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+        <span> {{value}} </span>
+    </ng-template>
+  </ngx-datatable-column>
+
+
+  <!-- НАЧАЛО ПОЛЯ close --> 
+  <ngx-datatable-column prop="delete" name="Закрыть" [width]="getColumnSize('delete')">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <div (click)="closeOllr(row.id_staff, row.id, row.gname)"><img src="/assets/img/delete.png" width="30" /></div>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ ПОЛЯ close -->  
+
+
+  <!-- НАЧАЛО ПОЛЯ delete --> 
+  <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <div (click)="deleteOllr(row.id_staff, row.id, row.gname)"><img src="/assets/img/delete.png" width="30" /></div>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- КОНЕЦ ПОЛЯ delete -->  
+  
+
+</ngx-datatable>
+
+
+<!-- Удалить ресурс -->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+    DeleteOpen
+  </button>
+  <button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+  DeleteClose
+  </button>
+  
+  <div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Удалить документ {{this.curDeleteObject.sLink}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+        <button type="button" class="btn btn-primary" (click)="deleteSave()">Да</button>
+        
+      </div>
+    </div>
+  </div>
+  </div>  
+  <!-- конец удалить ресурс  -->
+
+
+  <!-- Закрыть ресурс -->
+<button id="openCloseModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#closeModal" [hidden]="true">
+    DeleteOpen
+  </button>
+  <button id="closeCloseModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#closeModal" [hidden]="true"  data-dismiss="modal">
+  DeleteClose
+  </button>
+  
+  <div class="modal fade" tabindex="-1" role="dialog" id="closeModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Закрыть документ {{this.curCloseObject.sLink}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeClose()">Нет</button>
+        <button type="button" class="btn btn-primary" (click)="closeSave()">Да</button>
+        
+      </div>
+    </div>
+  </div>
+  </div>  
+  <!-- конец закрыть ресурс  -->
+
+
+  <div class="row mb-6">
+    
+    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Документ</label>
+    <div class="col-lg-8 fv-row">
+        <select name="department" data-control="selectDepartment" class="form-select form-select-solid form-select-lg fw-semibold" 
+                [(ngModel)]="this.settingOllr.gname">
+                <option *ngFor="let go of this.guideOllr" [value]="go.name">{{go.name}}</option>
+        </select>
+      </div>
+</div>       
+
+<div class="row mb-6">
+    <!--begin::Label-->
+    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Дата документа</label>
+
+    <div class="col-lg-8 fv-row">
+        <input (change)="addDateBegin($event)"  type="date" name="staffDateDocument" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold"/> 
+   </div>
+</div> 
+
+<button (click)="addDoc()">Добавить</button>
+<button (click)="backGeneral()">Назад</button>
+
+
+
+  <!-- Добавить ресурс -->
+  <button id="openAddModalButton"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" [hidden]="true">
+    AddOpen
+  </button>
+  <button id="closeAddModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#addModal" [hidden]="true"  data-dismiss="modal">
+  AddClose
+  </button>
+  
+  <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить документ {{this.settingOllr.gname}}?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="addClose()">Нет</button>
+        <button type="button" class="btn btn-primary" (click)="addSave()">Да</button>
+        
+      </div>
+    </div>
+  </div>
+  </div>  
+  <!-- конец добавить ресурс  -->

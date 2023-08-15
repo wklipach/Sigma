@@ -16,6 +16,7 @@ var staff = require('./routes/staff');
 var filters = require('./routes/filters.js');
 var task = require('./routes/task.js');
 var settings = require('./routes/settings.js');
+var ollr = require('./routes/ollr.js');
 
 var app = express();
 app.use(express.json({ limit: '50mb' }));
@@ -133,6 +134,7 @@ app.use('/staff', staff);
 app.use('/filters', filters);
 app.use('/task', task);
 app.use('/settings', settings);
+app.use('/ollr', ollr);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
