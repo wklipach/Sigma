@@ -52,7 +52,6 @@ const routes: Routes = [
   { path: 'task', component: TaskComponent, canActivate: [mainGuard] },
   { path: 'obj2card', component: ObjectCardComponent, canActivate: [mainGuard] },
   { path: 'obj2settings', component: Obj2settingsComponent, canActivate: [mainGuard] }
-
     
   ];
 
