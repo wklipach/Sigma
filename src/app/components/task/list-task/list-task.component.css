@@ -85,6 +85,18 @@ img:hover{
 
 }
 
+.btn.btn-primary{
+  color: #fff;
+  background-color: #386bc0 !important;
+  font-weight: semibold !important;
+}
+  .btn.btn-primary:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #386bc0 !important; 
+  cursor: pointer;
+  }
+  
 .btn.btn-secondary{
   color: #fff;
   background-color: #5a6268 !important;

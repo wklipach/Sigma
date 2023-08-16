@@ -90,7 +90,8 @@ class="material striped"
          </div>
 
          <div *ngIf="row.bitAccept === 0">
-              <button (click)="acceptTask(row.id_task, row.name_task)">Принять</button>
+              <button class="btn btn-primary btn-sm" (click)="acceptTask(row.id_task, row.name_task)">Принять</button>
+             
          </div>
 
       

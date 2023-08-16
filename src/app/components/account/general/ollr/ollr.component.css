@@ -231,23 +231,40 @@
   
   */
 
-
-  /deep/ .row-green-color {
-    background-color: green;
+ .card-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   }
 
-  /deep/ .row-red-color {
-    background-color: red;
-  }
+ .btns{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 30px;
+}
 
-  /deep/ .row-gray-color {
-    background-color: lightgray;
-  }
-
-  /deep/ .row-crossedout {
-    font-style: inherit;
-  }
-
-/*
-  https://stackblitz.com/edit/angular-ngx-datatable-row-color?file=app%2Fapp.component.html
-*/  
+.btn.btn-secondary{
+  color: #fff;
+  background-color: #5a6268 !important;
+  font-weight: 600 !important;
+ }
+ .btn.btn-secondary:hover{
+color: white !important;
+font-weight: bold !important;
+background-color: #5a6268 !important; 
+cursor: pointer;
+}
+.btn.btn-primary{
+  color: #fff;
+  background-color: #386bc0 !important;
+  font-weight: semibold !important;
+}
+  .btn.btn-primary:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #386bc0 !important; 
+  cursor: pointer;
+  } 

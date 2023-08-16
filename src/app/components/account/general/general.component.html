@@ -1,3 +1,5 @@
+   <app-basement></app-basement>
+   
    <div class="me-7 my-4">
         <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0; then contentLoadAvatar else contentDefault">Профиль</div>
         <ng-template #contentLoadAvatar class="image-input">
@@ -40,12 +42,7 @@
   <a class="nav-link text-active-primary ms-0 me-10 py-5" href="">Passport</a>
   </li>
   <!--end::Nav item-->
-  
-  <!--begin::Nav item-->
-  <li class="nav-item mt-2">
-  <a class="nav-link text-active-primary ms-0 me-10 py-5" href="">Statements</a>
-  </li>
-  <!--end::Nav item-->
+
     
   <li class="nav-item mt-2">
     <a class="nav-link text-active-primary ms-0 me-10 py-5" (click)="AddStaff()">
