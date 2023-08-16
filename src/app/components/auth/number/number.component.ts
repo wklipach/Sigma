@@ -19,7 +19,7 @@ export class NumberComponent {
   onNumberClick() {
     
     let sInput = (document.getElementById('secretNumber') as HTMLInputElement).value.trim().toUpperCase();
-    if (sInput === '300300') {
+    if (sInput === '358451') {
       this.authService.setNumber();
       this.router.navigate(['/']);
 
