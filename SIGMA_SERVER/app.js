@@ -21,19 +21,22 @@ var ollr = require('./routes/ollr.js');
 var app = express();
 app.use(express.json({ limit: '50mb' }));
 
+//БЛОК1
 
 //BEGIN СОКЕТ
 const httpChat = require('http').Server(app);
 
 const io = require('socket.io')(httpChat, {
   cors: {
-    origin: "http://localhost:4200",
+    // origin: "http://localhost:4200",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
 
 const portChat = process.env.portChat || 5000;
 
+//КОНЕЦ БЛОК1
 
 
 /* ЧУЖОЕ
@@ -51,6 +54,10 @@ socket.on('user:add', async (user) => {
 
 
 // "хранилище" для сообщений
+
+
+//БЛОК2
+
 const messages = []
 
 let users = new Map();
@@ -97,7 +104,7 @@ httpChat.listen(portChat, () => {
 });
 //END СОКЕТ
 
-
+//КОНЕЦ БЛОК2
 
 
 
@@ -105,12 +112,15 @@ httpChat.listen(portChat, () => {
 app.use(express.json({ limit: '50mb' }));
 // process.env.NODE_TLS_REJECT_UNAUTHORIZED='0'
 // Add headers
+
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:4200" ); // update to match the domain you will make the request from
     //res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

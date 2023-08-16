@@ -8,13 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class ChatService {
 
-  constructor(private socket: Socket) { }
+  constructor(private socket: Socket) { 
+  
+  }
 
 
 
   sengMessageAddUser(id_user: number) {
 	this.socket.emit('sigma_adduser', id_user);
-} 
+ } 
 
   sengStartMessage() {
 	this.socket.emit('sigma_start', 'sigma_start');
@@ -26,12 +28,12 @@ export class ChatService {
 
   	// emit event
 	sengMessage(msg: IDocChat) {
-		console.log('msg=', msg);
 		this.socket.emit('sigma_message', msg);
 	} 
 
 	// listen event
 	onMessage() {
+
 		return this.socket.fromEvent('sigma_message') as Observable<IDocChat[]>;
 	}
 
@@ -46,7 +48,7 @@ export class ChatService {
 
 	    // listen event
      onDisconnect() {
-	 		this.socket.disconnect();
+		this.socket.disconnect();
 		}
 	
 	

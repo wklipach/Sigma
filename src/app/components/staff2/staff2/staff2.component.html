@@ -51,7 +51,7 @@ class="material striped"
 <ngx-datatable-column prop = "avatar_name" name = "Фото" [width]="getColumnSize('avatar_name')">
   <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
        <div>
-             <img [src]="value" width="30" />
+             <img [src]="value" width="30" (click)="newGeneral(row.id_staff)" />
        </div>
     </ng-template>
 </ngx-datatable-column>

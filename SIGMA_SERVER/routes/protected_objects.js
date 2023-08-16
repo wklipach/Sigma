@@ -101,7 +101,9 @@ router.post('/', async function(req, res) {
         'po.id_customer, '+
         'gc.name AS customer, '+
         'po.id_object_type, '+
-        'got.name AS object_type '+
+        'got.name AS object_type, '+
+        "po.photo_name, "+
+        "IFNULL(length(po.photo_name),0) as ItIsPhoto "+
         ''+
         'FROM protected_object po '+
         'LEFT JOIN guide_post_status gps on gps.id = po.post_status '+

@@ -100,7 +100,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     NgxDatatableModule,
     SocketIoModule.forRoot(config)    
   ],
-  providers: [GlobalRef, DatePipe, AuthService, ChatService, SummaryService, AvatarService],
+  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChatService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

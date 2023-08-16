@@ -52,7 +52,6 @@ export class ChatComponent implements OnInit {
 
 
   constructor(private socketService: ChatService, private auth: AuthService, scrollDispatcher: ScrollDispatcher) { 
-
     this.chatForm  = new FormGroup({
       'send_message': new FormControl('')
     });
@@ -111,23 +110,14 @@ export class ChatComponent implements OnInit {
 
   ngAfterViewInit() {
     // child is set
-    if (this.virtualScroll) {
-
+    //if (this.virtualScroll) {
       // this.virtualScroll.getElementRef
-
-      this.virtualScroll.scrolledIndexChange.subscribe( e=> {
-        console.log('e', e);
-        const renderedRange = this.virtualScroll.getRenderedRange();
-        console.log('renderedRange=', this.virtualScroll.getElementRef().nativeElement);
-
-        
-
-      });
-
-      }
-
-
-
+      //this.virtualScroll.scrolledIndexChange.subscribe( e=> {
+        //console.log('e', e);
+        //const renderedRange = this.virtualScroll.getRenderedRange();
+        ///console.log('renderedRange=', this.virtualScroll.getElementRef().nativeElement);
+      //});
+      //}
 
     }
 
@@ -140,6 +130,7 @@ export class ChatComponent implements OnInit {
 
 
   onMessage(): void {
+
 
     if (!this.curChatUser.id_user) return;
     if (!String(this.chatForm.controls['send_message'].value).trim()) return;

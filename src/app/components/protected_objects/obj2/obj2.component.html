@@ -58,6 +58,14 @@ class="material striped"
       </ng-template>
 </ngx-datatable-column>
 
+<ngx-datatable-column prop = "photo_name" name = "Фото" [width]="getColumnSize('photo_name')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+       <div>
+             <img [src]="value" width="30" (click)="openObj2Card(row.id_object, row.name)" />
+       </div>
+    </ng-template>
+</ngx-datatable-column>
+
 
 <!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
 <ngx-datatable-column prop="name" name="Объект" [width]="getColumnSize('name')">

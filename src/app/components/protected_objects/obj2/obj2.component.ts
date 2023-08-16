@@ -46,6 +46,9 @@ interface IObjectOne {
   customer?: string; 
   id_object_type?: string; 
   object_type?: string; 
+  photo_name?: string;
+  ItIsPhoto?: string;
+
 };
 
 interface IMaps {
@@ -161,6 +164,13 @@ export class Obj2Component {
           if (el.senjor_guard?.trim() === "" || el.senjor_guard?.trim() == null) el.senjor_guard = "--" ;     
           if (el.MTR?.trim() === "" || el.MTR?.trim() == null) el.MTR = "--" ;   
           if (el.customer?.trim() === "" || el.customer?.trim() == null) el.customer = "--" ;     
+
+          if ( Number(el.ItIsPhoto)>0) {
+            el.photo_name = this.gr.sUrlObjectGlobal+ el.photo_name;
+          } else {
+            el.photo_name = "/assets/img/free-icon-blank-house.png";
+          }
+    
           
         });
 

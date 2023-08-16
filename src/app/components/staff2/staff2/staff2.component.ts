@@ -770,15 +770,28 @@ loadFiltersNull() {
     }
 
     if (res) {
+
+          let resFilter: IObjectOne[] = [...this.ORIGINAL_ShowStaff];
+          let val1 = "";
+          if (res.​value1) val1 = res.​value1.trim().toUpperCase(); 
      
-          let resFilter: IObjectOne[] = this.ORIGINAL_ShowStaff.filter( (el) => {
-            return (el[res.field1 as keyof IObjectOne] == res.​value1)
-          });
+          if (val1) {
+              resFilter = resFilter.filter( (el) => {
+                return (el[res.field1 as keyof IObjectOne]?.trim().toUpperCase().includes(​val1))
+              });
+          }
+
 
           if (res.field2?.trim() !== "" && res.field2?.trim() !== null) {
-            resFilter = resFilter.filter( (el) => {
-              return (el[res.field2 as keyof IObjectOne] == res.​value2)
-            });
+
+            let val2 = "";
+            if (res.​value2) val2 = res.​value2.trim().toUpperCase(); 
+
+            if (val2) {
+                resFilter = resFilter.filter( (el) => {
+                  return (el[res.field2 as keyof IObjectOne]?.trim().toUpperCase().includes(​val2))
+                });
+            }
           }
 
           const dateBegin = Date.parse(res.dateBegin || '');
