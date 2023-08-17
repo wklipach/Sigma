@@ -18,6 +18,7 @@ var task = require('./routes/task.js');
 var settings = require('./routes/settings.js');
 var ollr = require('./routes/ollr.js');
 
+
 var app = express();
 app.use(express.json({ limit: '50mb' }));
 
@@ -26,6 +27,7 @@ app.use(express.json({ limit: '50mb' }));
 //BEGIN СОКЕТ
 const httpChat = require('http').Server(app);
 
+
 const io = require('socket.io')(httpChat, {
   cors: {
     // origin: "http://localhost:4200",
@@ -33,6 +35,8 @@ const io = require('socket.io')(httpChat, {
     methods: ["GET", "POST"]
   }
 });
+
+
 
 const portChat = process.env.portChat || 5000;
 
@@ -99,9 +103,15 @@ io.on('connection', (socket) => {
 
 });
 
+
 httpChat.listen(portChat, () => {
   console.log(`Socket.IO server running at http://localhost:${portChat}/`);
 });
+
+
+
+
+
 //END СОКЕТ
 
 //КОНЕЦ БЛОК2

@@ -38,8 +38,8 @@ class="material striped"
 >
 
 <ngx-datatable-column prop = "id_task" name = "#" [width]="getColumnSize('id_task')">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-        {{ value }}
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+        <span (click)="opentask(row.id_task)">{{ value }}</span>
       </ng-template>
 </ngx-datatable-column>
 

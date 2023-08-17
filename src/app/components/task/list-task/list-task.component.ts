@@ -278,4 +278,13 @@ export class ListTaskComponent {
     }
   }
 
+
+  opentask(e: any) {
+    alert('!'+e);
+    this.router.navigate(['readtask'], { queryParams: { id_task: e }});
+    
+  }
+
+
+
 }
