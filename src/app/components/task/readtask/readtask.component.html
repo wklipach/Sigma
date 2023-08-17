@@ -8,16 +8,14 @@
       <div class="row mb-6">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Объект:</label>
         <div class="col-lg-8 fv-row">
-       <span class="col-lg-8 fv-row fw-semibold fs-5 text-muted">Хостел для нищих</span> 
-            <!-- <div class="col-lg-8 fv-row fw-semibold fs-5 text-muted">{{ ProtectedObject.name }}</div>  -->
-        
+             <span class="col-lg-8 fv-row fw-semibold fs-5 text-muted">{{ curTask.object_name }}</span> 
         </div>  
       </div>
   
       <div class="row mb-6">
         <label class="col-lg-4 col-form-label fw-semibold fs-6">Наименование задачи</label>
           <div class="col-lg-8 fv-row">
-            <span class="col-lg-8 fv-row fw-semibold fs-5 text-muted">Название задачи сюда</span> 
+            <span class="col-lg-8 fv-row fw-semibold fs-5 text-muted"> {{ curTask.name_task }} </span> 
           </div>
       </div>
     
@@ -27,7 +25,7 @@
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Кому</label>
           <div class="col-lg-8 fv-row">
            
-            <span class="col-lg-8 fv-row fw-semibold fs-5 text-muted">ОТдел в который отправляли</span> 
+            <span class="col-lg-8 fv-row fw-semibold fs-5 text-muted"> {{ curTask.department_name }} </span> 
 
             <!-- <select name="choice-departtment" data-control="select2" class="form-select" [(ngModel)]="id_department">
               <option *ngFor="let depart of this.guideDepartment" [value] = "depart.id">{{ depart.name }}</option>
@@ -39,28 +37,33 @@
     <div class="row mb-6">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Комментарий</label>
         <div class="col-lg-8 fv-row">
-          <textarea id="areaNote" name="textTask" cols="52" rows="8"></textarea>
+          <textarea id="areaNote" name="textTask" cols="52" rows="8">
+            {{ curTask.note }}
+          </textarea>
         </div> 
     </div>
    
    <div class="row mb-6">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата начала</label>
         <div class="col-lg-8 fv-row">
-           <input id="dateBegin" type="date" class="dateB"/>
+           <!--  <input id="dateBegin" type="date" class="dateB"/> -->
+           <span> {{ curTask.date_begin  | date: 'dd.MM.yyyy' }} </span>
         </div>
     </div>
   
      <div class="row mb-6">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата окончания</label>
       <div class="col-lg-8 fv-row">
-           <input id="dateEnd" type="date" class="dateE"/>
+           <!-- <input id="dateEnd" type="date" class="dateE"/> -->
+           <span> {{ curTask.date_end  | date: 'dd.MM.yyyy' }} </span>
+
          </div>
      </div>
   
     
  <div class="btns mt-5">
     
-     <button class="btn btn-secondary">Выйти</button>
+     <button class="btn btn-secondary" (click) = "back()" >Назад</button>
   </div>
   
   

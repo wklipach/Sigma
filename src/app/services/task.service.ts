@@ -19,6 +19,12 @@ export class TaskService {
     return this.http.get(this.gr.sUrlGlobal + 'task', {params: params});
   }
 
+  getTask_One(id_task: number) {
+    const params = new HttpParams()
+      .set('get_task_one', id_task);
+    return this.http.get(this.gr.sUrlGlobal + 'task', {params: params});
+  }
+
 
   insertTask(id_object: number, name_task: string, id_department: number, note: string, date_begin: string, date_end: string) {
     const sUrl = this.gr.sUrlGlobal + 'task';

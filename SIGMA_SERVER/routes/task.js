@@ -5,17 +5,23 @@ const mariadb = require("mariadb");
 const mariadbSettings =  require('../DB');
 const pool = mariadb.createPool(mariadbSettings);
 
-const sqlStringTask = require("../sql_query/query_task");      
+const sqlStringTask = require("../sql_query/query_task");  
+const sqlStringTaskOne = require("../sql_query/task_one");     
 
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
 
-
     if (req.query.get_task) {
       const result = await asyncTask(req.query.get_task);
       res.send(result);
     }
+
+    if (req.query.get_task_one) {
+      const result = await asyncTaskOne(req.query.get_task_one);
+      res.send(result);
+    }
+
  
   });
 
@@ -158,6 +164,23 @@ async function asyncCountTask(id_user) {
           if (conn) conn.release(); 
     }
   }
+
+  async function asyncTaskOne(id_task) {
+    let conn = await pool.getConnection();
+    try {
+  
+        const sQuery = sqlStringTaskOne;
+        const params = [id_task];
+
+        const resTaskOne = await conn.query(sQuery, params);
+        return JSON.stringify(resTaskOne);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }  
+
 
   async function asyncDeleteTask(id_task, id_user) {
     let conn = await pool.getConnection();
