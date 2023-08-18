@@ -36,7 +36,7 @@
   <div class="row mb-6">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Комментарий</label>
       <div class="col-lg-8 fv-row">
-        <textarea id="areaNote" name="textTask" cols="52" rows="6"></textarea>
+        <textarea id="areaNote" class="form-control" name="textTask" cols="52" rows="6"></textarea>
       </div> 
   </div>
  
@@ -57,6 +57,7 @@
   
 <div class="btns mt-5">
   <button class="btn btn-secondary" (click)="clickBack()">Отмена</button>
+  <button type="button" class="btn btn-primary" (click)="clickApply()">Создать</button> 
 </div>
 
   <!-- Конец  Карточка задачи -->

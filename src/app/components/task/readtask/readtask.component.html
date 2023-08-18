@@ -3,7 +3,7 @@
 
 <div class="card-body pt-2 mb-1 p-7 h-lg-500px w-lg-650px">
 
-    <h4 class="card-title m-2 text-center h-30px info">Инфо</h4>
+    <h4 class="card-title m-2 text-center h-30px info">Задача</h4>
   
       <div class="row mb-6">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Объект:</label>
@@ -37,7 +37,7 @@
     <div class="row mb-6">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Комментарий</label>
         <div class="col-lg-8 fv-row">
-          <textarea id="areaNote" name="textTask" cols="52" rows="8">
+          <textarea id="areaNote" class="form-control" name="textTask" cols="52" rows="8">
             {{ curTask.note }}
           </textarea>
         </div> 
@@ -65,15 +65,13 @@
     
      <button class="btn btn-secondary" (click) = "back()" >Назад</button>
   </div>
-  
-  
    
   
     </div>
       <!--  Конец  Карточка задачи -->
   
-  <!--
-    <div class="row mb-6">
+  
+    <!-- <div class="row mb-6">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Значение</label>
         <div class="col-lg-8 fv-row">
         
@@ -83,4 +81,4 @@
         </select>
     </div>
     </div>
-  не-->
+  не -->

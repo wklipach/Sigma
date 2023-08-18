@@ -43,9 +43,13 @@ img:hover{
 
 }
 
+:host ::ng-deep.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell{
+  padding:  2px 10px;
+}
+
 :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell.sortable .datatable-header-cell-wrapper {
   cursor: pointer;
-  padding: 0 5px;
+  padding: 0;
 }
 
 :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell .sort-btn {
@@ -79,6 +83,11 @@ img:hover{
 }
  
 } */
+
+.photo{
+  width: 45px;
+  height: 45px;
+}
 
 select {
   border: none;

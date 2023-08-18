@@ -168,7 +168,7 @@ export class Obj2Component {
           if ( Number(el.ItIsPhoto)>0) {
             el.photo_name = this.gr.sUrlObjectGlobal+ el.photo_name;
           } else {
-            el.photo_name = "/assets/img/free-icon-blank-house.png";
+            el.photo_name = "/assets/img/blank-building.svg";
           }
     
           
