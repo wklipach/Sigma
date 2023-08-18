@@ -129,7 +129,8 @@ export class ChatComponent implements OnInit {
 
 
 
-  onMessage(): void {
+  // Отправить сообщение  
+  sendMessage(): void {
 
 
     if (!this.curChatUser.id_user) return;
@@ -140,7 +141,7 @@ export class ChatComponent implements OnInit {
                                   id_user_to: this.curChatUser.id_user, 
                                   message: String(this.chatForm.controls['send_message'].value).trim(), 
                                   bMarked: false,
-                                  createdAt: -1};
+                                  createdAt: -1 };
 
     this.socketService.sengMessage(send_msg);
 
@@ -184,6 +185,8 @@ export class ChatComponent implements OnInit {
 
       // если есть изменение в прямо сейчас показываемом юзере обновляем текущее окно. 
       const Res = this.allMessages.filter( (msg) => { return (msg.id_user === curChatUser || msg.id_user_to === curChatUser);});
+
+      console.log('messages=', Res);
 
       if (this.appearMessages.length !== Res.length) {
            this.appearMessages = Res;

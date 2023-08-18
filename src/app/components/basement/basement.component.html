@@ -37,6 +37,17 @@
       </ul>
     </div>
 
+
+    <button type="button" class="btn btn-info btn-sm position-relative" (click)="chat()">
+      Чат
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        0
+          <span class="visually-hidden">Новые сообщения</span>
+      </span>
+    </button>
+
+
+
     <button type="button" class="btn btn-info btn-sm position-relative" (click)="unreadTask()">
       Задачи
       <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">

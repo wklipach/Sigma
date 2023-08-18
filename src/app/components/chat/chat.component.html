@@ -8,27 +8,33 @@
 <div id="left-div">
 
 
+
+<select name="Users" size="5">
+    <option *ngFor="let user of users" value="user.id_user" (click)="clickUser(user)"> {{user.name}} {{user.connected}} </option>
+</select>
+
+
+<!--
  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
   <div *cdkVirtualFor="let user of users" class="example-item" (click)="clickUser(user)">{{user.name}} {{user.connected}}" </div>
 </cdk-virtual-scroll-viewport>
+-->
 
 
 <cdk-virtual-scroll-viewport #fareNotes appendOnly itemSize="50" class="example-viewport">
-        <div *cdkVirtualFor="let msg of this.appearMessages" class="example-item">{{msg.message}} {{msg.createdAt  | date: "MMM d, y, h:mm:ss"  }} </div>
-      </cdk-virtual-scroll-viewport>
+        <div *cdkVirtualFor="let msg of this.appearMessages" class="example-item">{{msg.message}} {{msg.createdAt  | date: "MMM d, y, HH:mm:ss"  }} </div>
+</cdk-virtual-scroll-viewport>
       
 
 
 <div id="footer">
     <form [formGroup]="chatForm">
       <div>
-        <button (click)="onMessage()">Отправить</button>
+        <button type="button" class="btn btn-success" (click)="sendMessage()">Отправить</button>
         <input type="text" id="idmessage" formControlName="send_message" placeholder="сообщение">
       </div>
     </form>    
 </div>
 
     
-<button type="button" class="btn btn-success">Success</button>
-
 

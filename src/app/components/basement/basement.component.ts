@@ -36,6 +36,10 @@ export class BasementComponent implements OnInit {
     this.router.navigate(['/listtask']);
   }
 
+  public chat() {
+        this.router.navigate(['/chat']);
+  }
+
 
   public countTask() {
     this.taskService.unAceptTaskCount().subscribe ( (res: any)=> {

@@ -27,6 +27,7 @@ import { ObjectCardComponent } from './components/protected_objects/object-card/
 import { Obj2settingsComponent } from './components/protected_objects/obj2settings/obj2settings.component';
 import { OllrComponent } from './components/account/general/ollr/ollr.component';
 import { ReadtaskComponent } from './components/task/readtask/readtask.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -54,7 +55,7 @@ const routes: Routes = [
   { path: 'obj2card', component: ObjectCardComponent, canActivate: [mainGuard] },
   { path: 'obj2settings', component: Obj2settingsComponent, canActivate: [mainGuard] },
   { path: 'readtask', component: ReadtaskComponent, canActivate: [mainGuard] },
-  
+  { path: 'chat', component: ChatComponent, canActivate: [mainGuard] },
     
   ];
 

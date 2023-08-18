@@ -18,6 +18,8 @@ var task = require('./routes/task.js');
 var settings = require('./routes/settings.js');
 var ollr = require('./routes/ollr.js');
 
+const { asyncInsertChat, asyncLoadStartMessage } = require('./modules/chat.js')
+
 
 var app = express();
 app.use(express.json({ limit: '50mb' }));
@@ -62,21 +64,26 @@ socket.on('user:add', async (user) => {
 
 //БЛОК2
 
-const messages = []
+let messages = [];
 
 let users = new Map();
 io.on('connection', (socket) => {
 
 
-  socket.on('sigma_message', msg => {
+  socket.on('sigma_message', async msg => {
     msg.createdAt = Date.now();
-    console.log('curmsg', msg);
     messages.push(msg);
     io.emit('sigma_message', messages);
+    await asyncInsertChat(msg.id_user, msg.id_user_to, msg.message, msg.createdAt);
   });
 
   // обновление сообщений при инициализации клиента
-  socket.on('sigma_start', msg => {
+  socket.on('sigma_start', async msg => {
+    messages = [];
+    const arrStartMessage = await asyncLoadStartMessage();
+    for (key in arrStartMessage) {
+      messages.push(arrStartMessage[key]);
+    }
     io.emit('sigma_start', messages);
   });
 
