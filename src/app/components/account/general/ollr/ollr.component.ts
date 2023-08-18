@@ -289,29 +289,34 @@ backGeneral() {
 getRowClass(row: any) {
 
   if (row.Color === "red") {
+    console.log('row red=', row);
     return {
       'row-red-color': true
     };
   }
 
   if (row.Color == "green") {
+    console.log('row green=', row);
     return {
       'row-green-color': true
     };
   }
 
   if (row.Color == "gray") {
+    console.log('row gray=', row);
     return {
       'row-gray-color': true
     };
   }
 
   if (row.Color == "crossed_out") {
+    console.log('row crossed_out=', row);
     return {
       'row-crossedout': true
     };
   }
 
+  console.log('row empty=', row);
   return {};
 
 

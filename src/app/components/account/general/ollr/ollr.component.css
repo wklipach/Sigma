@@ -268,3 +268,16 @@ cursor: pointer;
   background-color: #386bc0 !important; 
   cursor: pointer;
   } 
+
+
+  :host ::ng-deep .row-gray-color {
+    background-color: gray;
+}
+
+:host ::ng-deep .row-red-color {
+  background: rgba(213, 102, 95,0.2)!important;
+}
+
+:host ::ng-deep .row-green-color {
+  background-color: green;
+}
