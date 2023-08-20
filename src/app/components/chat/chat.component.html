@@ -1,18 +1,50 @@
+<app-basement></app-basement>
 
-<div id="header">
-  <img src = "../../../assets/img/avatar.png" width="75" height="50"> <span>{{this.currentUser.name}}</span> 
-</div>
-
-<div id="container">
-  <p>{{this.resp_msg.message}}</p>
-<div id="left-div">
-
-
-
-<select name="Users" size="5">
-    <option *ngFor="let user of users" value="user.id_user" (click)="clickUser(user)"> {{user.name}} {{user.connected}} </option>
+<div class="container-fluid flex-row">
+    <div class="header">
+  <img class="avatar" src = "../../../assets/img/homer.png"> 
+  <span>{{this.currentUser.name}}</span> 
+    </div>
+<div class="row">
+    <div class="col-md-2 m-0">
+    
+<select name="Users" size="50">
+    <option *ngFor="let user of users" value="user.id_user"  (click)="clickUser(user)"> 
+    <div class="user-name">
+      <img class="talker" src = "../../../assets/img/300-1.jpg">
+     
+      <span>{{user.name}}</span><span>{{user.connected}}</span>
+    </div>
+    </option>
 </select>
+    </div>
+  <div class="col-md-10 m-0">
+ 
+<cdk-virtual-scroll-viewport #fareNotes appendOnly itemSize="50" class="example-viewport">
+        <div *cdkVirtualFor="let msg of this.appearMessages" class="example-item">{{msg.message}} {{msg.createdAt  | date: "MMM d, y, HH:mm:ss"  }} </div>
+</cdk-virtual-scroll-viewport>
 
+<div class="footer">
+    
+  <form [formGroup]="chatForm">
+      <div>
+       
+        <input type="text" id="idmessage" formControlName="send_message" placeholder="сообщение">
+
+        <!-- <textarea id="areaNote" class="form-control" name="textTask" cols="52" rows="6"></textarea> -->
+      </div>
+  </form> 
+
+ <button type="button" class="btn btn-success ml-auto ntn-sm" (click)="sendMessage()">Отправить</button>
+  
+</div>
+  </div>
+    </div>
+
+
+
+
+ </div>   <!-- Конец контейнера -->
 
 <!--
  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
@@ -21,20 +53,11 @@
 -->
 
 
-<cdk-virtual-scroll-viewport #fareNotes appendOnly itemSize="50" class="example-viewport">
-        <div *cdkVirtualFor="let msg of this.appearMessages" class="example-item">{{msg.message}} {{msg.createdAt  | date: "MMM d, y, HH:mm:ss"  }} </div>
-</cdk-virtual-scroll-viewport>
-      
 
 
-<div id="footer">
-    <form [formGroup]="chatForm">
-      <div>
-        <button type="button" class="btn btn-success" (click)="sendMessage()">Отправить</button>
-        <input type="text" id="idmessage" formControlName="send_message" placeholder="сообщение">
-      </div>
-    </form>    
-</div>
+<!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nisi dolore vel dignissimos ea 
+cumque sapiente blanditiis asperiores officia sint velit soluta ipsam perspiciatis fuga, optio enim error 
+porro autem sed dolorum placeat. Eum inventore omnis, delectus laboriosam dolorem, ea nostrum commodi mollitia 
+recusandae in, possimus sit cumque ex veritatis! -->
 
-    
-
+<p>{{this.resp_msg.message}}</p>
