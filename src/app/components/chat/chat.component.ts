@@ -86,7 +86,12 @@ export class ChatComponent implements OnInit {
     this.auth.getUserWithoutID(this.auth.getSessionUser().id_user).subscribe((data: any) => {
       
          this.users = data.map( (elem: any) => {
-              const res_elem: IUserChat =  {id_user: elem.id, name: elem.login, connected: false, ItIsAvatar: elem.ItIsAvatar, connected_icon: this.sGrayIcon};
+              const res_elem: IUserChat =  {id_user: elem.id, 
+                                            name: elem.login, 
+                                            connected: false, 
+                                            ItIsAvatar: elem.ItIsAvatar, 
+                                            connected_icon: this.sGrayIcon, 
+                                            ItIsUnread: false};
 
               if ( Number(res_elem.ItIsAvatar)>0) {
                 res_elem.avatar_name = this.gr.sUrlAvatarGlobal+ elem.avatar_name;
@@ -112,6 +117,9 @@ export class ChatComponent implements OnInit {
               if (el.id_user === this.currentUser.id_user) 
                   el.msg_from_current_user = true; else el.msg_from_current_user = false;
               });
+
+
+              this.countUnreadMessage();
     });
 
 
@@ -119,8 +127,6 @@ export class ChatComponent implements OnInit {
 
        //если пришло сообщение что какие-то сообщения прочитаны обновляем список сообщений
        this.socketService.onMessageRead().subscribe((data: IDocChat[]) =>  {
-
-        console.log('onMessageRead!!!!!!!!!!!');
 
                       this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
                                                                  .sort( (b,a) => {return b.createdAt - a.createdAt});
@@ -259,6 +265,7 @@ export class ChatComponent implements OnInit {
       //}
 
 
+      this.countUnreadMessage();
       //console.log('this.appearMessages=', this.appearMessages);
 
       this._scrollToBottom();
@@ -289,6 +296,40 @@ export class ChatComponent implements OnInit {
    }
 
 
+
+
+   //пересчитываем сколько непрочитанных сообщений у юзера
+   countUnreadMessage() {
+    //console.log('allMessages = ', this.allMessages);
+     let res = this.allMessages.filter( el => el.id_user !== this.currentUser.id_user).filter( el => el.bMarked == false);
+
+
+     this.socketService.isWriteCountUnreadMessages(res.length);
+
+      res = res.reduce((o: IDocChat[], i: IDocChat) => {
+      if (!o.find(v => v.id_user == i.id_user)) {
+        o.push(i);
+      }
+      return o;
+    }, []);
+
+
+    //console.log('000000====>', res);  
+
+    this.users.forEach ( el=> { el.ItIsUnread = false; });
+    res.forEach ( el => {
+      this.users.find( user=> user.id_user == el.id_user)!.ItIsUnread = true;  
+
+      console.log('====>', this.users.find( user=> user.id_user == el.id_user));  
+
+    });
+
+    this.users = [...this.users];
+    console.log('this.users', this.users);
+
+     
+   }
+   
 
   
 }

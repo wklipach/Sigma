@@ -1,15 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';  
 import { IDocChat } from '../interface/chat/chat';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
+
+	private countUnreadMessages = new Subject<number>();
+
+
+
   constructor(private socket: Socket) { 
   
+  }
+
+
+  isCountUnreadMessagesIn(): Observable<number> {
+    return this.countUnreadMessages.asObservable();
+  }
+
+  isWriteCountUnreadMessages(count: number) {
+    this.countUnreadMessages.next(count);
   }
 
 

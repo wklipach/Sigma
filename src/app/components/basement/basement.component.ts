@@ -12,6 +12,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class BasementComponent implements OnInit {
 
 
+  unreadChatMessages: number = 0;
   unAceptTaskCount?: number = 0;
 
   constructor(private authService: AuthService, 
@@ -22,6 +23,15 @@ export class BasementComponent implements OnInit {
 
   ngOnInit(): void {
     this.countTask();
+
+    this.chatService.isCountUnreadMessagesIn().subscribe ( (res: number) => {
+      this.unreadChatMessages = res;
+    });
+
+    this.authService.getCountMessages(this.authService.getSessionUser().id_user).subscribe ( (res: any) => {
+      //console.log('кол непр сообщ', res[0].CountMessages);
+      if (res.length>0)  this.chatService.isWriteCountUnreadMessages(res[0].CountMessages);
+    });
   }
 
 

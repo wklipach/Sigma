@@ -33,13 +33,16 @@ router.get('/', async function(req, res, next) {
      res.send(user_without_currentid);
   }
 
-
   if (req.query.get_user_avatar) {
     const user_avatar = await asyncAvatar(req.query.get_user_avatar);
     res.send(user_avatar);
  }
 
-
+ if (req.query.get_count_messages) {
+  const user_avatar = await asyncCountChatMessages(req.query.get_count_messages);
+  res.send(user_avatar);
+}
+ 
 });
 
 
@@ -98,6 +101,23 @@ async function asyncAvatar(id_user) {
     if (conn) conn.release(); 
   }
 }
+
+
+async function asyncCountChatMessages(id_user) {
+  let conn = await pool.getConnection();
+  try {
+      
+      const resCountChatMessages = await conn.query("select count(id_chat) as CountMessages from chat where bMarked=0 and id_user_to=?", [id_user]);
+      return JSON.stringify(resCountChatMessages);
+
+  } catch (err) {
+      return  err;
+  } finally {
+    if (conn) conn.release(); 
+  }
+}
+
+
 
 
 

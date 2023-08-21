@@ -178,5 +178,14 @@ export class AuthService implements IUser, IOhrArchive {
     }
  
 
+    // получаем количество непрочитанных сообщений в чате
+    getCountMessages(id_user: number) {
+      const params = new HttpParams()
+        .set('get_count_messages', id_user);
+      return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
+    }
+
+    
+
 
 }

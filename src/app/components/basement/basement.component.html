@@ -41,7 +41,7 @@
     <button type="button" class="btn btn-info btn-sm position-relative mx-3" (click)="chat()">
       Чат
       <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-        3
+        {{this.unreadChatMessages}}
           <span class="visually-hidden">Новые сообщения</span>
       </span>
     </button>

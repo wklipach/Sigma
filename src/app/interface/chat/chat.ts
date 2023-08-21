@@ -16,4 +16,5 @@ export interface IUserChat {
     avatar_name?: string;
     ItIsAvatar?: string;
     connected_icon: string;
+    ItIsUnread: boolean;
 }

@@ -6,6 +6,7 @@
         <span>{{this.currentUser.name}}</span> 
 
 
+        <button (click)="countUnreadMessage()">!!!!!</button>
 
 
 
@@ -19,6 +20,14 @@
             <img class="talker" src = {{user.avatar_name}} >
             <span>{{user.name}}</span>
             <img class="talker" src = {{user.connected_icon}} >
+
+
+            <div *ngIf="user.ItIsUnread == true" >   
+              <img class="talker" src = "/assets/img/letter.png" >
+            </div>
+            <div *ngIf="user.ItIsUnread !== true" >все прочитано</div>
+
+
           </div>
           </option>
       </select>
