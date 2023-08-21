@@ -83,8 +83,18 @@ async function asyncNickUser(sNick) {
 async function asyncUserWithoutCurrentID(currentID) {
   let conn = await pool.getConnection();
   try {
+
+
+    const sQuery = 
+      "SELECT t.id, "+
+      "t.login, "+
+      "s.avatar_name, "+
+      "IFNULL(length(s.avatar_name),0) as ItIsAvatar "+
+      "FROM tuser t "+
+      "left join staff s on s.id_staff = t.id "+
+      "WHERE t.id<>? AND t.bitdelete=0";  
       
-      const resUsers = await conn.query("SELECT * FROM tuser WHERE id<>? AND bitdelete=0", [currentID]);
+      const resUsers = await conn.query(sQuery, [currentID]);
       return JSON.stringify(resUsers);
 
   } catch (err) {

@@ -22,7 +22,26 @@ async function asyncInsertChat(id_user, id_user_to, message, createdAt) {
       } finally  {
           if (conn) conn.release(); 
     }
-  }  
+  }
+  
+  
+  async function asyncReadMessage(id_user, id_user_to, createdAt) {
+    let conn = await pool.getConnection();
+    try {
+
+       const params = [id_user, id_user_to, createdAt];
+       const sReadMessage = 
+       " update chat set bMarked = true where id_user=? and id_user_to=? and createdAt=?";
+
+        const resReadMessage = await conn.query(sReadMessage, params);
+        return JSON.stringify(resReadMessage);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
 
 
   async function asyncLoadStartMessage() {
@@ -45,5 +64,6 @@ async function asyncInsertChat(id_user, id_user_to, message, createdAt) {
 
   exports.asyncInsertChat = asyncInsertChat;
   exports.asyncLoadStartMessage = asyncLoadStartMessage;
+  exports.asyncReadMessage = asyncReadMessage;
  
   module.exports = { ...module.exports }

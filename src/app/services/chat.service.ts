@@ -23,6 +23,10 @@ export class ChatService {
    } 
 
 
+   sengReadMessage(id_user: number, id_user_to: number, createdAt: number) {
+	this.socket.emit('sigma_readmessage', {id_user, id_user_to, createdAt});
+ } 
+
 
 
 
@@ -33,9 +37,14 @@ export class ChatService {
 
 	// listen event
 	onMessage() {
-
 		return this.socket.fromEvent('sigma_message') as Observable<IDocChat[]>;
 	}
+
+	// listen event ReadMessage
+	onMessageRead() {
+		return this.socket.fromEvent('sigma_readmessage') as Observable<IDocChat[]>;
+	}
+
 
 	onStartMessage() {
 		return this.socket.fromEvent('sigma_start') as Observable<IDocChat[]>;

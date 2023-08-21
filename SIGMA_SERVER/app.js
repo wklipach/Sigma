@@ -18,7 +18,7 @@ var task = require('./routes/task.js');
 var settings = require('./routes/settings.js');
 var ollr = require('./routes/ollr.js');
 
-const { asyncInsertChat, asyncLoadStartMessage } = require('./modules/chat.js')
+const { asyncInsertChat, asyncLoadStartMessage, asyncReadMessage } = require('./modules/chat.js')
 
 
 var app = express();
@@ -90,11 +90,24 @@ io.on('connection', (socket) => {
   // добавляем пользователя в хранилище
   socket.on('sigma_adduser', async (user) => {
     socket.id_user=user;
-    console.log('initialize user', 'user=', user, 'socket.id=', socket.id);
+    // console.log('initialize user', 'user=', user, 'socket.id=', socket.id);
     users.set(socket.id, user);
     io.emit('sigma_users', Object.fromEntries(users));
-    console.log(Object.fromEntries(users));
   });
+
+  //пользователь прочитал сообщение
+  socket.on('sigma_readmessage', async dataRead => {
+    console.log('dataRead=', dataRead);
+    let dataReadIndex = messages.findIndex( msg => msg.id_user == dataRead.id_user && msg.id_user_to == dataRead.id_user_to && msg.createdAt == dataRead.createdAt);
+    if (dataReadIndex > -1) {
+        messages[dataReadIndex].bMarked = true;
+        io.emit('sigma_readmessage', messages);
+        await asyncReadMessage(dataRead.id_user, dataRead.id_user_to, dataRead.createdAt);
+    }
+  });
+
+  //this.socket.emit('sigma_readmessage', id_user, id_user_to, createdAt);
+
 
 
   socket.on('disconnect', () => {

@@ -1,10 +1,14 @@
 import {  CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { GlobalRef } from 'globalref';
 import { ISessionUser } from 'src/app/interface/auth/user';
 import { IDocChat, IUserChat } from 'src/app/interface/chat/chat';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
+
+import { Subject, Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 
 @Component({
@@ -17,10 +21,14 @@ import { ChatService } from 'src/app/services/chat.service';
 export class ChatComponent implements OnInit {
 
    @ViewChild('fareNotes') virtualScroll!: CdkVirtualScrollViewport;
-   
 
+
+
+   sGrayIcon: string = "/assets/img/circle_gray.png";
+   sGreenIcon: string = "/assets/img/circle_green.png";
+   sMarkedIcon: string = "/assets/img/marked.png";
+   sUnMarkedIcon: string = "/assets/img/unmarked.png";
   
- 
   private _curChatUser = {} as IUserChat;
   get curChatUser() {
     return this._curChatUser;
@@ -30,7 +38,7 @@ export class ChatComponent implements OnInit {
   }
 
 
-  public resp_msg: IDocChat = {id_user: -1, id_user_to: -1, message: '', bMarked: false, createdAt: -1};
+  //public resp_msg: IDocChat = {id_user: -1, id_user_to: -1, message: '', bMarked: false, createdAt: -1, from_to_color: false};
   public chatUsers = {};
 
   // хранилище всех сообщений
@@ -51,7 +59,10 @@ export class ChatComponent implements OnInit {
   users: IUserChat[] = [];
 
 
-  constructor(private socketService: ChatService, private auth: AuthService, scrollDispatcher: ScrollDispatcher) { 
+  constructor(private socketService: ChatService, 
+              private auth: AuthService, 
+              scrollDispatcher: ScrollDispatcher, 
+              private gr: GlobalRef) { 
     this.chatForm  = new FormGroup({
       'send_message': new FormControl('')
     });
@@ -65,36 +76,73 @@ export class ChatComponent implements OnInit {
 
     //получаем все пользователей в системе
     this.auth.getUserWithoutID(this.auth.getSessionUser().id_user).subscribe((data: any) => {
+      
+         this.users = data.map( (elem: any) => {
+              const res_elem: IUserChat =  {id_user: elem.id, name: elem.login, connected: false, ItIsAvatar: elem.ItIsAvatar, connected_icon: this.sGrayIcon};
 
-      this.users = data.map( (elem: any) => {
-        return {id_user: elem.id, name: elem.login, connected: false};
+              if ( Number(res_elem.ItIsAvatar)>0) {
+                res_elem.avatar_name = this.gr.sUrlAvatarGlobal+ elem.avatar_name;
+              } else {
+                res_elem.avatar_name ="/assets/img/usernull.jpg";
+              }
+              return res_elem;
+         });
+
       });
 
-
       this.socketService.sengMessageAddUser(this.currentUser.id_user);
-
-    });
-
-
 
     
     //инициализируем начальный список сообщений
     this.socketService.sengStartMessage();
     this.socketService.onStartMessage().subscribe((data: IDocChat[]) =>  {
         this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
-                                                  .sort( (a,b) => {return b.createdAt - a.createdAt});
-        }
-    );
+                                                  .sort( (b,a) => {return b.createdAt - a.createdAt});
+
+             //если отправленное тек. юзером ставим msg_rom_current_user true, else false 
+             this.allMessages.forEach ( (el: IDocChat) => {
+              if (el.id_user === this.currentUser.id_user) 
+                  el.msg_from_current_user = true; else el.msg_from_current_user = false;
+              });
+    });
 
 
-    //получение кем-то отправленных сообщений
-    this.socketService.onMessage().subscribe((data: IDocChat[]) =>  {
-              this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
-                                                        .sort( (a,b) => {return b.createdAt - a.createdAt});
 
-              this.showMessages(this.curChatUser.id_user);                                                        
-          }
-     );
+
+       //если пришло сообщение что какие-то сообщения прочитаны обновляем список сообщений
+       this.socketService.onMessageRead().subscribe((data: IDocChat[]) =>  {
+
+        console.log('onMessageRead!!!!!!!!!!!');
+
+                      this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
+                                                                 .sort( (b,a) => {return b.createdAt - a.createdAt});
+                      //перебираем полученные                                                     
+                      this.allMessages.forEach ( (el: IDocChat) =>  {
+                      //если отправленное тек. юзером ставим msg_rom_current_user true, else false                                             
+                      if (el.id_user === this.currentUser.id_user) el.msg_from_current_user = true; else el.msg_from_current_user = false;
+                      //сообщение прочитанное или нет, ставим иконку прочитанности
+                      if (el.bMarked) el.marked_icon = this.sMarkedIcon; else el.marked_icon = this.sUnMarkedIcon; 
+
+                      });
+                      this.showMessages(this.curChatUser.id_user);                                                        
+        });
+
+
+
+        //получение кем-то отправленных сообщений, включая самого юзера
+        this.socketService.onMessage().subscribe((data: IDocChat[]) =>  {
+                        this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
+                                                                  .sort( (b,a) => {return b.createdAt - a.createdAt});
+                        //перебираем полученные                                                     
+                        this.allMessages.forEach ( (el: IDocChat) =>  {
+                          //если отправленное тек. юзером ставим msg_rom_current_user true, else false                                             
+                          if (el.id_user === this.currentUser.id_user) el.msg_from_current_user = true; else el.msg_from_current_user = false;
+                          //сообщение прочитанное или нет, ставим иконку прочитанности
+                          if (el.bMarked) el.marked_icon = this.sMarkedIcon; else el.marked_icon = this.sUnMarkedIcon; 
+
+                        });
+                        this.showMessages(this.curChatUser.id_user);                                                        
+        });
 
     this.socketService.onUsers().subscribe((data: any) =>  {
           this.chatUsers = data;
@@ -103,6 +151,7 @@ export class ChatComponent implements OnInit {
           this.activeUser();
        }
     );
+
 
 
   }
@@ -122,13 +171,6 @@ export class ChatComponent implements OnInit {
     }
 
 
-
-
-
-
-
-
-
   // Отправить сообщение  
   sendMessage(): void {
 
@@ -141,18 +183,21 @@ export class ChatComponent implements OnInit {
                                   id_user_to: this.curChatUser.id_user, 
                                   message: String(this.chatForm.controls['send_message'].value).trim(), 
                                   bMarked: false,
-                                  createdAt: -1 };
+                                  createdAt: -1,
+                                  msg_from_current_user: true,
+                                  marked_icon: this.sUnMarkedIcon};
 
     this.socketService.sengMessage(send_msg);
 
-  }
 
+  }
 
 
     activeUser() {
       // выключаем всех юзеров
         this.users.map((user) => {
           user.connected = false;
+          user.connected_icon = this.sGrayIcon;
         });
 
         //включаем найденных как активных 
@@ -160,6 +205,7 @@ export class ChatComponent implements OnInit {
             let userIndex = this.users.findIndex( user => user.id_user == value);
             if (userIndex > -1) {
                 this.users[userIndex].connected = true;
+                this.users[userIndex].connected_icon = this.sGreenIcon;
             }
           }
 
@@ -182,16 +228,59 @@ export class ChatComponent implements OnInit {
 
 
     showMessages(curChatUser: number) {
-
       // если есть изменение в прямо сейчас показываемом юзере обновляем текущее окно. 
       const Res = this.allMessages.filter( (msg) => { return (msg.id_user === curChatUser || msg.id_user_to === curChatUser);});
-
       console.log('messages=', Res);
 
-      if (this.appearMessages.length !== Res.length) {
-           this.appearMessages = Res;
-      }
+      //все что послано кем-то нам делаем прочитанным => sMarkedIcon 
+      Res.forEach ( (el: IDocChat) => {
+        if (el.bMarked) el.marked_icon = this.sMarkedIcon; else el.marked_icon = this.sUnMarkedIcon; 
+        if (el.id_user !== this.currentUser.id_user && el.bMarked === false) {
+          el.bMarked = true;
+          el.marked_icon = this.sMarkedIcon; 
+          //console.log(el);
+          //отправляем сведения о прочитанном сообщении
+          this.socketService.sengReadMessage(el.id_user, el.id_user_to, el.createdAt);
+        }
 
+      });
+
+
+      //if (this.appearMessages.length !== Res.length) {
+           this.appearMessages = [...Res];
+      //}
+
+
+      //console.log('this.appearMessages=', this.appearMessages);
+
+      this._scrollToBottom();
     }
+
+
+    private _scrollToBottom() {
+      setTimeout(() => {
+        this.virtualScroll.scrollTo({
+          bottom: 0,
+          behavior: 'auto',
+        });
+      }, 0);
+      setTimeout(() => {
+        this.virtualScroll.scrollTo({
+          bottom: 0,
+          behavior: 'auto',
+        });
+      }, 50);
+    } 
     
+   
+    getClassLine(bTrue: boolean) {
+       if (bTrue) 
+          return "example-item"; 
+        else 
+          return "example-item-false";
+   }
+
+
+
+  
 }

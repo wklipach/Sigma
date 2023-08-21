@@ -26,6 +26,20 @@
     padding: 15px;
   }
 
+  .example-item-false {
+    height: auto;
+    background-color: #e9ec0c;
+    overflow-y: visible;
+    margin-bottom: 20px ;
+    margin-left: 15px;
+    margin-right: 15px;
+    white-space: pre-wrap;
+    border-radius: 20px;
+    padding: 15px;
+  }
+
+
+
   .example-item:first-child {
     margin-top: 20px;
   }
