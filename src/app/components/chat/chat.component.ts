@@ -7,10 +7,6 @@ import { IDocChat, IUserChat } from 'src/app/interface/chat/chat';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
-import { Subject, Subscription } from 'rxjs';
-import { delay } from 'rxjs/operators';
-
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -28,6 +24,7 @@ export class ChatComponent implements OnInit {
    sGreenIcon: string = "/assets/img/circle_green.png";
    sMarkedIcon: string = "/assets/img/marked.png";
    sUnMarkedIcon: string = "/assets/img/unmarked.png";
+   sAvatar : string = "/assets/img/usernull.jpg";
   
   private _curChatUser = {} as IUserChat;
   get curChatUser() {
@@ -72,6 +69,17 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
 
     this.currentUser = this.auth.getSessionUser(); 
+
+    //получение аватара из базы
+    this.auth.getUserAvatar(this.currentUser.id_user).subscribe ( (res: any) => {
+            if (res.length>0) {
+              if (res[0].ItIsAvatar>0) {
+                this.sAvatar = this.gr.sUrlAvatarGlobal+res[0].avatar_name;
+              }
+            }
+    });
+
+
 
 
     //получаем все пользователей в системе

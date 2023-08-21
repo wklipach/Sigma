@@ -170,4 +170,13 @@ export class AuthService implements IUser, IOhrArchive {
   }
 
 
+    // получаем аватар пользователя
+    getUserAvatar(id_user: number) {
+      const params = new HttpParams()
+        .set('get_user_avatar', id_user);
+      return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
+    }
+ 
+
+
 }

@@ -34,6 +34,10 @@ router.get('/', async function(req, res, next) {
   }
 
 
+  if (req.query.get_user_avatar) {
+    const user_avatar = await asyncAvatar(req.query.get_user_avatar);
+    res.send(user_avatar);
+ }
 
 
 });
@@ -78,6 +82,23 @@ async function asyncNickUser(sNick) {
     if (conn) conn.release(); 
   }
 }
+
+
+
+async function asyncAvatar(id_user) {
+  let conn = await pool.getConnection();
+  try {
+      
+      const resAvatar = await conn.query("select avatar_name,  length(ifnull(avatar_name, '')) as ItIsAvatar from staff where id_staff=?", [id_user]);
+      return JSON.stringify(resAvatar);
+
+  } catch (err) {
+      return  err;
+  } finally {
+    if (conn) conn.release(); 
+  }
+}
+
 
 
 async function asyncUserWithoutCurrentID(currentID) {
