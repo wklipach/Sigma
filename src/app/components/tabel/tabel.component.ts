@@ -17,7 +17,9 @@ interface ITabel {
   id_object?: number;
   object_name: string;
   DateBegin: Date;
+  DateBegin_str: string;
   DateEnd: Date;
+  DateEnd_str: string;
 }
 
 
@@ -53,14 +55,15 @@ export class TabelComponent {
                       this.ColumnSizeObj =   this.tableServ.getTableWidth('tabelTable');
 
 
+                    this.tabelsrv.getTabel_All().subscribe( (res: any) => {
+                            this.ShowTabel = res;
+                            this.ShowTabel.forEach((el)=>  {
+                              el.DateBegin_str = this.datePipe.transform(el.DateBegin, 'yyyy-MM-dd') || '';
+                              el.DateEnd_str = this.datePipe.transform(el.DateEnd, 'yyyy-MM-dd') || '';
+                          });
+                    });
 
-                      this.tabelsrv.getStaff_All().subscribe( (res: any) => {
-
-                        this.ShowTabel = res;
-
-                      });
-
-                }
+               }
 
 
 
@@ -104,6 +107,7 @@ export class TabelComponent {
 
               focusFunction(e: any, datestr: any) {
                 e.target.type = 'date';
+                console.log('datestr', datestr);
                 e.target.value =  datestr;
               }
 
@@ -115,71 +119,60 @@ export class TabelComponent {
                 }
               }
               
+              idDateisValid (date: Date) {
+                return date.getTime() === date.getTime();
+              }               
             
-    // Преобразование даты рождения
+  
     setDateBegin($event: any, id: number) {
+          let date = new Date($event.target.value);
+          const isDate = this.idDateisValid(date);
+          if (isDate) {
+            // console.log($event.target.value, date);
+            this.tabelsrv.setTabelDateBegin(date, id).subscribe( (res: any) => { console.log('res update = ', res); } );
+          } else {
+            this.tabelsrv.setTabelDateBeginNull(id).subscribe( (res: any) => { console.log('res update = ', res); } );
+          }
 
-/*      
+
+          const res = this.ShowTabel.map( el => {
+            if (el.id?.toString() == id.toString()) {
+              el.DateBegin_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+            }
+            return el;
+            });
+          this.ShowTabel = [...res];
+
+
+          $event.target.type = '';
+          return $event.target; 
+    } 
+
+
+    setDateEnd($event: any, id: number) {
       let date = new Date($event.target.value);
       const isDate = this.idDateisValid(date);
       if (isDate) {
         // console.log($event.target.value, date);
-        this.staffserv.updateStaffDate(date, id_staff.toString(), 'DateBirth').subscribe( (res: any) => { console.log('res update = ', res); } );
+        this.tabelsrv.setTabelDateEnd(date, id).subscribe( (res: any) => { console.log('res update = ', res); } );
       } else {
-        // console.log($event.target.value, 'даты нет!');
-        this.staffserv.updateStaffDateNull(id_staff.toString(), 'DateBirth').subscribe( (res: any) => { console.log('res update = ', res); } );
+        this.tabelsrv.setTabelDateEndNull(id).subscribe( (res: any) => { console.log('res update = ', res); } );
       }
 
 
-      if (isDate) {      
-              const res = this.ShowStaff.map( el => {
-                if (el.id_staff == id_staff.toString()) {
-                  el.sAge =  (new Date().getFullYear() -  date.getFullYear()).toString();
-                  el.DateBirth_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '--';
-                }
-                return el;
-              });
-            this.ShowStaff = [...res];
-
-            const res2 = this.ORIGINAL_ShowStaff.map( el => {
-              if (el.id_staff == id_staff.toString()) {
-                el.sAge =  (new Date().getFullYear() -  date.getFullYear()).toString();
-                el.DateBirth_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '--';
-               }
-               return el;
-              });
-             this.ORIGINAL_ShowStaff = [...res2];
-
-            $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
-       }            
-
-       if (!isDate) {      
-            const res = this.ShowStaff.map( el => {
-              if (el.id_staff == id_staff.toString()) {
-                el.sAge =  '--';
-                el.DateBirth_str = '--';
-              }
-              return el;
-            });
-          this.ShowStaff = [...res];
+      const res = this.ShowTabel.map( el => {
+        if (el.id?.toString() == id.toString()) {
+          el.DateEnd_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+        }
+        return el;
+        });
+      this.ShowTabel = [...res];
 
 
-          const res2 = this.ORIGINAL_ShowStaff.map( el => {
-            if (el.id_staff == id_staff.toString()) {
-              el.sAge =  '--';
-              el.DateBirth_str = '--';
-            }
-            return el;
-            });
-          this.ORIGINAL_ShowStaff = [...res2];
+      $event.target.type = '';
+      return $event.target; 
+} 
 
-          $event.target.value = '--';
-        }            
-
-
-        $event.target.type = '';
-*/     
-    } 
 
     myalert(e: any) {
       console.log('e=', e);

@@ -5,6 +5,7 @@ import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { ITable } from 'src/app/interface/table';
 import { TableService } from 'src/app/services/table.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 
 
@@ -41,6 +42,11 @@ interface IOLLR  {
  };
 
 
+ interface IProtectedObject {
+  id?: number; 
+  id_object?: number; 
+  name_object?: string;
+}
 
 
 
@@ -69,10 +75,14 @@ export class SummaryComponent  implements OnInit  {
 
   //содержит ширины столбцов, взятые из хранилища
   ColumnSizeObj:  ITable[] = [];
+  settingProtectedObject:  IProtectedObject = {};
 
 
-
-  constructor(private route: ActivatedRoute, private summaryServ: SummaryService, private router: Router, private tableServ:  TableService) { 
+  constructor(private route: ActivatedRoute, 
+              private summaryServ: SummaryService, 
+              private router: Router, 
+              private tableServ:  TableService, 
+              private settingserv: SettingsService,) { 
         // this.route.queryParams.subscribe((params) => { this.id_staff = params['id_staff'];
       //});
   }
@@ -116,6 +126,11 @@ export class SummaryComponent  implements OnInit  {
        });
 
       this.ShowOLLR = value;
+    });
+
+    this.settingserv.getSettingProtectedObject(this.id_staff).subscribe ( (res: any) => {
+
+      if (res && res.length>0) this.settingProtectedObject = res[0];  
     });
 
   }

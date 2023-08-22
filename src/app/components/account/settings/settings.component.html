@@ -265,4 +265,23 @@
             </div>      
 
       </div>
+
+
+
+      <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Объект</label>
+    
+        <div class="col-lg-8 fv-row">
+
+           <select name="status" data-control="selectStatus" class="form-select form-select-solid form-select-lg fw-semibold" 
+                   (change)="onChangeProtectedObject($event, this.guideProtectedObject, this.settingProtectedObject.id || 0)" 
+                   [(ngModel)]="this.settingProtectedObject.name_object">
+              <option *ngFor="let g of this.guideProtectedObject" [value]="g.name">{{g.name}}</option>
+            </select>
+
+        </div>
+    </div>  
+
+
      <button class="btn btn-secondary" (click)="backGeneral()">Назад</button>

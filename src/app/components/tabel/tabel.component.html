@@ -34,36 +34,54 @@ class="material striped"
     </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column prop = "DateBegin" name = "Дата начала" [width]="getColumnSize('DateBegin')" [cellClass]="'wital_span'">
+<ngx-datatable-column prop = "DateBegin_str" name = "Дата начала" [width]="getColumnSize('DateBegin_str')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">
 
         <span
            style="cursor: pointer;" 
-           (click)="editing[rowIndex + '-DateBegin'] = true"
-           *ngIf="!editing[rowIndex + '-DateBegin']">
+           (click)="editing[rowIndex + '-DateBegin_str'] = true"
+           *ngIf="!editing[rowIndex + '-DateBegin_str']">
                             {{ value }} 
     
         </span>
 
         <input
-           (focus)="focusFunction($event, row.DateBegin)" 
+           style="cursor: pointer;" 
+           (focus)="focusFunction($event, row.DateBegin_str)" 
            (focusout)="setDateBegin($event, row.id)"
            (keyup.enter)="myEnter($event)"
-           *ngIf="editing[rowIndex + '-DateBegin']"
-           type="date"
-           [value]="value"
+           *ngIf="editing[rowIndex + '-DateBegin_str']"
+           type="text"
+           [value]= "value" 
          />
 
-        
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "DateEnd_str" name = "Дата окончания" [width]="getColumnSize('DateEnd_str')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">
+
+        <span
+           style="cursor: pointer;" 
+           (click)="editing[rowIndex + '-DateEnd_str'] = true"
+           *ngIf="!editing[rowIndex + '-DateEnd_str']">
+                            {{ value }} 
+    
+        </span>
+
+        <input
+           style="cursor: pointer;" 
+           (focus)="focusFunction($event, row.DateEnd_str)" 
+           (focusout)="setDateEnd($event, row.id)"
+           (keyup.enter)="myEnter($event)"
+           *ngIf="editing[rowIndex + '-DateEnd_str']"
+           type="text"
+           [value]= "value" 
+         />
 
     </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column prop = "DateEnd" name = "Дата окончания" [width]="getColumnSize('DateEnd')" >
-    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value }} </span>
-    </ng-template>
-</ngx-datatable-column>
 
 
 

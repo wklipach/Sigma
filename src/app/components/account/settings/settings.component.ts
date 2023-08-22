@@ -47,6 +47,12 @@ interface ISetting {
   comment?: string;  
 }
 
+interface IProtectedObject {
+   id?: number; 
+   id_object?: number; 
+   name_object?: string;
+}
+
 
 
 @Component({
@@ -62,6 +68,7 @@ export class SettingsComponent {
   public form!: FormGroup;
   id_staff: number = 0;
 
+  guideProtectedObject:  ISmallGuide[] = [];
   guidePosition:  ISmallGuide[] = [];
   guideStatus:  ISmallGuide[] = [];
   guideOrganization:  ISmallGuide[] = [];
@@ -71,6 +78,7 @@ export class SettingsComponent {
   guideSenjorGuard:  ISenjorGuardGuide[] = [];
   guideDepartment:  ISmallGuide[] = [];
   settingData:  ISetting = {};
+  settingProtectedObject:  IProtectedObject = {};
 
 
   constructor(private route: ActivatedRoute,
@@ -114,10 +122,12 @@ export class SettingsComponent {
       this.servguide.getSenjorGuard(),
       this.servguide.getSmallGuide('guide_department'),
       this.settingserv.getSetting(this.id_staff),
+      this.settingserv.getSettingProtectedObject(this.id_staff),
+      this.servguide.getProtectedObjectGuide()
     ];
 
   forkJoin(sources)
-  .subscribe(([res1, res2, res3, res4, res5, res6, res7, res8, res9]) => {
+  .subscribe(([res1, res2, res3, res4, res5, res6, res7, res8, res9, res10, res11]) => {
       this.guidePosition = res1; 
       this.guideOrganization = res2; 
       this.guideStatus = res3; 
@@ -131,7 +141,11 @@ export class SettingsComponent {
         this.settingData.DateBirth_str = this.datePipe.transform(this.settingData.DateBirth, 'yyyy-MM-dd') || '';
         this.settingData.date_interview_str = this.datePipe.transform(this.settingData.date_interview, 'yyyy-MM-dd') || '';
       } 
+      if (res10 && res10.length>0) {
+        this.settingProtectedObject = res10[0];  
+      }
 
+      this.guideProtectedObject = res11;
       console.log('this.settingData=', this.settingData);
   });    
 
@@ -274,9 +288,41 @@ export class SettingsComponent {
      if (res) {
      if (!res.name) res.name='';
       this.staffserv.updateProtectedSmallGuide(Number(res.id), res.name, this.id_staff.toString(), field).subscribe();
-  
      }
     }
+  }
+
+  onChangeProtectedObject(ev: any, smallGuide:  ISmallGuide[], id: number) {
+
+
+
+    console.log(this.settingProtectedObject);
+
+    if (ev) {
+      let res = smallGuide.find( (el) => el.name == ev.target.value);
+      if (res) {
+      if (!res.name) res.name='';
+      console.log(res, id);
+
+        if (res.id == '1') {
+          this.settingserv.setSettingDeleteProtectedObject(id, this.settingProtectedObject.id_object || 0, this.id_staff).subscribe();
+          return;
+        }
+
+        if (id == 0) {
+          console.log('добавляем');
+          this.settingserv.setInsertProtectedObject(res.id || '0', this.id_staff).subscribe();
+          return;
+        }
+
+        if (id > 0) {
+          console.log('апдейтим');
+          this.settingserv.setUpdateProtectedObject(id, res.id || '0', this.id_staff).subscribe();
+          return;
+        }
+
+      }
+     }    
   }
 
 

@@ -19,10 +19,138 @@ router.get('/', async function(req, res, next) {
   });
 
 
+  router.post('/', async function(req, res) {
+
+     if (req.body['dateBegin']) {
+      const result = await asyncUpdateTabelDateBegin
+                          (req.body['id'], req.body['dateBegin'], req.body['id_user']);
+      res.send(result);
+     }
+
+     if (req.body['dateBeginNull']) {
+       const result = await asyncUpdateTabelDateBeginNull
+                            (req.body['id'], req.body['id_user']);
+       res.send(result);
+     }
+
+     if (req.body['dateEnd']) {
+        const result = await asyncUpdateTabelDateEnd
+                            (req.body['id'], req.body['dateEnd'], req.body['id_user']);
+        res.send(result);
+       }
+  
+       if (req.body['dateEndNull']) {
+         const result = await asyncUpdateTabelDateEndNull
+                              (req.body['id'], req.body['id_user']);
+         res.send(result);
+       }
+  
+  });
+
+
+
+
+  async function asyncUpdateTabelDateBegin(id, DateBegin, id_user) {
+    let conn = await pool.getConnection();
+    try {
+        addDate = DateBegin.replace("Z", " ").replace("T", " ");
+
+        const params = [addDate, id];
+        const sQuery = 
+        "update staff_object set DateBegin=? where id=?";
+
+        console.log(sQuery, params);
+
+        const paramsJournal = [DateBegin, id, id_user];
+        const sJournal = 
+        "insert tabel_log (`newvalue`, `id_tabel`, `field`, `id_user`, `date_oper`) value(?, ?, 'DateBegin', ?, now())";
+
+        const resDateBegin = await conn.query(sQuery, params);
+        await conn.query(sJournal, paramsJournal);
+        return JSON.stringify(resDateBegin);
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+  async function asyncUpdateTabelDateBeginNull(id, id_user) {
+    let conn = await pool.getConnection();
+    try {
+        const params = [id];
+        const sQuery = 
+        "update staff_object set DateBegin=null where id=?";
+
+        console.log(sQuery, params);
+
+        const paramsJournal = [id, id_user];
+        const sJournal = 
+        "insert tabel_log (`newvalue`, `id_tabel`, `field`, `id_user`, `date_oper`) value('null', ?, 'DateBegin', ?, now())";
+
+        const resDateBegin = await conn.query(sQuery, params);
+        await conn.query(sJournal, paramsJournal);
+        return JSON.stringify(resDateBegin);
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+  async function asyncUpdateTabelDateEnd(id, DateEnd, id_user) {
+    let conn = await pool.getConnection();
+    try {
+        addDate = DateEnd.replace("Z", " ").replace("T", " ");
+
+        const params = [addDate, id];
+        const sQuery = 
+        "update staff_object set DateEnd=? where id=?";
+
+        console.log(sQuery, params);
+
+        const paramsJournal = [DateEnd, id, id_user];
+        const sJournal = 
+        "insert tabel_log (`newvalue`, `id_tabel`, `field`, `id_user`, `date_oper`) value(?, ?, 'DateEnd', ?, now())";
+
+        const resDateEnd = await conn.query(sQuery, params);
+        await conn.query(sJournal, paramsJournal);
+        return JSON.stringify(resDateEnd);
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
+
+  async function asyncUpdateTabelDateEndNull(id, id_user) {
+    let conn = await pool.getConnection();
+    try {
+        const params = [id];
+        const sQuery = 
+        "update staff_object set DateEnd=null where id=?";
+
+        console.log(sQuery, params);
+
+        const paramsJournal = [id, id_user];
+        const sJournal = 
+        "insert tabel_log (`newvalue`, `id_tabel`, `field`, `id_user`, `date_oper`) value('null', ?, 'DateEnd', ?, now())";
+
+        const resDateEnd = await conn.query(sQuery, params);
+        await conn.query(sJournal, paramsJournal);
+        return JSON.stringify(resDateEnd);
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  }
   
   async function asyncTabel() {
-
-
     let conn = await pool.getConnection();
     try {
   
