@@ -107,15 +107,14 @@ class="material striped"
 
 </div>
 
-  <div class="card-body p-9 justify-content-center">
+  <div class="card-body p-9 justify-content-left w-50">
     <h4 class="card-title text-muted">Добавить документ</h4>
-  </div>
- 
+  
 
-<div class="d-flex my-3">
+<div class="d-flex my-3 justify-content-left w-100">
     
-    <label class="col-lg-3 col-form-label fw-semibold fs-6">Выбрать</label>
-    <div class="col-lg-4 fv-row">
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Выбрать</label>
+    <div class="col-lg-5 fv-row">
         <select name="department" data-control="selectDepartment" class="form-select form-select-solid form-select-lg fw-semibold" 
                 [(ngModel)]="this.settingOllr.gname">
                 <option *ngFor="let go of this.guideOllr" [value]="go.name">{{go.name}}</option>
@@ -123,18 +122,18 @@ class="material striped"
       </div>
 </div>
 
-<div class="d-flex my-3">
-    <label class="col-lg-3 col-form-label fw-semibold fs-6">Дата документа</label>
+<div class="d-flex my-3 justify-content-left w-100">
+    <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата документа</label>
 
-    <div class="col-lg-4 fv-row">
+    <div class="col-lg-5 fv-row">
         <input (change)="addDateBegin($event)"  type="date" name="staffDateDocument" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold"/> 
    </div>
 
 </div>
 
-<div class="btns">
-  <button class="btn btn-primary" (click)="addDoc()">Добавить</button>
-  <button class="btn btn-secondary" (click)="backGeneral()">Назад</button>
+<div class="d-flex my-3 justify-content-start w-100">
+  <button class="btn btn-primary mx-3" (click)="addDoc()">Добавить</button>
+  <button class="btn btn-secondary " (click)="backGeneral()">Назад</button>
   </div>
 
 
@@ -159,5 +158,7 @@ class="material striped"
       </div>
     </div>
   </div>
-  </div>  
+  </div> 
+
+</div>
   <!-- конец добавить ресурс  -->

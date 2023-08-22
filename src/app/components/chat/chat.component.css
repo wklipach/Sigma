@@ -16,7 +16,7 @@
    
   .example-item {
     height: auto;
-    background-color: #91b7f0;
+    background-color: #c8dbf8;
     overflow-y: visible;
     margin-bottom: 20px ;
     margin-left: 15px;
@@ -28,7 +28,7 @@
 
   .example-item-false {
     height: auto;
-    background-color: #e9ec0c;
+    background-color: #e6e6e6;
     overflow-y: visible;
     margin-bottom: 20px ;
     margin-left: 15px;
@@ -77,10 +77,26 @@
     border-radius: 50%;
     cursor: pointer;
 }
+.reed{
+    color: #218838 !important;
+    margin-left: 99%;
+    width: 25px;
+    height: 25px;
+}
 
+.connected{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
 select{
     width: 100%;
     height: 650px;
+.letter{
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+}
     
 }
 option{
@@ -90,7 +106,7 @@ option{
 }
 option:hover{
     height: 50px;
-    background-color: #c92951;
+    background-color: #e2a024;
     cursor: pointer;
     font-weight: 600;
     color: white;

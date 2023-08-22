@@ -9,38 +9,38 @@
         <button (click)="countUnreadMessage()">!!!!!</button>
 
 
-
     </div>
 <div class="row">
-    <div class="col-md-2 m-0">
+    <div class="col-md-3 m-0">
    
       <select name="Users" size="50">
           <option *ngFor="let user of users" value="user.id_user"  (click)="clickUser(user)"> 
           <div class="user-name">
+            
             <img class="talker" src = {{user.avatar_name}} >
             <span>{{user.name}}</span>
-            <img class="talker" src = {{user.connected_icon}} >
+            
 
 
             <div *ngIf="user.ItIsUnread == true" >   
-              <img class="talker" src = "/assets/img/letter.png" >
+              <img class="letter" src = "/assets/img/letter.png" >
             </div>
-            <div *ngIf="user.ItIsUnread !== true" >все прочитано</div>
-
+            <div *ngIf="user.ItIsUnread !== true" >Новых нет</div>
+            <img class="connected" title="Online"  src = {{user.connected_icon}} >
 
           </div>
           </option>
       </select>
 
     </div>
-  <div class="col-md-10 m-0">
+  <div class="col-md-9 m-0">
  
 <cdk-virtual-scroll-viewport #fareNotes appendOnly itemSize="50" class="example-viewport">
         <div *cdkVirtualFor="let msg of this.appearMessages" 
               [ngClass]="this.getClassLine(msg.msg_from_current_user)">
               {{msg.message}} 
               {{msg.createdAt  | date: "MMM d, y, HH:mm:ss"  }} 
-              <img class="talker" src = {{msg.marked_icon}} >
+              <img class="reed" src = {{msg.marked_icon}} >
         </div>
 </cdk-virtual-scroll-viewport>
 

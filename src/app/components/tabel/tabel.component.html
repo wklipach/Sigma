@@ -38,7 +38,7 @@ class="material striped"
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">
 
         <span
-           style="cursor: pointer;" 
+           style="cursor: pointer;border-color: #138496;width: 50px !important;" 
            (click)="editing[rowIndex + '-DateBegin'] = true"
            *ngIf="!editing[rowIndex + '-DateBegin']">
                             {{ value }} 

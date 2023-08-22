@@ -20,11 +20,12 @@ export class ChatComponent implements OnInit {
 
 
 
-   sGrayIcon: string = "/assets/img/circle_gray.png";
-   sGreenIcon: string = "/assets/img/circle_green.png";
-   sMarkedIcon: string = "/assets/img/marked.png";
+   sGrayIcon: string = "/assets/img/circle.png";
+   sGreenIcon: string = "/assets/img/circle.png";
+   sMarkedIcon: string = "/assets/img/double-checked.svg";
    sUnMarkedIcon: string = "/assets/img/unmarked.png";
    sAvatar : string = "/assets/img/usernull.jpg";
+   
   
   private _curChatUser = {} as IUserChat;
   get curChatUser() {
