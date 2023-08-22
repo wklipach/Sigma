@@ -34,27 +34,28 @@ class="material striped"
     </ng-template>
 </ngx-datatable-column>
 
-<ngx-datatable-column prop = "DateBegin" name = "Дата начала" [width]="getColumnSize('DateBegin')" >
+<ngx-datatable-column prop = "DateBegin" name = "Дата начала" [width]="getColumnSize('DateBegin')" [cellClass]="'wital_span'">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">
 
         <span
-           title="Double click to edit"
-           class = "wital_span"                                       
-           placeholder="Choose a date"
+           style="cursor: pointer;" 
            (click)="editing[rowIndex + '-DateBegin'] = true"
            *ngIf="!editing[rowIndex + '-DateBegin']">
                             {{ value }} 
+    
+        </span>
 
-         </span>
-
-         <input
+        <input
            (focus)="focusFunction($event, row.DateBegin)" 
            (focusout)="setDateBegin($event, row.id)"
            (keyup.enter)="myEnter($event)"
            *ngIf="editing[rowIndex + '-DateBegin']"
            type="date"
            [value]="value"
-          />
+         />
+
+        
+
     </ng-template>
 </ngx-datatable-column>
 

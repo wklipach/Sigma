@@ -180,4 +180,8 @@ export class TabelComponent {
         $event.target.type = '';
 */     
     } 
+
+    myalert(e: any) {
+      console.log('e=', e);
+    }
 }

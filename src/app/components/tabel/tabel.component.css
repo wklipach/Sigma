@@ -243,9 +243,10 @@
     }
   
 
-  .wital_span {
+
+ :host ::ng-deep .wital_span {
       width: 100px;
       height: 100%;
       	
-      background-color:#dc3545
+      /* background-color:#dc3545 */
   }    
