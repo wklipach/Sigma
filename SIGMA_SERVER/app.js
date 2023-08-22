@@ -17,6 +17,7 @@ var filters = require('./routes/filters.js');
 var task = require('./routes/task.js');
 var settings = require('./routes/settings.js');
 var ollr = require('./routes/ollr.js');
+var tabel = require('./routes/tabel.js');
 
 const { asyncInsertChat, asyncLoadStartMessage, asyncReadMessage } = require('./modules/chat.js')
 
@@ -175,6 +176,8 @@ app.use('/filters', filters);
 app.use('/task', task);
 app.use('/settings', settings);
 app.use('/ollr', ollr);
+app.use('/tabel', tabel);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -50,6 +50,7 @@ import { TaskComponent } from './components/task/task/task.component';
 import { Obj2settingsComponent } from './components/protected_objects/obj2settings/obj2settings.component';
 import { OllrComponent } from './components/account/general/ollr/ollr.component';
 import { ReadtaskComponent } from './components/task/readtask/readtask.component';
+import { TabelComponent } from './components/tabel/tabel.component';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -87,7 +88,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     TaskComponent,
     Obj2settingsComponent,
     OllrComponent,
-    ReadtaskComponent
+    ReadtaskComponent,
+    TabelComponent
   ],
   imports: [
     BrowserModule,

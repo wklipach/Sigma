@@ -28,6 +28,7 @@ import { Obj2settingsComponent } from './components/protected_objects/obj2settin
 import { OllrComponent } from './components/account/general/ollr/ollr.component';
 import { ReadtaskComponent } from './components/task/readtask/readtask.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { TabelComponent } from './components/tabel/tabel.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -56,7 +57,7 @@ const routes: Routes = [
   { path: 'obj2settings', component: Obj2settingsComponent, canActivate: [mainGuard] },
   { path: 'readtask', component: ReadtaskComponent, canActivate: [mainGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [mainGuard] },
-    
+  { path: 'tabel', component: TabelComponent, canActivate: [mainGuard] },
   ];
 
 

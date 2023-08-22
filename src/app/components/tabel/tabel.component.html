@@ -1,0 +1,70 @@
+<app-basement></app-basement>
+
+
+<ngx-datatable
+#tabelTable
+class="material striped"
+[rows]="this.ShowTabel"
+[columnMode]="ColumnMode.force"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="50"
+[limit]="100"
+[scrollbarV]="true"
+[scrollbarH]="true"
+(resize)="onResize($event)"
+>
+
+
+<ngx-datatable-column prop = "id_staff" name = "#" [width]="getColumnSize('id_staff')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "fio" name = "ФИО" [width]="getColumnSize('fio')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "object_name" name = "Объект" [width]="getColumnSize('object_name')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "DateBegin" name = "Дата начала" [width]="getColumnSize('DateBegin')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">
+
+        <span
+           title="Double click to edit"
+           class = "wital_span"                                       
+           placeholder="Choose a date"
+           (click)="editing[rowIndex + '-DateBegin'] = true"
+           *ngIf="!editing[rowIndex + '-DateBegin']">
+                            {{ value }} 
+
+         </span>
+
+         <input
+           (focus)="focusFunction($event, row.DateBegin)" 
+           (focusout)="setDateBegin($event, row.id)"
+           (keyup.enter)="myEnter($event)"
+           *ngIf="editing[rowIndex + '-DateBegin']"
+           type="date"
+           [value]="value"
+          />
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "DateEnd" name = "Дата окончания" [width]="getColumnSize('DateEnd')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+    </ng-template>
+</ngx-datatable-column>
+
+
+
+
+</ngx-datatable>
