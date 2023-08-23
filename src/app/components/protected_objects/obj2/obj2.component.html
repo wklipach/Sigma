@@ -68,7 +68,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
-<ngx-datatable-column prop="name" name="Объект" [width]="getColumnSize('name')">
+<ngx-datatable-column prop="name" name="Объект" [width]="getColumnSize('name')" [frozenLeft]="true">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"

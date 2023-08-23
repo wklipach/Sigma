@@ -42,7 +42,7 @@ class="material striped"
 >
 
 
-<ngx-datatable-column prop = "id_staff" name = "#" [width]="getColumnSize('id_staff')" >
+<ngx-datatable-column prop = "id_staff" name = "#" [width]="getColumnSize('id_staff')" [frozenLeft]="true">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
       <span (dblclick)="newGeneral(row.id_staff)">
         {{ value }}
@@ -62,7 +62,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ НАИМЕНОВАНИЕ-->
-<ngx-datatable-column prop="fio" name="ФИО" [width]="getColumnSize('fio')">
+<ngx-datatable-column prop="fio" name="ФИО" [width]="getColumnSize('fio')" [frozenLeft]="true">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
       <span
         title="Double click to edit"
