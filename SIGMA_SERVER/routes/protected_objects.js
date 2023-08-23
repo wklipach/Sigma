@@ -25,7 +25,12 @@ router.get('/', async function(req, res, next) {
     if (req.query.clear_object) {
       const result = await asyncClearObject(req.query.clear_object);
       res.send(result);
-    }  
+    }
+    
+    if (req.query.get_staff_objects) {
+      const result = await asyncStaffObject(req.query.get_staff_objects);
+      res.send(result);
+    }
     
  
   });
@@ -103,7 +108,9 @@ router.post('/', async function(req, res) {
         'po.id_object_type, '+
         'got.name AS object_type, '+
         "po.photo_name, "+
-        "IFNULL(length(po.photo_name),0) as ItIsPhoto "+
+        'IFNULL(length(po.photo_name),0) as ItIsPhoto, '+
+        'group_concat(so.id_staff) as list_staff_number, '+
+        'group_concat(s2.fio) as list_staff_fio '+
         ''+
         'FROM protected_object po '+
         'LEFT JOIN guide_post_status gps on gps.id = po.post_status '+
@@ -112,7 +119,10 @@ router.post('/', async function(req, res) {
         'LEFT JOIN guide_mtr gm on gm.id =po.id_mtr '+
         'LEFT JOIN guide_customers gc on gc.id =po.id_customer '+
         'LEFT JOIN guide_object_type got on got.id=po.id_object_type '+
+        'left join staff_object so on so.id_object = po.id_object '+
+        'LEFT JOIN staff s2 on s2.id_staff=so.id_staff '+
         'where po.bitDelete = 0 and po.id_object<>1 '+
+        'group by po.id_object '+
         'ORDER BY po.id_object ASC';
  
         const resProtectedObjects = await conn.query(sQuery);
@@ -169,6 +179,28 @@ router.post('/', async function(req, res) {
   }
 
 
+
+  async function  asyncStaffObject(id_object) {
+    let conn = await pool.getConnection();
+     try {
+   
+         const sQuery = 
+          'select so.id_staff, s.fio, so.DateBegin, so.DateEnd '+
+          'from staff_object so '+
+          'left join staff s  on s.id_staff = so.id_staff '+
+          'where so.id_object = ? '+
+          'order by fio asc ';
+
+         const params = [id_object];
+ 
+         const resStaffObjects = await conn.query(sQuery, params);
+         return JSON.stringify(resStaffObjects);
+       } catch (err) {
+         return  err;
+       } finally  {
+           if (conn) conn.release(); 
+     }
+   }
 
 
 

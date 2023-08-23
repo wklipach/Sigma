@@ -39,6 +39,13 @@ interface ICurrentObject {
   photo_name?: string; 
 };
 
+interface IStaffObject {
+  id_staff?: number;
+  fio?: string;
+  DateBegin?: Date; 
+  DateEnd?: Date;
+}
+
 
 
 @Component({
@@ -50,6 +57,7 @@ export class ObjectCardComponent {
 
   ProtectedObject: IProtectedObject = {id_object: 0, name: '--'};
   currentObject: ICurrentObject = {};
+  listStaffObject:   IStaffObject[] = [];
   public sObjectPath  = '';
 
   constructor (
@@ -96,8 +104,6 @@ onLoadFromBase() {
 
     const S = aRes[0].photo_name;
 
-    console.log('this.sObjectPath=', S);
-
     if (S !== '""' && (S)) {
       if (typeof S !== 'undefined') {
         if (S.length > 0) {
@@ -106,11 +112,17 @@ onLoadFromBase() {
       }
     }
 
-
     this.loadTextInfo (aRes);
 
-
   });
+
+
+  //список "сотрудник-номер"
+  this.objserv.getStaffProtectedObjects(this.ProtectedObject.id_object).subscribe((aRes: any) => {
+    this.listStaffObject = aRes;
+  });
+
+
 }
 
 

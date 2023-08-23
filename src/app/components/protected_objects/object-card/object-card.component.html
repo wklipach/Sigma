@@ -129,6 +129,16 @@
   </div>  
 
 
+
+  <div *ngFor="let so of this.listStaffObject">
+    <span>№</span><span>{{so.id_staff}}</span>
+    <span>ФИО</span><span>{{so.fio}}</span>
+    <span>Начало</span><span>{{so.DateBegin}}</span>
+    <span>Конец</span><span>{{so.DateEnd}}</span>
+  </div>
+
+
+
 </form>
 
 

@@ -38,6 +38,12 @@ export class ListobjectsService {
     return this.http.get(this.gr.sUrlGlobal + 'protected_objects', {params: params});
   }
 
+  getStaffProtectedObjects(id_object: number) {
+     const params = new HttpParams()
+     .set('get_staff_objects', id_object);
+     return this.http.get(this.gr.sUrlGlobal + 'protected_objects', {params: params});
+  }
+
 
 
   updateProtectedOne(text: string, id_object: string, field: string) {

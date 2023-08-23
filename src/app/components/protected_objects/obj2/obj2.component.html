@@ -404,6 +404,21 @@ class="material striped"
 </ngx-datatable-column>
 <!-- КОНЕЦ СПРАВОЧНИКА Клиент  -->
 
+
+
+<ngx-datatable-column prop = "list_staff_number" name = "Номера сотрудников" [width]="getColumnSize('list_staff_number')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+    {{ value }} 
+    </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "list_staff_fio" name = "ФИО сотрудников" [width]="getColumnSize('list_staff_fio')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+    {{ value }} 
+    </ng-template>
+</ngx-datatable-column>
+
+
 <!-- НАЧАЛО ПОЛЯ delete -->  
 <ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
   <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">

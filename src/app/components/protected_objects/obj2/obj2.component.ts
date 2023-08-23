@@ -48,7 +48,8 @@ interface IObjectOne {
   object_type?: string; 
   photo_name?: string;
   ItIsPhoto?: string;
-
+  list_staff_number?: string;
+  list_staff_fio?: string;
 };
 
 interface IMaps {
