@@ -109,7 +109,7 @@ router.post('/', async function(req, res) {
         'got.name AS object_type, '+
         "po.photo_name, "+
         'IFNULL(length(po.photo_name),0) as ItIsPhoto, '+
-        'group_concat(so.id_staff) as list_staff_number, '+
+        "group_concat(so.id_staff) as list_staff_number, "+
         'group_concat(s2.fio) as list_staff_fio '+
         ''+
         'FROM protected_object po '+

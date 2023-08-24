@@ -121,7 +121,6 @@ export class Staff2Component {
     // фильтры
     listFilters:  any[] = [];
 
-
     // для работы таблицы
     editing: any = {};
 
@@ -757,8 +756,10 @@ loadFiltersNull() {
 
   onChangeFilter(curEl: any) {
 
+
     if (curEl.value.toString() == "0") {
       this.loadFiltersNull();
+      this.closePanel();
       return;
     }
 
@@ -766,6 +767,7 @@ loadFiltersNull() {
 
     if (!res) {
       this.loadFiltersNull();
+      this.closePanel();
       return;
     }
 
@@ -775,9 +777,10 @@ loadFiltersNull() {
           let val1 = "";
           if (res.​value1) val1 = res.​value1.trim().toUpperCase(); 
      
+          console.log('val1=', val1, res);          
           if (val1) {
               resFilter = resFilter.filter( (el) => {
-                return (el[res.field1 as keyof IObjectOne]?.trim().toUpperCase().includes(​val1))
+                return (  el[res.field1 as keyof IObjectOne]?.toString().trim().toUpperCase().includes(​val1))
               });
           }
 
@@ -789,7 +792,7 @@ loadFiltersNull() {
 
             if (val2) {
                 resFilter = resFilter.filter( (el) => {
-                  return (el[res.field2 as keyof IObjectOne]?.trim().toUpperCase().includes(​val2))
+                  return (el[res.field2 as keyof IObjectOne]?.toString().trim().toUpperCase().includes(​val2))
                 });
             }
           }
@@ -810,11 +813,21 @@ loadFiltersNull() {
 
 
           this.ShowStaff = [...resFilter];
-
-
+          this.closePanel();
     }
 
   }
+
+
+
+  closePanel() {
+      let closeCanvas= (document.querySelector('[data-bs-dismiss="offcanvas"]') as HTMLButtonElement);
+      if (closeCanvas) closeCanvas.click();
+  }
+
+
+
+
 
   clickFilters() {
     this.router.navigate(['filter']);
