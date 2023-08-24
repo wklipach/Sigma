@@ -1,5 +1,24 @@
 <app-basement></app-basement>
 
+<div class="Container d-flex flex-row p-2">
+  
+  <h2>Табель</h2>
+   <div class="input-group rounded w-lg-500px">
+        <input id="search" 
+               type="search"
+               class="form-control rounded" 
+               placeholder="Поиск" 
+               aria-label="Search" 
+               aria-describedby="search-addon" 
+               (keyup.enter)="onEnterSearch()"/>
+        <span class="input-group-text border-0" id="search-addon">
+          <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
+        </span>
+      </div>
+
+
+</div>
+
 
 <ngx-datatable
 #tabelTable

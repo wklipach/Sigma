@@ -310,12 +310,12 @@ summaryOpen(id_staff: number) {
         });
 
         // console.log('find=', res)
-        this.ShowStaff =  JSON.parse(JSON.stringify(res));
+        this.ShowStaff = [...res]; 
 
       } else {
         console.log('обнуляем поиск');
         // показываем без всяких ограничений
-        this.ShowStaff = JSON.parse(JSON.stringify(this.ORIGINAL_ShowStaff));
+        this.ShowStaff = [...this.ORIGINAL_ShowStaff];
       }
     }  
   

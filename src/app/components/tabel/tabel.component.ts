@@ -35,6 +35,7 @@ export class TabelComponent {
   @ViewChild('tabelTable') datatableComponent!: DatatableComponent;
   faCoffee = faCoffee;
 
+  ShowTabel_original: ITabel[] = [];
   ShowTabel: ITabel[] = [];
 
   //содержит ширины столбцов, взятые из хранилища
@@ -56,11 +57,13 @@ export class TabelComponent {
 
 
                     this.tabelsrv.getTabel_All().subscribe( (res: any) => {
-                            this.ShowTabel = res;
-                            this.ShowTabel.forEach((el)=>  {
+                            this.ShowTabel_original = res;
+                            this.ShowTabel_original.forEach((el)=>  {
                               el.DateBegin_str = this.datePipe.transform(el.DateBegin, 'yyyy-MM-dd') || '';
                               el.DateEnd_str = this.datePipe.transform(el.DateEnd, 'yyyy-MM-dd') || '';
                           });
+                          this.ShowTabel = [...this.ShowTabel_original];
+
                     });
 
                }
@@ -135,13 +138,25 @@ export class TabelComponent {
           }
 
 
+          // обновляем показываемую таблицу
           const res = this.ShowTabel.map( el => {
             if (el.id?.toString() == id.toString()) {
               el.DateBegin_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
             }
             return el;
-            });
+          });
           this.ShowTabel = [...res];
+
+
+          // обновляем эталонную таблицу таблицу
+          const resOriginal = this.ShowTabel_original.map( el => {
+            if (el.id?.toString() == id.toString()) {
+              el.DateBegin_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+            }
+            return el;
+          });
+          this.ShowTabel_original = [...resOriginal];
+
 
 
           $event.target.type = '';
@@ -160,6 +175,7 @@ export class TabelComponent {
       }
 
 
+      // обновляем показываемую таблицу
       const res = this.ShowTabel.map( el => {
         if (el.id?.toString() == id.toString()) {
           el.DateEnd_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
@@ -168,13 +184,58 @@ export class TabelComponent {
         });
       this.ShowTabel = [...res];
 
+      // обновляем эталонную таблицу таблицу
+      const resOriginal = this.ShowTabel_original.map( el => {
+        if (el.id?.toString() == id.toString()) {
+          el.DateEnd_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+         }
+         return el;
+        });
+       this.ShowTabel_original = [...resOriginal];
+
 
       $event.target.type = '';
       return $event.target; 
 } 
 
 
-    myalert(e: any) {
-      console.log('e=', e);
-    }
+myalert(e: any) {
+    console.log('e=', e);
+}
+
+
+onEnterSearch() {
+  this.funcSearch();
+ }
+   
+   
+
+ funcSearch() {
+  let sInput = (document.getElementById('search') as HTMLInputElement).value.toString().trim().toUpperCase();
+
+  if (sInput) {
+      // console.log('ищем=',sInput);
+      
+      const res = this.ShowTabel_original.filter( (el) => {
+         return (el.id_staff &&  el.id_staff.toString().toUpperCase().indexOf(sInput) != -1) ||
+                (el.fio &&  el.fio.toUpperCase().indexOf(sInput) != -1) ||
+                (el.object_name &&  el.object_name.toUpperCase().indexOf(sInput) != -1);
+      });
+
+      // console.log('find=', res)
+      this.ShowTabel =  [...res];
+
+    } else {
+      console.log('обнуляем поиск');
+      // показываем без всяких ограничений
+      this.ShowTabel = [...this.ShowTabel_original]; 
+    }   
+
+
+
+ }
+
+
+
+
 }
