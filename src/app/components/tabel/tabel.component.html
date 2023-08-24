@@ -48,9 +48,29 @@ class="material striped"
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "object_name" name = "Объект" [width]="getColumnSize('object_name')" >
-    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value }} </span>
-    </ng-template>
+    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+      <span
+       title="Double click to edit"
+       (dblclick)="this.editing[rowIndex + '-object_name'] = true"
+       *ngIf="!editing[rowIndex + '-object_name']"
+      >
+       {{ value }}
+     </span>
+     <select
+       *ngIf="editing[rowIndex + '-object_name']"
+       (blur)="editing[rowIndex + '-object_name'] = false"
+       (keyup.enter)="myEnter($event)"
+       (change)="onChangeProtectedObject($event, this.guideProtectedObject, row.id || 0, row.id_staff)" 
+       [ngModel]="value"       
+     >
+       <option *ngFor="let g of this.guideProtectedObject" [value]="g.name">{{g.name}}</option>
+     </select>
+   </ng-template>
+
+
+
+
+
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "DateBegin_str" name = "Дата начала" [width]="getColumnSize('DateBegin_str')">

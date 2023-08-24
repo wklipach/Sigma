@@ -8,6 +8,8 @@ import { GuideService } from 'src/app/services/guide.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TabelService } from 'src/app/services/tabel.service';
+import { Observable, forkJoin } from 'rxjs';
+import { SettingsService } from 'src/app/services/settings.service';
 
 
 interface ITabel {
@@ -22,7 +24,10 @@ interface ITabel {
   DateEnd_str: string;
 }
 
-
+interface ISmallGuide { 
+  id?: string;  
+  name?: string; 
+}
 
 @Component({
   selector: 'app-tabel',
@@ -37,6 +42,7 @@ export class TabelComponent {
 
   ShowTabel_original: ITabel[] = [];
   ShowTabel: ITabel[] = [];
+  guideProtectedObject:  ISmallGuide[] = [];
 
   //содержит ширины столбцов, взятые из хранилища
   ColumnSizeObj:  ITable[] = [];
@@ -49,6 +55,7 @@ export class TabelComponent {
                 private router: Router,
                 private tableServ:  TableService,
                 private tabelsrv: TabelService,
+                private settingserv: SettingsService,
                 private gr: GlobalRef ) {  }      
 
 
@@ -56,6 +63,7 @@ export class TabelComponent {
                       this.ColumnSizeObj =   this.tableServ.getTableWidth('tabelTable');
 
 
+/*                      
                     this.tabelsrv.getTabel_All().subscribe( (res: any) => {
                             this.ShowTabel_original = res;
                             this.ShowTabel_original.forEach((el)=>  {
@@ -65,8 +73,74 @@ export class TabelComponent {
                           this.ShowTabel = [...this.ShowTabel_original];
 
                     });
+*/                    
 
+                    let sources: Observable<any>[] = [
+                      this.tabelsrv.getTabel_All(),
+                      this.servguide.getProtectedObjectGuide()
+                    ];
+
+                    forkJoin(sources)
+                    .subscribe(([res1, res2]) => {
+                        this.ShowTabel_original = res1;
+                        this.ShowTabel_original.forEach((el)=>  {
+                          el.DateBegin_str = this.datePipe.transform(el.DateBegin, 'yyyy-MM-dd') || '';
+                          el.DateEnd_str = this.datePipe.transform(el.DateEnd, 'yyyy-MM-dd') || '';
+                        });
+                        this.ShowTabel = [...this.ShowTabel_original];
+
+                        this.guideProtectedObject = res2;
+
+                    });
                }
+
+
+
+
+               onChangeProtectedObject(ev: any, smallGuide:  ISmallGuide[], id: number, id_staff: number) {
+
+                let rowShowTable = this.ShowTabel.find ( curRow => curRow.id === id);
+                let rowShowTableOriginal = this.ShowTabel_original.find ( curRow => curRow.id === id);
+           
+                if (ev) {
+                  let res = smallGuide.find( (el) => el.name == ev.target.value);
+                  if (res) {
+                  if (!res.name) res.name='';
+                  console.log(res, id);
+            
+                    if (res.id == '1') {
+                      const id_object = rowShowTable?.id_object;
+                      this.settingserv.setSettingDeleteProtectedObject(id, id_object || 0, id_staff).subscribe();
+
+                      // обновляем массивы
+                      if (rowShowTable) {rowShowTable.id_object = 1; rowShowTable.object_name = res.name; }
+                      if (rowShowTableOriginal) {rowShowTableOriginal.id_object = 1; rowShowTableOriginal.object_name = res.name; }
+                      return;
+                    }
+            
+                    if (id == 0) {
+                      console.log('добавляем');
+                      this.settingserv.setInsertProtectedObject(res.id || '0', id_staff).subscribe();
+
+                      // обновляем массивы
+                      if (rowShowTable) {rowShowTable.id_object = Number(res.id); rowShowTable.object_name = res.name; }
+                      if (rowShowTableOriginal) {rowShowTableOriginal.id_object = Number(res.id); rowShowTableOriginal.object_name = res.name; }
+                      return;
+                    }
+            
+                    if (id > 0) {
+                      console.log('апдейтим');
+                      this.settingserv.setUpdateProtectedObject(id, res.id || '0', id_staff).subscribe();
+
+                      // обновляем массивы                      
+                      if (rowShowTable) {rowShowTable.id_object = Number(res.id); rowShowTable.object_name = res.name; }
+                      if (rowShowTableOriginal) {rowShowTableOriginal.id_object = Number(res.id); rowShowTableOriginal.object_name = res.name; }
+                      return;
+                    }
+            
+                  }
+                 }    
+              }               
 
 
 
