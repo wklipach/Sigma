@@ -47,6 +47,14 @@ cursor: pointer;
     border:1px dashed#cacaca !important;
   
   }
+
+  :host ::ng-deep.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell:hover{
+    background-color: #e9e7e7;
+    font-size: 15px;
+    font-weight: 600;
+    overflow-y: visible !important;
+}
+
   
   :host ::ng-deep.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell{
     padding:  2px 10px;

@@ -241,3 +241,24 @@ input{
   top: 10px;
   left: 150px;
   }
+  option{
+    height: 50px;
+    color: white;
+    font-weight: 500;
+    padding: 15px 0;
+    background-color: #7386D5;
+    border: 1px solid #f3eeee;
+  }
+  option:hover{
+    cursor: pointer;
+    border: #386bc0;
+    border-radius: 10px;
+    color: #7386D5 ;
+    background-color: #fff;
+
+  }
+  /* .filter-name{
+    font-size: 16px;
+   margin: auto 0;
+  } */
+
