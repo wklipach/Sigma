@@ -20,9 +20,9 @@ export class ChatComponent implements OnInit {
 
 
 
-   sGrayIcon: string = "/assets/img/circle.png";
-   sGreenIcon: string = "/assets/img/circle.png";
-   sMarkedIcon: string = "/assets/img/double-checked.svg";
+   sGrayIcon: string = "/assets/img/circle_gray.png";
+   sGreenIcon: string = "/assets/img/circle_green.png";
+   sMarkedIcon: string = "/assets/img/double-checked.png";
    sUnMarkedIcon: string = "/assets/img/unmarked.png";
    sAvatar : string = "/assets/img/usernull.jpg";
    
