@@ -8,8 +8,8 @@
 <div class="row">
     <div class="col-md-3 m-0">
    
-      <select name="Users" size="50">
-          <option *ngFor="let user of users" value="user.id_user"  (click)="clickUser(user)"> 
+      <ul name="Users" size="50">
+          <li *ngFor="let user of users" value="user.id_user"  (click)="clickUser(user)"> 
           <div class="user-name">
             
             <img class="talker" src = {{user.avatar_name}} >
@@ -24,8 +24,8 @@
             <img class="connected" title="Online"  src = {{user.connected_icon}} >
 
           </div>
-          </option>
-      </select>
+        </li>
+      </ul>
 
     </div>
   <div class="col-md-9 m-0">

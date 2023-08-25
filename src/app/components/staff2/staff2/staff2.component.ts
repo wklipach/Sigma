@@ -124,6 +124,10 @@ export class Staff2Component {
     // для работы таблицы
     editing: any = {};
 
+    // для работы таблицы
+    bEdit: boolean = true; 
+
+
   constructor (private staffserv: StaffService, 
     private servguide: GuideService, 
     private datePipe: DatePipe,
@@ -912,8 +916,11 @@ loadFiltersNull() {
   if(newTab1) {
       newTab1.opener = null;
   }
+}
 
 
+clickColumn(prefix: string, rowIndex: string) {
+  this.editing[rowIndex + prefix] = true
 }
 
 
