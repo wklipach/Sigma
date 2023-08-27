@@ -25,6 +25,7 @@ label{
 .material {
     height: 800px;
     width: 99%;
+   
 }
   
   /* .ngx-datatable.material .datatable-header {
@@ -41,12 +42,11 @@ label{
     color: #222122;
     font-size: 13px;
     border:1px dashed#cacaca !important;
-  
-  }
+    }
   
   :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell.sortable .datatable-header-cell-wrapper {
     cursor: pointer;
-    padding: 0 5px;
+    padding: 0 2px;
   }
   
   :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell .sort-btn {
@@ -58,9 +58,9 @@ label{
   
   :host ::ng-deep .datatable-body-cell {
     background-color: rgb(255, 255, 255);
-    height: auto !important;
-    font-size: 1em !important;
-    overflow: auto;
+    height: 100% !important;
+    font-size: 13px ;
+    overflow-y: auto;
     border: 1px dashed #cacaca;
     text-align: center !important;
     white-space: pre-wrap !important;
@@ -70,7 +70,10 @@ label{
     display: inline-block;
     vertical-align: middle;
   }
-    
+  :host ::ng-deep .datatable-body-cell:hover {
+    overflow-y: auto !important;
+  }
+
   select {
     border: none;
     background-color: transparent;

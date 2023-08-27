@@ -73,7 +73,7 @@ cursor: pointer;
   
   :host ::ng-deep .datatable-body-cell {
     background-color: rgb(255, 255, 255);
-    height: auto !important;
+    height: 100% !important;
     font-size: 1em !important;
     overflow: auto;
     border: 1px dashed #cacaca;
@@ -86,6 +86,9 @@ cursor: pointer;
     vertical-align: middle !important;
   }
   
+  :host ::ng-deep .datatable-body-cell:hover {
+    overflow-y: auto;
+  }
   :host ::ng-deep.datatable-body-cell-label {
     display: flex;
     flex-direction: row;

@@ -35,7 +35,10 @@ input-group{
   color: #222122;
   font-size: 13px;
   border:1px dashed#cacaca !important;
+}
 
+:host ::ng-deep .datatable-body-cell:hover {
+  overflow-y: auto;
 }
 
 :host ::ng-deep.ngx-datatable .datatable-header .datatable-header-cell.sortable .datatable-header-cell-wrapper {

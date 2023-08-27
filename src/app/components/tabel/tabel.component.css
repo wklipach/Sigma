@@ -23,7 +23,7 @@
   }
   
   .ngx-datatable{
-    overflow-y: visible;
+    overflow-y: auto;
   }
   
   .ngx-datatable.material .datatable-header {
@@ -73,6 +73,15 @@
     display: inline-block;
     vertical-align: middle;
   }
+
+  .number_id{
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    background: #4244c2;
+    display: inline-block;
+  }
+
   
   /* :host ::ng-deep.ngx-datatable.material .datatable-header {
     display: flex;
@@ -82,6 +91,8 @@
    
   }
    
+    
+
   } */
   
   .photo{
