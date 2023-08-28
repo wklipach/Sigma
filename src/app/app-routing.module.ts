@@ -29,6 +29,7 @@ import { OllrComponent } from './components/account/general/ollr/ollr.component'
 import { ReadtaskComponent } from './components/task/readtask/readtask.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { TabelComponent } from './components/tabel/tabel.component';
+import { AdminmenuComponent } from './components/admin/adminmenu/adminmenu.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -58,6 +59,8 @@ const routes: Routes = [
   { path: 'readtask', component: ReadtaskComponent, canActivate: [mainGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [mainGuard] },
   { path: 'tabel', component: TabelComponent, canActivate: [mainGuard] },
+  { path: 'adminmenu', component: AdminmenuComponent, canActivate: [mainGuard] },
+  
   ];
 
 

@@ -2,11 +2,20 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {GlobalRef} from '../../../globalref';
 import { IUser, IOhrArchive, ISessionUser } from '../interface/auth/user';
+import { Observable } from 'rxjs';
 
+
+interface IAccessUser {
+  id: number;
+  login: string;
+  fio: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class AuthService implements IUser, IOhrArchive {
 
   id = 0;
@@ -58,7 +67,6 @@ export class AuthService implements IUser, IOhrArchive {
 
   constructor(private http: HttpClient, public gr: GlobalRef) { 
   }
-
 
   
   public getNumberIn() {
@@ -170,6 +178,14 @@ export class AuthService implements IUser, IOhrArchive {
   }
 
 
+    // получаем всех пользователей
+    getAllUsers() {
+      const params = new HttpParams()
+        .set('get_all_user', 'get_all_user');
+      return this.http.get(this.gr.sUrlGlobal + 'users', {params: params}) as Observable<IAccessUser[]>;
+    }
+  
+ 
     // получаем аватар пользователя
     getUserAvatar(id_user: number) {
       const params = new HttpParams()
@@ -185,6 +201,21 @@ export class AuthService implements IUser, IOhrArchive {
       return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
     }
 
+    // получаем количество непрочитанных сообщений в чате
+    getAccessMenu(id_user: number) {
+      const params = new HttpParams()
+        .set('get_access_menu', id_user);
+      return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
+    }
+
+
+    setAccessMenuOne(bollAccess: boolean, id_menu: number, RefName: string, selectedUser: number) {
+      const log_user = this.getSessionUser().id_user;
+      const sUrl = this.gr.sUrlGlobal + 'users';
+      return this.http.post(sUrl, {insert_menu_access: 'insert_menu_access',  access: bollAccess, id_menu, RefName, id_user: selectedUser, log_user: log_user});
+
+    }
+  
     
 
 

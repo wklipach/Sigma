@@ -10,29 +10,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav w-lg-950px justify-content-evenly">
-        <li class="nav-item">
+        <li *ngIf="this.getAccessMenu('staff2')" class="nav-item">
           <a class="nav-link" aria-current="page" href="/staff2">Сотрудники</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="this.getAccessMenu('obj2')" class="nav-item">
           <a class="nav-link" href="/obj2">Объекты</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="this.getAccessMenu('mtr2')" class="nav-item">
           <a class="nav-link" href="mtr2">МТР</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="this.getAccessMenu('events')" class="nav-item">
           <a class="nav-link" href="">События</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="this.getAccessMenu('contract')" class="nav-item">
           <a class="nav-link" href="">Договора</a>
-        </li><li class="nav-item">
+        </li>
+        
+        <li *ngIf="this.getAccessMenu('act')" class="nav-item">
           <a class="nav-link" href="">Акты</a>
         </li>
-      <li class="nav-item">
+      <li *ngIf="this.getAccessMenu('tender')" class="nav-item">
         <a class="nav-link" href="">Тендеры</a>
       </li>
 
-      <li class="nav-item">
+      <li  *ngIf="this.getAccessMenu('tabel')" class="nav-item">
         <a class="nav-link" href="tabel">Табель</a>
+      </li>
+
+      <li *ngIf="this.getAccessMenu('adminmenu')" class="nav-item">
+        <a class="nav-link" href="adminmenu">Администрирование</a>
       </li>
 
       <li class="nav-item">

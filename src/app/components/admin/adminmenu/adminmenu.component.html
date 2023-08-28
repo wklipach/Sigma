@@ -1,0 +1,21 @@
+<app-basement></app-basement>
+
+<div class="parent">
+
+            <ul class="li_users">
+                <li *ngFor="let user of users" (click)="clickAccess(user.id)" > {{user.fio}} </li>
+            </ul>
+
+            <ul>
+                <li *ngFor="let menu of accessUserMenu">
+                    <div>
+                        <input type="checkbox" [id]="menu.id_menu" 
+                               [name]="menu.id_menu" 
+                               [checked]="menu.boolAccess" 
+                               (change)="fieldsChange($event.currentTarget, menu.id_menu, menu.RefName)" />
+                        <label [for]="menu.id_menu">{{menu.RusName}}</label>
+                      </div>
+                </li>
+            </ul>
+
+</div>

@@ -519,7 +519,10 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
               });
              this.ORIGINAL_ShowStaff = [...res2];
 
+
+            $event.target.type = ''; 
             $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
+
        }            
 
        if (!isDate) {      
@@ -542,11 +545,10 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
             });
           this.ORIGINAL_ShowStaff = [...res2];
 
+          $event.target.type = ''; 
           $event.target.value = '--';
         }            
 
-
-        $event.target.type = '';
      
     } 
     
@@ -581,6 +583,7 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
           });
           this.ORIGINAL_ShowStaff = [...res2];
 
+          $event.target.type = '';
           $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
       }
 
@@ -603,9 +606,10 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
         this.ORIGINAL_ShowStaff = [...res2];
 
 
+        $event.target.type = '';
         $event.target.value = '--';
       }
-     $event.target.type = '';
+     
   }    
 
   set003from($event: any, id_staff: number) {
@@ -640,7 +644,8 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
         });
         this.ORIGINAL_ShowStaff = [...res2];
 
-         $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
+        $event.target.type = '';
+        $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
      }
 
 
@@ -661,12 +666,11 @@ maxPasteLength(e: ClipboardEvent, iLength: number) {
       });
       this.ORIGINAL_ShowStaff = [...res2];
 
+       $event.target.type = '';
        $event.target.value = '--';
      }
 
-    $event.target.type = '';
-
- }
+}
  
  
  addNewStaff() {
@@ -876,6 +880,7 @@ loadFiltersNull() {
         });
         this.ORIGINAL_ShowStaff = [...res2];
 
+         $event.target.type = '';
          $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '--';
      }
 
@@ -897,10 +902,11 @@ loadFiltersNull() {
       });
       this.ORIGINAL_ShowStaff = [...res2];
 
+
+       $event.target.type = '';
        $event.target.value = '--';
      }
 
-    $event.target.type = '';
 
  }
 

@@ -311,7 +311,9 @@ class="material striped"
                       (dblclick)="editing[rowIndex + '-DateBirth_str'] = true"
                           *ngIf="!editing[rowIndex + '-DateBirth_str']"
           >
-                              {{ value }} 
+
+                  {{value }} 
+
           </span>
           <input
               (focus)="focusFunction($event, row.DateBirth_str)" 

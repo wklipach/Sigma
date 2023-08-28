@@ -41,19 +41,98 @@ router.get('/', async function(req, res, next) {
  if (req.query.get_count_messages) {
   const user_avatar = await asyncCountChatMessages(req.query.get_count_messages);
   res.send(user_avatar);
-}
+ }
+
+ if (req.query.get_access_menu) {
+  const user_access_menu = await asyncUserAccessMenu(req.query.get_access_menu);
+  res.send(user_access_menu);
+ }
+
+ if (req.query.get_all_user) {
+  const users = await asyncUserAllUser();
+  res.send(users);
+ }
+
+
  
 });
 
 
 router.post('/', async function(req, res) {
-
   if (req.body.newuser) {
       const result = await asyncNewUser(req.body.newuser);
       res.send(result);
   }
+
+  if (req.body.insert_menu_access) {
+    const result = await asyncAccessMenuOne(req.body.access, req.body.id_menu, req.body.id_user, req.body.log_user, req.body.RefName);
+    res.send(result);
+}
+
+
+
 });
 
+
+async function asyncAccessMenuOne(access, id_menu, id_user, log_user, log_field) {
+
+  let conn = await pool.getConnection();
+  try {
+      const params = [id_user, id_menu];
+      const resUsers = await conn.query("select id from access_staff_menu where id_staff=? and id_menu=?", params);
+      console.log('resUsers', id_user, id_menu);
+      console.log('resUsers=', resUsers);
+      if (resUsers.length>0 && !access) {
+        const params_delete = [resUsers[0].id];
+        const resDelete = await conn.query("delete from access_staff_menu where id=?", params_delete);
+
+        if (resDelete) {
+            const paramsJournalDelete = ["delete access", id_user, log_field, log_user];
+            const sJournalDelete = 
+            "insert staff_log (`newvalue`, `id_staff`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+            await conn.query(sJournalDelete, paramsJournalDelete);
+         }
+
+
+      }
+
+      if (resUsers.length == 0 && access) {
+        const params_insert = [id_menu, id_user];
+        const resInsert = await conn.query("insert access_staff_menu (id_menu, id_staff) value (?,?)", params_insert);
+
+        if (resInsert) {
+          const paramsJournalInsert = ["insert access", id_user, log_field, log_user];
+          const sJournalInsert = 
+          "insert staff_log (`newvalue`, `id_staff`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+          await conn.query(sJournalInsert, paramsJournalInsert);
+       }
+
+
+      }
+
+      return JSON.stringify(resUsers);
+
+  } catch (err) {
+      return  err;
+  } finally {
+    if (conn) conn.release(); 
+  }
+
+}
+
+
+
+async function asyncUserAllUser() {
+  let conn = await pool.getConnection();
+  try {
+      const resUsers = await conn.query("SELECT id, login, fio FROM tuser WHERE bitdelete=0");
+      return JSON.stringify(resUsers);
+  } catch (err) {
+      return  err;
+  } finally {
+    if (conn) conn.release(); 
+  }
+}
 
 
 
@@ -180,5 +259,36 @@ async function asyncUser(sUser) {
   }
 
 }
+
+
+async function asyncUserAccessMenu(id_user) {
+
+  let conn = await pool.getConnection();
+  try {
+    const sQuery =
+    " select asm.id_menu, am.name as RefName, am.rus_name as RusName, 1 as boolAccess from access_staff_menu asm,  access_menu am where "+
+    " am.id_menu = asm.id_menu and asm.id_staff=? "+
+    " union all "+
+    " select id_menu, name as RefName, rus_name as RusName, 0 as boolAccess from access_menu "+
+    " where bitDelete=0 and "+
+    "  id_menu not in (select asm.id_menu from access_staff_menu asm where asm.id_staff=?) "+
+    " order by id_menu";
+
+     const params = [id_user, id_user];
+     const resTest = await conn.query(sQuery, params);
+
+     return JSON.stringify(resTest);
+    } catch (err) {
+      return  err;
+    } finally  {
+        if (conn) conn.release(); 
+  }
+
+}
+
+
+// return this.http.post(sUrl, {insert_menu_access: 'insert_menu_access',  access: bollAccess, id_menu, RefName, id_user: selectedUser});
+
+
 
 module.exports = router;
