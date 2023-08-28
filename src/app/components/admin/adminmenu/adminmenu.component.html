@@ -1,13 +1,17 @@
 <app-basement></app-basement>
 
-<div class="parent">
+<div class="container p-5">
+    <div class="row">
+      <div class="col">
+        <ul class="list-group">
+                <li class="list-group-item" *ngFor="let user of users" (click)="clickAccess(user.id)" > {{user.fio}} </li>
+        </ul>
 
-            <ul class="li_users">
-                <li  *ngFor="let user of users" (click)="clickAccess(user.id)" > {{user.fio}} </li>
-            </ul>
-
-            <ul>
-                <li *ngFor="let menu of accessUserMenu">
+      </div>
+      <div class="col">
+        
+        <ul class="list-group">
+                <li class="list-group-item" *ngFor="let menu of accessUserMenu">
                     <div>
                         <input type="checkbox" [id]="menu.id_menu" 
                                [name]="menu.id_menu" 
@@ -16,6 +20,7 @@
                         <label [for]="menu.id_menu">{{menu.RusName}}</label>
                       </div>
                 </li>
-            </ul>
+        </ul>
 
-</div>
+      </div>
+    </div>
