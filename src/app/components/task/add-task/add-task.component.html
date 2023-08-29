@@ -14,12 +14,16 @@
       </div>  
     </div>
 
-    <div class="row mb-6">
+    <div class="row mb-3">
       <label class="col-lg-4 col-form-label fw-semibold fs-6">Наименование задачи</label>
-        <div class="col-lg-8 fv-row">
-           <input id="nameTask" type="text" class="form-control w-100"/>
-        </div>
-    </div>
+          <div class="col-lg-8 fv-row">
+            <select name="choice-nametsk" data-control="selectNameTask" class="form-select" [(ngModel)]="id_nametask">
+              <option *ngFor="let nametask of this.guideNameTask" [value] = "nametask.id" selected="0">{{ nametask.name }}</option>
+            </select>
+          </div> 
+       </div>
+  
+
   
 
     

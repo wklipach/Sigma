@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GuideService } from 'src/app/services/guide.service';
 import { TaskService } from 'src/app/services/task.service';
+import { Observable, forkJoin } from 'rxjs';
 
 interface ISmallGuide { 
   id?: string;  
@@ -24,8 +25,10 @@ interface IProtectedObject {
 export class AddTaskComponent {
 
   guideDepartment: ISmallGuide[] = [];
+  guideNameTask: ISmallGuide[] = [];
   ProtectedObject: IProtectedObject = {id_object: 0, name: '--'};
   id_department = 0;
+  id_nametask = 0;
 
   constructor (private servguide: GuideService, 
                private servTask: TaskService, 
@@ -44,9 +47,19 @@ export class AddTaskComponent {
   }
 
   ngOnInit() {
-    this.servguide.getSmallGuide('guide_department').subscribe( (value: any) => {
-      this.guideDepartment = value; 
-    });
+
+
+    let sources: Observable<any>[] = [
+      this.servguide.getSmallGuide('guide_department'),
+      this.servguide.getSmallGuide('guide_name_task'),
+    ];
+  
+    forkJoin(sources)
+    .subscribe( ([res1, res2]) => {
+      this.guideDepartment = res1; 
+      this.guideNameTask = res2; 
+    });    
+
   }
 
 
@@ -65,6 +78,12 @@ export class AddTaskComponent {
       alert("Введите отдел.");
       return;
     }
+
+    if (this.id_nametask == 0) {
+      alert("Введите наименование задачи.");
+      return;
+    }
+
 
     let sNote = (document.getElementById('areaNote') as HTMLTextAreaElement).value.trim();
 
@@ -89,20 +108,8 @@ export class AddTaskComponent {
       return;      
     }
 
-
-    let nameTask = (document.getElementById('nameTask') as HTMLInputElement).value.trim();
-    if (!nameTask) {
-      alert("Введите наименование задачи.");
-      return;      
-    }
-
-
-
-    //console.log(this.id_department);
-    //console.log(sNote);
-    //console.log(dateEnd);
-
-    this.servTask.insertTask(this.ProtectedObject.id_object, nameTask, this.id_department, sNote, dateBegin, dateEnd).subscribe( (value: any) => {
+ 
+    this.servTask.insertTask(this.ProtectedObject.id_object, this.id_nametask, this.id_department, sNote, dateBegin, dateEnd).subscribe( (value: any) => {
 
 
         if (value.insertId) {

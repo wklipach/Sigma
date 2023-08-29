@@ -7,7 +7,7 @@ var sqlStringTaskOne =
 "t.date_begin, "+
 "t.date_end, "+
 "t.bitSuccess, "+
-"t.name_task, "+
+"gnt.name as name_task, "+
 "case "+
 "when s.fio is null then u.login "+
 "else s.fio "+
@@ -25,6 +25,7 @@ var sqlStringTaskOne =
 "left join staff s2 on s2.id_staff = t.id_user_accept "+
 "left join protected_object po on po.id_object = t.id_object "+
 "inner join guide_department gd on gd.id=t.id_department "+
+"inner join guide_name_task gnt on gnt.id=t.id_name_task "+
 "where t.id=?";
 
 module.exports = sqlStringTaskOne;

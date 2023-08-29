@@ -159,12 +159,17 @@ export class ListTaskComponent {
 
       let indexShowTask = this.taskArray.findIndex( (el  =>  el.id_task == idTask.toString()));
       this.taskArray[indexShowTask].bitSuccess = true;
+
+      console.log('this.taskArray',this.taskArray);
+
+
       let indexShowOriginal = this.taskOriginal.findIndex( (el  =>  el.id_task == idTask.toString()));
       this.taskOriginal[indexShowOriginal].bitSuccess = true;
 
       //refresh data
       this.taskOriginal = [...this.taskOriginal];
       this.taskArray = [...this.taskArray];
+      this.updateFilter('');
       //меняем в базе  
       this.servTask.succesfullTask(idTask.toString()).subscribe();
     }
@@ -179,7 +184,7 @@ export class ListTaskComponent {
       let idTask = this.curAcceptTask.id_task;
       this.servTask.acceptTask(idTask.toString()).subscribe( (res: any) => {
 
-        console.log(res, res[0].RES);
+        //console.log(res, res[0].RES);
 
         let indexShowTask = this.taskArray.findIndex( (el  =>  el.id_task == idTask.toString()));
         this.taskArray[indexShowTask].bitAccept = '1';
@@ -192,9 +197,7 @@ export class ListTaskComponent {
         this.taskOriginal = [...this.taskOriginal];
         this.taskArray = [...this.taskArray];
 
-        console.log(this.taskArray);
-  
-
+        //console.log(this.taskArray);
       });
 
     }
