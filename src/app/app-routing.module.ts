@@ -30,6 +30,8 @@ import { ReadtaskComponent } from './components/task/readtask/readtask.component
 import { ChatComponent } from './components/chat/chat.component';
 import { TabelComponent } from './components/tabel/tabel.component';
 import { AdminmenuComponent } from './components/admin/adminmenu/adminmenu.component';
+import { CheckObjectComponent } from './components/protected_objects/check-object/check-object.component';
+import { PostObjectComponent } from './components/protected_objects/post-object/post-object.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -60,6 +62,8 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent, canActivate: [mainGuard] },
   { path: 'tabel', component: TabelComponent, canActivate: [mainGuard] },
   { path: 'adminmenu', component: AdminmenuComponent, canActivate: [mainGuard] },
+  { path: 'check', component: CheckObjectComponent, canActivate: [mainGuard] },
+  { path: 'post', component: PostObjectComponent, canActivate: [mainGuard] },
   
   ];
 

@@ -45,9 +45,23 @@ class="material striped"
 
 
 <ngx-datatable-column prop = "itis_task" name = "Задача" [width]="getColumnSize('itis_task')">
-  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-       <div (click)="newTask(row.id_object, row.name)" ><img src="/assets/img/expand.png" width="30" />
-       </div>
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">
+
+    <span *ngIf="!this.task_opinion[row.id_object]">--</span>
+    <select
+      [ngModel]="task_opinion" 
+      (ngModelChange)="updateWorkout($event, row.id_object)">
+      <option [value]=  "0"  > -- </option>
+      <option [value] =  "1" > Задачи </option>
+      <option [value] =  "2" > Чек-лист </option>
+      <option [value] =  "3" > Пост </option>
+     </select>
+
+     <div (click)="newTask(row.id_object, row.name, value)" >
+          <img src="/assets/img/expand.png" width="30" />
+     </div>
+
+
     </ng-template>
 </ngx-datatable-column>
 

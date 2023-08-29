@@ -52,6 +52,8 @@ import { OllrComponent } from './components/account/general/ollr/ollr.component'
 import { ReadtaskComponent } from './components/task/readtask/readtask.component';
 import { TabelComponent } from './components/tabel/tabel.component';
 import { AdminmenuComponent } from './components/admin/adminmenu/adminmenu.component';
+import { CheckObjectComponent } from './components/protected_objects/check-object/check-object.component';
+import { PostObjectComponent } from './components/protected_objects/post-object/post-object.component';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -91,7 +93,9 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     OllrComponent,
     ReadtaskComponent,
     TabelComponent,
-    AdminmenuComponent
+    AdminmenuComponent,
+    CheckObjectComponent,
+    PostObjectComponent
   ],
   imports: [
     BrowserModule,

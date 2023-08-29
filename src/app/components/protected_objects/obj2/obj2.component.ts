@@ -92,6 +92,12 @@ export class Obj2Component {
 
   editing: any = {};
 
+  
+
+
+  //выбранная задача в выпадающем списке
+  task_opinion: any = {};
+
 
   guidePostStatus:  ISmallGuide[] = [];
   guideOrganization:  ISmallGuide[] = [];
@@ -171,12 +177,14 @@ export class Obj2Component {
           } else {
             el.photo_name = "/assets/img/blank-building.svg";
           }
+
+           //if (el.id_object) this.task_opinion[el.id_object] = "0";
     
           
         });
 
         // при загрузке показываем без всяких ограничений
-        this.ShowObjects = JSON.parse(JSON.stringify(this.ORIGINAL_ShowObjects));
+        this.ShowObjects = [...this.ORIGINAL_ShowObjects];
 
          //console.log('this.ShowObjects =', this.ShowObjects);
       });
@@ -352,6 +360,7 @@ export class Obj2Component {
         });
         this.ORIGINAL_ShowObjects = [...res2];
 
+        $event.target.type = '';
         $event.target.value = this.datePipe.transform(date, 'dd.MM.yyyy') || '';
     }
 
@@ -373,7 +382,9 @@ export class Obj2Component {
       });
       this.ORIGINAL_ShowObjects = [...res2];
 
-      $event.target.value = '';
+
+      $event.target.type = '';
+      $event.target.value = '--';
   }
 
       $event.target.type = '';
@@ -602,19 +613,65 @@ export class Obj2Component {
     }
 
 
-    newTask(id_object: number, name: string) {
 
-      const url = this.router.serializeUrl(this.router.createUrlTree(['addtask'], {
-        queryParams: {
-          id_object: id_object,
-          name: name
-        }
-      }));
 
-      const newTab = window.open(url, '_blank'); 
-      if(newTab) {
-          newTab.opener = null;
+    updateWorkout($event: any, id_object: number) {
+      this.task_opinion[id_object] = $event;
+    }
+
+    newTask(id_object: number, name: string, value: string) {
+
+
+      if (!this.task_opinion[id_object]) return;
+      if (this.task_opinion[id_object] == "0") return;
+
+
+      // создаем новую задачу
+      if (this.task_opinion[id_object] == "1") {
+              const url = this.router.serializeUrl(this.router.createUrlTree(['addtask'], {
+                queryParams: {
+                  id_object: id_object,
+                  name: name
+                }
+              }));
+        
+              const newTab = window.open(url, '_blank'); 
+              if(newTab) {
+                  newTab.opener = null;
+              }
       }
+
+       // открываем чек-лист
+      if (this.task_opinion[id_object] == "2") {
+        const url = this.router.serializeUrl(this.router.createUrlTree(['check'], {
+          queryParams: {
+            id_object: id_object,
+            name: name
+          }
+        }));
+  
+        const newTab = window.open(url, '_blank'); 
+        if(newTab) {
+            newTab.opener = null;
+        }
+
+      }
+
+      // открываем пост
+      if (this.task_opinion[id_object] == "3") {
+          const url = this.router.serializeUrl(this.router.createUrlTree(['post'], {
+             queryParams: {
+                id_object: id_object,
+                name: name
+              }
+            }));
+       
+            const newTab = window.open(url, '_blank'); 
+            if(newTab) {
+                newTab.opener = null;
+            }
+       }
+      
 
     }
 

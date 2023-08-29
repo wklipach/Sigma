@@ -201,3 +201,7 @@ cursor: pointer;
     height: 100%;
     background-color: #47d8c5;
   }
+
+  .witspan {
+    text-align: center; 
+  }
