@@ -107,7 +107,7 @@ class="material striped"
 
 
 <!-- НАЧАЛО ПОЛЯ Выполнить -->  
-<ngx-datatable-column prop="succesfull" name="Выполнить" [width]="getColumnSize('succesfull')">
+<ngx-datatable-column prop="succesfull" name="Завершить" [width]="getColumnSize('succesfull')">
     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
           <div (click)="succesfullTask(row.id_task, row.name_task)"><img src="/assets/img/done.png" width="30" /></div>
     </ng-template>
