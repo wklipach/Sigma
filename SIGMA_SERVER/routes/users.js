@@ -53,6 +53,10 @@ router.get('/', async function(req, res, next) {
   res.send(users);
  }
 
+ if (req.query.get_user_from_id) {
+  const resUser = await asyncUserFromId(req.query.get_user_from_id);
+  res.send(resUser);
+ }
 
  
 });
@@ -165,6 +169,22 @@ async function asyncNickUser(sNick) {
   }
 }
 
+
+async function asyncUserFromId(id_user) {
+
+  let conn = await pool.getConnection();
+  try {
+
+      const sParam = [id_user];
+      const resQuery = await conn.query("SELECT * FROM tuser WHERE id=?", sParam);
+      return JSON.stringify(resQuery);
+
+  } catch (err) {
+      return  err;
+  } finally {
+    if (conn) conn.release(); 
+  }
+}
 
 
 async function asyncAvatar(id_user) {

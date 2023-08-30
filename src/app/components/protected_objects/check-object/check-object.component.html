@@ -1,194 +1,85 @@
 <div class="wrapper">
    <div class="card w-50">
     <div class="card-body">
-      <h3 class="card-title">Отчет по проверке №2739</h3>
+      <h3 class="card-title">Отчет по проверке № {{ReportNumber}}</h3>
      <h4>Объект проверки</h4>
-     <div class="fs-5 text-muted fw-semibold" >МО, Рублево-успенское ш, поселок «Усово-3», уч. 16</div>
+     <div class="fs-5 text-muted fw-semibold">
+      {{this.ProtectedObject.name}}
+     </div>
+     <div class="fs-5 text-muted fw-semibold">
+      {{this.ProtectedObject.address}}
+     </div>
+
+
+     <h4 >Дата и время начала</h4>
+     <div class="fs-4 text-muted fw-semibold my-2" >
+      <input type="date" /> <input type="time" />
+     </div>
+
+     <h4 >Дата и время завершения</h4>
+     <div class="fs-4 text-muted fw-semibold my-2" >
+      <input type="date" /> <input type="time" />
+     </div>
+
+
      <h4 >Проверяющий</h4>
-     <div class="fs-4 text-muted fw-semibold my-2" >Петров Иван</div>
+     <div class="fs-4 text-muted fw-semibold my-2" >{{fio}}</div>
      <div class="flex-row">
         <h4>Результат проверки</h4>
-        <h2>91,2%</h2>
+        <h2>{{resultCheck}}%</h2>
         <h4>Выявлено нарушений</h4>
-        <h2>1</h2>
+        <h2> {{countTrouble}}</h2>
      </div>
   </div>
-
-  
-
-    </div>
+ 
+</div>
 
 
-   <div class="card w-50 mt-3 p-0">
+   <div *ngFor="let question of arrQuestion; let i = index" class="card w-50 mt-3 p-0">
     <div class="card-body">
-      <h4 class="card-title mb-3">Есть ли на входе табличка СП? </h4>
+      <h4 class="card-title mb-3">{{question.name}} </h4>
       
-      <div class="w-100 check-line"> 
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-              Да
-            </label>
+      <!-- Блок Да-нет  -->
+        <div *ngIf="question.grade == 1" class="w-100 check-line"> 
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio1Id{{question.id}}" value="option1">
+              <label class="form-check-label" for="radio1Id{{question.id}}">
+                Да
+              </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-              Нет
-            </label>
+              <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio2Id{{question.id}}" value="option2">
+              <label class="form-check-label" for="radio2Id{{question.id}}">
+                Нет
+             </label>
           </div>
-    </div>
-
-  </div> 
- </div>  
- 
- <div class="card w-50 mt-3 p-0">
-    <div class="card-body">
-      <h4 class="card-title mb-3">Спросил ли у вас сотрудник которого вы встретили первым предписание?</h4>
-      
-      <div class="w-50 check-line"> 
-
-    <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-              Да
-            </label>
-    </div>
-          
-    <div class="form-check flex-row">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-              Нет
-            </label>
-          </div>
-          
-     </div>
-  </div> 
- </div>       
-
- <div class="card w-50 mt-3 p-0">
-    <div class="card-body">
-      <h4 class="card-title mb-3">Палка резиновая ПР-Т висит на поясе?</h4>
-      <div class="w-50 check-line"> 
-
-    <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-              Да
-            </label>
-    </div>
-          
-    <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-              Нет
-            </label>
-          </div>
-          
-     </div>
-  </div> 
- </div>       
-
- <div class="card w-50 mt-3 p-0">
-  <div class="card-body">
-    <h4 class="card-title mb-3">Наручники БРС, висят на сотрудниках стоящих на постах?</h4>
-    <div class="w-50 check-line"> 
-
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-          <label class="form-check-label" for="exampleRadios1">
-            Да
-          </label>
-  </div>
-        
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">
-            Нет
-          </label>
         </div>
-        
-   </div>
-</div> 
-</div>      
+        <!--Конец Блок Да-нет  -->
 
-<div class="card w-50 mt-3 p-0">
-  <div class="card-body">
-    <h4 class="card-title mb-3">Есть ли нарушение в ношении и эксплуатации оружия?</h4>
-   
-    <div class="w-50 check-line"> 
+        <!--Блок 1-2-3-4-5  -->
+        <div *ngIf="question.grade == 5" class="w-100 check-line"> 
+              <div *ngFor="let s of [1,2,3,4,5]">
 
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-          <label class="form-check-label" for="exampleRadios1">
-            Да
-          </label>
-  </div>
-        
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">
-            Нет
-          </label>
-        </div>
-        
-   </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio{{s}}Id{{question.id}}" value="option{{s}}">
+                  <label class="form-check-label" for="radio{{s}}Id{{question.id}}">
+                    {{s}}
+                  </label>
+                </div>
 
-   <div class="w-50 check-line"> 
-    <input type="text" name="comment" class="form-control"> 
-   </div>
+              </div>
+        </div>        
+        <!--Конец Блок 1-2-3-4-5  -->
+
+        <!--Блок Поле ввода  -->
+        <div *ngIf="question.input" class="w-50 check-line"> 
+          <input type="text" name="comment{{question.id}}" id="comment{{question.id}}" class="form-control"> 
+         </div>
+        <!--Конец Блок Поле ввода  -->
 
 
-
-</div> 
-</div>  
-
-
-<div class="card w-50 mt-3 p-0">
-  <div class="card-body">
-    <h4 class="card-title mb-3">Нарушено ли ношение формы у сотрудников стоящих на постах?</h4>
-    <div class="w-50 check-line"> 
-
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-          <label class="form-check-label" for="exampleRadios1">
-            Да
-          </label>
-  </div>
-        
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">
-            Нет
-          </label>
-        </div>
-        
-   </div>
-</div> 
-</div>       
-
-<div class="card w-50 mt-3 p-0">
-  <div class="card-body">
-    <h4 class="card-title mb-3">В Наличие копия Уведомления о начале оказания охранных услуг?</h4>
-    <div class="w-50 check-line"> 
-
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-          <label class="form-check-label" for="exampleRadios1">
-            Да
-          </label>
-  </div>
-        
-  <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-          <label class="form-check-label" for="exampleRadios2">
-            Нет
-          </label>
-        </div>
-        
-   </div>
-</div> 
-</div>       
-
+    </div> 
+   </div>  
 
 
 </div> <!-- END wrapper -->
@@ -196,49 +87,7 @@
 
 
 
-<div class="container">
-    <div class="row">
- <div class="col">
-<h4>Отчет по проверке №2739 </h4>
-
-<span>Усово-3, Дом-16 (Москва и МО; Объектовая охрана; Москва)</span>
-<h4>Адрес</h4>
-
-   </div>
-
-</div>
-
-
-    <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Состояние документации?</label>
-      <input type="text" class="form-control" id="documentStatus" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">Оценить состояние всех журналов и наблюдательного дела.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>        .   
-           .     
-
-
-
-
-
-
-
-
-
-
-
-
+<!--
 Отчет по проверке №2739 
 Объект проверки
 Усово-3, Дом-16 (Москва и МО; Объектовая охрана; Москва)
@@ -285,3 +134,4 @@
 Состояние документации?
 Оценить состояние всех журналов и наблюдательного дела, по необходимости сделать общее фото Оценка 5 баллов.
 Чистота поста? Оценка 5 баллов.
+-->

@@ -54,6 +54,7 @@ import { TabelComponent } from './components/tabel/tabel.component';
 import { AdminmenuComponent } from './components/admin/adminmenu/adminmenu.component';
 import { CheckObjectComponent } from './components/protected_objects/check-object/check-object.component';
 import { PostObjectComponent } from './components/protected_objects/post-object/post-object.component';
+import { ChecklistService } from './services/checklist.service';
 
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -110,7 +111,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     NgxDatatableModule,
     SocketIoModule.forRoot(config)    
   ],
-  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChatService],
+  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChatService, ChecklistService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

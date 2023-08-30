@@ -15,6 +15,12 @@ export class GuideService {
     return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
   }
 
+  getCheckGuideGuide() {
+    const params = new HttpParams()
+         .set('get_guide_checklist', 'get_guide_checklist');
+    return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
+  }  
+
   getSenjorGuard() {
     const params = new HttpParams()
          .set('get_senjor_guard', 'get_senjor_guard');

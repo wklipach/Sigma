@@ -33,9 +33,32 @@ router.get('/', async function(req, res, next) {
       const result = await asyncGuideProtectedObject();
       res.send(result);
     }
+
+    if (req.query.get_guide_checklist) {
+      const result = await asyncCheckListGuide();
+      res.send(result);
+    }
+
   });
 
 
+
+
+
+  async function asyncCheckListGuide() {
+    let conn = await pool.getConnection();
+    try {
+  
+        const sQuery = 
+        "SELECT id, name, grade, input FROM guide_checklist where bitDelete=0 order by id asc";
+        const resOllr = await conn.query(sQuery);
+        return JSON.stringify(resOllr);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  } 
 
   async function asyncOllrGuide() {
     let conn = await pool.getConnection();
@@ -50,8 +73,6 @@ router.get('/', async function(req, res, next) {
       } finally  {
           if (conn) conn.release(); 
     }
-
-
   } 
 
 

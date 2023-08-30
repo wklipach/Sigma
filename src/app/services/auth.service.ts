@@ -145,10 +145,10 @@ export class AuthService implements IUser, IOhrArchive {
     return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
   }
 
-  // получаем пользователя, поиск по maria DB
-  getUserFromID(mariaID: string) {
+  // получаем пользователя, поиск по id
+  getUserFromID(id_user: number) {
     const params = new HttpParams()
-      .set('get_user_id', mariaID.toString());
+      .set('get_user_from_id', id_user);
     return this.http.get(this.gr.sUrlGlobal + 'users', {params: params});
   }
 

@@ -645,8 +645,7 @@ export class Obj2Component {
       if (this.task_opinion[id_object] == "2") {
         const url = this.router.serializeUrl(this.router.createUrlTree(['check'], {
           queryParams: {
-            id_object: id_object,
-            name: name
+            id_object: id_object
           }
         }));
   
