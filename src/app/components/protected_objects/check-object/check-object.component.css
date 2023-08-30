@@ -14,8 +14,20 @@
 }
 card-body{
     align-items: center;
+    height: auto;
 }
 h3, h4, h5{
     justify-items: center;
     margin-bottom: 1px;
+}
+.check-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px !important;
+    margin-right: auto;
+}
+.form-check-label{
+    font-size: 15px;
+    color: black;
 }
