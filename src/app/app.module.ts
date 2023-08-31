@@ -56,6 +56,9 @@ import { CheckObjectComponent } from './components/protected_objects/check-objec
 import { PostObjectComponent } from './components/protected_objects/post-object/post-object.component';
 import { ChecklistService } from './services/checklist.service';
 
+
+
+
 // socket config
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
