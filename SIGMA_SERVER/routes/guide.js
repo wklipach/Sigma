@@ -50,7 +50,7 @@ router.get('/', async function(req, res, next) {
     try {
   
         const sQuery = 
-        "SELECT id, name, grade, input FROM guide_checklist where bitDelete=0 order by id asc";
+        "SELECT id, name, trim(ifnull(comment,'')) as comment, grade, input FROM guide_checklist where bitDelete=0 order by id asc";
         const resOllr = await conn.query(sQuery);
         return JSON.stringify(resOllr);
       } catch (err) {

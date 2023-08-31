@@ -14,6 +14,7 @@ interface IProtectedObject {
 interface  IQuestion {
   id: number;
   name: string;
+  comment: string;
   grade: number;
   input: boolean;
 }
