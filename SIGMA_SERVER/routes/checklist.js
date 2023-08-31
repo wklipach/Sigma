@@ -30,17 +30,11 @@ router.get('/', async function(req, res, next) {
                                      req.body['dateBegin'], 
                                      req.body['dateEnd'], 
                                      req.body['id_check_senjor'], 
+                                     req.body['elements_object'], 
+                                     req.body['average_grade'], 
+                                     req.body['count_trouble'], 
                                      req.body['id_user']);
                 res.send(result);
-        }
-
-            
-        if (req.body['insert_checklist_element']) {
-            const result = await asyncInsertCheckListElement
-                                    (req.body['id_po_checklist'], 
-                                    req.body['id_check'], 
-                                    req.body['grade']);
-            res.send(result);
         }
 
     }); 
@@ -83,7 +77,12 @@ router.get('/', async function(req, res, next) {
     }
 
 
-    async function asyncInsertCheckList(id_object, dateBegin, dateEnd, id_check_senjor, id_user) {
+    async function asyncInsertCheckList(id_object, dateBegin, dateEnd, id_check_senjor, elements_object, average_grade, count_trouble, id_user) {
+
+
+
+        console.log('elements_object=', elements_object);
+
         let conn = await pool.getConnection();
         try {
 
@@ -92,10 +91,10 @@ router.get('/', async function(req, res, next) {
             const mDateBegin = dateBegin.replace("Z", " ").replace("T", " ");
             const mDateEnd = dateEnd.replace("Z", " ").replace("T", " ");
   
-           const params = [id_object, mDateBegin, mDateEnd, id_check_senjor];
+           const params = [id_object, mDateBegin, mDateEnd, id_check_senjor, average_grade, count_trouble];
            const sInsertChecklist = 
-           " insert po_checklist (id_object, dateBegin, dateEnd, id_check_senjor) "+
-           " value (?,?,?,?)";
+           " insert po_checklist (id_object, dateBegin, dateEnd, id_check_senjor, average_grade, count_trouble) "+
+           " value (?,?,?,?, ?, ?)";
             const resInsertChecklist = await conn.query(sInsertChecklist, params);
 
             if (resInsertChecklist.insertId) {
@@ -103,6 +102,12 @@ router.get('/', async function(req, res, next) {
                 const sJournal = 
                 "insert po_checklist_log (`newvalue`, `id_checklist`, `field`, `id_user`, `date_oper`) value('insert', ?, '', ?, now())";
                 await conn.query(sJournal, paramsJournal);
+             
+                for (let id_check in elements_object) {
+                  await asyncInsertCheckListElement(resInsertChecklist.insertId, id_check, elements_object[id_check].id_grage, elements_object[id_check].comment);
+                }
+
+
             }
       
             return JSON.stringify(resInsertChecklist);
@@ -115,14 +120,14 @@ router.get('/', async function(req, res, next) {
       }      
 
 
-      async function asyncInsertCheckListElement(id_po_checklist, id_check, grade) {
+      async function asyncInsertCheckListElement(id_po_checklist, id_check, grade, comment) {
         let conn = await pool.getConnection();
         try {
 
-           const sParams = [id_po_checklist, id_check, grade];
+           const sParams = [id_po_checklist, id_check, grade, comment];
            const sQuery = 
-           " insert po_checklist_composition (id_po_checklist, id_check, grade) "+
-           " value (?,?,?)";
+           " insert po_checklist_composition (id_po_checklist, id_check, grade, comment) "+
+           " value (?,?,?,?)";
             const resInsertChecklistElement = await conn.query(sQuery, sParams);
 
             return JSON.stringify(resInsertChecklistElement);

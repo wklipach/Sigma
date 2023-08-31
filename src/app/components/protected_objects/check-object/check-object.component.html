@@ -14,8 +14,19 @@
 
       <span class="text-muted fw-semibold fs-4">Дата и время начала</span>
          <div class="card-line">
+
+<!--
      <input type="date" /> 
      <input type="time" />
+-->               
+
+
+     <input
+  type="datetime-local"
+  id="meeting-time"
+  name="meeting-time"/>
+
+
          </div> 
 
     
@@ -45,13 +56,13 @@
       <!-- Блок Да-нет  -->
         <div *ngIf="question.grade == 1" class="w-100 check-line"> 
           <div class="form-check">
-              <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio1Id{{question.id}}" value="option1">
+              <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio1Id{{question.id}}" value="option1" (click)="summaryClick(gradeSummary, question.id, 1)">
               <label class="form-check-label" for="radio1Id{{question.id}}">
                 Да
               </label>
           </div>
           <div class="form-check">
-              <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio2Id{{question.id}}" value="option2">
+              <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio2Id{{question.id}}" value="option2" (click)="summaryClick(gradeSummary,question.id, 0)">
               <label class="form-check-label" for="radio2Id{{question.id}}">
                 Нет
              </label>
@@ -63,7 +74,7 @@
         <div *ngIf="question.grade == 5" class="w-100 check-line"> 
               <div *ngFor="let s of [1,2,3,4,5]">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio{{s}}Id{{question.id}}" value="option{{s}}">
+                  <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio{{s}}Id{{question.id}}" value="option{{s}}" (click)="summaryClick(gradeSummary, question.id, s)">
                   <label class="form-check-label" for="radio{{s}}Id{{question.id}}">
                     {{s}}
                   </label>
@@ -75,7 +86,7 @@
 
         <!--Блок Поле ввода  -->
         <div *ngIf="question.input" class="w-50 check-line"> 
-          <input type="text" name="comment{{question.id}}" id="comment{{question.id}}" class="form-control"> 
+          <input type="text" name="comment{{question.id}}" id="comment{{question.id}}" class="form-control" (change)="summaryClick(commentSummary, question.id, 0, $event.target)"> 
          </div>
         <!--Конец Блок Поле ввода  -->
 
@@ -86,55 +97,5 @@
 div> <!--</ END wrapper -->
 
 
-
-
-
-
-<!--
-Отчет по проверке №2739 
-Объект проверки
-Усово-3, Дом-16 (Москва и МО; Объектовая охрана; Москва)
-МО, Рублево-успенское ш, поселок «Усово-3», уч. 16
-Чек-лист Объект с оружием и спец.средствами.
-Управляющий:Балаклеенко А.В
-Дата и время начала: 06 нояб. 2022, 16:52
-Дата и время завершения:06 нояб. 2022, 17:09 Продолжительность:0д, 0ч, 17мин, 42с
-Результат проверки 91.18% 31 из 34 баллов Выявлено нарушений 1
-
-
-
-
-Есть ли на входе табличка СП? 
-Спросил ли у вас сотрудник которого вы встретили первым предписание? 
-Наличие УЧО у сотрудников? 
-Палка резиновая ПР-Т висит на поясе? Проверить у каждого сотрудника стоящего на посту.
-Наручники БРС, висят на сотрудниках стоящих на постах?
-
-Есть ли нарушение в ношении и эксплуатации оружия?
-Если "да" объяснить сотруднику как правильно носить и обращаться с оружием, указать ФИО сотрудника.
-Нарушено ли ношение формы у сотрудников стоящих на постах?
-1. Копия Уведомления о начале оказания охранных услуг
-2. Копия лицензии на осуществление частной охранной деятельности с приложением. 
-3. Копия РХИ (Разрешение на хранение и использование оружия и патронов) с приложением.
-4. Копия документов, подтверждающих право владения или пользования имуществом, подлежащим охране.
-5. Копия договора об оказании охранных услуг. 
-6. Копия Должностной инструкции частного охранника на объекте охраны с приложением. 
-7. Копия образцов форменной одежды. 
-8. Копия приказа об откомандировании служебного оружия и патронов к нему на охраняемый объект. 
-9. Копия приказа об откомандировании специальных средств на охраняемый объект. 
-10. Копия приказа о выделении сотрудников.
-Проверить соответствие сотрудников смены и приказа.
-11. График несения службы
-Соответствуют ли документы Наб.дела, полной описи наб.дела?
-Соответствует ли состав смены приказу о выделении сотрудников? 
-Соответствует ли номер договора во всех документах с основным номером договора?
-Заверены ли все копии документов печатями "С-П" ?
-Сходятся ли в приказах адреса охраняемых объектов с указанным в Уведомлении?
-Если "НЕТ", указать в каком приказе
-
-Ведение Документации/Журналов.  
-Общее состояние поста, чистота. 80%
-Состояние документации?
-Оценить состояние всех журналов и наблюдательного дела, по необходимости сделать общее фото Оценка 5 баллов.
-Чистота поста? Оценка 5 баллов.
--->
+<button>Отмена</button>
+<button (click) = "saveCheck()">Сохранить</button>

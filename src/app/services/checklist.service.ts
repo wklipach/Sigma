@@ -24,7 +24,34 @@ export class ChecklistService {
 
 
 
+  
 
+
+  insertCheckList(id_object: number,  
+                   dateBegin: Date,  
+                   dateEnd: Date,  
+                   id_check_senjor: number,  
+                   elements_object: any, 
+                   average_grade: number,
+                   count_trouble: number) {
+    const sUrl = this.gr.sUrlGlobal + 'checklist';
+    const id_user = this.auth.getSessionUser().id_user;
+    const params = {insert_checklist: "insert_checklist", 
+                    id_object,  
+                    dateBegin,  
+                    dateEnd, 
+                    id_check_senjor, 
+                    elements_object,
+                    average_grade,
+                    count_trouble,
+                    id_user};
+
+    return this.http.post(sUrl, params);
+  }  
+
+
+
+ 
 
 /*
   insertFilter(filterName: string, field1: string, value1: string, field2: string, value2: string, dateBegin: string, dateEnd: string) {
