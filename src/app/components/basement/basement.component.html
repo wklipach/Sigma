@@ -37,6 +37,10 @@
         <a class="nav-link" href="tabel">Табель</a>
       </li>
 
+      <li  *ngIf="this.getAccessMenu('listcheck')" class="nav-item">
+        <a class="nav-link" href="listcheck">Проверки</a>
+      </li>
+
       <li *ngIf="this.getAccessMenu('adminmenu')" class="nav-item">
         <a class="nav-link" href="adminmenu">Администрирование</a>
       </li>

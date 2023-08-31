@@ -32,6 +32,8 @@ import { TabelComponent } from './components/tabel/tabel.component';
 import { AdminmenuComponent } from './components/admin/adminmenu/adminmenu.component';
 import { CheckObjectComponent } from './components/protected_objects/check-object/check-object.component';
 import { PostObjectComponent } from './components/protected_objects/post-object/post-object.component';
+import { ListCheckComponent } from './components/protected_objects/list-check/list-check.component';
+import { ListCheckCardComponent } from './components/protected_objects/list-check/list-check-card/list-check-card.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -64,6 +66,8 @@ const routes: Routes = [
   { path: 'adminmenu', component: AdminmenuComponent, canActivate: [mainGuard] },
   { path: 'check', component: CheckObjectComponent, canActivate: [mainGuard] },
   { path: 'post', component: PostObjectComponent, canActivate: [mainGuard] },
+  { path: 'listcheck', component: ListCheckComponent, canActivate: [mainGuard] },
+  { path: 'checkcard', component: ListCheckCardComponent, canActivate: [mainGuard] },
   
   ];
 

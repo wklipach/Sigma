@@ -55,6 +55,8 @@ import { AdminmenuComponent } from './components/admin/adminmenu/adminmenu.compo
 import { CheckObjectComponent } from './components/protected_objects/check-object/check-object.component';
 import { PostObjectComponent } from './components/protected_objects/post-object/post-object.component';
 import { ChecklistService } from './services/checklist.service';
+import { ListCheckComponent } from './components/protected_objects/list-check/list-check.component';
+import { ListCheckCardComponent } from './components/protected_objects/list-check/list-check-card/list-check-card.component';
 
 
 
@@ -99,7 +101,9 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     TabelComponent,
     AdminmenuComponent,
     CheckObjectComponent,
-    PostObjectComponent
+    PostObjectComponent,
+    ListCheckComponent,
+    ListCheckCardComponent
   ],
   imports: [
     BrowserModule,

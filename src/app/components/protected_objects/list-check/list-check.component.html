@@ -1,0 +1,79 @@
+<app-basement></app-basement>
+
+<h2>Проверки объектов</h2>
+
+
+<ngx-datatable
+id="CheckListTable"
+class="material striped"
+[rows]="this.arrayListCheck"
+[columnMode]="ColumnMode.force"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="50"
+[limit]="100"
+[scrollbarV]="true"
+[scrollbarH]="true"
+#Obj2Table
+(resize)="onResize($event)">
+
+
+<ngx-datatable-column prop = "id" name = "№ проверки" [width]="getColumnSize('id')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <div (click)="openCheckObject(row.id)"> {{ value }} </div>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "id_object" name = "№ объекта" [width]="getColumnSize('id_object')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "name" name = "Наименование объекта" [width]="getColumnSize('name')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "address" name = "Адрес объекта" [width]="getColumnSize('address')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "DateBegin" name = "Начало проверки" [width]="getColumnSize('DateBegin')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value | date: "dd.MM.yyyy HH:mm" }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "DateEnd" name = "Окончание проверки" [width]="getColumnSize('DateEnd')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value | date: "dd.MM.yyyy HH:mm" }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "average_grade" name = "Результат %" [width]="getColumnSize('average_grade')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "count_trouble" name = "Проблемы" [width]="getColumnSize('count_trouble')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "fio" name = "Проверяющий" [width]="getColumnSize('fio')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+
+
+</ngx-datatable>
+
+

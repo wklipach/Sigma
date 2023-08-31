@@ -68,7 +68,7 @@ export class CheckObjectComponent {
 
    ngOnInit() {
 
-      (document.getElementById('meeting-time') as HTMLDataElement).value = this.datetimeLocal();
+    (document.getElementById('meeting-time') as HTMLDataElement).value = this.datetimeLocal();
 
     // сведения об объекте
     this.servcheck.getObjectInfo(this.ProtectedObject.id_object).subscribe( (res: any) => {
@@ -164,7 +164,7 @@ export class CheckObjectComponent {
 
                     if (res.insertId) {
                       console.log(res.insertId);
-                        alert ("Лист проверки №"+ res.insertId + "создан успешно.");
+                        alert ("Лист проверки №"+ res.insertId + " создан успешно.");
                         window.close();                    
                     } else alert("Лист проверки не создан.");
       });

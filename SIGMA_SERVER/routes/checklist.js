@@ -19,6 +19,17 @@ router.get('/', async function(req, res, next) {
         res.send(result);
     }
 
+    if (req.query.get_list_check) {
+      const result = await asyncGetListCheck();
+      res.send(result);
+    }    
+
+    if (req.query.get_check) {
+      const result = await asyncGetCheck(req.query.get_check);
+      res.send(result);
+    }    
+    
+
   });
 
 
@@ -57,6 +68,60 @@ router.get('/', async function(req, res, next) {
               if (conn) conn.release(); 
         }        
     }
+
+
+
+    async function asyncGetCheck(id_po_check) {
+      let conn = await pool.getConnection();
+      try {
+
+        const params = [id_po_check];
+
+        const sQuery = 
+          " select gc.name, M.grade, M.`comment` "+
+          " from po_checklist_composition M "+
+          " left join guide_checklist gc on gc.id = M.id_check "+
+          " where M.id_po_checklist=?  order by gc.id";
+        
+          const resQuery = await conn.query(sQuery, params);
+          return JSON.stringify(resQuery);
+        } catch (err) {
+          return  err;
+        } finally  {
+            if (conn) conn.release(); 
+      }        
+    }
+
+    async function asyncGetListCheck() {
+      let conn = await pool.getConnection();
+      try {
+
+        const sQuery = 
+        " select "+
+        "   pc.id, "+
+        "   pc.id_object, "+
+        "   po.name, "+
+        " po.address, "+
+        "   pc.DateBegin, "+ 
+        " pc.DateEnd, "+
+        " pc.average_grade, "+
+        " pc.count_trouble, "+
+        " pc.id_check_senjor,"+
+        " s.fio "+
+        " from po_checklist pc "+
+        " inner join protected_object po on po.id_object =  pc.id_object "+
+        " inner join staff s on s.id_staff =  pc.id_check_senjor "+
+        " order by pc.DateEnd desc ";
+
+          const resQuery = await conn.query(sQuery);
+          return JSON.stringify(resQuery);
+        } catch (err) {
+          return  err;
+        } finally  {
+            if (conn) conn.release(); 
+      }        
+    }
+
 
 
     async function asyncGetObjectInfo(id_object) {

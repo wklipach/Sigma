@@ -23,7 +23,21 @@ export class ChecklistService {
   }
 
 
+  getListCheck() {
+    const params = new HttpParams()
+         .set('get_list_check', 'get_list_check');
+    return this.http.get(this.gr.sUrlGlobal + 'checklist', {params: params});
+  }
 
+
+  getCheck(id_po_check: number) {
+    const params = new HttpParams()
+         .set('get_check', id_po_check);
+    return this.http.get(this.gr.sUrlGlobal + 'checklist', {params: params});
+  }
+
+  
+  
   
 
 

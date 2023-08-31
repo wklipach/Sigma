@@ -1,0 +1,19 @@
+
+<ul>
+  <li *ngFor="let ch of this.arrayCheck">
+
+    <span span class="redclass" *ngIf="ch.grade.toString() == '0'" >
+          {{ch.name}}
+          {{ch.grade}}
+    </span>
+
+    <span *ngIf="ch.grade.toString() !== '0'" >
+        {{ch.name}}
+        {{ch.grade}}
+    </span>
+
+    <span>{{ch.comment}}</span>
+
+  </li>
+</ul>
+
