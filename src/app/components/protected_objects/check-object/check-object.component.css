@@ -15,20 +15,140 @@
 card-body{
     align-items: center;
     height: auto;
+    padding-top: 2px !important;
 }
-h3, h4, h5{
-    justify-items: center;
-    margin-bottom: 1px;
-}
+
 .check-line{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 500px !important;
+    height: 30px;
     margin-right: auto;
     margin-bottom: 20px;
+    margin: 20px 0;
+    line-height: 30px;
 }
+.card-line{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 500px !important;
+    padding: 10px 0;
+    height: auto;
+}
+
+.form-check-label{
+    display: flex;
+    font-size: 15px;
+    line-height: 10px;
+    color: rgb(131, 130, 130);
+}
+
 .form-check-label{
     font-size: 15px;
     color: black;
+    margin-left: 10px;
+}
+
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+input[type="date"]{
+    background-color: #0080ff;
+    position: relative;
+    padding: 5px;
+    height: 75px;
+    top: 5px;
+    left: 0;
+    font-family: "Roboto Mono",monospace;
+    color: #ffffff;
+    font-size: 18px;
+    border: none;
+    outline:double; 
+    border-radius: 5px;
+}
+::-webkit-calendar-picker-indicator{
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+[type="date"] {
+ 
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+input[type=time] {
+    position: relative;
+    border: none;
+    color: #df0d64;
+    font-size: 18px;
+    width: 180px;
+    height: 75px;
+    text-align: center;
+    outline:double;
+    outline: #0080ff;
+    border-radius: 5px;
+
+  }
+  /* Wrapper around the hour, minute, second, and am/pm fields as well as 
+  the up and down buttons and the 'X' button */
+  input[type=time]::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+    padding: 15px;
+    background-color: #0080ff;
+    border: 1px solid#0080ff;
+  }
+  /* The space between the fields - between hour and minute, the minute and 
+  second, second and am/pm */
+  input[type=time]::-webkit-datetime-edit-text {
+    padding: 19px 4px;
+  }
+  /* The naming convention for the hour, minute, second, and am/pm field is
+  `-webkit-datetime-edit-{field}-field` */
+  /* Hour */
+  input[type=time]::-webkit-datetime-edit-hour-field {
+    background-color: #f2f4f5;
+    border-radius: 15%;
+    padding: 19px 13px;
+  }
+  /* Minute */
+  input[type=time]::-webkit-datetime-edit-minute-field {
+    background-color: #f2f4f5;
+    border-radius: 15%;
+    padding: 19px 13px;
+  }
+  /* AM/PM */
+  input[type=time]::-webkit-datetime-edit-ampm-field {
+    background-color: #7155d3;
+    border-radius: 15%;
+    color: #fff;
+    padding: 19px 13px;
+  }
+  /* 'X' button for resetting/clearing time */
+  input[type=time]::-webkit-clear-button {
+    display: none;
+  }
+  /* Up/Down arrows for incrementing/decrementing the value */
+  input[type=time]::-webkit-inner-spin-button {
+    display: none;
+  }
+  input[type='time']::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    position: absolute;
+    width: 10%;
+    left:35%;
 }

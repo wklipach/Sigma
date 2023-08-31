@@ -1,43 +1,44 @@
+<app-basement></app-basement>
 <div class="wrapper">
    <div class="card w-50">
-    <div class="card-body">
-      <h3 class="card-title">Отчет по проверке № {{ReportNumber}}</h3>
-     <h4>Объект проверки</h4>
-     <div class="fs-5 text-muted fw-semibold">
-      {{this.ProtectedObject.name}}
-     </div>
-     <div class="fs-5 text-muted fw-semibold">
-      {{this.ProtectedObject.address}}
-     </div>
+     <div class="card-body pt-2">
+      <div class="card-title fs-2">Отчет по проверке № {{ReportNumber}}</div>
+        <div class="card-line">
+      <span class="text-muted fw-semibold fs-4 my-0">Объект проверки</span>
+     <div class="fs-4 text-muted fw-semibold my-0">{{this.ProtectedObject.name}}</div>
+      </div>
+
+      <div class="fs-5 text-muted fw-semibold">{{this.ProtectedObject.address}}</div>
 
 
-     <h4 >Дата и время начала</h4>
-     <div class="fs-4 text-muted fw-semibold my-2" >
-      <input type="date" /> <input type="time" />
-     </div>
+      <span class="text-muted fw-semibold fs-4">Дата и время начала</span>
+         <div class="card-line">
+     <input type="date" /> 
+     <input type="time" />
+         </div> 
 
-     <h4 >Дата и время завершения</h4>
-     <div class="fs-4 text-muted fw-semibold my-2" >
-      <input type="date" /> <input type="time" />
-     </div>
+    
+         </div> 
+     
+         <div class="card-line">
+         <span class="text-muted fw-semibold fs-4">Проверяющий</span>
+        <div class="fs-4 text-muted fw-semibold my-2" >{{fio}}</div>
+        </div>
 
-
-     <h4 >Проверяющий</h4>
-     <div class="fs-4 text-muted fw-semibold my-2" >{{fio}}</div>
-     <div class="flex-row">
+        <div class="card-line">
         <h4>Результат проверки</h4>
         <h2>{{resultCheck}}%</h2>
         <h4>Выявлено нарушений</h4>
         <h2> {{countTrouble}}</h2>
      </div>
-  </div>
- 
 </div>
 
+</div> <!-- card --> 
 
    <div *ngFor="let question of arrQuestion; let i = index" class="card w-50 mt-3 p-0">
     <div class="card-body">
       <h4 class="card-title mb-3">{{question.name}} </h4>
+      <small class="form-text text-muted">We'll never share your email with anyone else.</small>
       
       <!-- Блок Да-нет  -->
         <div *ngIf="question.grade == 1" class="w-100 check-line"> 
@@ -59,7 +60,6 @@
         <!--Блок 1-2-3-4-5  -->
         <div *ngIf="question.grade == 5" class="w-100 check-line"> 
               <div *ngFor="let s of [1,2,3,4,5]">
-
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio{{s}}Id{{question.id}}" value="option{{s}}">
                   <label class="form-check-label" for="radio{{s}}Id{{question.id}}">
@@ -81,8 +81,9 @@
     </div> 
    </div>  
 
+div> <!--</ END wrapper -->
 
-</div> <!-- END wrapper -->
+
 
 
 
