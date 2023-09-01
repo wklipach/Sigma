@@ -1,32 +1,29 @@
 <div class="card w-50">
   <div class="card-body pt-2">
-   <div class="card-title fs-2">Отчет по проверке № 503</div>
+   <div class="card-title fs-2">Отчет по проверке № {{ this.infoCheck.id }} </div>
      <div class="card-line">
    <span class="text-muted fw-semibold fs-4 my-0">Объект проверки</span>
-  <div class="fs-4 text-muted fw-semibold my-0">Рынок</div>
+  <div class="fs-4 text-muted fw-semibold my-0">{{this.infoCheck.name}}</div>
    </div>
 
-   <div class="fs-5 text-muted fw-semibold">Ул. Ленина 22</div>
+   <div class="fs-5 text-muted fw-semibold"> {{this.infoCheck.address}} </div>
 
 
-   <span class="text-muted fw-semibold fs-4">23.10.2023 17:30 Дата и время начала</span>
-   <span class="text-muted fw-semibold fs-4">23.10.2023 17:30 Дата и время окончания</span>   
-   <div class="card-line">
-   <input type="datetime-local" id="meeting-time" name="meeting-time"/>
-   </div> 
+   <span class="text-muted fw-semibold fs-4">Дата и время начала  {{ this.infoCheck.DateBegin | date:'dd.MM.yyyy HH:mm' }} </span>
+   <span class="text-muted fw-semibold fs-4">Дата и время окончания {{ this.infoCheck.DateEnd | date:'dd.MM.yyyy HH:mm:' }}</span>   
 
 
   
  <div class="card-line">
  <span class="text-muted fw-semibold fs-4">Проверяющий</span>
- <div class="fs-4 text-muted fw-semibold my-2" >Петров</div>
+ <div class="fs-4 text-muted fw-semibold my-2" >{{ this.infoCheck.fio }}</div>
  </div>
 
   <div class="card-line">
      <h4>Результат проверки</h4>
-     <h2>95 %</h2>
+     <h2>   {{ this.infoCheck.average_grade }} % </h2>
      <h4>Выявлено нарушений</h4>
-     <h2> 5</h2>
+     <h2>  {{ this.infoCheck.count_trouble }} </h2>
   </div>
 </div>
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChecklistService } from 'src/app/services/checklist.service';
 import { GuideService } from 'src/app/services/guide.service';
@@ -8,6 +9,19 @@ interface ICheck {
   name: string; 
   grade: string;  
   comment: string;  
+}
+
+interface IListCheck {
+  id?: number;
+  id_object?: number;
+  name?: string;
+  address?: string;
+  DateBegin?: Date; 
+  DateEnd?: Date; 
+  average_grade?: number; 
+  count_trouble?: number;
+  id_check_senjor?: number;
+  fio?: string; 
 }
 
 @Component({
@@ -19,6 +33,7 @@ export class ListCheckCardComponent {
 
   id_po_check: number = 0;
   arrayCheck: ICheck[] = [];
+  infoCheck: IListCheck = {};
 
   constructor (private servguide: GuideService, 
     private auth: AuthService,
@@ -34,12 +49,30 @@ export class ListCheckCardComponent {
 
 
 ngOnInit() {
+    let sources: Observable<any>[] = [
+      this.servcheck.getCheck(this.id_po_check),
+      this.servcheck.getCheckTittleInfo(this.id_po_check),
+    ];
+    forkJoin(sources)
+    .subscribe( ([res1, res2]) => {
+      this.arrayCheck = res1;
+        this.infoCheck = res2[0]; 
 
-  // сведения о проверке
-  this.servcheck.getCheck(this.id_po_check).subscribe( (res: any) => {
-    this.arrayCheck = res;
-    console.log(this.arrayCheck);
-  });
+       
+       if (this.infoCheck.DateBegin) {
+           const dBegin = new Date (this.infoCheck.DateBegin);
+           dBegin.setMinutes(dBegin.getMinutes() - dBegin.getTimezoneOffset());
+           this.infoCheck.DateBegin = dBegin;
+       }
+        
+       if (this.infoCheck.DateEnd) {
+           const dEnd = new Date (this.infoCheck.DateEnd);
+           dEnd.setMinutes(dEnd.getMinutes() - dEnd.getTimezoneOffset());
+           this.infoCheck.DateEnd = dEnd;
+       }
+
+
+    });    
   }
 
 }  

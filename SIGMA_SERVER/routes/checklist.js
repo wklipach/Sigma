@@ -28,7 +28,12 @@ router.get('/', async function(req, res, next) {
       const result = await asyncGetCheck(req.query.get_check);
       res.send(result);
     }    
-    
+
+    if (req.query.get_tittle_info) {
+      const result = await asyncGetCheckTitleInfo(req.query.get_tittle_info);
+      res.send(result);
+    }    
+
 
   });
 
@@ -121,6 +126,41 @@ router.get('/', async function(req, res, next) {
             if (conn) conn.release(); 
       }        
     }
+
+
+
+    async function asyncGetCheckTitleInfo(id_po_check) {
+      let conn = await pool.getConnection();
+      try {
+
+        const params = [ id_po_check ];
+        const sQuery = 
+         " select  "+
+         " pc.id, "+
+         " pc.id_object, "+
+         " po.name, "+
+         " po.address, "+
+         "  pc.DateBegin, "+
+         " pc.DateEnd, "+
+         " pc.average_grade, "+
+         " pc.count_trouble, "+
+         " pc.id_check_senjor, "+
+         " s.fio "+
+         " from po_checklist pc "+
+         " inner join protected_object po on po.id_object =  pc.id_object "+
+         " inner join staff s on s.id_staff =  pc.id_check_senjor "+
+         " where pc.id=? ";
+
+          const resQuery = await conn.query(sQuery, params);
+
+          return JSON.stringify(resQuery);
+        } catch (err) {
+          return  err;
+        } finally  {
+            if (conn) conn.release(); 
+      }        
+    }
+
 
 
 

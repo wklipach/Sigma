@@ -36,9 +36,13 @@ export class ChecklistService {
     return this.http.get(this.gr.sUrlGlobal + 'checklist', {params: params});
   }
 
-  
-  
-  
+  getCheckTittleInfo(id_po_check: number) {
+    const params = new HttpParams()
+         .set('get_tittle_info', id_po_check);
+    return this.http.get(this.gr.sUrlGlobal + 'checklist', {params: params});
+  }
+
+
 
 
   insertCheckList(id_object: number,  
