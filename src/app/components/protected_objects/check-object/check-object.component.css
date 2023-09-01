@@ -25,8 +25,9 @@ card-body{
     width: 500px !important;
     height: 30px;
     margin-right: auto;
-    margin-bottom: 20px;
-    margin: 20px 0;
+    margin: 10px 0;
+    line-height: 20px;
+    margin: 0;
     line-height: 30px;
 }
 .card-line{
@@ -51,35 +52,47 @@ card-body{
     color: black;
     margin-left: 10px;
 }
+  .btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 958px;
+    height: auto;
+    margin: 20px 0;
+  }
 
-*,
-*:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-input[type="date"]{
-    background-color: #0080ff;
-    position: relative;
-    padding: 5px;
-    height: 75px;
-    top: 5px;
-    left: 0;
-    font-family: "Roboto Mono",monospace;
-    color: #ffffff;
-    font-size: 18px;
-    border: none;
-    outline:double; 
-    border-radius: 5px;
+input[type="datetime-local"]{
+  background-color: #0080ff;
+  position: relative;
+  padding: 5px;
+  height: 45px;
+  top: 5px;
+  left: 0;
+  font-family: "Roboto Mono",monospace;
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+  outline:double; 
+  border-radius: 5px;
 }
 ::-webkit-calendar-picker-indicator{
-    background-color: transparent;
-    width: 20px;
-    height: 20px;
-    padding: 15px;
-    cursor: pointer;
-    border-radius: 3px;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+opacity: 1;
+}
+
+/* 
+<div class="container-fluid h-50 w-100">
+<app-events></app-events>
+</div>
+
 }
 [type="date"] {
  
@@ -103,7 +116,7 @@ input[type=time] {
     outline: #0080ff;
     border-radius: 5px;
 
-  }
+  } */
   /* Wrapper around the hour, minute, second, and am/pm fields as well as 
   the up and down buttons and the 'X' button */
   input[type=time]::-webkit-datetime-edit-fields-wrapper {
@@ -152,3 +165,28 @@ input[type=time] {
     width: 10%;
     left:35%;
 }
+
+.btn.btn-primary{
+  color: #fff;
+  background-color: #386bc0 !important;
+  font-weight: semibold !important;
+}
+  .btn.btn-primary:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #386bc0 !important; 
+  cursor: pointer;
+  }
+
+  .btn.btn-secondary{
+    color: #fff;
+    background-color: #5a6268 !important;
+    font-weight: 600 !important;
+   }
+   .btn.btn-secondary:hover{
+  color: white !important;
+  font-weight: bold !important;
+  background-color: #5a6268 !important; 
+  cursor: pointer;
+  }
+  

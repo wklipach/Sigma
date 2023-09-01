@@ -1,10 +1,44 @@
+<div class="card w-50">
+  <div class="card-body pt-2">
+   <div class="card-title fs-2">Отчет по проверке № 503</div>
+     <div class="card-line">
+   <span class="text-muted fw-semibold fs-4 my-0">Объект проверки</span>
+  <div class="fs-4 text-muted fw-semibold my-0">Рынок</div>
+   </div>
+
+   <div class="fs-5 text-muted fw-semibold">Ул. Ленина 22</div>
+
+
+   <span class="text-muted fw-semibold fs-4">23.10.2023 17:30 Дата и время начала</span>
+   <span class="text-muted fw-semibold fs-4">23.10.2023 17:30 Дата и время окончания</span>   
+   <div class="card-line">
+   <input type="datetime-local" id="meeting-time" name="meeting-time"/>
+   </div> 
+
+
+  
+ <div class="card-line">
+ <span class="text-muted fw-semibold fs-4">Проверяющий</span>
+ <div class="fs-4 text-muted fw-semibold my-2" >Петров</div>
+ </div>
+
+  <div class="card-line">
+     <h4>Результат проверки</h4>
+     <h2>95 %</h2>
+     <h4>Выявлено нарушений</h4>
+     <h2> 5</h2>
+  </div>
+</div>
+
+      </div> 
+
 
 <ul>
   <li *ngFor="let ch of this.arrayCheck">
 
     <span span class="redclass" *ngIf="ch.grade.toString() == '0'" >
-          {{ch.name}}
-          {{ch.grade}}
+            <div>     {{ch.name}}</div>  
+     <div>     {{ch.grade}}</div>
     </span>
 
     <span *ngIf="ch.grade.toString() !== '0'" >

@@ -241,20 +241,27 @@ input{
   top: 10px;
   left: 150px;
   }
+
+.form-select{
+  width: 100%;
+  overflow-y: auto;
+  text-transform: lowercase;
+}
+
   option{
     height: 50px;
-    color: white;
+    color: black;
     font-weight: 500;
     padding: 15px 0;
-    background-color: #7386D5;
+    background-color: #fff;
     border: 1px solid #f3eeee;
   }
   option:hover{
     cursor: pointer;
     border: #386bc0;
     border-radius: 10px;
-    color: #7386D5 ;
-    background-color: #fff;
+    color: #fff;
+    background-color: #386bc0;
 
   }
   /* .filter-name{

@@ -13,31 +13,19 @@
 
 
       <span class="text-muted fw-semibold fs-4">Дата и время начала</span>
-         <div class="card-line">
+         
+      <div class="card-line">
+      <input type="datetime-local" id="meeting-time" name="meeting-time"/>
+      </div> 
+  
 
-<!--
-     <input type="date" /> 
-     <input type="time" />
--->               
-
-
-     <input
-  type="datetime-local"
-  id="meeting-time"
-  name="meeting-time"/>
-
-
-         </div> 
-
-    
-         </div> 
      
-         <div class="card-line">
-         <span class="text-muted fw-semibold fs-4">Проверяющий</span>
-        <div class="fs-4 text-muted fw-semibold my-2" >{{fio}}</div>
-        </div>
+    <div class="card-line">
+    <span class="text-muted fw-semibold fs-4">Проверяющий</span>
+    <div class="fs-4 text-muted fw-semibold my-2" >{{fio}}</div>
+    </div>
 
-        <div class="card-line">
+     <div class="card-line">
         <h4>Результат проверки</h4>
         <h2>{{resultCheck}}%</h2>
         <h4>Выявлено нарушений</h4>
@@ -45,19 +33,19 @@
      </div>
 </div>
 
-</div> <!-- card --> 
+         </div> 
 
    <div *ngFor="let question of arrQuestion; let i = index" class="card w-50 mt-3 p-0">
     <div class="card-body">
-      <h4 class="card-title mb-3">{{question.name}} </h4>
+      <h4 class="card-title mb-2">{{question.name}} </h4>
 
-      <small *ngIf="question.comment.length > 0" class="form-text text-muted">{{question.comment}}</small>
+      <small *ngIf="question.comment.length > 0" class="form-text text-muted fs-5 py-2">{{question.comment}}</small>
       
       <!-- Блок Да-нет  -->
         <div *ngIf="question.grade == 1" class="w-100 check-line"> 
           <div class="form-check">
               <input class="form-check-input" type="radio" name="radioName{{question.id}}" id="radio1Id{{question.id}}" value="option1" (click)="summaryClick(gradeSummary, question.id, 1)">
-              <label class="form-check-label" for="radio1Id{{question.id}}">
+              <label class="form-check-label my-auto" for="radio1Id{{question.id}}">
                 Да
               </label>
           </div>
@@ -68,6 +56,7 @@
              </label>
           </div>
         </div>
+
         <!--Конец Блок Да-нет  -->
 
         <!--Блок 1-2-3-4-5  -->
@@ -94,8 +83,25 @@
     </div> 
    </div>  
 
-div> <!--</ END wrapper -->
+
+     
+        <div class="btns">
+        <button class="btn btn-secondary" type="button">Отмена</button>
+        <button class="btn btn-primary"  (click)="saveCheck()"button type="button">Сохранить</button>
+      </div>
 
 
-<button>Отмена</button>
-<button (click) = "saveCheck()">Сохранить</button>
+
+   </div>
+
+ <!-- card --> 
+    <div> <!--</ END wrapper -->
+     
+    
+     
+
+
+      </div> 
+     
+      
+
