@@ -658,10 +658,12 @@ export class Obj2Component {
 
       // открываем пост
       if (this.task_opinion[id_object] == "3") {
+
+
           const url = this.router.serializeUrl(this.router.createUrlTree(['post'], {
              queryParams: {
                 id_object: id_object,
-                name: name
+                id_post: -1,
               }
             }));
        
@@ -669,6 +671,8 @@ export class Obj2Component {
             if(newTab) {
                 newTab.opener = null;
             }
+
+
        }
       
 

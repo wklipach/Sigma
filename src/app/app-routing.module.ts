@@ -31,7 +31,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { TabelComponent } from './components/tabel/tabel.component';
 import { AdminmenuComponent } from './components/admin/adminmenu/adminmenu.component';
 import { CheckObjectComponent } from './components/protected_objects/check-object/check-object.component';
-import { PostObjectComponent } from './components/protected_objects/post-object/post-object.component';
+import { PostObjectComponent } from './components/protected_objects/post/post-object/post-object.component';
 import { ListCheckComponent } from './components/protected_objects/list-check/list-check.component';
 import { ListCheckCardComponent } from './components/protected_objects/list-check/list-check-card/list-check-card.component';
 

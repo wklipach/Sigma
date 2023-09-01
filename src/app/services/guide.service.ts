@@ -21,6 +21,25 @@ export class GuideService {
     return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
   }  
 
+  getGuideDress() {
+    const params = new HttpParams()
+         .set('get_guide_dress', 'get_guide_dress');
+    return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
+  }  
+
+  getGuideSpecialMeans() {
+    const params = new HttpParams()
+         .set('get_special_means', 'get_special_means');
+    return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
+  }  
+
+  getGuideWeapons() {
+    const params = new HttpParams()
+         .set('get_weapons', 'get_weapons');
+    return this.http.get(this.gr.sUrlGlobal + 'guide', {params: params});
+  }  
+
+
   getSenjorGuard() {
     const params = new HttpParams()
          .set('get_senjor_guard', 'get_senjor_guard');
