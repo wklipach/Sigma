@@ -1,0 +1,146 @@
+<form class="mb-2 px-9">
+    <div class="card-body mt-2 p-10">
+
+<!--        
+            <div class="row mb-6">
+                <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
+                        <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
+                    <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
+                    <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
+                </div>
+                    
+                <div class="col-lg-8">
+                            <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+                            <ng-template #contentLoadAvatar class="image-input">
+                            <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+                            </ng-template>
+                            <ng-template #contentDefault>
+                            <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
+                            </ng-template>
+                </div>
+            </div>
+            
+-->            
+             <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Название</label>
+                <div class="col-lg-8 fv-row">
+                    <input type="text" name="name" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                </div>
+            </div>  
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Номер</label>
+                <div class="col-lg-8 fv-row">
+                    <input type="text" name="number" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                </div>
+            </div>  
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Метка</label>
+                <div class="col-lg-8 fv-row">
+                    <input type="text" name="label" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                </div>
+            </div>  
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                    <span class="required">График работы поста</span>
+                    </label>
+
+                <div class="col-lg-8 fv-row">
+                    <select name="routine" data-control="selectRoutine" class="form-select form-select-solid form-select-lg fw-semibold">
+                        <option *ngFor="let gpr of this.guidePostRoutine" [value]="gpr.name">{{gpr.name}}</option>
+                   </select>
+                </div>
+           </div>
+   
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Время начала смены</label>
+            <div class="col-lg-8 fv-row">
+                <input type="time" name="TimeBegin" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+            </div>
+           </div>  
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Время окончания смены</label>
+            <div class="col-lg-8 fv-row">
+                <input type="time" name="TimeEnd" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+            </div>
+           </div>  
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пост выставлен</label>
+            <div class="col-lg-8 fv-row">
+                <input type="date" name="DateBegin" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+            </div>
+           </div>  
+           
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пост снят</label>
+            <div class="col-lg-8 fv-row">
+                <input type="date" name="DateEnd" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+            </div>
+           </div>  
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">. Ссылка на видео с камеры наблюдения </label>
+            <div class="col-lg-8 fv-row">
+                <input type="text" name="link_video" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+            </div>
+           </div>  
+
+
+            <!-- начало спецсредства -->           
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Спецсредства</label>
+                <div class="col-lg-8 fv-row">
+                      <ul>
+                        <li *ngFor="let spm of this.guideSpecialMeans" >
+                            <input type="checkbox" id="idSpecialMeans{{spm.id_mtr}}" name="SpecialMeans{{spm.id_mtr}}"/>
+                            <label for="SpecialMeans{{spm.id_mtr}}">{{spm.name}}</label>
+                            <label for="SpecialMeans{{spm.id_mtr}}">Кол</label>
+                            <input type="text" id="idSpecialMeansCount{{spm.id_mtr}}" name="SpecialMeansCount{{spm.id_mtr}}"/>
+
+                        </li>
+                      </ul>
+                </div>
+            </div>  
+            <!-- конец спецсредства-->   
+
+
+            <!-- начало оружие -->           
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Оружие</label>
+                <div class="col-lg-8 fv-row">
+                      <ul>
+                        <li *ngFor="let w of this.guideWeapons" >
+                            <input type="checkbox" id="idWeapons{{w.id_mtr}}" name="Weapons{{w.id_mtr}}"/>
+                            <label for="Weapons{{w.id_mtr}}">{{w.name}}</label>
+                            <label for="Weapons{{w.id_mtr}}">Кол</label>
+                            <input type="text" id="idWeaponsCount{{w.id_mtr}}" name="WeaponsCount{{w.id_mtr}}"/>
+                        </li>
+                      </ul>
+                </div>
+            </div>  
+            <!-- конец оружие-->   
+    
+            <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span class="required">Форма одежды</span>
+                        </label>
+    
+                    <div class="col-lg-8 fv-row">
+                        <select name="dress" data-control="selectDress" class="form-select form-select-solid form-select-lg fw-semibold">
+                            <option *ngFor="let gd of this.guideDress" [value]="gd.name">{{gd.name}}</option>
+                       </select>
+                    </div>
+            </div>
+    
+
+   </div>     
+
+
+   <button id="closeform" (click)="close()">Закрыть</button>
+   <button id="saveform" (click)="save()">Сохранить</button>
+
+</form>                 

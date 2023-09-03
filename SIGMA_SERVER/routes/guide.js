@@ -39,7 +39,73 @@ router.get('/', async function(req, res, next) {
       res.send(result);
     }
 
+    if (req.query.get_guide_dress) {
+      const result = await asyncGuideDress();
+      res.send(result);
+    }
+
+    if (req.query.get_special_means) {
+      const result = await asyncGuideSpecialMeans();
+      res.send(result);
+    }
+
+    if (req.query.get_weapons) {
+      const result = await asyncGuideWeapons();
+      res.send(result);
+    }
+
+
+
   });
+
+  async function asyncGuideWeapons() {
+    let conn = await pool.getConnection();
+    try {
+
+        const sQuery = 
+        " select id_mtr, name, description from mtr where id_mtrvid=6 and bitDelete=0 order by name asc ";
+        const resOllr = await conn.query(sQuery);
+        return JSON.stringify(resOllr);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  } 
+
+  
+  async function asyncGuideSpecialMeans() {
+    let conn = await pool.getConnection();
+    try {
+
+        const sQuery = 
+        " select id_mtr, name, description from mtr where id_mtrvid=7 and bitDelete=0 order by name asc ";
+        const resOllr = await conn.query(sQuery);
+        return JSON.stringify(resOllr);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  } 
+
+  
+  async function asyncGuideDress() {
+    let conn = await pool.getConnection();
+    try {
+  
+        const sQuery = 
+        " select 0 as id_mtr, '--' as name, '' as description "+
+        " union all "+
+        " select id_mtr, name, description from mtr where id_mtrvid=1 and bitDelete=0 order by name asc ";
+        const resOllr = await conn.query(sQuery);
+        return JSON.stringify(resOllr);
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+  } 
 
 
 
