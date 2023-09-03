@@ -1,5 +1,7 @@
-<form class="mb-2 px-9">
-    <div class="card-body mt-2 p-10">
+<app-basement></app-basement>
+<div class="wrapper">
+<form class="mb-2 w-50">
+    <div class="card-body p-9 w-100 align-item-center">
 
 <!--        
             <div class="row mb-6">
@@ -24,21 +26,21 @@
              <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Название</label>
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="name" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                    <input type="text" name="name"  class="form-control w-100" />
                 </div>
             </div>  
 
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Номер</label>
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="number" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                    <input type="text" name="number" class="form-control" />
                 </div>
             </div>  
 
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Метка</label>
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="label" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                    <input type="text" name="label" class="form-control" />
                 </div>
             </div>  
 
@@ -139,8 +141,18 @@
 
    </div>     
 
+   <div class="btns">
+    <button id="closeform"(click)="close()" class="btn btn-secondary" type="button">Отмена</button>
+    <button id="saveform" class="btn btn-primary" (click)="save()" button type="button">Сохранить</button>
+  </div>
 
-   <button id="closeform" (click)="close()">Закрыть</button>
-   <button id="saveform" (click)="save()">Сохранить</button>
 
-</form>                 
+<!-- 
+    <buttonclass="btn btn-secondary" type="button">Отмена</button>
+    <button(click)="save()"> class="btn btn-primary"  (click)="saveCheck()"button type="button">Сохранить</button>
+  </div>
+   <button(click)="close()">Закрыть</button>
+   охранить</button> -->
+
+</form>    
+</div>             

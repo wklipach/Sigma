@@ -20,7 +20,7 @@ class="material striped"
 
 <ngx-datatable-column prop = "id" name = "№ проверки" [width]="getColumnSize('id')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <div (click)="openCheckObject(row.id)"> {{ value }} </div>
+      <div style="cursor: pointer;" (click)="openCheckObject(row.id)"> {{ value }} </div>
       </ng-template>
 </ngx-datatable-column>
 
