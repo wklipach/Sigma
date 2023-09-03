@@ -17,9 +17,7 @@
       <div class="card-line">
       <input type="datetime-local" id="meeting-time" name="meeting-time"/>
       </div> 
-  
-
-     
+       
     <div class="card-line">
     <span class="text-muted fw-semibold fs-4">Проверяющий</span>
     <div class="fs-4 text-muted fw-semibold my-2" >{{fio}}</div>
@@ -28,13 +26,15 @@
      <div class="card-line">
         <h4>Результат проверки</h4>
         <h2>{{resultCheck}}%</h2>
+      </div>    
+      
+      <div class="card-line">
         <h4>Выявлено нарушений</h4>
         <h2> {{countTrouble}}</h2>
-     </div>
+      </div>
+    
 </div>
-
-         </div> 
-
+         </div>
    <div *ngFor="let question of arrQuestion; let i = index" class="card w-50 mt-3 p-0">
     <div class="card-body">
       <h4 class="card-title mb-2">{{question.name}} </h4>
