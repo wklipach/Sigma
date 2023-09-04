@@ -4,6 +4,7 @@ var router = express.Router();
 const mariadb = require("mariadb");
 const mariadbSettings =  require('../DB');
 const pool = mariadb.createPool(mariadbSettings);
+const sqlStringPost = require("../sql_query/post.js");
 
 
 router.get('/', async function(req, res, next) {
@@ -12,6 +13,23 @@ router.get('/', async function(req, res, next) {
       const result = await asyncClearPost(req.query.clear_post);
       res.send(result);
     }
+
+    if (req.query.get_posts) {
+        const result = await asyncGetPosts(req.query.id_object);
+        res.send(result);
+      }
+
+      if (req.query.get_object_from_post) {
+        const result = await asyncGetObjectFromPost(req.query.id_post);
+        res.send(result);
+      }
+
+      if (req.query.get_post_base) {
+        const result = await asyncGetPostBase(req.query.id_post);
+        res.send(result);
+      }
+
+  
 
   });
 
@@ -23,7 +41,167 @@ router.get('/', async function(req, res, next) {
       res.send(result);
      }
 
+     if (req.body.insert_post) {
+        const result = await asyncInsertPost(req.body.id_object, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.insert_special_means) {
+        const result = await asyncInsertSpecialMeans(req.body.id_post, req.body.id_mtr, req.body.boolChecked, req.body.count, req.body.id_user);
+        res.send(result);
+       }
+
+  
+
   });
+
+
+  async function asyncGetPostBase(id_post) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = sqlStringPost;
+        const resSql = await conn.query(sSql, [id_post]);
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+
+  }
+
+
+async function asyncGetObjectFromPost(id_post) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = 
+        "select id_object, `name`, address from protected_object where id_object in "+
+                "(select id_object from  posts where id = ?)";
+
+        const resSql = await conn.query(sSql, [id_post]);
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+
+  }
+
+
+
+  async function asyncGetPosts(id_object) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = 
+                " select p.`id`, "+
+                " p.`id_object`, "+
+                " po.name as object_name, "+
+                " po.address as object_address, "+
+                " p.`name` as post_name, "+
+                " p.`number` as post_number, "+
+                " p.`label`, "+
+                " p.`id_post_routine`, "+
+                " pr.name as post_routine, "+
+                " p.`TimeBegin`, "+
+                " p.`TimeEnd`, "+
+                " p.`DateBegin`, "+
+                " p.`DateEnd`, "+
+                " p.`camera_link`, "+
+                " p.`id_dress`, "+
+                " d.`name` as dress, "+
+                " p.`photo_name` "+
+                " from posts p "+
+                " left join guide_post_routine pr on pr.id=p.id_post_routine "+
+                " left join mtr d on d.id_mtr=p.id_dress "+
+                " left join protected_object po on po.id_object = p.id_object  "+
+                " where p.bitDelete = 0 and p.id_object = ? "+
+                " order by id desc ";
+    
+
+
+        const resupdate = await conn.query(sSql, [id_object]);
+        return JSON.stringify(resupdate);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+
+  }
+
+
+  async function asyncInsertPost(id_object, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = "insert posts(`id_object`) value (?)";
+        const resInsert = await conn.query(sSql, [id_object]);
+
+        if (resInsert.insertId) {
+            const paramsJournal = ['insert', resInsert.insertId, id_object.toString(), id_user];
+            const sJournal = 
+            "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+            await conn.query(sJournal, paramsJournal);
+        }
+
+        return JSON.stringify(resInsert);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+
+
+
+async function asyncInsertSpecialMeans(id_post, id_mtr, boolChecked, count, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+        let  resSql;
+        let paramsJournal = [];
+
+
+        if (boolChecked) {
+            const sSql = "insert post_special_means(`id_post`, `id_mtr`, `count`) value (?,?,?)";
+            resSql = await conn.query(sSql, [id_post, id_mtr, count]);
+            paramsJournal = ['insert_special_means count='+count, id_post, id_mtr, id_user];
+            console.log("INSERT");
+    
+        } else {
+            const sSql = "delete from  post_special_means where id_post=? and id_mtr=?";
+            resSql = await conn.query(sSql, [id_post, id_mtr]);
+            paramsJournal = ['delete_special_means', id_post, id_mtr, id_user];
+        }
+
+         const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+         await conn.query(sJournal, paramsJournal);
+        
+
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
 
 
 

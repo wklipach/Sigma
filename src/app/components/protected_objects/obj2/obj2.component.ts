@@ -96,6 +96,7 @@ export class Obj2Component {
 
 
   //выбранная задача в выпадающем списке
+  
   task_opinion: any = {};
 
 
@@ -660,10 +661,9 @@ export class Obj2Component {
       if (this.task_opinion[id_object] == "3") {
 
 
-          const url = this.router.serializeUrl(this.router.createUrlTree(['post'], {
+          const url = this.router.serializeUrl(this.router.createUrlTree(['listpost'], {
              queryParams: {
-                id_object: id_object,
-                id_post: -1,
+                id_object: id_object
               }
             }));
        

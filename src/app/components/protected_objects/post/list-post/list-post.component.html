@@ -1,0 +1,100 @@
+<app-basement></app-basement>
+
+<h2>Посты на объекте № {{id_object}}</h2>
+<h4>{{protected_object.name}}</h4>
+<h4>{{protected_object.address}}</h4>
+
+
+  <!-- КНОПКА ДОБАВЛЕНИЯ ПОСТА -->
+
+  <div class="add-btn" title="Добавить новый пост">
+    <div (click)="addNewPost()"><img src="/assets/img/plus.png" width="30" /></div>
+    </div>
+  
+  <!--  КОНЕЦ КНОПКА ДОБАВЛЕНИЯ ПОСТА -->
+
+<ngx-datatable
+id="PostListTable"
+class="material striped"
+[rows]="this.arrayListPost"
+[columnMode]="ColumnMode.force"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="50"
+[limit]="100"
+[scrollbarV]="true"
+[scrollbarH]="true"
+#PostListTable
+(resize)="onResize($event)">
+
+
+
+<ngx-datatable-column prop = "photo_name" name = "Фото" [width]="getColumnSize('photo_name')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+    <div style="cursor: pointer;" (click)="openPost(row.id)"> {{ value }} </div>
+    </ng-template>
+</ngx-datatable-column>
+
+
+<ngx-datatable-column prop = "post_name" name = "Название поста" [width]="getColumnSize('post_name')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <div style="cursor: pointer;" (click)="openPost(row.id)"> {{ value }} </div>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "post_number" name = "№ поста" [width]="getColumnSize('post_number')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "label" name = "Метка" [width]="getColumnSize('label')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "post_routine" name = "График" [width]="getColumnSize('post_routine')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "TimeBegin" name = "Время начала" [width]="getColumnSize('TimeBegin')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value | date: "HH:mm" }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "TimeEnd" name = "Время окончания" [width]="getColumnSize('TimeEnd')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value | date: "HH:mm" }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "DateBegin" name = "Выставлен" [width]="getColumnSize('DateBegin')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value | date: "dd.MM.yyyy" }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "DateEnd" name = "Снят" [width]="getColumnSize('DateEnd')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value | date: "dd.MM.yyyy" }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "camera_link" name = "Камера" [width]="getColumnSize('camera_link')">
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+      <span> {{ value }} </span>
+      </ng-template>
+</ngx-datatable-column>
+
+<ngx-datatable-column prop = "dress" name = "Форма одежды" [width]="getColumnSize('dress')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+    <span> {{ value }} </span>
+    </ng-template>
+</ngx-datatable-column>
+
+
+</ngx-datatable>

@@ -34,6 +34,7 @@ import { CheckObjectComponent } from './components/protected_objects/check-objec
 import { PostObjectComponent } from './components/protected_objects/post/post-object/post-object.component';
 import { ListCheckComponent } from './components/protected_objects/list-check/list-check.component';
 import { ListCheckCardComponent } from './components/protected_objects/list-check/list-check-card/list-check-card.component';
+import { ListPostComponent } from './components/protected_objects/post/list-post/list-post.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent, canActivate: [mainGuard] },
@@ -68,6 +69,8 @@ const routes: Routes = [
   { path: 'post', component: PostObjectComponent, canActivate: [mainGuard] },
   { path: 'listcheck', component: ListCheckComponent, canActivate: [mainGuard] },
   { path: 'checkcard', component: ListCheckCardComponent, canActivate: [mainGuard] },
+  { path: 'listpost', component: ListPostComponent, canActivate: [mainGuard] },
+  
   
   ];
 
