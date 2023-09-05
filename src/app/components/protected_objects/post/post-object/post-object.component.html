@@ -7,26 +7,26 @@
 <form class="mb-2 w-50">
     <div class="card-body p-9 w-100 align-item-center">
 
-<!--        
-            <div class="row mb-6">
-                <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
-                        <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
-                    <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
-                    <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
-                </div>
-                    
-                <div class="col-lg-8">
-                            <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
-                            <ng-template #contentLoadAvatar class="image-input">
-                            <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
-                            </ng-template>
-                            <ng-template #contentDefault>
-                            <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
-                            </ng-template>
-                </div>
+
+        <div class="row mb-6">
+            <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
+                    <input type="file" id="photo_post" (change)="onFileChange($event)" #fileInput style="display:none"> 
+                <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('photo_post').click()">Загрузить фото</span>
+                <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;"  (click)="clearFile()">Удалить фото</span>
             </div>
-            
--->            
+                
+            <div class="col-lg-8">
+                        <div class="image-input-wrapper" *ngIf="this.sPhotoPostPath.length>0;then contentLoadPhotoPost else contentDefault">Пост охраны</div>
+                        <ng-template #contentLoadPhotoPost class="image-input">
+                        <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sPhotoPostPath" alt="Пост охраны" id="img" onclick="document.getElementById('photo_post').click()">
+                        </ng-template>
+                        <ng-template #contentDefault>
+                        <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/post.png" onclick="document.getElementById('photo_post').click()">
+                        </ng-template>
+            </div>
+        </div>        
+
+         
 
             <div class="row mb-6">
                 <h2>Объект №{{this.protected_object.id_object}}</h2>
@@ -112,10 +112,14 @@
                 <div class="col-lg-8 fv-row">
                       <ul>
                         <li *ngFor="let spm of this.guideSpecialMeans" >
-                            <input type="checkbox" id="idSpecialMeans{{spm.id_mtr}}" name="SpecialMeans{{spm.id_mtr}}" (change)="onClickSpecialMeans($event.target, spm.id_mtr)"/>
+                            <input type="checkbox" id="idSpecialMeans{{spm.id_mtr}}" name="SpecialMeans{{spm.id_mtr}}" 
+                                  [checked] = "spm.checked" 
+                                  (change)="onClickSpecialMeans($event.target, spm.id_mtr)"/>
                             <label for="SpecialMeans{{spm.id_mtr}}">{{spm.name}}</label>
                             <label for="SpecialMeans{{spm.id_mtr}}">Кол</label>
-                            <input type="text" id="idSpecialMeansCount{{spm.id_mtr}}" name="SpecialMeansCount{{spm.id_mtr}}"/>
+                            <input type="text" id="idSpecialMeansCount{{spm.id_mtr}}" name="SpecialMeansCount{{spm.id_mtr}}"
+                                   [value] = "spm.count"
+                                   (blur)="onBlurSpecialMeansInput($event.target, spm.id_mtr)"/>
 
                         </li>
                       </ul>
@@ -130,10 +134,14 @@
                 <div class="col-lg-8 fv-row">
                       <ul>
                         <li *ngFor="let w of this.guideWeapons" >
-                            <input type="checkbox" id="idWeapons{{w.id_mtr}}" name="Weapons{{w.id_mtr}}"/>
+                            <input type="checkbox" id="idWeapons{{w.id_mtr}}" name="Weapons{{w.id_mtr}}"
+                                   [checked] = "w.checked" 
+                                   (change)="onClickWeapons($event.target, w.id_mtr)"/>
                             <label for="Weapons{{w.id_mtr}}">{{w.name}}</label>
                             <label for="Weapons{{w.id_mtr}}">Кол</label>
-                            <input type="text" id="idWeaponsCount{{w.id_mtr}}" name="WeaponsCount{{w.id_mtr}}"/>
+                            <input type="text" id="idWeaponsCount{{w.id_mtr}}" name="WeaponsCount{{w.id_mtr}}"
+                                   [value] = "w.count"
+                                   (blur)="onBlurWeaponsInput($event.target, w.id_mtr)"/>
                         </li>
                       </ul>
                 </div>
@@ -157,17 +165,9 @@
    </div>     
 
    <div class="btns">
-    <button id="closeform"(click)="close()" class="btn btn-secondary" type="button">Отмена</button>
-    <button id="saveform" class="btn btn-primary" (click)="save()" button type="button">Сохранить</button>
+    <button id="closeform"(click)="back()" class="btn btn-secondary" type="button">Назад</button>
   </div>
 
-
-<!-- 
-    <buttonclass="btn btn-secondary" type="button">Отмена</button>
-    <button(click)="save()"> class="btn btn-primary"  (click)="saveCheck()"button type="button">Сохранить</button>
-  </div>
-   <button(click)="close()">Закрыть</button>
-   охранить</button> -->
 
 </form>    
 </div>             

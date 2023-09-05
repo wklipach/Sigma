@@ -58,6 +58,7 @@ import { ChecklistService } from './services/checklist.service';
 import { ListCheckComponent } from './components/protected_objects/list-check/list-check.component';
 import { ListCheckCardComponent } from './components/protected_objects/list-check/list-check-card/list-check-card.component';
 import { ListPostComponent } from './components/protected_objects/post/list-post/list-post.component';
+import { PostReadComponent } from './components/protected_objects/post/post-read/post-read.component';
 
 
 
@@ -105,7 +106,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     PostObjectComponent,
     ListCheckComponent,
     ListCheckCardComponent,
-    ListPostComponent
+    ListPostComponent,
+    PostReadComponent
   ],
   imports: [
     BrowserModule,

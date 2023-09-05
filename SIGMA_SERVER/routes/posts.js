@@ -5,6 +5,7 @@ const mariadb = require("mariadb");
 const mariadbSettings =  require('../DB');
 const pool = mariadb.createPool(mariadbSettings);
 const sqlStringPost = require("../sql_query/post.js");
+var fs = require('fs');
 
 
 router.get('/', async function(req, res, next) {
@@ -29,15 +30,41 @@ router.get('/', async function(req, res, next) {
         res.send(result);
       }
 
-  
+      if (req.query.get_post_weapons) {
+        const result = await asyncGetPostWeapons(req.query.get_post_weapons);
+        res.send(result);
+      }
+
+      if (req.query.get_post_special_means) {
+          const result = await asyncGetPostSpecialMeans(req.query.get_post_special_means);
+          res.send(result);
+       }      
+
+       if (req.query.get_post_photo_name) {
+        const result = await asyncGetPostPhotoName(req.query.get_post_photo_name);
+        res.send(result);
+        }      
+
+        if (req.query.get_post_read_weapon) {
+            const result = await asyncGetPostReadWeapon(req.query.get_post_read_weapon);
+            res.send(result);
+        }              
+
+        if (req.query.get_post_read_specialmeans) {
+            const result = await asyncGetPostReadSpecialMeans(req.query.get_post_read_specialmeans);
+            res.send(result);
+        }              
+
+
+            
 
   });
 
 
   router.post('/', async function(req, res) {
 
-     if (req.body.imagePost) {
-      const result = await asyncUpdatePhotoPost(req.body.id_post, req.body.imagePost.Name, req.body.imagePost.imagePost);
+     if (req.body.photo_post) {
+      const result = await asyncUpdatePhotoPost(req.body.id_post, req.body.photo_post.Name, req.body.photo_post.photo_post);
       res.send(result);
      }
 
@@ -51,9 +78,77 @@ router.get('/', async function(req, res, next) {
         res.send(result);
        }
 
+       if (req.body.update_special_means) {
+        const result = await asyncUpdateSpecialMeans(req.body.id_post, req.body.id_mtr, req.body.count, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.insert_weapons) {
+        const result = await asyncInsertWeapons(req.body.id_post, req.body.id_mtr, req.body.boolChecked, req.body.count, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_weapons) {
+        const result = await asyncUpdateWeapons(req.body.id_post, req.body.id_mtr, req.body.count, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.delete_post) {
+        const result = await asyncDeletePost(req.body.id_post, req.body.id_user);
+        res.send(result);
+       }
+
   
 
   });
+
+
+  async function asyncGetPostWeapons(id_post) {
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = "select * from post_weapons where id_post=?";
+        const resSql = await conn.query(sSql, [id_post]);
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+  }
+
+  async function asyncGetPostSpecialMeans(id_post) {
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = "select * from post_special_means where id_post=?";
+        const resSql = await conn.query(sSql, [id_post]);
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+  }
+
+
+  async function asyncGetPostPhotoName(id_post) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const resSql = await conn.query("select photo_name from posts where id=?", [id_post]);
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+
+  }
 
 
   async function asyncGetPostBase(id_post) {
@@ -91,9 +186,53 @@ async function asyncGetObjectFromPost(id_post) {
     } finally {
         if (conn) conn.release(); //release to pool
     }
-
   }
 
+ 
+  async function asyncGetPostReadWeapon(id_post) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = 
+            " select pw.id_mtr, pw.`count`, m.name "+ 
+            " from post_weapons pw "+
+            " left join mtr m on m.id_mtr = pw.id_mtr "+
+            " where pw.id_post=?";  
+
+        const resSql = await conn.query(sSql, [id_post]);
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+  }
+
+
+         async function asyncGetPostReadSpecialMeans(id_post) {
+
+            let conn;
+            try {
+        
+                conn = await pool.getConnection();
+                const sSql = 
+                   " select pw.id_mtr, "+
+                   " pw.`count`, "+
+                   " m.name  "+
+                   " from post_special_means pw "+ 
+                   " left join mtr m on m.id_mtr = pw.id_mtr where pw.id_post=? ";
+                 
+                const resSql = await conn.query(sSql, [id_post]);
+                return JSON.stringify(resSql);
+            } catch (err) {
+                throw err;
+            } finally {
+                if (conn) conn.release(); //release to pool
+            }
+          }
+        
 
 
   async function asyncGetPosts(id_object) {
@@ -203,6 +342,121 @@ async function asyncInsertSpecialMeans(id_post, id_mtr, boolChecked, count, id_u
     }
 }
 
+
+async function asyncUpdateSpecialMeans(id_post, id_mtr, count, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = "select count(*) as Count from post_special_means where id_post=? and id_mtr=?";
+        const resCount = await conn.query(sSql, [id_post, id_mtr]);
+
+        if (resCount[0].Count !== 0) {
+            const sSql = "update post_special_means set count=? where `id_post`=? and `id_mtr`=?";
+            await conn.query(sSql, [count, id_post, id_mtr]);
+            const paramsJournal = ['update_special_means count='+count, id_post, id_mtr, id_user];
+            const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+            await conn.query(sJournal, paramsJournal);
+        }
+        return JSON.stringify(resCount);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+async function asyncInsertWeapons(id_post, id_mtr, boolChecked, count, id_user) {
+
+    console.log('INSERT WEAPONS');
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+        let  resSql;
+        let paramsJournal = [];
+
+
+        if (boolChecked) {
+            const sSql = "insert post_weapons(`id_post`, `id_mtr`, `count`) value (?,?,?)";
+            resSql = await conn.query(sSql, [id_post, id_mtr, count]);
+            paramsJournal = ['insert_weapons count='+count, id_post, id_mtr, id_user];
+            console.log("INSERT");
+    
+        } else {
+            const sSql = "delete from  post_weapons where id_post=? and id_mtr=?";
+            resSql = await conn.query(sSql, [id_post, id_mtr]);
+            paramsJournal = ['delete_weapons', id_post, id_mtr, id_user];
+        }
+
+         const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+         await conn.query(sJournal, paramsJournal);
+        
+
+        return JSON.stringify(resSql);
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+async function asyncUpdateWeapons(id_post, id_mtr, count, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+        const sSql = "select count(*) as Count from post_weapons where id_post=? and id_mtr=?";
+        const resCount = await conn.query(sSql, [id_post, id_mtr]);
+
+        if (resCount[0].Count !== 0) {
+            const sSql = "update post_weapons set count=? where `id_post`=? and `id_mtr`=?";
+            await conn.query(sSql, [count, id_post, id_mtr]);
+            const paramsJournal = ['update_weapons count='+count, id_post, id_mtr, id_user];
+            const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+            await conn.query(sJournal, paramsJournal);
+        }
+        return JSON.stringify(resCount);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+    async function asyncDeletePost(id_post, id_user) {
+
+        let conn;
+        try {
+
+            conn = await pool.getConnection();
+            const sSql = "update posts set bitDelete=1 where `id`=?";
+
+            const resSql = await conn.query(sSql, [id_post]);
+
+            if (resSql) {
+                const paramsJournal = ['delete', id_post, id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, '', ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+            
+            return JSON.stringify(resSql);
+
+        } catch (err) {
+            throw err;
+        } finally {
+            if (conn) conn.release(); //release to pool
+        }
+    }
 
 
   async function asyncClearPost(id_post) {

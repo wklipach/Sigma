@@ -6,6 +6,7 @@ import { TableService } from 'src/app/services/table.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListobjectsService } from 'src/app/services/listobjects.service';
+import { GlobalRef } from 'globalref';
 
 
 interface IPost {
@@ -18,8 +19,8 @@ interface IPost {
 	label: DOMStringList;
 	id_post_routine: number;
 	post_routine: string;
-	TimeBegin: Date;
-	TimeEnd: Date;
+	TimeBegin: string;
+	TimeEnd: string;
 	DateBegin: Date;
 	DateEnd: Date;
 	camera_link: string; 
@@ -33,6 +34,12 @@ interface IPObj {
 	address: string;
 }
 
+interface IDeletePost {
+	id_post?: number;
+	sLink?: string;
+  }
+  
+
 @Component({
   selector: 'app-list-post',
   templateUrl: './list-post.component.html',
@@ -42,6 +49,7 @@ export class ListPostComponent {
 
 	id_object: number = 0;
 	protected_object: IPObj = {name: "", address: ""};
+	curDeletePost: IDeletePost = {};
 
 	arrayListPost: IPost[] = [];
 	ColumnMode = ColumnMode;
@@ -55,6 +63,7 @@ export class ListPostComponent {
 				 private route: ActivatedRoute,
 				 private router: Router,
 				 public objserv:   ListobjectsService,
+				 public gr: GlobalRef,
 				 )	  { 
 				
 					this.route.queryParams.subscribe((params) => { 
@@ -71,9 +80,24 @@ export class ListPostComponent {
 	
 	
 		this.postServ.getPosts(this.id_object).subscribe( (value: any) => {
+
+
+		  let listPost: IPost[] = value;	
+		  listPost.forEach ( el => {
+			if (el.TimeBegin) el.TimeBegin =  el.TimeBegin.substring(0,5);
+			if (el.TimeEnd) el.TimeEnd = el.TimeEnd.substring(0,5);
+
+			if (el.photo_name) {
+				el.photo_name = this.gr.sUrlPhotoPostGlobal+ el.photo_name;
+			  } else {
+				el.photo_name = "/assets/img/post.png";
+			  }
+
+		  });
+
 		  
-		  this.arrayListPost =  value;
-		  console.log(this.arrayListPost);
+		  this.arrayListPost =  [...listPost];
+		  
 	
 		});
 
@@ -121,8 +145,23 @@ export class ListPostComponent {
 		  }
 	  }	
 
-	  openPost(id: number) {
+	  openPostEdit(id: number) {
 		this.router.navigate(['post'], { queryParams: { id_post: id }});
+	  }
+
+	  openPost(id: number) {
+
+        const url = this.router.serializeUrl(this.router.createUrlTree(['postread'], {
+			queryParams: {
+			  id_post: id
+			}
+		  }));
+	
+		  const newTab = window.open(url, '_blank'); 
+		  if(newTab) {
+			  newTab.opener = null;
+		  }
+  
 	  }
 
 	  addNewPost(){
@@ -137,6 +176,35 @@ export class ListPostComponent {
 		});
 
 	  }
+
+	  deletePost(id_post: number, sLink: string) {
+		//openDeleteModalButton
+		this.curDeletePost.sLink = sLink;
+		this.curDeletePost.id_post = id_post;
+		document!.getElementById("openDeleteModalButton")!.click();
+	  }
+  
+  
+	  deleteClose() {
+		document!.getElementById("closeDeleteModalButton")!.click();
+	  }
+
+	  deleteSave() {
+
+		if (this.curDeletePost.id_post) {
+  
+		  let idObject = this.curDeletePost.id_post;
+		  let indexShowObjects = this.arrayListPost.findIndex( (el  =>  el.id.toString() == idObject.toString()));
+		  this.arrayListPost.splice(indexShowObjects,1);
+  
+		  //refresh data
+		  this.arrayListPost = [...this.arrayListPost];
+  
+		  this.postServ.deletePost(idObject).subscribe();
+		}
+		this.deleteClose();
+	  }
+  
 
 
 }

@@ -1,0 +1,151 @@
+<app-basement></app-basement>
+
+
+<div class="wrapper">
+<form class="mb-2 w-50">
+    <div class="card-body p-9 w-100 align-item-center">
+
+
+        <div class="row mb-6">
+                
+            <div class="col-lg-8">
+                        <div class="image-input-wrapper" *ngIf="this.sPhotoPostPath.length>0;then contentLoadPhotoPost else contentDefault">Пост охраны</div>
+                        <ng-template #contentLoadPhotoPost class="image-input">
+                        <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sPhotoPostPath" alt="Пост охраны" id="img">
+                        </ng-template>
+                        <ng-template #contentDefault>
+                        <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/post.png">
+                        </ng-template>
+            </div>
+        </div>        
+
+         
+
+            <div class="row mb-6">
+                <h2>Объект №{{this.protected_object.id_object}}</h2>
+                <h4>{{this.protected_object.name}}</h4>
+                <h4>{{this.protected_object.address}}</h4>
+            </div>
+
+
+
+             <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Название</label>
+                <div class="col-lg-8 fv-row">
+                    {{ postInfo.post_name }}
+                </div>
+            </div>  
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Номер</label>
+                <div class="col-lg-8 fv-row">
+                    {{ postInfo.post_number }}
+                </div>
+            </div>  
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Метка</label>
+                <div class="col-lg-8 fv-row">
+                    {{ postInfo.label }}
+                </div>
+            </div>  
+
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                    <span class="required">График работы поста</span>
+                    </label>
+
+                <div class="col-lg-8 fv-row">
+                    {{ postInfo.routine }}
+                </div>
+           </div>
+   
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Время начала смены</label>
+            <div class="col-lg-8 fv-row">
+                {{ postInfo.TimeBegin }}
+            </div>
+           </div>  
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Время окончания смены</label>
+            <div class="col-lg-8 fv-row">
+                {{ postInfo.TimeEnd }}
+            </div>
+           </div>  
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пост выставлен</label>
+            <div class="col-lg-8 fv-row">
+                 {{ postInfo.DateBegin | date: "dd.MM.yyyy" }}
+            </div>
+           </div>  
+           
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пост снят</label>
+            <div class="col-lg-8 fv-row">
+                {{ postInfo.DateEnd | date: "dd.MM.yyyy" }}
+            </div>
+           </div>  
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Ссылка на видео с камеры наблюдения </label>
+            <div class="col-lg-8 fv-row">
+                {{ postInfo.camera_link }}
+            </div>
+           </div>  
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Спецсредства нв посту</label>
+            <div class="col-lg-8 fv-row">
+                <ul>
+                    <li *ngFor="let sm of this.guideSpecialMeans">
+                        <span>{{sm.id_mtr}}</span>
+                        <span>{{sm.name}}</span>
+                        <span>{{sm.count}}</span>
+                    </li>
+                </ul>
+            </div>
+           </div>             
+
+           <div class="row mb-6">
+            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Оружие нв посту</label>
+            <div class="col-lg-8 fv-row">
+                <ul>
+                    <li *ngFor="let w of this.guidePostWeapon">
+                        <span>{{w.id_mtr}}</span>
+                        <span>{{w.name}}</span>
+                        <span>{{w.count}}</span>
+                    </li>
+                </ul>
+            </div>
+           </div>  
+
+
+    
+            <div class="row mb-6">
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span class="required">Форма одежды</span>
+                        </label>
+    
+                    <div class="col-lg-8 fv-row">
+                        {{ postInfo.dress }}
+                    </div>
+
+                    <div class="col-lg-8 fv-row">
+                        {{ postInfo.description }}
+                    </div>
+
+            </div>
+    
+
+   
+   <div class="btns">
+    <button id="closeform" (click)="close()" class="btn btn-secondary" type="button">Закрыть</button>
+  </div>
+
+
+</div>    
+
+</form>    
+</div>

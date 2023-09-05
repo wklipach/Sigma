@@ -31,9 +31,14 @@ class="material striped"
 
 <ngx-datatable-column prop = "photo_name" name = "Фото" [width]="getColumnSize('photo_name')">
   <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-    <div style="cursor: pointer;" (click)="openPost(row.id)"> {{ value }} </div>
+       <div>
+             <img [src]="value" class="photo" (click)="openPost(row.id)" />
+       </div>
     </ng-template>
 </ngx-datatable-column>
+
+
+
 
 
 <ngx-datatable-column prop = "post_name" name = "Название поста" [width]="getColumnSize('post_name')">
@@ -44,57 +49,97 @@ class="material striped"
 
 <ngx-datatable-column prop = "post_number" name = "№ поста" [width]="getColumnSize('post_number')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value }} </span>
+      <span (click)="openPost(row.id)"> {{ value }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "label" name = "Метка" [width]="getColumnSize('label')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value }} </span>
+      <span (click)="openPost(row.id)"> {{ value }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "post_routine" name = "График" [width]="getColumnSize('post_routine')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value }} </span>
+      <span (click)="openPost(row.id)"> {{ value }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "TimeBegin" name = "Время начала" [width]="getColumnSize('TimeBegin')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value | date: "HH:mm" }} </span>
+      <span (click)="openPost(row.id)"> {{ value  }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "TimeEnd" name = "Время окончания" [width]="getColumnSize('TimeEnd')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value | date: "HH:mm" }} </span>
+      <span (click)="openPost(row.id)"> {{ value  }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "DateBegin" name = "Выставлен" [width]="getColumnSize('DateBegin')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value | date: "dd.MM.yyyy" }} </span>
+      <span (click)="openPost(row.id)"> {{ value | date: "dd.MM.yyyy" }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "DateEnd" name = "Снят" [width]="getColumnSize('DateEnd')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value | date: "dd.MM.yyyy" }} </span>
+      <span (click)="openPost(row.id)"> {{ value | date: "dd.MM.yyyy" }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "camera_link" name = "Камера" [width]="getColumnSize('camera_link')">
     <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-      <span> {{ value }} </span>
+      <span (click)="openPost(row.id)"> {{ value }} </span>
       </ng-template>
 </ngx-datatable-column>
 
 <ngx-datatable-column prop = "dress" name = "Форма одежды" [width]="getColumnSize('dress')">
   <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-    <span> {{ value }} </span>
+    <span (click)="openPost(row.id)"> {{ value }} </span>
     </ng-template>
 </ngx-datatable-column>
 
 
+<ngx-datatable-column prop = "edit" name = "Редактировать" [width]="getColumnSize('dress')">
+  <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+    <button class="btn btn-edit" (click)="openPostEdit(row.id)"><img src="/assets/img/addwork.png" width="30" /></button>
+    </ng-template>
+</ngx-datatable-column>
+
+<!-- НАЧАЛО ПОЛЯ delete -->  
+<ngx-datatable-column prop="delete" name="Удалить" [width]="getColumnSize('delete')">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    <div (click)="deletePost(row.id, row.post_name)"><img src="/assets/img/delete.png" width="30" /></div>
+  </ng-template>
+</ngx-datatable-column>
+<!-- КОНЕЦ ПОЛЯ delete -->  
+
+
 </ngx-datatable>
+
+<!-- МОДАЛЬНЫЕ ОКНА УДАЛЕНИЯ ОБЪЕКТА-->
+<button id="openDeleteModalButton"  type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#geleteModal" [hidden]="true">
+  DeleteOpen
+</button>
+<button id="closeDeleteModalButton" type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#geleteModal" [hidden]="true"  data-dismiss="modal">
+DeleteClose
+</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="geleteModal">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Удалить объект {{this.curDeletePost.sLink}}?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="deleteClose()">Нет</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="deleteSave()">Да</button>
+      
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- КОНЕЦ МОДАЛЬНЫЕ ОКНА УДАЛЕНИЕ ОБЪЕКТА-->
