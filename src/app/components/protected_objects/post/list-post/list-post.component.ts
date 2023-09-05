@@ -146,7 +146,7 @@ export class ListPostComponent {
 	  }	
 
 	  openPostEdit(id: number) {
-		this.router.navigate(['post'], { queryParams: { id_post: id }});
+		this.router.navigate(['post'], { queryParams: { id_post: id, id_object: this.id_object }});
 	  }
 
 	  openPost(id: number) {

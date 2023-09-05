@@ -63,6 +63,7 @@ export class PostObjectComponent {
   postInfo: IPostInfo = {  post_name: '', post_number: '',  label: '',  camera_link: ''};
 
   id_post: number = 0;
+  id_object: number = 0;
 
    // ngModel для select-option
    id_post_routine = 0;
@@ -86,9 +87,13 @@ export class PostObjectComponent {
       this.createForm();
 
       this.route.queryParams.subscribe((params) => { 
-        if (params['id_post']) {
-          this.id_post = params['id_post'];
-        }
+          if (params['id_post']) {
+            this.id_post = params['id_post'];
+          }
+
+          if (params['id_object']) {
+            this.id_object = params['id_object'];
+          }
         });
 }
 
@@ -256,7 +261,7 @@ export class PostObjectComponent {
 
 
   back () {
-      this.router.navigate(['/listpost']);
+      this.router.navigate(['listpost'], { queryParams: { id_object: this.id_object }});
   }
 
 

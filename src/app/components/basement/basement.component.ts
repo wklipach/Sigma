@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GlobalRef } from 'globalref';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -25,10 +26,12 @@ export class BasementComponent implements OnInit {
   unreadChatMessages: number = 0;
   unAceptTaskCount?: number = 0;
   accessUserMenu: IAccessMenu[] = [];
+  sAvatar : string = "/assets/img/usernull.jpg";
 
   constructor(private authService: AuthService, 
               private chatService: ChatService ,  
               private router: Router,
+              private gr: GlobalRef,
               private taskService:  TaskService) 
               {  }
 
@@ -39,8 +42,17 @@ export class BasementComponent implements OnInit {
 
     this.authService.getAccessMenu(this.authService.getSessionUser().id_user).subscribe ( (res: any) => {
       this.accessUserMenu = res;
-
     });
+
+    //получение аватара из базы
+    this.authService.getUserAvatar(this.authService.getSessionUser().id_user).subscribe ( (res: any) => {
+        if (res.length>0) {
+          if (res[0].ItIsAvatar>0) {
+            this.sAvatar = this.gr.sUrlAvatarGlobal+res[0].avatar_name;
+          }
+       };
+    });
+
 
     this.chatService.isCountUnreadMessagesIn().subscribe ( (res: number) => {
       this.unreadChatMessages = res;
