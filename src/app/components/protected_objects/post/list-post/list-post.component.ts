@@ -170,7 +170,7 @@ export class ListPostComponent {
 		this.postServ.insertPost(this.id_object).subscribe ( (res: any)=> {
 
 			if (res.insertId) {
-				this.router.navigate(['post'], { queryParams: { id_post: res.insertId }});
+				this.router.navigate(['post'], { queryParams: { id_post: res.insertId, id_object: this.id_object }});
 			}
 
 		});
