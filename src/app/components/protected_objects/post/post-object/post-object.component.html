@@ -39,21 +39,24 @@
              <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Название</label>
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="name"  class="form-control w-100" id="namePost" />
+                    <input type="text" name="name"  class="form-control w-100" id="namePost" 
+                    (blur)="onBlurNamePostInput($event.target)"/>
                 </div>
             </div>  
 
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Номер</label>
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="number" class="form-control" id="numberPost" />
+                    <input type="text" name="number" class="form-control" id="numberPost" 
+                    (blur)="onBlurNumberPostInput($event.target)"/>
                 </div>
             </div>  
 
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Метка</label>
                 <div class="col-lg-8 fv-row">
-                    <input type="text" name="label" class="form-control" id="labelPost" />
+                    <input type="text" name="label" class="form-control" id="labelPost" 
+                    (blur)="onBlurLabelPostInput($event.target)"/> 
                 </div>
             </div>  
 
@@ -63,7 +66,9 @@
                     </label>
 
                 <div class="col-lg-8 fv-row">
-                    <select name="routine" data-control="selectRoutine" class="form-select form-select-solid form-select-lg fw-semibold" [ngModel]="id_post_routine">
+                    <select name="routine" data-control="selectRoutine" class="form-select form-select-solid form-select-lg fw-semibold" 
+                            [(ngModel)]="id_post_routine"
+                            (change)="onClickRoutine()">
                         <option *ngFor="let gpr of this.guidePostRoutine" [value]="gpr.id">{{gpr.name}}</option>
                    </select>
                 </div>
@@ -73,35 +78,40 @@
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Время начала смены</label>
             <div class="col-lg-8 fv-row">
                 <input type="time" name="TimeBegin" id="idTimeBegin"
-                       class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                       class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                       (blur)="onBlurTimeBeginPostInput($event.target)"/> 
             </div>
            </div>  
 
            <div class="row mb-6">
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Время окончания смены</label>
             <div class="col-lg-8 fv-row">
-                <input type="time" name="TimeEnd" id="idTimeEnd" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                <input type="time" name="TimeEnd" id="idTimeEnd" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                       (blur)="onBlurTimeEndPostInput($event.target)"/>
             </div>
            </div>  
 
            <div class="row mb-6">
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пост выставлен</label>
             <div class="col-lg-8 fv-row">
-                <input type="date" name="DateBegin" id="idDateBegin" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                <input type="date" name="DateBegin" id="idDateBegin" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                (blur)="onBlurDateBeginPostInput($event.target)" />
             </div>
            </div>  
            
            <div class="row mb-6">
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пост снят</label>
             <div class="col-lg-8 fv-row">
-                <input type="date" name="DateEnd" id="idDateEnd" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" />
+                <input type="date" name="DateEnd" id="idDateEnd" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                (blur)="onBlurDateEndPostInput($event.target)" />
             </div>
            </div>  
 
            <div class="row mb-6">
             <label class="col-lg-4 col-form-label required fw-semibold fs-6">. Ссылка на видео с камеры наблюдения </label>
             <div class="col-lg-8 fv-row">
-                <input type="text" name="link_video" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" id="linkcameraPost" />
+                <input type="text" name="link_video" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" id="linkcameraPost" 
+                (blur)="onBlurCameraPostInput($event.target)"/> 
             </div>
            </div>  
 
@@ -155,7 +165,8 @@
     
                     <div class="col-lg-8 fv-row">
                         <select name="dress" data-control="selectDress" class="form-select form-select-solid form-select-lg fw-semibold"
-                                [ngModel]="id_dress">
+                                [(ngModel)]="id_dress"
+                                (change)="onClickDress()">
                             <option *ngFor="let gd of this.guideDress" [value]="gd.id_mtr">{{gd.name}}</option>
                        </select>
                     </div>

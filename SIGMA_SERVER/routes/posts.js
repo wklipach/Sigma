@@ -98,7 +98,56 @@ router.get('/', async function(req, res, next) {
         res.send(result);
        }
 
-  
+       if (req.body.update_post_routine) {
+        const result = await asyncUpdatePostRoutine(req.body.id_post, req.body.id_post_routine, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_post_dress) {
+        const result = await asyncUpdatePostDress(req.body.id_post, req.body.id_post_dress, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_name_post) {
+        const result = await asyncUpdateNamePost(req.body.id_post, req.body.namepost, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_number_post) {
+        const result = await asyncUpdateNumberPost(req.body.id_post, req.body.numberpost, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_label_post) {
+        const result = await asyncUpdateLabelPost(req.body.id_post, req.body.labelpost, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_camera_post) {
+        const result = await asyncUpdateCameraPost(req.body.id_post, req.body.camerapost, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_timebegin_post) {
+        const result = await asyncUpdateTimeBeginPost(req.body.id_post, req.body.timebeginpost, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_timeend_post) {
+        const result = await asyncUpdateTimeEndPost(req.body.id_post, req.body.timeendpost, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_datebegin_post) {
+        const result = await asyncUpdateDateBeginPost(req.body.id_post, req.body.datebeginpost, req.body.id_user);
+        res.send(result);
+       }
+
+       if (req.body.update_dateend_post) {
+        const result = await asyncUpdateDateEndPost(req.body.id_post, req.body.dateendpost, req.body.id_user);
+        res.send(result);
+       }
+
 
   });
 
@@ -424,6 +473,270 @@ async function asyncUpdateWeapons(id_post, id_mtr, count, id_user) {
             await conn.query(sJournal, paramsJournal);
         }
         return JSON.stringify(resCount);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+async function asyncUpdatePostRoutine(id_post, id_post_routine, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set id_post_routine=? where `id`=?";
+            const resSql = await conn.query(sSql, [id_post_routine, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [id_post_routine, id_post, 'id_post_routine', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+async function asyncUpdatePostDress(id_post, id_post_dress, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set id_dress=? where `id`=?";
+            const resSql = await conn.query(sSql, [id_post_dress, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [id_post_dress, id_post, 'id_dress', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+async function asyncUpdateNamePost(id_post, namepost, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `name`=? where `id`=?";
+            const resSql = await conn.query(sSql, [namepost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [namepost, id_post, 'name', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+async function asyncUpdateNumberPost(id_post, numberpost, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `number`=? where `id`=?";
+            const resSql = await conn.query(sSql, [numberpost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [numberpost, id_post, 'number', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+async function asyncUpdateLabelPost(id_post, labelpost, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `label`=? where `id`=?";
+            const resSql = await conn.query(sSql, [labelpost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [labelpost, id_post, 'label', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+async function asyncUpdateCameraPost(id_post, camerapost, id_user) {
+
+    let conn;
+    try {
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `camera_link`=? where `id`=?";
+            const resSql = await conn.query(sSql, [camerapost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [camerapost, id_post, 'camera_link', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+async function asyncUpdateTimeBeginPost(id_post, timebeginpost, id_user) {
+
+    let conn;
+    try {
+
+        if (!timebeginpost) timebeginpost = null;
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `TimeBegin`=? where `id`=?";
+            const resSql = await conn.query(sSql, [timebeginpost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [timebeginpost, id_post, 'TimeBegin', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+async function asyncUpdateTimeEndPost(id_post, timeendpost, id_user) {
+
+    let conn;
+    try {
+
+        if (!timeendpost) timeendpost = null;
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `TimeEnd`=? where `id`=?";
+            const resSql = await conn.query(sSql, [timeendpost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [timeendpost, id_post, 'TimeEnd', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+
+async function asyncUpdateDateBeginPost(id_post, datebeginpost, id_user) {
+
+    let conn;
+    try {
+
+        if (!datebeginpost) datebeginpost = null;
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `DateBegin`=? where `id`=?";
+            const resSql = await conn.query(sSql, [datebeginpost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [datebeginpost, id_post, 'DateBegin', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) conn.release(); //release to pool
+    }
+}
+
+async function asyncUpdateDateEndPost(id_post, dateendpost, id_user) {
+
+
+    console.log('id_post, dateendpost, id_user', id_post, dateendpost, id_user);
+
+    let conn;
+    try {
+
+        if (!dateendpost) dateendpost = null;
+
+        conn = await pool.getConnection();
+
+            const sSql = "update posts set `DateEnd`=? where `id`=?";
+            const resSql = await conn.query(sSql, [dateendpost, id_post]);
+
+            if (resSql) {
+                const paramsJournal = [dateendpost, id_post, 'DateEnd', id_user];
+                const sJournal = "insert posts_log (`newvalue`, `id_post`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+                await conn.query(sJournal, paramsJournal);
+            }
+
+        return JSON.stringify(resSql);
 
     } catch (err) {
         throw err;

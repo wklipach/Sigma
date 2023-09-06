@@ -184,6 +184,13 @@ export class PostObjectComponent {
    }
 
 
+   datetimeLocal(curDate: Date) {
+    const dt = new Date(curDate);
+    dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+    return dt; //.toISOString().slice(0, 16);
+  }
+
+
    loadInfo(postInfo: IPostInfo) {
 
 
@@ -203,12 +210,11 @@ export class PostObjectComponent {
     }
   
     if (postInfo.DateBegin) {
-
-      (<HTMLInputElement> document.getElementById("idDateBegin")).valueAsDate = new Date(postInfo.DateBegin);
+      (<HTMLInputElement> document.getElementById("idDateBegin")).valueAsDate = this.datetimeLocal(postInfo.DateBegin);
    }
 
    if (postInfo.DateEnd) {
-    (<HTMLInputElement> document.getElementById("idDateEnd")).valueAsDate = new Date(postInfo.DateEnd);
+     (<HTMLInputElement> document.getElementById("idDateEnd")).valueAsDate = this.datetimeLocal(postInfo.DateEnd);
    }
    
    if (postInfo.id_post_routine) {
@@ -222,6 +228,16 @@ export class PostObjectComponent {
     
    }
     
+   onClickRoutine() {
+    this.servPost.updateRoutinePost(this.id_post, this.id_post_routine).subscribe();   
+   }
+
+   onClickDress() {
+
+    console.log(this.id_post, this.id_dress);
+    this.servPost.updateDressPost(this.id_post, this.id_dress).subscribe();   
+   }
+
 
    onClickSpecialMeans(target: any, id_mtr: number) {
       const boolChecked = target.checked; 
@@ -238,7 +254,46 @@ export class PostObjectComponent {
        if (!Number(target.value)) return;
        const count = Number(target.value);
        this.servPost.updateSpecialMeans(this.id_post, id_mtr, count).subscribe();   
+   }
 
+   onBlurNamePostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateNamePost(this.id_post, val).subscribe();   
+   }
+
+   onBlurNumberPostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateNumberPost(this.id_post, val).subscribe();   
+   }
+
+   onBlurLabelPostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateLabelPost(this.id_post, val).subscribe();   
+   }   
+
+   onBlurCameraPostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateCameraPost(this.id_post, val).subscribe();
+   }
+
+   onBlurTimeBeginPostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateTimeBeginPost(this.id_post, val).subscribe();
+   }
+
+   onBlurTimeEndPostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateTimeEndPost(this.id_post, val).subscribe();
+   }
+
+   onBlurDateBeginPostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateDateBeginPost(this.id_post, val).subscribe();
+   }
+
+   onBlurDateEndPostInput(target: any) {
+    const val = target.value.toString().trim();
+    this.servPost.updateDateEndPost(this.id_post, val).subscribe();
    }
 
    onClickWeapons(target: any, id_mtr: number) {
@@ -391,6 +446,8 @@ export class PostObjectComponent {
       this.onLoadFromBasePhotoPost();
     });
   }
+
+
 
 
 }
