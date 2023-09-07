@@ -5,6 +5,9 @@ li:hover{
     border-radius: 50%;
     border: 1px solid transparent;
 }
+.avauser{
+    margin-top: 5px;
+}
 img:hover{
     cursor: pointer;
 }

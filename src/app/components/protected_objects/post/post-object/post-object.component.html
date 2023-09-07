@@ -1,8 +1,5 @@
 <app-basement></app-basement>
 
-
-
-
 <div class="wrapper">
 <form class="mb-2 w-50">
     <div class="card-body p-9 w-100 align-item-center">
@@ -29,9 +26,18 @@
          
 
             <div class="row mb-6">
-                <h2>Объект №{{this.protected_object.id_object}}</h2>
-                <h4>{{this.protected_object.name}}</h4>
-                <h4>{{this.protected_object.address}}</h4>
+                <div class="name-object">
+                    <div class="line">
+                      <span class="fs-3 text-primary">Объект </span>
+                      <span class="fs-3 text-primary">"{{protected_object.name}}" </span>
+                      
+                  <h6>№ {{id_object}}</h6>
+                    </div>
+                    
+                   
+                  <h4>{{protected_object.address}}</h4>
+                  </div>
+                  
             </div>
 
 
@@ -118,7 +124,7 @@
 
             <!-- начало спецсредства -->           
             <div class="row mb-6">
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Спецсредства</label>
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6 w-50px">Спецсредства</label>
                 <div class="col-lg-8 fv-row">
                       <ul>
                         <li *ngFor="let spm of this.guideSpecialMeans" >
@@ -127,7 +133,7 @@
                                   (change)="onClickSpecialMeans($event.target, spm.id_mtr)"/>
                             <label for="SpecialMeans{{spm.id_mtr}}">{{spm.name}}</label>
                             <label for="SpecialMeans{{spm.id_mtr}}">Кол</label>
-                            <input type="text" id="idSpecialMeansCount{{spm.id_mtr}}" name="SpecialMeansCount{{spm.id_mtr}}"
+                            <input class="form-control" type="text" id="idSpecialMeansCount{{spm.id_mtr}}" name="SpecialMeansCount{{spm.id_mtr}}"
                                    [value] = "spm.count"
                                    (blur)="onBlurSpecialMeansInput($event.target, spm.id_mtr)"/>
 
@@ -137,19 +143,20 @@
             </div>  
             <!-- конец спецсредства-->   
 
-
+ 
             <!-- начало оружие -->           
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Оружие</label>
                 <div class="col-lg-8 fv-row">
                       <ul>
                         <li *ngFor="let w of this.guideWeapons" >
-                            <input type="checkbox" id="idWeapons{{w.id_mtr}}" name="Weapons{{w.id_mtr}}"
-                                   [checked] = "w.checked" 
+                            <input class="mr-5" type="checkbox" id="idWeapons{{w.id_mtr}}" name="Weapons{{w.id_mtr}}"
+                                 
+                            [checked] = "w.checked" 
                                    (change)="onClickWeapons($event.target, w.id_mtr)"/>
                             <label for="Weapons{{w.id_mtr}}">{{w.name}}</label>
-                            <label for="Weapons{{w.id_mtr}}">Кол</label>
-                            <input type="text" id="idWeaponsCount{{w.id_mtr}}" name="WeaponsCount{{w.id_mtr}}"
+                            <label for="Weapons{{w.id_mtr}}">Количество</label>
+                            <input class="WeaponsCount" type="text" id="idWeaponsCount{{w.id_mtr}}" name="WeaponsCount{{w.id_mtr}}"
                                    [value] = "w.count"
                                    (blur)="onBlurWeaponsInput($event.target, w.id_mtr)"/>
                         </li>

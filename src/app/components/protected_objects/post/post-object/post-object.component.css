@@ -6,6 +6,32 @@
     width: 100vw;
     height: auto;
 }
+
+ul{
+  list-style-type: none;
+}
+
+li{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background-color: transparent;
+}
+.check{
+ font-weight: 600;
+ font-size: 22px;
+}
+
+.WeaponsCount{
+  width: 50px; 
+  font-weight: bold;
+}
+label{
+  margin: 0 10px;
+}
+
+
 .btns{
     width: 100%;
     display: flex;

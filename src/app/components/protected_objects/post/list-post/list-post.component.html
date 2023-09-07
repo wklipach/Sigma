@@ -1,8 +1,21 @@
 <app-basement></app-basement>
 
-<h2>Посты на объекте № {{id_object}}</h2>
-<h4>{{protected_object.name}}</h4>
-<h4>{{protected_object.address}}</h4>
+    <div class="name-object">
+        <div class="line">
+          <span class="fs-3 text-primary">Объект </span>
+          <span class="fs-3 text-primary">"{{protected_object.name}}" </span>
+          
+      <h6>№ {{id_object}}</h6>
+        </div>
+              
+      <h4>{{protected_object.address}}</h4>
+      </div>
+      
+
+
+<!-- <h2>Посты на объекте № {{id_object}}</h2>
+<h4>{{protected_object.name}}</h4> -->
+<!-- <h4>{{protected_object.address}}</h4> -->
 
 
   <!-- КНОПКА ДОБАВЛЕНИЯ ПОСТА -->
@@ -102,9 +115,9 @@ class="material striped"
 </ngx-datatable-column>
 
 
-<ngx-datatable-column prop = "edit" name = "Редактировать" [width]="getColumnSize('dress')">
+<ngx-datatable-column prop = "edit" name = "Изменить" [width]="getColumnSize('dress')">
   <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
-    <button class="btn btn-edit" (click)="openPostEdit(row.id)"><img src="/assets/img/addwork.png" width="30" /></button>
+    <button class="btn btn-edit" (click)="openPostEdit(row.id)"><img src="/assets/img/edit.png" width="20" /></button>
     </ng-template>
 </ngx-datatable-column>
 
