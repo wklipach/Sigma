@@ -14,10 +14,11 @@
      margin-right: 100px !important;
   }
   .add-btn{
-    height: 20px !important;
+    height: 25px !important;
     position:fixed;
-    top: 10px;
+    top: -20px;
     left: 150px;
+    margin-bottom: 40px;
     }
   
   img:hover{
