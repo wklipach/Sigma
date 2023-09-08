@@ -59,6 +59,9 @@ import { ListCheckComponent } from './components/protected_objects/list-check/li
 import { ListCheckCardComponent } from './components/protected_objects/list-check/list-check-card/list-check-card.component';
 import { ListPostComponent } from './components/protected_objects/post/list-post/list-post.component';
 import { PostReadComponent } from './components/protected_objects/post/post-read/post-read.component';
+import { ShareService } from './services/share.service';
+import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-test.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -107,7 +110,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     ListCheckComponent,
     ListCheckCardComponent,
     ListPostComponent,
-    PostReadComponent
+    PostReadComponent,
+    DragDropTestComponent
   ],
   imports: [
     BrowserModule,
@@ -120,9 +124,10 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     FontAwesomeModule,
     ResizableModule,
     NgxDatatableModule,
+    DragDropModule,
     SocketIoModule.forRoot(config)    
   ],
-  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChatService, ChecklistService],
+  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChatService, ChecklistService, ShareService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

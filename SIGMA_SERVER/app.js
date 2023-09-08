@@ -21,7 +21,7 @@ var tabel = require('./routes/tabel.js');
 var checklist = require('./routes/checklist.js');
 var posts = require('./routes/posts.js');
 
-const { asyncInsertChat, asyncLoadStartMessage, asyncReadMessage } = require('./modules/chat.js')
+const { asyncInsertChat, asyncLoadStartMessage, asyncReadMessage } = require('./modules/chat.js');
 
 
 var app = express();

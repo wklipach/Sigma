@@ -1,0 +1,35 @@
+<div class="container">
+    <h2>Movies</h2>
+    <div cdkDropList 
+         [cdkDropListData]="MoviesList"
+         cdkDropList  #list1="cdkDropList"
+         class="movie-list" 
+         [cdkDropListConnectedTo]="list2" 
+        (cdkDropListDropped)="onDrop($event)">
+      
+           <div class="movie-block" *ngFor="let moviesList of MoviesList" cdkDrag>
+           
+            {{moviesList.name}}
+            <img [src] = "moviesList.photo_name" width="40" height="40" class="rounded-circle mx-10 pt-2">            
+
+           </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Movies Watched</h2>
+    <div cdkDropList 
+         [cdkDropListData]="MoviesWatched"
+         cdkDropList #list2="cdkDropList"
+         [cdkDropListConnectedTo]="list1" 
+         class="movie-list" 
+         (cdkDropListDropped)="onDrop($event)">
+              <div class="movie-block" *ngFor="let moviesWatched of MoviesWatched" cdkDrag>
+                {{moviesWatched.name}}
+                <img [src] = "moviesWatched.photo_name" width="40" height="40" class="rounded-circle mx-10 pt-2">
+              </div>
+    </div>
+  </div>  
+
+
+  
