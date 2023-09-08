@@ -20,12 +20,17 @@ var ollr = require('./routes/ollr.js');
 var tabel = require('./routes/tabel.js');
 var checklist = require('./routes/checklist.js');
 var posts = require('./routes/posts.js');
+var chalk = require ('chalk');
 
 const { asyncInsertChat, asyncLoadStartMessage, asyncReadMessage } = require('./modules/chat.js');
 
 
 var app = express();
 app.use(express.json({ limit: '50mb' }));
+
+
+console.log( chalk.bgRed.white(' point 1 '), chalk.bgRed.white(new Date().toLocaleTimeString()));  
+//npm install chalk@4.1.2
 
 //БЛОК1
 
