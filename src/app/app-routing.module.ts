@@ -39,7 +39,9 @@ import { PostReadComponent } from './components/protected_objects/post/post-read
 import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-test.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent, canActivate: [mainGuard] },
+  { path: '', component: Obj2Component, canActivate: [mainGuard] },
+  { path: 'obj2', component: Obj2Component, canActivate: [mainGuard] },
+  { path: 'main', component: MainComponent, canActivate: [mainGuard] },
   { path: 'number', component: NumberComponent},
   { path: 'login', component: LoginComponent, canActivate: [numberGuard]},
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [numberGuard] },
@@ -50,7 +52,6 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent, canActivate: [mainGuard] },
   { path: 'ollr', component: OllrComponent, canActivate: [mainGuard] },
   { path: 'listobjects', component: ListObjectsComponent, canActivate: [mainGuard] },
-  { path: 'obj2', component: Obj2Component, canActivate: [mainGuard] },
   { path: 'listmtr', component: ListMtrComponent, canActivate: [mainGuard] },
   { path: 'mtr2', component: Mtr2Component, canActivate: [mainGuard] },
   { path: 'liststaff', component: StaffComponent, canActivate: [mainGuard] },
