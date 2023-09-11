@@ -139,6 +139,13 @@ export class CheckObjectComponent {
     return date.getTime() === date.getTime();
   } 
 
+
+  closeCheck() {
+
+    window.close();
+
+  }
+
   saveCheck() {
 
     const dateBegin = new Date((document.getElementById('meeting-time') as HTMLDataElement).value);
@@ -165,7 +172,7 @@ export class CheckObjectComponent {
                     if (res.insertId) {
                       console.log(res.insertId);
                         alert ("Лист проверки №"+ res.insertId + " создан успешно.");
-                        window.close();                    
+                        this.closeCheck();                    
                     } else alert("Лист проверки не создан.");
       });
 
