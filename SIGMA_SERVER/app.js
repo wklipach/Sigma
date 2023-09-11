@@ -22,11 +22,16 @@ var checklist = require('./routes/checklist.js');
 var posts = require('./routes/posts.js');
 var chalk = require ('chalk');
 
+//var cors = require('cors');
+
 const { asyncInsertChat, asyncLoadStartMessage, asyncReadMessage } = require('./modules/chat.js');
 
 
 var app = express();
 app.use(express.json({ limit: '50mb' }));
+
+
+//app.use(cors);
 
 
 console.log( chalk.bgRed.white(' point 1 '), chalk.bgRed.white(new Date().toLocaleTimeString()));  
@@ -40,11 +45,11 @@ const httpChat = require('http').Server(app);
 
 const io = require('socket.io')(httpChat, {
   cors: {
-    // origin: "http://localhost:4200",
     origin: "*",
     methods: ["GET", "POST"]
   }
 });
+
 
 
 
@@ -98,10 +103,16 @@ io.on('connection', (socket) => {
   // добавляем пользователя в хранилище
   socket.on('sigma_adduser', async (user) => {
     socket.id_user=user;
-    // console.log('initialize user', 'user=', user, 'socket.id=', socket.id);
     users.set(socket.id, user);
     io.emit('sigma_users', Object.fromEntries(users));
   });
+
+  // просматриваем всех текущих юзеров
+  socket.on('sigma_users', async msg => {
+    console.log( chalk.bgRed.white(' sigma_users '), chalk.bgRed.white(new Date().toLocaleTimeString()));  
+    io.emit('sigma_users', Object.fromEntries(users));
+  });
+
 
   //пользователь прочитал сообщение
   socket.on('sigma_readmessage', async dataRead => {
@@ -117,10 +128,8 @@ io.on('connection', (socket) => {
   //this.socket.emit('sigma_readmessage', id_user, id_user_to, createdAt);
 
 
-
   socket.on('disconnect', () => {
     console.log('disconnect', 'socket.id=', socket.id, '', 'socket.id_user=', socket.id_user);
-
     // удаляем пользователя из хранилища
     users.delete(socket.id);
     io.emit('sigma_users', Object.fromEntries(users));
@@ -153,8 +162,8 @@ app.use(express.json({ limit: '50mb' }));
 
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200" ); // update to match the domain you will make the request from
-    //res.header("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Origin", "http://localhost:4200" ); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });

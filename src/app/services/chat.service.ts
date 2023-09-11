@@ -42,6 +42,12 @@ export class ChatService {
  } 
 
 
+   	// emit event
+	 checkAllUser(s: string) {
+		console.log('sigma_users', s);
+		this.socket.emit('sigma_users', s);
+	} 
+
 
 
   	// emit event
@@ -66,7 +72,7 @@ export class ChatService {
 
     // listen event
 	 onUsers() {
-		return	this.socket.fromEvent('sigma_users');
+		return	this.socket.fromEvent('sigma_users') as Observable<any[]>;
     }
 
 	    // listen event

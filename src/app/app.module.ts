@@ -67,7 +67,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 // socket config
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: { reconnection: true} };
 
 
 

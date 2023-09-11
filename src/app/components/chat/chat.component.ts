@@ -69,6 +69,8 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log('oninit!');
+
     this.currentUser = this.auth.getSessionUser(); 
 
     //получение аватара из базы
@@ -159,13 +161,19 @@ export class ChatComponent implements OnInit {
                         this.showMessages(this.curChatUser.id_user);                                                        
         });
 
-    this.socketService.onUsers().subscribe((data: any) =>  {
-          this.chatUsers = data;
 
-          // включаем и сортируем активных юзеров
+        console.log('перед подпиской!');
+        this.socketService.checkAllUser('get list users');
+
+        this.socketService.onUsers().subscribe((data: any) =>  {
+          this.chatUsers = data;
+            // включаем и сортируем активных юзеров
           this.activeUser();
+          console.log('юзера из чата this.chatUsers', this.chatUsers);
+          console.log('выводим с активными this.users', this.users);
        }
     );
+  
 
 
 
@@ -173,15 +181,7 @@ export class ChatComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    // child is set
-    //if (this.virtualScroll) {
-      // this.virtualScroll.getElementRef
-      //this.virtualScroll.scrolledIndexChange.subscribe( e=> {
-        //console.log('e', e);
-        //const renderedRange = this.virtualScroll.getRenderedRange();
-        ///console.log('renderedRange=', this.virtualScroll.getElementRef().nativeElement);
-      //});
-      //}
+
 
     }
 
@@ -321,12 +321,12 @@ export class ChatComponent implements OnInit {
     res.forEach ( el => {
       this.users.find( user=> user.id_user == el.id_user)!.ItIsUnread = true;  
 
-      console.log('====>', this.users.find( user=> user.id_user == el.id_user));  
+      //console.log('====>', this.users.find( user=> user.id_user == el.id_user));  
 
     });
 
     this.users = [...this.users];
-    console.log('this.users', this.users);
+    //console.log('this.users', this.users);
 
      
    }
