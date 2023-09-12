@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import {Observable} from 'rxjs';
+import { GlobalRef } from 'globalref';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,8 @@ import {Observable} from 'rxjs';
 export class SocketService {
    private socket: Socket;
 
-   constructor() {
-    this.socket = io('http://localhost:5000');
+   constructor(public gr: GlobalRef) {
+    this.socket = io(gr.lobbychat);
   }
 
   // EMITTER example
