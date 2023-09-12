@@ -62,12 +62,16 @@ import { PostReadComponent } from './components/protected_objects/post/post-read
 import { ShareService } from './services/share.service';
 import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-test.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LobbyChatComponent } from './components/lobby-chat/lobby-chat.component';
+import { SocketService } from './services/socket.service';
 
 
 
 
 // socket config
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: { reconnection: true} };
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {  
+  withCredentials: false
+} };
 
 
 
@@ -111,7 +115,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: { reconn
     ListCheckCardComponent,
     ListPostComponent,
     PostReadComponent,
-    DragDropTestComponent
+    DragDropTestComponent,
+    LobbyChatComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +132,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: { reconn
     DragDropModule,
     SocketIoModule.forRoot(config)    
   ],
-  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChatService, ChecklistService, ShareService],
+  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChecklistService, ShareService, ChatService, SocketService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

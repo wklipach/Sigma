@@ -45,10 +45,11 @@ const httpChat = require('http').Server(app);
 
 const io = require('socket.io')(httpChat, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
+    origin: "*"
   }
 });
+
+
 
 
 
@@ -81,6 +82,15 @@ let messages = [];
 
 let users = new Map();
 io.on('connection', (socket) => {
+
+
+  console.log( chalk.bgRed.white('connection'), chalk.bgRed.white(new Date().toLocaleTimeString()));  
+
+
+  socket.on('sendMessage', async msg => {
+    msg.createdAt = Date.now();
+    io.emit('newMessage', msg);
+  });
 
 
   socket.on('sigma_message', async msg => {
@@ -129,8 +139,9 @@ io.on('connection', (socket) => {
 
 
   socket.on('disconnect', () => {
-    console.log('disconnect', 'socket.id=', socket.id, '', 'socket.id_user=', socket.id_user);
-    // удаляем пользователя из хранилища
+    //console.log('disconnect', 'socket.id=', socket.id, '', 'socket.id_user=', socket.id_user);
+    console.log( chalk.bgRed.white('disconnect'), chalk.bgRed.white(socket.id_user), chalk.bgRed.white(socket.id), users);  
+    // удаляем сокет пользователя из хранилища
     users.delete(socket.id);
     io.emit('sigma_users', Object.fromEntries(users));
     console.log(Object.fromEntries(users));

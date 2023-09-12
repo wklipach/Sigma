@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';  
 import { IDocChat } from '../interface/chat/chat';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +72,7 @@ export class ChatService {
 
     // listen event
 	 onUsers() {
-		return	this.socket.fromEvent('sigma_users') as Observable<any[]>;
+		return	(this.socket.fromEvent('sigma_users') as Observable<any[]>);
     }
 
 	    // listen event

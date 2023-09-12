@@ -2,6 +2,7 @@ import {  CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scroll
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GlobalRef } from 'globalref';
+import { Subscription } from 'rxjs';
 import { ISessionUser } from 'src/app/interface/auth/user';
 import { IDocChat, IUserChat } from 'src/app/interface/chat/chat';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,6 +20,10 @@ export class ChatComponent implements OnInit {
    @ViewChild('fareNotes') virtualScroll!: CdkVirtualScrollViewport;
 
 
+   private _StartMessageSub!: Subscription;
+   private _MessageReadSub!: Subscription;
+   private _MessageSub!: Subscription;
+   private _UsersSub!: Subscription;
 
    sGrayIcon: string = "/assets/img/circle_gray.png";
    sGreenIcon: string = "/assets/img/circle_green.png";
@@ -111,7 +116,7 @@ export class ChatComponent implements OnInit {
     
     //инициализируем начальный список сообщений
     this.socketService.sengStartMessage();
-    this.socketService.onStartMessage().subscribe((data: IDocChat[]) =>  {
+    this._StartMessageSub =    this.socketService.onStartMessage().subscribe((data: IDocChat[]) =>  {
         this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
                                                   .sort( (b,a) => {return b.createdAt - a.createdAt});
 
@@ -129,7 +134,7 @@ export class ChatComponent implements OnInit {
 
 
        //если пришло сообщение что какие-то сообщения прочитаны обновляем список сообщений
-       this.socketService.onMessageRead().subscribe((data: IDocChat[]) =>  {
+       this._MessageReadSub = this.socketService.onMessageRead().subscribe((data: IDocChat[]) =>  {
 
                       this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
                                                                  .sort( (b,a) => {return b.createdAt - a.createdAt});
@@ -147,7 +152,7 @@ export class ChatComponent implements OnInit {
 
 
         //получение кем-то отправленных сообщений, включая самого юзера
-        this.socketService.onMessage().subscribe((data: IDocChat[]) =>  {
+        this._MessageSub = this.socketService.onMessage().subscribe((data: IDocChat[]) =>  {
                         this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
                                                                   .sort( (b,a) => {return b.createdAt - a.createdAt});
                         //перебираем полученные                                                     
@@ -165,7 +170,7 @@ export class ChatComponent implements OnInit {
         console.log('перед подпиской!');
         this.socketService.checkAllUser('get list users');
 
-        this.socketService.onUsers().subscribe((data: any) =>  {
+        this._UsersSub = this.socketService.onUsers().subscribe((data: any) =>  {
           this.chatUsers = data;
             // включаем и сортируем активных юзеров
           this.activeUser();
@@ -180,10 +185,15 @@ export class ChatComponent implements OnInit {
   }
 
 
-  ngAfterViewInit() {
 
+  ngOnDestroy() {
+    this._StartMessageSub.unsubscribe();
+    this._MessageReadSub.unsubscribe();
+    this._MessageSub.unsubscribe();
+    this._UsersSub.unsubscribe();
 
-    }
+  }
+ 
 
 
   // Отправить сообщение  

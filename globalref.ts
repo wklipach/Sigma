@@ -1,4 +1,4 @@
-import { SocketIoConfig } from "ngx-socket-io";
+ import { SocketIoConfig } from "ngx-socket-io";
 
 
 // http and socket config
