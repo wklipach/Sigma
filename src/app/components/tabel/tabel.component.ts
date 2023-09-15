@@ -215,7 +215,12 @@ export class TabelComponent {
           // обновляем показываемую таблицу
           const res = this.ShowTabel.map( el => {
             if (el.id?.toString() == id.toString()) {
-              el.DateBegin_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+
+              if (isDate) {
+                el.DateBegin_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+              } else el.DateBegin_str =  '';
+
+
             }
             return el;
           });
@@ -225,7 +230,9 @@ export class TabelComponent {
           // обновляем эталонную таблицу таблицу
           const resOriginal = this.ShowTabel_original.map( el => {
             if (el.id?.toString() == id.toString()) {
+              if (isDate) {
               el.DateBegin_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+              } else el.DateBegin_str =  '';
             }
             return el;
           });
@@ -252,7 +259,10 @@ export class TabelComponent {
       // обновляем показываемую таблицу
       const res = this.ShowTabel.map( el => {
         if (el.id?.toString() == id.toString()) {
-          el.DateEnd_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+          if (isDate) {
+             el.DateEnd_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+          } else el.DateEnd_str = '';
+          
         }
         return el;
         });
@@ -261,7 +271,9 @@ export class TabelComponent {
       // обновляем эталонную таблицу таблицу
       const resOriginal = this.ShowTabel_original.map( el => {
         if (el.id?.toString() == id.toString()) {
-          el.DateEnd_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+          if (isDate) {
+             el.DateEnd_str = this.datePipe.transform(date, 'yyyy-MM-dd') || '';
+          } else el.DateEnd_str = '';
          }
          return el;
         });

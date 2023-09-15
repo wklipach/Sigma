@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';  
 import { IDocChat } from '../interface/chat/chat';
-import { Observable, Subject, map } from 'rxjs';
+import { Observable, Subject, from, map } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { GlobalRef } from 'globalref';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class ChatService {
 
 
 
-  constructor(private socket: Socket) { 
+  constructor(private http: HttpClient, public gr: GlobalRef) { 
   
   }
+  
 
 
   isCountUnreadMessagesIn(): Observable<number> {
@@ -29,57 +31,47 @@ export class ChatService {
 
 
   sengMessageAddUser(id_user: number) {
-	this.socket.emit('sigma_adduser', id_user);
+	const params = {sigma_adduser: id_user};
+	return this.http.post(this.gr.sUrlGlobal + 'pooling_chat', params);
  } 
 
-  sengStartMessage() {
-	this.socket.emit('sigma_start', 'sigma_start');
+  
+
+   sengReadMessage(id_user: number, id_user_to: number, createdAt: number) {
+   	const params = {sigma_readmessage: 'sigma_readmessage', id_user: id_user, id_user_to: id_user_to, createdAt: createdAt};
+	return this.http.post(this.gr.sUrlGlobal + 'pooling_chat', params);
    } 
 
 
-   sengReadMessage(id_user: number, id_user_to: number, createdAt: number) {
-	this.socket.emit('sigma_readmessage', {id_user, id_user_to, createdAt});
- } 
-
-
-   	// emit event
-	 checkAllUser(s: string) {
-		console.log('sigma_users', s);
-		this.socket.emit('sigma_users', s);
+	 checkAllUser(id_user: number) {
+		const params = new HttpParams()
+		.set('sigma_users', id_user);
+	   return this.http.get(this.gr.sUrlGlobal + 'pooling_chat', {params: params});
 	} 
 
 
 
   	// emit event
 	sengMessage(msg: IDocChat) {
-		this.socket.emit('sigma_message', msg);
+		const params = {insert_message: 'insert_message', msg: msg};
+		return this.http.post(this.gr.sUrlGlobal + 'pooling_chat', params);
+
 	} 
 
 	// listen event
-	onMessage() {
-		return this.socket.fromEvent('sigma_message') as Observable<IDocChat[]>;
+	getMessage() {
+		const params = new HttpParams()
+		.set('sigma_message', 'sigma_message');
+	   return this.http.get(this.gr.sUrlGlobal + 'pooling_chat', {params: params})  as Observable<IDocChat[]>;
 	}
 
-	// listen event ReadMessage
-	onMessageRead() {
-		return this.socket.fromEvent('sigma_readmessage') as Observable<IDocChat[]>;
-	}
 
 
 	onStartMessage() {
-		return this.socket.fromEvent('sigma_start') as Observable<IDocChat[]>;
+ 		const params = new HttpParams()
+  		.set('sigma_start', 'sigma_start');
+         return this.http.get(this.gr.sUrlGlobal + 'pooling_chat', {params: params})  as Observable<IDocChat[]>;
 	}
 
-    // listen event
-	 onUsers() {
-		return	(this.socket.fromEvent('sigma_users') as Observable<any[]>);
-    }
-
-	    // listen event
-     onDisconnect() {
-		this.socket.disconnect();
-		}
-	
-	
 }
 

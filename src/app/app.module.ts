@@ -22,7 +22,6 @@ import {AuthService} from './services/auth.service';
 import { MainComponent } from './components/main/main.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatService } from './services/chat.service';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { GeneralComponent } from './components/account/general/general.component';
 import { SummaryComponent } from './components/account/summary/summary.component';
@@ -62,16 +61,6 @@ import { PostReadComponent } from './components/protected_objects/post/post-read
 import { ShareService } from './services/share.service';
 import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-test.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { LobbyChatComponent } from './components/lobby-chat/lobby-chat.component';
-import { SocketService } from './services/socket.service';
-
-
-
-
-// socket config
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {  
-  withCredentials: false
-} };
 
 
 
@@ -115,8 +104,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {
     ListCheckCardComponent,
     ListPostComponent,
     PostReadComponent,
-    DragDropTestComponent,
-    LobbyChatComponent
+    DragDropTestComponent
   ],
   imports: [
     BrowserModule,
@@ -129,10 +117,9 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {
     FontAwesomeModule,
     ResizableModule,
     NgxDatatableModule,
-    DragDropModule,
-    SocketIoModule.forRoot(config)    
+    DragDropModule
   ],
-  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChecklistService, ShareService, ChatService, SocketService],
+  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChecklistService, ShareService, ChatService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -26,7 +26,6 @@ export class MainComponent implements OnInit  {
 
 
   public Exit() {
-    this.chatService.onDisconnect();
     this.authService.clearStorage();
     this.router.navigate(['/login']);
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalRef } from 'globalref';
+import { Subscription, timer } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -27,6 +28,8 @@ export class BasementComponent implements OnInit {
   unAceptTaskCount?: number = 0;
   accessUserMenu: IAccessMenu[] = [];
   sAvatar : string = "/assets/img/usernull.jpg";
+  private _UserChatCount!: Subscription;
+
 
   constructor(private authService: AuthService, 
               private chatService: ChatService ,  
@@ -58,8 +61,19 @@ export class BasementComponent implements OnInit {
       this.unreadChatMessages = res;
     });
 
+
+    //СООБЩЕНИЯ ДЛЯ ЧАТА
+
+    // НАЧАЛО бесконечный таймер 
+    let timer$ = timer(2000, 30000);
+    timer$.subscribe(t => this.countChatMessages());
+    // КОНЕЦ бесконечный таймер 
+  }
+
+
+  countChatMessages() {
     this.authService.getCountMessages(this.authService.getSessionUser().id_user).subscribe ( (res: any) => {
-      //console.log('кол непр сообщ', res[0].CountMessages);
+      // console.log('кол непр сообщ', res[0].CountMessages);
       if (res.length>0)  this.chatService.isWriteCountUnreadMessages(res[0].CountMessages);
     });
   }
@@ -71,7 +85,6 @@ export class BasementComponent implements OnInit {
 
 
   public Exit() {
-    this.chatService.onDisconnect();
     this.authService.clearStorage();
     this.router.navigate(['/login']);
   }

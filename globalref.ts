@@ -1,5 +1,4 @@
- import { SocketIoConfig } from "ngx-socket-io";
-
+ 
 
 // http and socket config
 export class GlobalRef {
@@ -7,8 +6,6 @@ export class GlobalRef {
   public sUrlAvatarGlobal = this.sUrlGlobal + 'images/useravatar/';
   public sUrlPhotoPostGlobal = this.sUrlGlobal + 'images/posts/';
   public sUrlObjectGlobal = this.sUrlGlobal + 'images/protected_object/';
-  public config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
-  public lobbychat =   'http://localhost:5000/';
 }
 
 

@@ -2,7 +2,7 @@ import {  CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scroll
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { GlobalRef } from 'globalref';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { ISessionUser } from 'src/app/interface/auth/user';
 import { IDocChat, IUserChat } from 'src/app/interface/chat/chat';
 import { AuthService } from 'src/app/services/auth.service';
@@ -74,7 +74,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log('oninit!');
 
     this.currentUser = this.auth.getSessionUser(); 
 
@@ -111,14 +110,20 @@ export class ChatComponent implements OnInit {
 
       });
 
-      this.socketService.sengMessageAddUser(this.currentUser.id_user);
+
+      // добавляем юзера в хранилище
+      this.socketService.sengMessageAddUser(this.currentUser.id_user).subscribe( users => {
+        //console.log('users', users);
+      }
+
+      );
 
     
     //инициализируем начальный список сообщений
-    this.socketService.sengStartMessage();
-    this._StartMessageSub =    this.socketService.onStartMessage().subscribe((data: IDocChat[]) =>  {
-        this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
-                                                  .sort( (b,a) => {return b.createdAt - a.createdAt});
+    this._StartMessageSub =    this.socketService.onStartMessage().subscribe((data: IDocChat[] ) =>  { 
+      //console.log('data=', data);
+        this.allMessages = data.filter( (msg: any) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
+                                                  .sort( (b: IDocChat, a: IDocChat) => {return b.createdAt - a.createdAt});
 
              //если отправленное тек. юзером ставим msg_rom_current_user true, else false 
              this.allMessages.forEach ( (el: IDocChat) => {
@@ -131,66 +136,56 @@ export class ChatComponent implements OnInit {
     });
 
 
+    // НАЧАЛО бесконечный таймер красим зеленым активных пользователей 
+    let timer$ = timer(2000, 3000);
+    this._UsersSub =  timer$.subscribe(t => this.activeUsers());
+    // КОНЕЦ бесконечный таймер красим зеленым активных пользователей 
 
-
-       //если пришло сообщение что какие-то сообщения прочитаны обновляем список сообщений
-       this._MessageReadSub = this.socketService.onMessageRead().subscribe((data: IDocChat[]) =>  {
-
-                      this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
-                                                                 .sort( (b,a) => {return b.createdAt - a.createdAt});
-                      //перебираем полученные                                                     
-                      this.allMessages.forEach ( (el: IDocChat) =>  {
-                      //если отправленное тек. юзером ставим msg_rom_current_user true, else false                                             
-                      if (el.id_user === this.currentUser.id_user) el.msg_from_current_user = true; else el.msg_from_current_user = false;
-                      //сообщение прочитанное или нет, ставим иконку прочитанности
-                      if (el.bMarked) el.marked_icon = this.sMarkedIcon; else el.marked_icon = this.sUnMarkedIcon; 
-
-                      });
-                      this.showMessages(this.curChatUser.id_user);                                                        
-        });
-
-
-
-        //получение кем-то отправленных сообщений, включая самого юзера
-        this._MessageSub = this.socketService.onMessage().subscribe((data: IDocChat[]) =>  {
-                        this.allMessages = data.filter( (msg) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
-                                                                  .sort( (b,a) => {return b.createdAt - a.createdAt});
-                        //перебираем полученные                                                     
-                        this.allMessages.forEach ( (el: IDocChat) =>  {
-                          //если отправленное тек. юзером ставим msg_rom_current_user true, else false                                             
-                          if (el.id_user === this.currentUser.id_user) el.msg_from_current_user = true; else el.msg_from_current_user = false;
-                          //сообщение прочитанное или нет, ставим иконку прочитанности
-                          if (el.bMarked) el.marked_icon = this.sMarkedIcon; else el.marked_icon = this.sUnMarkedIcon; 
-
-                        });
-                        this.showMessages(this.curChatUser.id_user);                                                        
-        });
-
-
-        console.log('перед подпиской!');
-        this.socketService.checkAllUser('get list users');
-
-        this._UsersSub = this.socketService.onUsers().subscribe((data: any) =>  {
-          this.chatUsers = data;
-            // включаем и сортируем активных юзеров
-          this.activeUser();
-          console.log('юзера из чата this.chatUsers', this.chatUsers);
-          console.log('выводим с активными this.users', this.users);
-       }
-    );
-  
-
-
+    // НАЧАЛО бесконечный таймер получаем сообщения
+    let timerMessage$ = timer(5000, 3000);
+    this._MessageSub =  timerMessage$.subscribe(t => this.allMessage());
+    // КОНЕЦ бесконечный таймер получаем сообщения
 
   }
 
 
+   allMessage() {
+    this.socketService.getMessage().subscribe( (data: any) =>  {
+      this.allMessages = data.filter( (msg: any) => { return (msg.id_user === this.currentUser.id_user || msg.id_user_to === this.currentUser.id_user) })
+                                                .sort( (b: any,a: any) => {return b.createdAt - a.createdAt});
+
+
+      //перебираем полученные                                                     
+      this.allMessages.forEach ( (el: IDocChat) =>  {
+        //если отправленное тек. юзером ставим msg_rom_current_user true, else false                                             
+        if (el.id_user === this.currentUser.id_user) el.msg_from_current_user = true; else el.msg_from_current_user = false;
+        //сообщение прочитанное или нет, ставим иконку прочитанности
+        if (el.bMarked) el.marked_icon = this.sMarkedIcon; else el.marked_icon = this.sUnMarkedIcon; 
+      });
+      this.showMessages(this.curChatUser.id_user);                                                        
+      });    
+    }
+
+    activeUsers () {
+        this.socketService.checkAllUser(this.currentUser.id_user).subscribe( (data: any) => {
+            this.chatUsers = data;
+            this.activeUser();
+         }
+        );
+     }        
+
 
   ngOnDestroy() {
-    this._StartMessageSub.unsubscribe();
-    this._MessageReadSub.unsubscribe();
-    this._MessageSub.unsubscribe();
-    this._UsersSub.unsubscribe();
+    //this._StartMessageSub.unsubscribe();
+    //this._MessageReadSub.unsubscribe();
+
+    if (this._MessageSub) {
+       this._MessageSub.unsubscribe();
+    }
+
+    if (this._UsersSub) {
+        this._UsersSub.unsubscribe();
+    }
 
   }
  
@@ -212,8 +207,10 @@ export class ChatComponent implements OnInit {
                                   msg_from_current_user: true,
                                   marked_icon: this.sUnMarkedIcon};
 
-    this.socketService.sengMessage(send_msg);
-
+    this.socketService.sengMessage(send_msg).subscribe( () => {
+      this.allMessage(); 
+      this.chatForm.controls['send_message'].setValue('');
+    });
 
   }
 
@@ -227,7 +224,7 @@ export class ChatComponent implements OnInit {
 
         //включаем найденных как активных 
         for (const [key, value] of Object.entries(this.chatUsers)) {
-            let userIndex = this.users.findIndex( user => user.id_user == value);
+            let userIndex = this.users.findIndex( user => user.id_user.toString() == key);
             if (userIndex > -1) {
                 this.users[userIndex].connected = true;
                 this.users[userIndex].connected_icon = this.sGreenIcon;
@@ -255,7 +252,6 @@ export class ChatComponent implements OnInit {
     showMessages(curChatUser: number) {
       // если есть изменение в прямо сейчас показываемом юзере обновляем текущее окно. 
       const Res = this.allMessages.filter( (msg) => { return (msg.id_user === curChatUser || msg.id_user_to === curChatUser);});
-      console.log('messages=', Res);
 
       //все что послано кем-то нам делаем прочитанным => sMarkedIcon 
       Res.forEach ( (el: IDocChat) => {
@@ -265,21 +261,18 @@ export class ChatComponent implements OnInit {
           el.marked_icon = this.sMarkedIcon; 
           //console.log(el);
           //отправляем сведения о прочитанном сообщении
-          this.socketService.sengReadMessage(el.id_user, el.id_user_to, el.createdAt);
+          this.socketService.sengReadMessage(el.id_user, el.id_user_to, el.createdAt).subscribe();
         }
 
       });
 
+      this.countUnreadMessage();      
 
-      //if (this.appearMessages.length !== Res.length) {
-           this.appearMessages = [...Res];
-      //}
-
-
-      this.countUnreadMessage();
-      //console.log('this.appearMessages=', this.appearMessages);
-
-      this._scrollToBottom();
+      if (JSON.stringify(this.appearMessages) !== JSON.stringify(Res)) {
+            this.appearMessages = [...Res];
+            this._scrollToBottom();
+      }
+      
     }
 
 
