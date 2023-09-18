@@ -29,8 +29,9 @@ li{
 }
 label{
   margin: 0 10px;
+  min-width: 100px;
+  margin: auto 10px;
 }
-
 
 .btns{
     width: 100%;

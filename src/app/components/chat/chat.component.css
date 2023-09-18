@@ -38,8 +38,6 @@
     padding: 15px;
   }
 
-
-
   .example-item:first-child {
     margin-top: 20px;
   }
@@ -98,6 +96,7 @@ li:hover{
     border: 2px solid #fff;
     border-radius: 50%;
     box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(21, 38, 114, 0.075);
+    margin-right: 15px;
 }
 .talker{
     position: relative;
@@ -105,6 +104,7 @@ li:hover{
     height: 35px;
     border-radius: 50%;
     cursor: pointer;
+    margin-right: 10px;
 }
 .reed{
     color: #218838 !important;
@@ -117,6 +117,7 @@ li:hover{
     width: 20px;
     height: 20px;
     border-radius: 50%;
+    margin: auto 10px;
 }
 select{
     width: 100%;
@@ -124,11 +125,13 @@ select{
 }
 
 .letter{
+    display: flex;
+    flex-wrap: nowrap;
     width: 20px;
     height: 20px;
     background-color: transparent;
+    margin: auto 10px;
 }
-
 
 span{
     display: flex;
@@ -136,11 +139,11 @@ span{
     font-size: 14px;
     font-weight: 600;
 }
-
 .user-name{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: auto 0;
 
 }
 

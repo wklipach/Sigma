@@ -14,13 +14,11 @@
             
             <img class="talker" src = {{user.avatar_name}} >
             <span>{{user.name}}</span>
-            
-
-
+          
             <div *ngIf="user.ItIsUnread == true" >   
               <img class="letter" src = "/assets/img/letter.png" >
             </div>
-            <div *ngIf="user.ItIsUnread !== true" >Новых нет</div>
+            <div class="letter"  *ngIf="user.ItIsUnread !== true" ></div>
             <img class="connected" src = {{user.connected_icon}} >
 
           </div>
