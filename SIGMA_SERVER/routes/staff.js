@@ -18,11 +18,23 @@ router.get('/', async function(req, res, next) {
       const result = await asyncStaffObjects();
       res.send(result);
     }
- 
+
+    if (req.query.get_dragdrop ){
+      const result = await asyncDDStaffObjects(req.query.get_dragdrop);
+      res.send(result);
+    }
+
   });
 
 
   router.post('/', async function(req, res) {
+
+    if (req.body['update_dragdrop']) {
+
+      const result = await asyncUpdateDragDrop(req.body['id_so'], req.body['id_object'], req.body['id_staff'], req.body['id_user']);
+      res.send(result);
+    }
+
 
     if (req.body['text'] && req.body['id_staff'] && req.body['field'] && req.body['id_user']) {
       const result = await asyncUpdateStaffObject(req.body['text'], req.body['id_staff'], req.body['field'], req.body['id_user']);
@@ -196,6 +208,33 @@ router.get('/', async function(req, res, next) {
       } finally  {
           if (conn) conn.release(); 
     }
+  }
+
+
+  async function asyncUpdateDragDrop(id_so, id_object, id_staff, id_user) {
+    let conn = await pool.getConnection();
+    try {
+  
+        const params = [id_object, id_so];
+        const sQuery = 
+        "update staff_object set id_object=? where id=?";
+        const resUpdate = await conn.query(sQuery, params);
+
+        const paramsJournal = ['move object', id_staff, id_object, id_user];
+        const sJournal = 
+        "insert staff_log (`newvalue`, `id_staff`, `field`, `id_user`, `date_oper`) value(?, ?, ?, ?, now())";
+        if (resUpdate) {
+          await conn.query(sJournal, paramsJournal);
+        } 
+
+        return JSON.stringify(resUpdate);
+
+      } catch (err) {
+        return  err;
+      } finally  {
+          if (conn) conn.release(); 
+    }
+
   }
 
 
@@ -381,6 +420,27 @@ router.get('/', async function(req, res, next) {
     }
   } 
 
+
+
+  async function asyncDDStaffObjects(id_object) {
+    let conn = await pool.getConnection();
+    try {
+          const sQuery = 
+          " select so.id, so.id_object, so.id_staff, s.fio, s.avatar_name as photo_name "+
+          " from staff_object so "+
+          " left join staff s on s.id_staff = so.id_staff "+ 
+          " where id_object=?";
+
+          const params = [id_object]
+          const resSql = await conn.query(sQuery, params);            
+          return  JSON.stringify(resSql);           
+        }
+       catch (err) {
+          return  err;
+     } finally  {
+           if (conn) conn.release(); 
+       }
+  }
 
   module.exports = router;
 

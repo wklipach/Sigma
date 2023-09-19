@@ -37,6 +37,7 @@ import { ListCheckCardComponent } from './components/protected_objects/list-chec
 import { ListPostComponent } from './components/protected_objects/post/list-post/list-post.component';
 import { PostReadComponent } from './components/protected_objects/post/post-read/post-read.component';
 import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-test.component';
+import { DragDropStaffComponent } from './components/protected_objects/drag-drop-staff/drag-drop-staff.component';
 
 const routes: Routes = [
   { path: '', component: Obj2Component, canActivate: [mainGuard] },
@@ -74,7 +75,8 @@ const routes: Routes = [
   { path: 'checkcard', component: ListCheckCardComponent, canActivate: [mainGuard] },
   { path: 'listpost', component: ListPostComponent, canActivate: [mainGuard] },
   { path: 'postread', component: PostReadComponent, canActivate: [mainGuard] },
-  { path: 'ddtest', component: DragDropTestComponent, canActivate: [mainGuard] }
+  { path: 'ddtest', component: DragDropTestComponent, canActivate: [mainGuard] },
+  { path: 'ddstaff', component: DragDropStaffComponent, canActivate: [mainGuard] }
    
   
   ];

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
 import { ListobjectsService } from 'src/app/services/listobjects.service';
 import { GuideService } from 'src/app/services/guide.service';
 import { DatePipe } from '@angular/common';
@@ -8,6 +8,7 @@ import { TableService } from 'src/app/services/table.service';
 import { ITable } from 'src/app/interface/table';
 import { Router } from '@angular/router';
 import { GlobalRef } from 'globalref';
+import { DragDropStaffService } from 'src/app/services/drag-drop-staff.service';
 
 
 interface ISmallGuide { 
@@ -71,6 +72,8 @@ interface IDeleteObject {
 export class Obj2Component {
 
   ColumnMode = ColumnMode;
+  SelectionType = SelectionType;
+
   @ViewChild('Obj2Table') datatableComponent!: DatatableComponent;
 
   faCoffee = faCoffee;
@@ -113,6 +116,7 @@ export class Obj2Component {
                private datePipe: DatePipe,
                private tableServ:  TableService,
                private router: Router,
+               private dds: DragDropStaffService,
                public gr: GlobalRef ) {  
 
   }
@@ -719,6 +723,33 @@ export class Obj2Component {
       if (e && e.column && e.column.prop && e.newValue) {
         this.saveColumnSize(this.datatableComponent, 'Obj2Table', e.column.prop, e.newValue);
       }
+  }
+
+  ddStaffObject()  {
+
+
+    if (this.dds.getDDProtectedObjects().length < 2) {
+      alert('Вы должны выбрать минимум два объекта');
+      return;
+    }
+
+    const url = this.router.serializeUrl(this.router.createUrlTree(['ddstaff'], { queryParams: { navSettings: JSON.stringify(this.dds.getDDProtectedObjects()) } }));
+
+
+    console.log(this.dds.getDDProtectedObjects());
+
+    const newTab = window.open(url, '_blank'); 
+    if(newTab) {
+        newTab.opener = null;
+    }
+
+  }
+
+  selected = [];
+  onSelectDragDropObject( { selected }: any) {
+    const j: [] = selected;
+    this.dds.setDDProtectedObjects(selected);
+
   }
   
 

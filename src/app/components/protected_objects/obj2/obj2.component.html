@@ -6,7 +6,12 @@
 
 <div class="add-btn" title="Добавить новый объект">
   <div (click)="addNewObject()"><img src="/assets/img/plus.png" width="30" /></div>
-  </div>
+</div>
+
+<div class="add-btn" title="Персонал на объектах">
+  <div (click)="ddStaffObject()"><img src="/assets/img/dd_staff.png" width="30" /></div>
+</div>
+
 
 <!--  КОНЕЦ КНОПКА ДОБАВЛЕНИЯ ОБЪЕКТА -->
   
@@ -23,8 +28,8 @@
         <span class="input-group-text border-0" id="search-addon">
           <button (click)="funcSearch()"><i class="fas fa-search"></i></button>
         </span>
-      </div>
-
+   </div>
+   
 </div>
 
 <ngx-datatable
@@ -40,8 +45,20 @@ class="material striped"
 [scrollbarH]="true"
 #Obj2Table
 (resize)="onResize($event)"
+
+[selected]="selected"
+[selectionType]="SelectionType.checkbox"
+(select)="onSelectDragDropObject($event)"
 >
 
+<ngx-datatable-column
+prop = "itis_check"
+[width]="getColumnSize('itis_check')"
+name = "+++"
+[sortable]="false"
+[draggable]="false"
+[checkboxable]="true">
+</ngx-datatable-column>
 
 <ngx-datatable-column prop = "itis_task" name = "Задача" [width]="getColumnSize('itis_task')">
   <ng-template let-value="value" ngx-datatable-cell-template let-row="row" let-rowIndex="rowIndex">

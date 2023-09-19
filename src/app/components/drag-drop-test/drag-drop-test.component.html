@@ -4,7 +4,7 @@
          [cdkDropListData]="MoviesList"
          cdkDropList  #list1="cdkDropList"
          class="movie-list" 
-         [cdkDropListConnectedTo]="list2" 
+         [cdkDropListConnectedTo]="list1" 
         (cdkDropListDropped)="onDrop($event)">
       
            <div class="movie-block" *ngFor="let moviesList of MoviesList" cdkDrag>
@@ -21,7 +21,7 @@
     <div cdkDropList 
          [cdkDropListData]="MoviesWatched"
          cdkDropList #list2="cdkDropList"
-         [cdkDropListConnectedTo]="list1" 
+         [cdkDropListConnectedTo]="list2" 
          class="movie-list" 
          (cdkDropListDropped)="onDrop($event)">
               <div class="movie-block" *ngFor="let moviesWatched of MoviesWatched" cdkDrag>
@@ -32,4 +32,4 @@
   </div>  
 
 
-  
+  <!-- НОВОЕ В ЦИКЛЕ ПОПЫТКА-->

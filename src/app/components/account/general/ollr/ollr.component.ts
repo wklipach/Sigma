@@ -96,8 +96,6 @@ export class OllrComponent {
       this.ShowOLLR = res2; 
       console.log('this.ShowOLLR=', this.ShowOLLR);
       });    
-
-
  }
 
 

@@ -61,6 +61,8 @@ import { PostReadComponent } from './components/protected_objects/post/post-read
 import { ShareService } from './services/share.service';
 import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-test.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropStaffComponent } from './components/protected_objects/drag-drop-staff/drag-drop-staff.component';
+import { DragDropStaffService } from './services/drag-drop-staff.service';
 
 
 
@@ -104,7 +106,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ListCheckCardComponent,
     ListPostComponent,
     PostReadComponent,
-    DragDropTestComponent
+    DragDropTestComponent,
+    DragDropStaffComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +122,15 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NgxDatatableModule,
     DragDropModule
   ],
-  providers: [GlobalRef, DatePipe, AuthService, SummaryService, AvatarService, ChecklistService, ShareService, ChatService],
+  providers: [GlobalRef, 
+              DatePipe, 
+              AuthService, 
+              SummaryService, 
+              AvatarService, 
+              ChecklistService, 
+              ShareService, 
+              ChatService, 
+              DragDropStaffService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
