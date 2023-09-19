@@ -9,12 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 interface IDDResult {
   head: string;
   id_object: number;
+  address: string;
   items: ICard[];
 }
 
 interface IObj {
   id: number;
   name: string;
+  address: string;
 }
 
 @Component({
@@ -37,8 +39,15 @@ export class DragDropStaffComponent {
   ngOnInit() {
 
     this.route.queryParams.subscribe(params => {
-      this.dd_array = JSON.parse(params['navSettings']);
-      this.loadData();
+      const dd_param: number[] = JSON.parse(params['navSettings']);
+      const strParam = dd_param.join(',');
+      
+       this.dds.getDDProtObj(strParam).subscribe( (res: any) => {
+        console.log('res=', res);
+         this.dd_array = res;
+         this.loadData();
+       });
+
       }
     );    
   
@@ -61,7 +70,7 @@ export class DragDropStaffComponent {
                   if (!val.photo_name) val.photo_name="/assets/img/usernull.jpg"; else val.photo_name= this.gr.sUrlAvatarGlobal+ val.photo_name;
                   itemRes.push(val);
                 });
-            this.dd_result.push( {head: this.dd_array[i].name, id_object: this.dd_array[i].id, items: itemRes});
+            this.dd_result.push( {head: this.dd_array[i].name, id_object: this.dd_array[i].id, address: this.dd_array[i].address, items: itemRes});
           }
 
     });

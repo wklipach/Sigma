@@ -5,13 +5,14 @@
 	<div cdkDropListGroup>
 		<div class="example-container" *ngFor="let items of dd_result; let i=index" cdkDrag>
 			<h2>{{items.head}}</h2>
+			<h4>{{items.address}}</h4>
 
 			<div cdkDropList #todoList="cdkDropList" [cdkDropListData]="items.items"
 				class="example-list" (cdkDropListDropped)="drop($event, items.head, items.id_object)">
 				<div class="example-box" *ngFor="let item of items.items" cdkDrag>
                     {{item.fio}}
                     <img [src] = "item.photo_name" width="40" height="40" class="rounded-circle mx-10 pt-2">
-
+					<div>ранг:   {{item.rank}}</div>
                 </div>
 			</div>
 		</div>

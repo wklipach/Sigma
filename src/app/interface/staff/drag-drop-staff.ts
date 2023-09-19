@@ -4,4 +4,5 @@ export interface ICard {
     id_staff: number;
     photo_name: string;
     fio: string;
+    rank: string;
   }

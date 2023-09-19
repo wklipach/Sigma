@@ -23,6 +23,11 @@ router.get('/', async function(req, res, next) {
       const result = await asyncDDStaffObjects(req.query.get_dragdrop);
       res.send(result);
     }
+    
+    if (req.query.dd_prot_object){
+      const result = await asyncDDProtectedObjects(req.query.dd_prot_object);
+      res.send(result);
+    }    
 
   });
 
@@ -426,7 +431,7 @@ router.get('/', async function(req, res, next) {
     let conn = await pool.getConnection();
     try {
           const sQuery = 
-          " select so.id, so.id_object, so.id_staff, s.fio, s.avatar_name as photo_name "+
+          " select so.id, so.id_object, so.id_staff, s.fio, s.avatar_name as photo_name, s.rank "+
           " from staff_object so "+
           " left join staff s on s.id_staff = so.id_staff "+ 
           " where id_object=?";
@@ -441,6 +446,24 @@ router.get('/', async function(req, res, next) {
            if (conn) conn.release(); 
        }
   }
+
+
+  async function asyncDDProtectedObjects(strings_object) {
+    let conn = await pool.getConnection();
+    try {
+          const sQuery = 
+          "select `id_object` as `id`, `name`, `address` from protected_object where id_object in ("+strings_object+") ";
+
+          const resSql = await conn.query(sQuery);            
+          return  JSON.stringify(resSql);           
+        }
+       catch (err) {
+          return  err;
+     } finally  {
+           if (conn) conn.release(); 
+       }
+  }  
+  
 
   module.exports = router;
 

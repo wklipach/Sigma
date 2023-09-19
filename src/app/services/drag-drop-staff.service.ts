@@ -18,7 +18,7 @@ interface IObj {
 })
 export class DragDropStaffService {
 
-  private dd_protected_objects: IObj[] = [];
+  private dd_protected_objects: number[] = [];
 
   constructor(private http: HttpClient, public gr: GlobalRef, private auth: AuthService ) { }
 
@@ -26,7 +26,7 @@ export class DragDropStaffService {
     this.dd_protected_objects = [];
 
     selected.map( (el: any) => {
-      this.dd_protected_objects.push({id: el.id_object, name: el.name })  ;
+      this.dd_protected_objects.push(el.id_object)  ;
     } )
 
  }
@@ -41,6 +41,16 @@ export class DragDropStaffService {
          .set('get_dragdrop', id_object);
     return this.http.get(this.gr.sUrlGlobal + 'staff', {params: params});
   }
+
+  getDDProtObj(prot_object: string) {
+    const params = new HttpParams()
+         .set('dd_prot_object', prot_object);
+
+         console.log('prot_object', prot_object);
+    return this.http.get(this.gr.sUrlGlobal + 'staff', {params: params});
+  }
+
+  
 
   drop(event: CdkDragDrop<ICard[]>, head: string, id_object: number) {
 
