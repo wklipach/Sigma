@@ -1,20 +1,22 @@
-<button (click)="onClose()" >Выход</button>
-<div></div>
+<button type="button" class="btn btn-secondary" (click)="onClose()" >Выход</button>
 
+<div class="wrapper">
 <div cdkDropList (cdkDropListDropped)="dropColumns($event)">
 	<div cdkDropListGroup>
 		<div class="example-container" *ngFor="let items of dd_result; let i=index" cdkDrag>
-			<h2>{{items.head}}</h2>
-			<h4>{{items.address}}</h4>
+			<h4>{{items.head}}</h4>
+			<h5>{{items.address}}</h5>
 
 			<div cdkDropList #todoList="cdkDropList" [cdkDropListData]="items.items"
 				class="example-list" (cdkDropListDropped)="drop($event, items.head, items.id_object)">
 				<div class="example-box" *ngFor="let item of items.items" cdkDrag>
-                    {{item.fio}}
-                    <img [src] = "item.photo_name" width="40" height="40" class="rounded-circle mx-10 pt-2">
-					<div>ранг:   {{item.rank}}</div>
+                <img [src] = "item.photo_name" width="40" height="40">
+					<span class="fio"> {{item.fio}}</span>
+                    <span class="badge rounded-pill text-bg-info fs-5 my-auto"> {{item.rank}}</span>
                 </div>
 			</div>
 		</div>
 	</div>
+</div>
+
 </div>
