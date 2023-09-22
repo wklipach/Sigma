@@ -9,7 +9,7 @@
   width: calc(100vw/5);
   height: auto;
   min-height: 250px;
-  border: solid 2px rgb(222, 231, 180);
+  border: solid 2px #ccc;
   padding: 5px;
   margin: 1px 1px;
   display: inline-block;
