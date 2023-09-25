@@ -1,5 +1,29 @@
 <form class="mb-2 px-9">
 
+
+    <div class="row gx-1 justify-content-start">
+  
+     
+  
+      <div class="col-lg-4 col-md-6 bg-secondary w-407px h-500px">
+ 
+ 
+
+      
+      </div>
+  
+      <div class="col-lg-4 col-md-6  bg-danger w-407px h-500px">
+   <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
+                    <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
+                    <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
+      </div>
+  
+    </div>
+ 
+
+
+
+
     <!-- <form class="m-0 h-auto" [formGroup]="form">
       
         <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
@@ -18,11 +42,9 @@
       
     <div class="card-body mt-2 p-10">
             <div class="row mb-6">
-                <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column">
-                        <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
-                    <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
-                    <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
-                </div>
+                <!-- <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column"> -->
+                       
+                <!-- </div> -->
                     
                 <div class="col-lg-8">
                             <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
