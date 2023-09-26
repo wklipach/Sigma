@@ -1,18 +1,28 @@
 <form class="mb-2 px-9">
 
 
-    <div class="row gx-1 justify-content-start">
-  
-     
-  
-      <div class="col-lg-4 col-md-6 bg-secondary w-407px h-500px">
+    <div class="row gx-1">
+      <div class="col-lg-4 col-md-6 oneCol">
  
- 
-
+        <div class="photo">
+            <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+            <ng-template #contentLoadAvatar class="image-input">
+            <img class="rounded  w-117px h-117px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+            </ng-template>
+            <ng-template #contentDefault>
+            <img class="rounded image-input-wrapper w-117px h-117px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
+            </ng-template>
+        </div>
+        
+<div class="fio">
+            <input type="text" name="fio" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+                   [value]="this.settingData.fio"
+                   (blur)="myUpdateClick($event.target, 'fio')"/>
+        </div>
       
       </div>
   
-      <div class="col-lg-4 col-md-6  bg-danger w-407px h-500px">
+      <div class="col-lg-8 h-1470px twoCol">
    <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
                     <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
                     <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
@@ -46,27 +56,10 @@
                        
                 <!-- </div> -->
                     
-                <div class="col-lg-8">
-                            <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
-                            <ng-template #contentLoadAvatar class="image-input">
-                            <img class="rounded  w-125px h-125px image-input-wrapper"  [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
-                            </ng-template>
-                            <ng-template #contentDefault>
-                            <img class="rounded image-input-wrapper w-125px h-125px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
-                            </ng-template>
-                </div>
+               
             </div>
             
-             <div class="row mb-6">
-                <!--begin::Label-->
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">ФИО</label>
-    
-                <div class="col-lg-8 fv-row">
-                    <input type="text" name="fio" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
-                           [value]="this.settingData.fio"
-                           (blur)="myUpdateClick($event.target, 'fio')"/>
-                </div>
-            </div>  
+            
     
             <div class="row mb-6">
                     <!--begin::Label-->

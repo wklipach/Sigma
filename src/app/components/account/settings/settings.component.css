@@ -1,4 +1,41 @@
+body{
+  font-family: 'Poppins;', sans-serif;
+}
+.oneCol{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;  
+   width: 407px;
+   min-height: 500px;
+   height: auto;
+   align-items:flex-start;  
+   border-right: 20px solid #B5B5C3;
+}
+.photo{
+  position: relative;
+  width: 117px;
+  height: 117px;
+  left: 33px;
+  top: 53px;
+  margin-right: 19px;
+  order: 1;
+}
+.fio{
+  position: absolute;
+  top: 60px;
+  left: 190px;
+  width: 330px;
+  font-size: 18px;
 
+  .twoCol{
+    width: 1063px;
+    padding: 95px 250px !important;
+    background-color: #baf51a;
+  }
+
+
+}
 .image-input {
     position: relative;
     display: inline-block;
