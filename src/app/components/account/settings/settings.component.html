@@ -22,14 +22,36 @@
                                 (blur)="myUpdateClick($event.target, 'fio')"/>
                             </div> 
                             <div class="status-text">25 лет, Суточник </div>  
-                            <button class="btn">чат</button>
-                </div>  
-                
-               
-       </div>
+                            
+                              <div class=" btn-line">
+                                <button class="btn-chat">чат</button>
+                                <button class="btn-report">отчёт</button>
+                              </div>
+                </div>
+        </div>
     
-    
+           <div class="col-line">
+            
         
+        <div class=" phone"> Телефон: </div>
+           
+        <div class=" phone-number">
+            <input type="tel" name="phone1" class="phone-number"
+            [value]="this.settingData.phone"
+            (blur)="myUpdateClick($event.target, 'phone')"/>
+        </div>
+
+         </div>
+
+         <div class="col-line">
+            <div class=" phone"> Разряд: </div>
+            <div class=" phone-number">
+            <input type="tel" name="phone1" class="phone-number"
+                [value]="this.settingData.phone"
+                (blur)="myUpdateClick($event.target, 'phone')"/>
+            </div>
+        </div>
+
       </div> <!-- END oneCOL -->
   
       <div class="col-lg-8 h-1470px twoCol">
@@ -108,9 +130,9 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
-                    <input type="tel" name="phone1" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
+                    <!-- <input type="tel" name="phone1" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
                            [value]="this.settingData.phone"
-                           (blur)="myUpdateClick($event.target, 'phone')"/>
+                           (blur)="myUpdateClick($event.target, 'phone')"/> -->
                 </div>
                 
             </div>
@@ -186,7 +208,7 @@
     
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
-                <div class="col-lg-8 fv-row">
+                <!-- <div class="col-lg-8 fv-row">
                     <select name="rank" data-control="selectRank" class="form-select form-select-solid form-select-lg fw-semibold" 
                             (change)="myUpdateNumberClick($event, 'rank')"
                             [(ngModel)]="this.settingData.rank" >
@@ -195,7 +217,7 @@
                         <option>6</option>
                         <option>Нет</option>
                     </select>
-                </div>
+                </div> -->
             </div>
          
             

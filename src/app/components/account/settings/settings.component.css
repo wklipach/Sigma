@@ -12,14 +12,13 @@ body{
   min-height: 900px;
   box-sizing: border-box;
   }
-   .img-block{
+  .img-block{
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
   width: 100%;
   height: auto;
-
  }
 
 .photo{
@@ -29,12 +28,13 @@ body{
   left: 33px;
   margin-top: 53px;
   margin-left: 33px;
-
 }
-
 .text-block{
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 0 0 20px;
+  width: 100%;
 }
 .fc-fio{
  display: flex;
@@ -42,35 +42,92 @@ body{
  font-size: 18px;
  color: #464457;
  margin-top: 56px;
- margin-left: 15px;
  font-family: Poppins;
  font-size: 18px;
  font-style: normal;
  font-weight: 600;
  line-height: normal;
  border: none;
-
+ padding: 0 !important;
 }
 .status-text{
   display: flex;
   flex-direction: row;
   color: #BABAC5;
   font-family: Poppins;
-  margin-top: 0;
+  margin-top: 5px;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-left: 22px;
+
 }
-.btn{
+.btn-line{
+  display: flex;
+  flex-direction: row;
+  align-items: self-end;
+  width: 100%;
+  margin-top: auto; 
+
+}
+.btn-chat{
+  font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
   width: 74px;
   height: 36px;
   flex-shrink: 0;
   border-radius: 2px;
   background: #21C192;
+  color: #fff;
+}
+.btn-report{
+  font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+width: 85px;
+height: 36px;
+margin-left: auto;
+margin-right: 34px;
+flex-shrink: 0;
+color: #fff;
+border-radius: 2px;
+background: #526AE5;
 }
 
+.col-line{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 30px;
+margin-left: 33px;
+}
+.phone{
+  color: #464457;
+font-family: Poppins;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+
+}
+.phone-number{
+  color: #4C81D0;
+  text-align: right;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: none;
+  margin-left: auto;
+margin-right: 34px;
+}
 
   .twoCol{
     width: 1063px;
