@@ -1,0 +1,4 @@
+name,imageUrl,area,profileUrl,office,tags,isLoggedUser,positionName,id,parentId
+Иван Иванов,assets/img/avatar.png,'Дом1',assets/img/avatar.png,CTO office,"Ceo,tag1,manager,cto",false,Chief Executive Officer,1,
+Петр Петров,assets/img/avatar.png,'Дом2',assets/img/avatar.png,CEO office,"Ceo,tag1, tag2",false,CTO ,2,1
+Федор Федоров,assets/img/avatar.png,'Дом3',assets/img/avatar.png,CEO office,"Ceo,tag1, tag2",false,CTO ,3,1

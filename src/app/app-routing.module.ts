@@ -38,6 +38,7 @@ import { ListPostComponent } from './components/protected_objects/post/list-post
 import { PostReadComponent } from './components/protected_objects/post/post-read/post-read.component';
 import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-test.component';
 import { DragDropStaffComponent } from './components/protected_objects/drag-drop-staff/drag-drop-staff.component';
+import { DragDropStaff2Component } from './components/protected_objects/drag-drop-staff2/drag-drop-staff2.component';
 
 const routes: Routes = [
   { path: '', component: Obj2Component, canActivate: [mainGuard] },
@@ -76,8 +77,8 @@ const routes: Routes = [
   { path: 'listpost', component: ListPostComponent, canActivate: [mainGuard] },
   { path: 'postread', component: PostReadComponent, canActivate: [mainGuard] },
   { path: 'ddtest', component: DragDropTestComponent, canActivate: [mainGuard] },
-  { path: 'ddstaff', component: DragDropStaffComponent, canActivate: [mainGuard] }
-   
+  { path: 'ddstaff', component: DragDropStaffComponent, canActivate: [mainGuard] },
+  { path: 'ddstaff2', component: DragDropStaff2Component, canActivate: [mainGuard] }
   
   ];
 

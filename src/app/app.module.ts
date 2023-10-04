@@ -63,6 +63,8 @@ import { DragDropTestComponent } from './components/drag-drop-test/drag-drop-tes
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragDropStaffComponent } from './components/protected_objects/drag-drop-staff/drag-drop-staff.component';
 import { DragDropStaffService } from './services/drag-drop-staff.service';
+import { DragDropStaff2Component } from './components/protected_objects/drag-drop-staff2/drag-drop-staff2.component';
+import { D3OrgChartComponent } from './d3-org-chart/d3-org-chart.component';
 
 
 
@@ -107,7 +109,9 @@ import { DragDropStaffService } from './services/drag-drop-staff.service';
     ListPostComponent,
     PostReadComponent,
     DragDropTestComponent,
-    DragDropStaffComponent
+    DragDropStaffComponent,
+    DragDropStaff2Component,
+    D3OrgChartComponent
   ],
   imports: [
     BrowserModule,

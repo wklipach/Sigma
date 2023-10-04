@@ -734,13 +734,17 @@ export class Obj2Component {
     }
 
     const url = this.router.serializeUrl(this.router.createUrlTree(['ddstaff'], { queryParams: { navSettings: JSON.stringify(this.dds.getDDProtectedObjects()) } }));
-
-
-    console.log(this.dds.getDDProtectedObjects());
-
+    //console.log(this.dds.getDDProtectedObjects());
     const newTab = window.open(url, '_blank'); 
     if(newTab) {
         newTab.opener = null;
+    }
+
+    const url2 = this.router.serializeUrl(this.router.createUrlTree(['ddstaff2'], { queryParams: { navSettings: JSON.stringify(this.dds.getDDProtectedObjects()) } }));
+    //console.log(this.dds.getDDProtectedObjects());
+    const newTab2 = window.open(url2, '_blank'); 
+    if(newTab2) {
+        newTab2.opener = null;
     }
 
   }
