@@ -34,6 +34,7 @@ export class D3OrgChartComponent {
 
     if (!this.chart) {
       return;
+      
     }
 
     if (!this.chartContainer) {
