@@ -33,7 +33,7 @@
            <div class="col-line">
             
         
-        <div class=" phone"> Телефон: </div>
+        <div class="head-line"> Телефон: </div>
            
         <div class=" phone-number">
             <input type="tel" name="phone1" class="phone-number"
@@ -44,7 +44,25 @@
          </div>
 
          <div class="col-line">
-            <div class=" phone"> Разряд: </div>
+            <div class="head-line"> Разряд: </div>
+            <div class=" phone-number">
+            <input type="tel" name="phone1" class="phone-number"
+                [value]="this.settingData.phone"
+                (blur)="myUpdateClick($event.target, 'phone')"/>
+            </div>
+        </div>
+
+        <div class="col-line">
+            <div class="head-line"> ЛК: </div>
+            <div class=" phone-number">
+            <input type="tel" name="phone1" class="phone-number"
+                [value]="this.settingData.phone"
+                (blur)="myUpdateClick($event.target, 'phone')"/>
+            </div>
+        </div>
+
+        <div class="col-line">
+            <div class="head-line"> РСЛА: </div>
             <div class=" phone-number">
             <input type="tel" name="phone1" class="phone-number"
                 [value]="this.settingData.phone"
@@ -55,14 +73,31 @@
       </div> <!-- END oneCOL -->
   
       <div class="col-lg-8 h-1470px twoCol">
-   <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
-                    <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
-                    <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
+        <div class="general-information">Общая информация</div>
+        <div class="text-photo">Фотография сотрудника</div>
+        <div class="big-photo">
+            
+            <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
+            <ng-template #contentLoadAvatar class="image-input">
+            <img   [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
+            </ng-template>
+            <ng-template #contentDefault>
+            <img class="rounded" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
+            <img class="dots-photo" src="/assets/img/dots.png">
+            </ng-template>
+        </div>
+        
+        
+        
+        <div class="type-block">Тип сотрудника</div>
+        
       </div>
   
     </div>
  
-
+<input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
+                            <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
+                            <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
 
 
 
@@ -202,9 +237,7 @@
                         <option *ngFor="let gtp of this.guideTypeperson" [value]="gtp.name">{{gtp.name}}</option>
                     </select>
                 </div>
-            </div>               
-
-           
+            </div>
     
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
