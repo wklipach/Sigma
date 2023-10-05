@@ -65,7 +65,8 @@ import { DragDropStaffComponent } from './components/protected_objects/drag-drop
 import { DragDropStaffService } from './services/drag-drop-staff.service';
 import { DragDropStaff2Component } from './components/protected_objects/drag-drop-staff2/drag-drop-staff2.component';
 import { D3OrgChartComponent } from './d3-org-chart/d3-org-chart.component';
-
+import {OrgChartModule} from './modules/org-chart/org-chart.module';
+import { DragGropStaff3Component } from './components/protected_objects/drag-grop-staff3/drag-grop-staff3.component';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { D3OrgChartComponent } from './d3-org-chart/d3-org-chart.component';
     DragDropTestComponent,
     DragDropStaffComponent,
     DragDropStaff2Component,
-    D3OrgChartComponent
+    D3OrgChartComponent,
+    DragGropStaff3Component
   ],
   imports: [
     BrowserModule,
@@ -124,7 +126,8 @@ import { D3OrgChartComponent } from './d3-org-chart/d3-org-chart.component';
     FontAwesomeModule,
     ResizableModule,
     NgxDatatableModule,
-    DragDropModule
+    DragDropModule,
+    OrgChartModule
   ],
   providers: [GlobalRef, 
               DatePipe, 

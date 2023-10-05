@@ -1,0 +1,19 @@
+<angular-org-chart [nodeTemplate]="nodeTemplate" [data]="tree" #exampleChart="orgChart" (dragover)="onDragOver($event)">
+
+    <!-- OPTIONAL: zoom button with an ugly png -->
+    <button zoom-button class="zoom-button" (click)="exampleChart.toggleZoom()">
+        <img src="assets/zoom-in-out.png" width="100%" alt="ZoomInOut">
+    </button>
+
+</angular-org-chart>
+
+<!-- Node Template -->
+<ng-template #nodeTemplate let-node>
+    <div class="chart-node" (dragstart)="dragstart($event)" (dragend)="onDragEnd($event)" (dragover)="onDragOver($event)">
+        <img [src]="node?.image" class="class='rounded image-input-wrapper w-125px h-125px; myClass">
+        <div class="name">{{node?.name}}</div>
+        <div class="description">{{node?.description}} </div>
+        <!-- An ugly button to fold/unfold -->
+        <div *ngIf="node.children.length" (click)="node.hideChildren = !node.hideChildren" class="tree-fold-btn">{{node.hideChildren ? '+' : '-'}}</div>
+    </div>
+</ng-template>

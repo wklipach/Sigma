@@ -87,7 +87,11 @@ export class DragDropStaff2Component {
         }
       }
     }
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'link'; // ставим тип курсора
+
   }
+
 
 
   moveElement(beginId: number, endId: number) {

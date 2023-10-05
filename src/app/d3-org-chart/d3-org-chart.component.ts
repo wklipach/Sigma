@@ -43,6 +43,7 @@ export class D3OrgChartComponent {
 
 
 
+    let mSt ="background-color: blue"; 
 
     this.chart
       .container(this.chartContainer.nativeElement)
@@ -51,9 +52,9 @@ export class D3OrgChartComponent {
       .nodeHeight( () => 160)
       .nodeContent( (node: any, i: any, arr: any, state: any) => {
 
-        return "<div>"+node.data.name +"</div>"+
+        return "<div style='"+mSt+ "'>"+node.data.name +"</div>"+
                "<div>"+ i +"</div>"+
-               "<img draggable='true' tree_id='"+ node.data.id +"' class='rounded image-input-wrapper w-125px h-125px'"+" src='"+node.data.profileUrl+"'>";
+               "<img tree_id='"+ node.data.id +"' class='rounded image-input-wrapper w-125px h-125px'"+" src='"+node.data.profileUrl+"'>";
       })
       .render();
   }
