@@ -149,8 +149,8 @@ onDragEnd(event: any) {
 }
 
 onDragOver(event: any) {
-  event.preventDefault();
-  event.dataTransfer.dropEffect = 'link'; // ставим тип курсора
+  event.preventDefault();    
+  event.dataTransfer.dropEffect = 'move'; // ставим тип курсора
 }
 
 }
