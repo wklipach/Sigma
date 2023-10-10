@@ -24,6 +24,8 @@ interface IDDResult2 {
   rank: string;
   parentId?: number;
   id_staff?: number;
+  Color: string;
+  phone: string
 }
 
 
@@ -31,6 +33,7 @@ interface IObj {
   id: number;
   name: string;
   address: string;
+  photo_name: string;
 }
 
 @Component({
@@ -56,7 +59,7 @@ export class DragDropStaff2Component {
       const strParam = dd_param.join(',');
       
        this.dds.getDDProtObj(strParam).subscribe( (res: any) => {
-        //console.log('res=', res);
+        console.log('res=', res);
          this.dd_array = res;
          this.loadData();
        });
@@ -70,16 +73,26 @@ export class DragDropStaff2Component {
 
 
 
-    this.dd_result.push({id: 0, name: "", address: "", photo_name: "/assets/img/dots.png", rank: "", parentId: undefined});
+    this.dd_result.push({id: 0, name: "", address: "", photo_name: "/assets/img/dots.png", rank: "", parentId: undefined, Color: '', phone: ''});
 
     for (let i = 0; i < this.dd_array.length; i++) {
+
+
+      if (!this.dd_array[i].photo_name) this.dd_array[i].photo_name="/assets/img/blank-building.svg"; 
+                                        else this.dd_array[i].photo_name= this.gr.sUrlObjectGlobal+ this.dd_array[i].photo_name;
+
 
       this.dd_result.push( {id: this.dd_array[i].id*(-1), 
                             name: this.dd_array[i].name, 
                             address: this.dd_array[i].address, 
-                            photo_name: "/assets/img/usernull.jpg", 
+                            photo_name: this.dd_array[i].photo_name, 
                             rank: '', 
-                            parentId: 0} );
+                            parentId: 0,
+                            Color: '',
+                            phone: ''} );
+
+
+                            // адрес, телефон, режим работы, начальник охраны, какая сп                            
 
         //this.dd_result.push( {name: this.dd_array[i].name, id_object: this.dd_array[i].id, address: this.dd_array[i].address, items: itemRes});
     }
@@ -90,27 +103,28 @@ export class DragDropStaff2Component {
     }
 
     forkJoin(sources)
-    .subscribe(dataArray => {
+    .subscribe((dataArray: any[]) => {
         
           for (let i = 0; i < this.dd_array.length; i++) {
-            let itemRes: ICard[] = [];
+            //console.log('i=', dataArray[i]);
                 dataArray[i].map( (val: any) => {
-                  
                   if (!val.photo_name) val.photo_name="/assets/img/usernull.jpg"; else val.photo_name= this.gr.sUrlAvatarGlobal+ val.photo_name;
                   if (!val.rank) val.rank = "";
-
-                  this.dd_result.push({id: val.id, name: val.fio, address: "", photo_name: val.photo_name, rank: val.rank, parentId: val.id_object*(-1), id_staff: val.id_staff });
-
+                  this.dd_result.push({id: val.id, 
+                                       name: val.fio, 
+                                       address: "", 
+                                       photo_name: val.photo_name, 
+                                       rank: val.rank, 
+                                       parentId: val.id_object*(-1), 
+                                       id_staff: val.id_staff,
+                                       Color: val.Color,
+                                       phone: val.phone });
                 });
-
           }
 
-          //console.log('this.dd_result=', this.dd_result);
           this.dd_result = [...this.dd_result];
 
     });
-
-
 
   }  
 

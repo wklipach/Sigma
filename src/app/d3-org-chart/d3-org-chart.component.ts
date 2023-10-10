@@ -61,7 +61,8 @@ export class D3OrgChartComponent {
 
 const color = '#FFFFFF';
 
-return    `
+const sSecurityGuard = 
+`
          <div draggable="true" tree_id=${node.data.id}
              style="font-family: 'Inter', sans-serif;background-color:${color}; position:absolute;margin-top:-1px; margin-left:-1px;width:${node.width}px;height:${node.height}px;border-radius:10px;border: 1px solid #E4E2E9">
             <div tree_id=${node.data.id} style="background-color:${color};position:absolute;margin-top:-25px;margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
@@ -69,7 +70,9 @@ return    `
               node.data.photo_name
             }" style="position:absolute;margin-top:-20px;margin-left:${20}px;border-radius:100px;width:40px;height:40px;" />
             
-            <div tree_id=${node.data.id} style="color:#08011E;position:absolute;right:20px;top:17px;font-size:10px;"><i tree_id=${node.data.id} class="fas fa-ellipsis-h"></i></div>
+            <div tree_id=${node.data.id} style="color:#08011E;position:absolute;right:20px;top:17px;font-size:10px;"><i tree_id=${node.data.id} class="fa fa-star"></i>  ${
+               node.data.id_staff
+            }</div>
 
             <div tree_id=${node.data.id} style="font-size:15px;color:#08011E;margin-left:20px;margin-top:32px"> ${
               node.data.name
@@ -79,14 +82,70 @@ return    `
             } </div>
 
             <div tree_id=${node.data.id} style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:10px;"> ${
-              node.data.rank
+              'Ранг: ' + node.data.rank
             } </div>
+
+            <div tree_id=${node.data.id} style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:10px;"> ${
+              'Тел: ' + node.data.phone
+            } </div>
+
+            <div tree_id=${node.data.id} style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:10px;"> ${
+              'ОЛЛР: ' + node.data.Color
+            } </div>
+
 
           </div>
           `;
 
-      })
-      .render();
+
+          const sSecurityObject =    
+          `
+          <div draggable="true" tree_id=${node.data.id}
+              style="font-family: 'Inter', sans-serif;background-color:${color}; position:absolute;margin-top:-1px; margin-left:-1px;width:${node.width}px;height:${node.height}px;border-radius:10px;border: 1px solid #E4E2E9">
+             <div tree_id=${node.data.id} style="background-color:${color};position:absolute;margin-top:-25px;margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
+             <img draggable="false" tree_id=${node.data.id} src=" ${
+               node.data.photo_name
+             }" style="position:absolute;margin-top:-20px;margin-left:${20}px;border-radius:100px;width:40px;height:40px;" />
+             
+
+             <div tree_id=${node.data.id} style="font-size:15px;color:#08011E;margin-left:20px;margin-top:32px"> ${
+               node.data.name
+             } </div>
+             <div tree_id=${node.data.id} style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:10px;"> ${
+               node.data.address
+             } </div>
+ 
+           </div>
+           `;
+ 
+           const sTopNode =    
+           `
+           <div draggable="true" tree_id=${node.data.id}
+               style="font-family: 'Inter', sans-serif;background-color:${color}; position:absolute;margin-top:-1px; margin-left:-1px;width:${node.width}px;height:${node.height}px;border-radius:10px;border: 1px solid #E4E2E9">
+              <div tree_id=${node.data.id} style="background-color:${color};position:absolute;margin-top:-25px;margin-left:${15}px;border-radius:100px;width:50px;height:50px;" ></div>
+              <img draggable="false" tree_id=${node.data.id} src=" ${
+                node.data.photo_name
+              }" style="position:absolute;margin-top:-20px;margin-left:${20}px;border-radius:100px;width:40px;height:40px;" />
+              
+           </div>
+            `;
+
+ 
+         if (node.data.id == 0) {
+          return    sTopNode;
+         }  
+
+         if (node.data.parentId == 0) {
+          return    sSecurityObject;
+         }  
+
+         
+         return    sSecurityGuard;
+
+
+      }
+     
+      ).render();
   }
 
   

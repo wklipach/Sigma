@@ -431,13 +431,25 @@ router.get('/', async function(req, res, next) {
     let conn = await pool.getConnection();
     try {
           const sQuery = 
-          " select so.id, so.id_object, so.id_staff, s.fio, s.avatar_name as photo_name, s.rank "+
+          " select so.id, so.id_object, so.id_staff, s.fio, s.avatar_name as photo_name, s.rank, '' as Color, s.phone "+
           " from staff_object so "+
           " left join staff s on s.id_staff = so.id_staff "+ 
           " where id_object=?";
-
+         
           const params = [id_object]
           const resSql = await conn.query(sQuery, params);            
+
+
+          const resStringBadge = await conn.query(sqlStringBadge);            
+          console.log('a1');
+          for (key in resSql) {
+            const resColor = resStringBadge.find(staff => staff.id_staff.toString() === resSql[key].id_staff.toString()); 
+            if (resColor) {
+               resSql[key].Color = resColor.Color;
+               console.log('resColor.Color', resColor.Color);
+            }
+          }
+
           return  JSON.stringify(resSql);           
         }
        catch (err) {
@@ -452,7 +464,7 @@ router.get('/', async function(req, res, next) {
     let conn = await pool.getConnection();
     try {
           const sQuery = 
-          "select `id_object` as `id`, `name`, `address` from protected_object where id_object in ("+strings_object+") ";
+          "select `id_object` as `id`, `name`, `address`, photo_name from protected_object where id_object in ("+strings_object+") ";
 
           const resSql = await conn.query(sQuery);            
           return  JSON.stringify(resSql);           
