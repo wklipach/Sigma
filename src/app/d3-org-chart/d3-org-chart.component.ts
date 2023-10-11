@@ -61,6 +61,8 @@ export class D3OrgChartComponent {
 
 const color = '#FFFFFF';
 
+// изменено виталий
+
 const sSecurityGuard = 
 `
          <div draggable="true" tree_id=${node.data.id}
