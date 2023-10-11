@@ -7,6 +7,7 @@ import { DragDropStaffService } from 'src/app/services/drag-drop-staff.service';
 import { GlobalRef } from 'globalref';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
+import { TabelService } from 'src/app/services/tabel.service';
 
 
 interface IDDResult {
@@ -25,7 +26,9 @@ interface IDDResult2 {
   parentId?: number;
   id_staff?: number;
   Color: string;
-  phone: string
+  phone: string;
+  dateBegin?: Date;
+  dateEnd?: Date;
 }
 
 
@@ -50,7 +53,10 @@ export class DragDropStaff2Component {
   dd_result: IDDResult2[] = [];
 
 
-  constructor(private dds: DragDropStaffService, private gr: GlobalRef, private route: ActivatedRoute) {}
+  constructor(private dds: DragDropStaffService, 
+              private gr: GlobalRef, 
+              private route: ActivatedRoute,
+              private tabelsrv: TabelService) {}
 
   ngOnInit() {
 
@@ -67,6 +73,13 @@ export class DragDropStaff2Component {
       }
     );  
 
+  }
+
+
+  dateLocal(d: string) {
+    const dt = new Date(d);
+    dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+    return dt.toISOString().slice(0, 10);
   }
 
   loadData() {
@@ -110,6 +123,18 @@ export class DragDropStaff2Component {
                 dataArray[i].map( (val: any) => {
                   if (!val.photo_name) val.photo_name="/assets/img/usernull.jpg"; else val.photo_name= this.gr.sUrlAvatarGlobal+ val.photo_name;
                   if (!val.rank) val.rank = "";
+
+                  if (val.DateBegin) {
+                    const currentDate = this.dateLocal(val.DateBegin);
+                    val.DateBegin = currentDate;
+                  } else val.DateBegin = '';
+
+                  if (val.DateEnd) {
+                    const currentDate = this.dateLocal(val.DateEnd);
+                    val.DateEnd = currentDate;
+                  } else val.DateEnd = '';                  
+
+
                   this.dd_result.push({id: val.id, 
                                        name: val.fio, 
                                        address: "", 
@@ -118,10 +143,14 @@ export class DragDropStaff2Component {
                                        parentId: val.id_object*(-1), 
                                        id_staff: val.id_staff,
                                        Color: val.Color,
-                                       phone: val.phone });
+                                       phone: val.phone,
+                                       dateBegin: val.DateBegin,
+                                       dateEnd: val.DateEnd});
                 });
+
           }
 
+          console.log('this.dd_result',this.dd_result);
           this.dd_result = [...this.dd_result];
 
     });
@@ -130,10 +159,10 @@ export class DragDropStaff2Component {
 
 
   dragStart(event: any) {
-    if (event.originalTarget) {
-      if (event.originalTarget.attributes) {
-         console.log('dragStart tree_id=', event.originalTarget.attributes.tree_id.value);
-         this.beginTree = event.originalTarget.attributes.tree_id.value;
+    if (event.target) {
+      if (event.target.attributes) {
+         console.log('dragStart tree_id=', event.target.attributes.tree_id.value);
+         this.beginTree = event.target.attributes.tree_id.value;
       }
     }
   }
@@ -141,10 +170,10 @@ export class DragDropStaff2Component {
   dragEnd(event: any) {
 
 
-    if (event.originalTarget) {
-      if (event.originalTarget.attributes) {
-        if (event.originalTarget.attributes.tree_id) {
-            this.endTree = event.originalTarget.attributes.tree_id.value;
+    if (event.target) {
+      if (event.target.attributes) {
+        if (event.target.attributes.tree_id) {
+            this.endTree = event.target.attributes.tree_id.value;
             console.log('dragEnd this.beginTree = ', this.beginTree);
             console.log('dragEnd this.endTree = ', this.endTree);
 
@@ -192,6 +221,43 @@ export class DragDropStaff2Component {
     });
     
     this.dd_result = [...this.dd_result];
+  }
+
+
+  idDateisValid (date: Date) {
+    return date.getTime() === date.getTime();
+  }               
+
+  clickOrgChart(event: any) {
+
+    if (event.target &&
+       event.target.attributes &&
+       event.target.attributes.id &&
+       event.target.attributes.tree_id) {
+      
+        if (event.target.attributes.id.value == 'dateBegin') {
+            let date = new Date(event.target.value);
+              const isDate = this.idDateisValid(date);
+              if (isDate) {
+                this.tabelsrv.setTabelDateBegin(date, event.target.attributes.tree_id.value).subscribe( (res: any) => { console.log('res update = ', res); } );
+              } else {
+                this.tabelsrv.setTabelDateBeginNull(event.target.attributes.tree_id.value).subscribe( (res: any) => { console.log('res update = ', res); } );
+              }
+        }
+
+        if (event.target.attributes.id.value == 'dateEnd') {
+              let date = new Date(event.target.value);
+              const isDate = this.idDateisValid(date);
+              if (isDate) {
+                  this.tabelsrv.setTabelDateEnd(date, event.target.attributes.tree_id.value).subscribe( (res: any) => { console.log('res update = ', res); } );
+              } else {
+                  this.tabelsrv.setTabelDateEndNull(event.target.attributes.tree_id.value).subscribe( (res: any) => { console.log('res update = ', res); } );
+              }
+         }
+ 
+    }           
+    
+
   }
 
  

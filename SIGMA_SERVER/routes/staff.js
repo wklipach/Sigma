@@ -215,7 +215,6 @@ router.get('/', async function(req, res, next) {
     }
   }
 
-
   async function asyncUpdateDragDrop(id_so, id_object, id_staff, id_user) {
     let conn = await pool.getConnection();
     try {
@@ -431,7 +430,7 @@ router.get('/', async function(req, res, next) {
     let conn = await pool.getConnection();
     try {
           const sQuery = 
-          " select so.id, so.id_object, so.id_staff, s.fio, s.avatar_name as photo_name, s.rank, '' as Color, s.phone "+
+          " select so.id, so.id_object, so.id_staff, s.fio, s.avatar_name as photo_name, s.rank, '' as Color, s.phone, so.DateBegin, so.DateEnd "+
           " from staff_object so "+
           " left join staff s on s.id_staff = so.id_staff "+ 
           " where id_object=?";

@@ -48,8 +48,8 @@ export class D3OrgChartComponent {
     this.chart
       .container(this.chartContainer.nativeElement)
       .data(this.data)
-      .nodeWidth( () => 160)
-      .nodeHeight( () => 160)
+      .nodeWidth( () => 170)
+      .nodeHeight( () => 170)
       .nodeContent( (node: any, i: any, arr: any, state: any) => {
 
 /*        
@@ -95,6 +95,16 @@ const sSecurityGuard =
               'ОЛЛР: ' + node.data.Color
             } </div>
 
+            <div tree_id=${node.data.id} style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:10px;"> 
+               Дата c:  
+               <input type="date" id='dateBegin' tree_id=${node.data.id } value="${node.data.dateBegin }" style="margin-left:6px;"/>
+            </div>
+
+            <div tree_id=${node.data.id} style="color:#716E7B;margin-left:20px;margin-top:3px;font-size:10px;"> 
+               Дата по:  
+               <input type = "date" id='dateEnd' tree_id=${node.data.id } value="${node.data.dateEnd }" />
+            </div>
+            
 
           </div>
           `;
@@ -151,5 +161,10 @@ const sSecurityGuard =
   }
 
   
+  setaDate(event: any) {
+
+    console.log('изменение даты', event);
+
+  }
 
 }
