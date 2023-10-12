@@ -48,8 +48,8 @@ export class D3OrgChartComponent {
     this.chart
       .container(this.chartContainer.nativeElement)
       .data(this.data)
-      .nodeWidth( () => 170)
-      .nodeHeight( () => 170)
+      .nodeWidth( () => 180)
+      .nodeHeight( () => 180)
       .nodeContent( (node: any, i: any, arr: any, state: any) => {
 
 /*        
@@ -61,7 +61,7 @@ export class D3OrgChartComponent {
 
 const color = '#FFFFFF';
 
-// изменено виталий
+// изменено виталий - 2
 
 const sSecurityGuard = 
 `
