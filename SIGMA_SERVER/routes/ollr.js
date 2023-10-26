@@ -29,7 +29,7 @@ router.get('/', async function(req, res, next) {
     }
 
     if (req.body['add_ollr']) {
-      const result = await asyncAddOllr(req.body['id_staff'], req.body['id_ollr'], req.body['DateBegin'], req.body['id_user']);
+      const result = await asyncAddOllr(req.body['id_staff'], req.body['id_ollr'], req.body['DateBegin'], req.body['SerNo'], req.body['id_user']);
       res.send(result);
     }
 
@@ -37,21 +37,21 @@ router.get('/', async function(req, res, next) {
 
   });
 
-  async function asyncAddOllr(id_staff, id_ollr, DateBegin, id_user) { 
+  async function asyncAddOllr(id_staff, id_ollr, DateBegin, SerNo, id_user) { 
     let conn = await pool.getConnection();
     try {
 
 
         addDate = DateBegin.replace("Z", " ").replace("T", " ");
 
-        const params = [id_ollr, id_staff, addDate];
+        const params = [id_ollr, id_staff, addDate, SerNo];
         const sQuery = 
-        "insert staff_ollr (id_ollr, id_staff, DateBegin) value (?,?,?)";
+        "insert staff_ollr (id_ollr, id_staff, DateBegin, SerNo) value (?,?,?,?)";
 
         console.log(sQuery, params);
 
 
-        const paramsJournal = [id_staff, id_ollr, id_user];
+        const paramsJournal = [id_staff, id_ollr+' '+SerNo, id_user];
         const sJournal = 
         "insert staff_log (`newvalue`, `id_staff`, `field`, `id_user`, `date_oper`) value('add ollr', ?, ?, ?, now())";
 

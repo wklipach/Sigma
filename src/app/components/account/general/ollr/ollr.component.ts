@@ -19,6 +19,7 @@ interface IOLLR  {
   Color?: string; 
   DateBegin?: Date; 
   ​​​​period?: string;  
+  SerNo?: string;  
   bitClose?: string;  
  };
 
@@ -46,6 +47,7 @@ interface IOllrGuide {
 })
 export class OllrComponent {
 
+  boolSerNo = false;
   id_staff: number = 0;
   ColumnSizeObj:  ITable[] = [];
   ShowOLLR: IOLLR[] = [];
@@ -211,7 +213,15 @@ addDateBegin(e: any) {
   const isDate = this.idDateisValid(date);
   if (isDate) {
       this.settingOllr.DateBegin = date;
-  }
+  } else this.settingOllr.DateBegin = undefined;
+}
+
+addSerNo(e: any) {
+   let SerNo = e.target.value;
+   if (SerNo) {
+    this.settingOllr.SerNo = SerNo;
+   } else this.settingOllr.SerNo = '';
+
 }
 
 addDoc() {
@@ -262,14 +272,22 @@ addSave() {
     return;
   }
 
+  if (this.settingOllr.id_ollr == '8' && !this.settingOllr.SerNo) {
+    alert('Ввведите серийный номер.');
+    this.addClose();
+    return;
+  }
+
+
   console.log(this.settingOllr);  
 
+  if (!this.settingOllr.SerNo) this.settingOllr.SerNo = '';
+  if (this.settingOllr.id_ollr != '8') this.settingOllr.SerNo = '';
 
-  this.servollr.addOllr(this.settingOllr.id_staff, this.settingOllr.id_ollr, this.settingOllr.DateBegin).subscribe ( res => {
+  this.servollr.addOllr(this.settingOllr.id_staff, this.settingOllr.id_ollr, this.settingOllr.DateBegin, this.settingOllr.SerNo).subscribe ( res => {
     this.loadData();
   });
-  
-    //
+
 
 
   this.addClose();
@@ -282,39 +300,53 @@ backGeneral() {
   this.router.navigate(['general'], { queryParams: { id_staff: this.id_staff }});
 }
 
+changeOllr(target: any) {
+
+  if (!target.value) return;
+
+  let indexOLLR = this.guideOllr.findIndex( (el  =>  el.name == target.value));
+  let id_ollr = this.guideOllr[indexOLLR].id_ollr;
+
+  if (id_ollr && id_ollr == '8') {
+    this.boolSerNo = true;
+    return;
+  } else 
+  this.boolSerNo = false;
+
+}
 
  
 getRowClass(row: any) {
 
   if (row.Color === "red") {
-    console.log('row red=', row);
+    //console.log('row red=', row);
     return {
       'row-red-color': true
     };
   }
 
   if (row.Color == "green") {
-    console.log('row green=', row);
+    //console.log('row green=', row);
     return {
       'row-green-color': true
     };
   }
 
   if (row.Color == "gray") {
-    console.log('row gray=', row);
+    //console.log('row gray=', row);
     return {
       'row-gray-color': true
     };
   }
 
   if (row.Color == "crossed_out") {
-    console.log('row crossed_out=', row);
+    //console.log('row crossed_out=', row);
     return {
       'row-crossedout': true
     };
   }
 
-  console.log('row empty=', row);
+  //console.log('row empty=', row);
   return {};
 
 

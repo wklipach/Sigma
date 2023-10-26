@@ -35,6 +35,11 @@ class="material striped"
     </ng-template>
   </ngx-datatable-column>
 
+  <ngx-datatable-column prop = "SerNo" name = "Серийный номер" [width]="getColumnSize('SerNo')" >
+    <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+        <span> {{value}} </span>
+    </ng-template>
+  </ngx-datatable-column>
 
   <!-- НАЧАЛО ПОЛЯ close --> 
   <ngx-datatable-column prop="delete" name="Закрыть" [width]="getColumnSize('delete')">
@@ -116,11 +121,20 @@ class="material striped"
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Выбрать</label>
     <div class="col-lg-5 fv-row">
         <select name="department" data-control="selectDepartment" class="form-select form-select-solid form-select-lg fw-semibold" 
+                (change)="changeOllr($event.target)"
                 [(ngModel)]="this.settingOllr.gname">
                 <option *ngFor="let go of this.guideOllr" [value]="go.name">{{go.name}}</option>
         </select>
       </div>
 </div>
+
+<div class="d-flex my-3 justify-content-left w-100" *ngIf="boolSerNo">
+  <label class="col-lg-4 col-form-label fw-semibold fs-6">Серийный номер</label>
+  <div class="col-lg-5 fv-row">
+    <input name="SerNo" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" (change)="addSerNo($event)" /> 
+  </div>
+</div>
+
 
 <div class="d-flex my-3 justify-content-left w-100">
     <label class="col-lg-4 col-form-label fw-semibold fs-6">Дата документа</label>

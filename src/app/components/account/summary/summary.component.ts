@@ -39,6 +39,7 @@ interface IOLLR  {
   Color?: string; 
   DateBegin?: string; 
   ​​​​period?: string;  
+  SerNo?: string; 
  };
 
 

@@ -156,7 +156,14 @@
             <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
               <span>   {{ value }}  </span>
               </ng-template>
-        </ngx-datatable-column>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column prop = "SerNo" name = "Серийный номер" [width]="getColumnSize('SerNo')" >
+            <ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+              <span>   {{ value }}  </span>
+              </ng-template>
+          </ngx-datatable-column>
+        
 
       </ngx-datatable>
 
@@ -166,6 +173,9 @@
 
     <!-- Конец карточки с информацией -->
 
- <!-- --> 
+
+
+ <!-- 
  <button class="btn btn-secondary"  (click)="backStaff()">Вернуться</button> 
+ --> 
 

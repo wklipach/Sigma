@@ -30,10 +30,10 @@ export class OllrService {
     return this.http.post(sUrl, {close_ollr: 'close_ollr', id_staff, id, id_user});
   }
 
-  addOllr(id_staff: string, id_ollr: string, DateBegin: Date) {
+  addOllr(id_staff: string, id_ollr: string, DateBegin: Date, SerNo: string) {
     const sUrl = this.gr.sUrlGlobal + 'ollr';
     const id_user = this.auth.getSessionUser().id_user;
-    return this.http.post(sUrl, {add_ollr: 'add_ollr', id_staff, id_ollr, DateBegin, id_user});
+    return this.http.post(sUrl, {add_ollr: 'add_ollr', id_staff, id_ollr, DateBegin, SerNo, id_user});
   }
 
   
