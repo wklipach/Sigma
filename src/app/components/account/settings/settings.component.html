@@ -1,6 +1,5 @@
 <form class="m-0">
 
-
     <div class="row">
       <div class="col-lg-4 col-md-6 oneCol">
         <div class="img-block">
@@ -17,7 +16,7 @@
                 
                 <div class="text-block">
                 <div class="fio">
-                            <input type="text" name="fio" class="form-control fc-fio" 
+                            <input type="text" name="fio" class="form-control fc-fio readonly" 
                                 [value]="this.settingData.fio"
                                 (blur)="myUpdateClick($event.target, 'fio')"/>
                             </div> 
@@ -29,30 +28,136 @@
                               </div>
                 </div>
         </div>
-    
-           <div class="col-line">
-            
-        
-        <div class="head-line"> Телефон: </div>
-           
-        <div class=" phone-number">
-            <input type="tel" name="phone1" class="phone-number"
-            [value]="this.settingData.phone"
-            (blur)="myUpdateClick($event.target, 'phone')"/>
+
+        <div class="oneCol-line">
+            <span class="head-line">Телефон:</span>
+            <div class=" text-blue">6546565</div>
+        </div>  
+
+        <div class="oneCol-line">
+            <span class="head-line">Разряд:</span>
+            <div class=" text-blue">6 разряд</div>
+        </div> 
+
+        <div class="oneCol-line">
+            <span class="head-line">УЧО:</span>
+            <div class=" text-blue">№412121</div>
         </div>
 
-         </div>
+        <div class="oneCol-line">
+            <span class="head-line">ЛК:</span>
+            <div class=" text-blue">
+                <div class=" phone-number">
+                    <input type="tel" name="phone1" class="text-blue"
+                        [value]="this.settingData.phone"
+                        (blur)="myUpdateClick($event.target, 'phone')"/>
+                    </div>
 
-         <div class="col-line">
+            </div>
+        </div> 
+
+        <div class="oneCol-line">
+            <span class="head-line">РСЛА:</span>
+            <div class=" text-blue">
+                <div class=" phone-number">
+                    <input type="tel" name="phone1" class="text-blue"
+                        [value]="this.settingData.phone"
+                        (blur)="myUpdateClick($event.target, 'phone')"/>
+                    </div>
+
+            </div>
+        </div> 
+
+        
+
+        <div class="oneCol-line">
+            <span class="head-line">Объект:</span>
+            <div class="selectStatus">
+                <select name="status" data-control="selectStatus" class="form-select form-select-solid form-select-lg fw-semibold" 
+                   (change)="onChangeProtectedObject($event, this.guideProtectedObject, this.settingProtectedObject.id || 0)" 
+                   [(ngModel)]="this.settingProtectedObject.name_object">
+              <option  *ngFor="let g of this.guideProtectedObject" [value]="g.name">{{g.name}}>
+            </select>
+        </div>
+            </div> 
+
+        <div class="oneCol-line">
+            <img src="/assets/img/columns1.png" width="18" height="18" alt="Сводная" class="img-ico">
+            <span class="label-black">Сводная</span>
+        </div>
+
+        <div class="oneCol-line">
+           <div class="general-info"> 
+        <img src="/assets/img/info1.png" width="16px" height="16px" alt="Информация" class="img-ico">
+        <span class="label-summary">Общая информация</span>
+        </div>
+        </div>
+        
+        <div class="oneCol-line">
+            <img src="/assets/img/sitemap.png" width="16px" height="16px" alt="Информация" class="img-ico">
+            <span class="label-black">Штатная структура</span>
+        </div>
+
+        <div class="oneCol-line">
+            <img src="/assets/img/fizik-ico.png" width="16px" height="16px" alt="Физические данные" class="img-ico">
+            <span class="label-black">Физические данные</span>
+        </div>   
+        
+        <div class="oneCol-line">
+            <img src="/assets/img/standards-Icon.png" width="16px" height="16px" alt="Нормативы" class="img-ico">
+            <span class="label-black">Нормативы</span>
+        </div>
+
+        <div class="oneCol-line">
+            <img src="/assets/img/passport.png" width="16px" height="16px" alt="Паспорт" class="img-ico">
+            <span class="label-black">Паспорт</span>
+        </div>
+
+        <div class="oneCol-line">
+            <img src="/assets/img/human-resources.png" width="16px" height="16px" alt="Кадры и бухгалтерия" class="img-ico">
+            <span class="label-black">Кадры и бухгалтерия</span>
+        </div>
+
+        <div class="oneCol-line">
+            <img src="/assets/img/docs.png" width="16px" height="16px" alt="Документы сотрудника" class="img-ico">
+            <span class="label-black">Документы сотрудника</span>
+
+        </div>
+        <div class="onecol-line">            
+         <div class="head-line"> Телефон: </div>
+           
+        <div class=" text-blue">
+            <input type="tel" name="phone1" class="text-blue"
+            [value]="this.settingData.phone"
+            (blur)="myUpdateClick($event.target, 'phone')"/>
+           
+        </div>
+
+        </div>         
+
+
+        
+         <div class="onecol-line">
             <div class="head-line"> Разряд: </div>
-            <div class=" phone-number">
-            <input type="tel" name="phone1" class="phone-number"
+            <div class=" text-blue">
+            <input type="tel" name="phone1" class="text-blue"
                 [value]="this.settingData.phone"
                 (blur)="myUpdateClick($event.target, 'phone')"/>
             </div>
+            <div class="row col-line2">
+                <!--begin::Label-->
+                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
+    
+                <div class="col-lg-8 fv-row">Имя
+                    <input name="surname" readonly class="form-control form-control-lg form-control-solid form-select-lg fw-normal name" 
+                               [value]="this.settingData.comment"
+                               (blur)="myUpdateClick($event.target, 'comment')"/>
+                </div>
+                
+            </div>        
         </div>
-
-        <div class="col-line">
+       
+        <div class="onecol-line">
             <div class="head-line"> ЛК: </div>
             <div class=" phone-number">
             <input type="tel" name="phone1" class="phone-number"
@@ -86,19 +191,95 @@
             <img class="dots-photo" src="/assets/img/dots.png">
             </ng-template>
         </div>
-        
-        
-        
-        <div class="type-block">Тип сотрудника</div>
-        
-      </div>
-  
-    </div>
+        <div class="col-line2">
+            <div class="type-block">Тип сотрудника
+                    <select name="typeperson" data-control="selectTypeperson" class="form-select type-select" 
+                        (change)="onChangeSmallGuide($event, this.guideTypeperson, 'id_typeperson')"
+                        [(ngModel)]="this.settingData.type">
+                        <option *ngFor="let gtp of this.guideTypeperson" style="type-option"[value]="gtp.name">{{gtp.name}}</option>
+                    </select>
+            </div> 
+            <div class="col-lg-8 fv-row comment-block">
+                <span>Метки</span>
+                <input name="comment" class="form-control form-control-lg form-control-solid form-select-lg fw-normal input-comment ;
+                width: 265px;
+                height: 41px;
+                margin: auto 0;
+                color: #6C7293;
+                font-family: Poppins;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                background-color: #fff;" 
+                           [value]="this.settingData.comment"
+                           (blur)="myUpdateClick($event.target, 'comment')"/>
+            </div>
+        </div>              
+                
+            <div class="row col-line2">
+                <!--begin::Label-->
+                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
+    
+                <div class="col-lg-8 fv-row">Фамилия
+                    <input name="surname" class="form-control form-control-lg form-control-solid form-select-lg fw-normal surname" 
+                               [value]="this.settingData.comment"
+                               (blur)="myUpdateClick($event.target, 'comment')"/>
+                </div>
+            </div>     
+            <div class="row mb-6">
+                <!--begin::Label-->
+                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
+    
+                <div class="col-lg-8 fv-row">Имя
+                    <input name="surname" class="form-control form-control-lg form-control-solid form-select-lg fw-normal name" 
+                               [value]="this.settingData.comment"
+                               (blur)="myUpdateClick($event.target, 'comment')"/>
+                </div>
+            </div>     
+            <div class="col-line2">
+                <!--begin::Label-->
+                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
+    
+                <div class="col-lg-8 fv-row">Отчество
+                    <input name="surname" class="form-control form-control-lg form-control-solid form-select-lg fw-normal name" 
+                               [value]="this.settingData.comment"
+                               (blur)="myUpdateClick($event.target, 'comment')"/>
+                </div>
+            </div>     
+            <div class="col-line2">
+            <div class="row mb-6">
+                <div class="gender-block">
+                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"</label> -->
+                <div class="col-lg-8 fv-row">Пол
+                    <select name="gender" data-control="selectGender" class="select-gender" 
+                        (change)="onChangeSmallGuide($event, this.guideGender, 'id_gender')"
+                        [(ngModel)]="this.settingData.gender">
+                        <option *ngFor="let gg of this.guideGender" [value]="gg.name">{{gg.name}}</option>
+                    </select>
+                </div>
+            </div> 
+         </div>  
+
+            
+          <div class="birth-block">
+             <div class="row mb-6">
+            <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"</label> -->
+                <div class="col-lg-8 fv-row">Дата рождения
+                    <input type="date" name="staffDateBirth" class="form-control form-control-lg form-control-solid form-select-lg fw-normal DateBirth" 
+                            [value]="this.settingData.DateBirth_str"
+                           (change)="setDate($event, 'DateBirth')" />
+                </div> 
+            </div>
+                </div>             
  
+                </div> 
+                  </div>
+ 
+                </div>
 <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
                             <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
                             <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
-
 
 
     <!-- <form class="m-0 h-auto" [formGroup]="form">
@@ -154,7 +335,7 @@
                     </select>
                   </div>
             </div>       
-    
+            
             <div class="row mb-6">
                 <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
@@ -165,11 +346,11 @@
                 <!--end::Label-->
                 <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
-                    <!-- <input type="tel" name="phone1" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
+                    <input type="tel" name="phone1" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
                            [value]="this.settingData.phone"
-                           (blur)="myUpdateClick($event.target, 'phone')"/> -->
+                           (blur)="myUpdateClick($event.target, 'phone')"/>
                 </div>
-                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
             </div>
 
             <div class="row mb-6">
@@ -215,27 +396,12 @@
                 </div>
             </div>   
 
-
-            <div class="row mb-6">
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Пол</label>
-                <div class="col-lg-8 fv-row">
-                    <select name="gender" data-control="selectGender" class="form-select form-select-solid form-select-lg fw-semibold" 
-                        (change)="onChangeSmallGuide($event, this.guideGender, 'id_gender')"
-                        [(ngModel)]="this.settingData.gender">
-                        <option *ngFor="let gg of this.guideGender" [value]="gg.name">{{gg.name}}</option>
-                    </select>
-                </div>
-            </div>               
-
+                    
 
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Тип</label>
                 <div class="col-lg-8 fv-row">
-                    <select name="typeperson" data-control="selectTypeperson" class="form-select form-select-solid form-select-lg fw-semibold" 
-                        (change)="onChangeSmallGuide($event, this.guideTypeperson, 'id_typeperson')"
-                        [(ngModel)]="this.settingData.type">
-                        <option *ngFor="let gtp of this.guideTypeperson" [value]="gtp.name">{{gtp.name}}</option>
-                    </select>
+                    
                 </div>
             </div>
     
@@ -281,16 +447,14 @@
 
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Дата рождения</label>
+        <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
     
-        <div class="col-lg-8 fv-row">
-            <input type="date" name="staffDateBirth" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
+        <div class="col-lg-8 fv-row">Дата рождения1
+            <input type="date" name="staffDateBirth" class="form-control form-control-lg form-control-solid form-select-lg fw-normal DateBirth margin-top-30px" 
                     [value]="this.settingData.DateBirth_str"
                    (change)="setDate($event, 'DateBirth')" />
-        </div>
-        
+        </div>        
     </div> 
-
     
     <div class="row mb-6">
         <!--begin::Label-->
@@ -344,7 +508,7 @@
                 </div>
             </div>      
 
-
+           
 
       <div class="row mb-6">
         <!--begin::Label-->
@@ -360,7 +524,6 @@
 
         </div>
     </div>  
-
 
      <button class="btn btn-secondary" (click)="backGeneral()">Назад</button>
 
