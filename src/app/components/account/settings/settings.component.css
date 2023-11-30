@@ -11,6 +11,7 @@ body{
   width: 407px;
   min-height: 900px;
   box-sizing: border-box;
+  background-color:#F3F6F8;
   }
   
   .img-block{
@@ -223,7 +224,7 @@ background: #526AE5;
   height: 91px;
   margin: 0;
   
-  background-color: #FFF;
+  background-color: #e9dcdc;
 
 }
 span-midle{
@@ -265,7 +266,7 @@ margin: auto 0;
   .twoCol{
     width: 1063px;
     padding: 95px 250px !important;
-    background-color: #fff;
+    background-color: #eed1d1;
   }
   .general-info{
     color: #6993ff !important;
@@ -275,6 +276,7 @@ margin: auto 0;
     font-weight: 400;
     line-height: normal;
     margin: auto;
+    background-color:#dde3f3;
  }
   .big-photo{
     display: flex;
@@ -489,4 +491,7 @@ margin-top: 30px;
   }
   img{
     cursor: pointer;
+  }
+  form-select{
+    font-size: 11px;
   }

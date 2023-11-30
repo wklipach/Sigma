@@ -11,8 +11,8 @@
                         <img class="rounded image-input-wrapper w-117px h-117px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
                         </ng-template>
             </div>
-            
-                
+
+                                        
                 <div class="text-block">
                 <div class="fio">
                             <input type="text" name="fio" class="form-control fc-fio readonly" 
@@ -46,12 +46,8 @@
         <div class="oneCol-line">
             <span class="head-line">ЛК:</span>
             <div class=" text-blue">
-                <div class=" phone-number">
-                    <input type="tel" name="phone1" class="text-blue"
-                        [value]="this.settingData.phone"
-                        (blur)="myUpdateClick($event.target, 'phone')"/>
-                    </div>
-
+                {{this.settingData.organization}}
+                
             </div>
         </div> 
 
@@ -130,59 +126,8 @@
             <span class="label-black">Документы сотрудника</span>
 
         </div>
-        <div class="onecol-line">            
-         <div class="head-line"> Телефон: </div>
-           
-        <div class=" text-blue">
-            <input type="tel" name="phone1" class="text-blue"
-            [value]="this.settingData.phone"
-            (blur)="myUpdateClick($event.target, 'phone')"/>
-           
-        </div>
-
-        </div>         
-
-
-        
-         <div class="onecol-line">
-            <div class="head-line"> Разряд: </div>
-            <div class=" text-blue">
-            <input type="tel" name="phone1" class="text-blue"
-                [value]="this.settingData.phone"
-                (blur)="myUpdateClick($event.target, 'phone')"/>
-            </div>
-            <div class="row col-line2">
-                <!--begin::Label-->
-                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
-    
-                <div class="col-lg-8 fv-row">Имя
-                    <input name="surname" readonly class="form-control form-control-lg form-control-solid form-select-lg fw-normal name" 
-                               [value]="this.settingData.comment"
-                               (blur)="myUpdateClick($event.target, 'comment')"/>
-                </div>
-                
-            </div>        
-        </div>
-       
-        <div class="onecol-line">
-            <div class="head-line"> ЛК: </div>
-            <div class=" phone-number">
-            <input type="tel" name="phone1" class="phone-number"
-                [value]="this.settingData.phone"
-                (blur)="myUpdateClick($event.target, 'phone')"/>
-            </div>
-        </div>
-
-        <div class="col-line">
-            <div class="head-line"> РСЛА: </div>
-            <div class=" phone-number">
-            <input type="tel" name="phone1" class="phone-number"
-                [value]="this.settingData.phone"
-                (blur)="myUpdateClick($event.target, 'phone')"/>
-            </div>
-        </div>
-
-      </div> <!-- END oneCOL -->
+            
+     </div> <!-- END oneCOL -->
   
       <div class="col-lg-8 h-1470px twoCol">
         <div class="general-information">Общая информация</div>
@@ -281,7 +226,21 @@
                 </div>             
  
                 </div> 
-                  </div>
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                        <span class="required">Компания</span>
+                        </label>
+    
+                    <div class="col-lg-8 fv-row fs-5">
+                        <select name="organization" data-control="selectOrganization" class="form-select form-select-solid form-select-lg fw-semibold" 
+                            (change)="onChangeSmallGuide($event, this.guideOrganization, 'id_organization')"
+                            [(ngModel)]="this.settingData.organization">
+                            <option style="font-size: 12px;" *ngFor="let go of this.guideOrganization" [value]="go.name">{{go.name}}</option>
+                       </select>
+                    </div>
+            </div>    
+            </div>
  
                 </div>
 <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
@@ -308,18 +267,12 @@
     <div class="card-body mt-2 p-10">
             <div class="row mb-6">
                 <!-- <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column"> -->
-                       
                 <!-- </div> -->
-                    
-               
-            </div>
-            
-            
-    
-            <div class="row mb-6">
+           </div>
+         <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                        <span class="required">Компания</span>
+                        <span class="required">Компания10</span>
                         </label>
     
                     <div class="col-lg-8 fv-row">
@@ -330,7 +283,18 @@
                        </select>
                     </div>
             </div>
+            
+            <div class="col-line2">
+                <!--begin::Label-->
+                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
     
+                <div class="col-lg-8 fv-row">Отчество11
+                    <input name="surname" class="form-control form-control-lg form-control-solid form-select-lg fw-normal name" 
+                               [value]="this.settingData.comment"
+                               (blur)="myUpdateClick($event.target, 'comment')"/>
+                </div>
+            </div>   
+
              <div class="row mb-6">
     
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Отдел</label>
@@ -413,7 +377,7 @@
             </div>
     
             <div class="row mb-6">
-                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд8</label>
                 <!-- <div class="col-lg-8 fv-row">
                     <select name="rank" data-control="selectRank" class="form-select form-select-solid form-select-lg fw-semibold" 
                             (change)="myUpdateNumberClick($event, 'rank')"
