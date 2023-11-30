@@ -203,7 +203,7 @@
                     <select name="typeperson" data-control="selectTypeperson" class="form-select type-select" 
                         (change)="onChangeSmallGuide($event, this.guideTypeperson, 'id_typeperson')"
                         [(ngModel)]="this.settingData.type">
-                        <option *ngFor="let gtp of this.guideTypeperson" style="type-option"[value]="gtp.name">{{gtp.name}}</option>
+                        <option *ngFor="let gtp of this.guideTypeperson" [value]="gtp.name">{{gtp.name}}</option>
                     </select>
             </div> 
             <div class="col-lg-8 fv-row comment-block">
@@ -284,7 +284,7 @@
                   </div>
  
                 </div>
-<input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display:none"> 
+<input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display: none"> 
                             <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
                             <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
 
@@ -402,8 +402,7 @@
                     </select>
                 </div>
             </div>   
-
-                    
+                 
 
             <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Тип</label>
