@@ -409,6 +409,34 @@ export class SettingsComponent {
       });
    }
 
+
+   myUpdateFioClick(element: any, field: string) {
+    let text = element.value;
+
+
+    if (field == 'f') {
+      this.settingData.f = text;
+    }
+
+    if (field == 'i') {
+      this.settingData.i = text;
+    }
+
+    if (field == 'o') {
+      this.settingData.o = text;
+    }
+
+    this.settingData.fio = this.settingData.f + ' '+ this.settingData.i+' '+this.settingData.o;
+
+
+    this.staffserv.updateStaffOne(this.settingData.fio, this.id_staff.toString(), 'fio').subscribe( (res: any) => {
+      console.log('res update = ', res);
+    })
+    
+ }
+
+
+
    backGeneral() {
     this.router.navigate(['general'], { queryParams: { id_staff: this.id_staff }});
  }
