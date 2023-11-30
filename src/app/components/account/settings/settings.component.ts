@@ -26,6 +26,9 @@ interface ISenjorGuardGuide {
 interface ISetting { 
   id_staff?: string;  
   fio?: string;  
+  f?: string;  
+  i?: string;  
+  o?: string;  
   phone?: string;  
   phone2?: string;  
   DateBirth?: Date;  
@@ -140,7 +143,22 @@ export class SettingsComponent {
         this.settingData = res9[0];  
         this.settingData.DateBirth_str = this.datePipe.transform(this.settingData.DateBirth, 'yyyy-MM-dd') || '';
         this.settingData.date_interview_str = this.datePipe.transform(this.settingData.date_interview, 'yyyy-MM-dd') || '';
+
+        this.settingData.f = '';
+        this.settingData.i = '';
+        this.settingData.o = '';
+        const words = this.settingData.fio?.split(' ');
+        if (words && words[0])  this.settingData.f = words[0];
+        if (words && words[1])  this.settingData.i = words[1];
+        if (words && words[2])  this.settingData.o = words[2];
       } 
+
+      console.log('1', this.settingData.f);
+      console.log('2', this.settingData.i);
+      console.log('3', this.settingData.o);
+
+
+
       if (res10 && res10.length>0) {
         this.settingProtectedObject = res10[0];  
       }
