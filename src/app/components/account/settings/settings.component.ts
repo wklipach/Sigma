@@ -48,6 +48,7 @@ interface ISetting {
   status?: string;  
   rank?: string;  
   comment?: string;  
+  sAge?: string;  
 }
 
 interface IProtectedObject {
@@ -144,6 +145,11 @@ export class SettingsComponent {
         this.settingData.DateBirth_str = this.datePipe.transform(this.settingData.DateBirth, 'yyyy-MM-dd') || '';
         this.settingData.date_interview_str = this.datePipe.transform(this.settingData.date_interview, 'yyyy-MM-dd') || '';
 
+
+        if (this.settingData.DateBirth) {
+          this.settingData.sAge =  this.getAge(new Date (this.settingData.DateBirth)).toString();
+        } else this.settingData.sAge = '--';
+
         this.settingData.f = '';
         this.settingData.i = '';
         this.settingData.o = '';
@@ -168,6 +174,18 @@ export class SettingsComponent {
   });    
 
  }
+
+
+  
+
+ getAge (birthdate: Date) {
+  let timeDiff = Math.abs(Date.now() - birthdate.getTime());
+  let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+  console.log(age)
+  return age;
+ }
+
+
 
   createForm() {
     this.form = this.fb.group({

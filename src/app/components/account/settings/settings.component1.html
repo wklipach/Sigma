@@ -1,7 +1,7 @@
-<!-- 
+
 <div>фамилия:{{this.settingData.f}}</div>
     <div>имя:{{this.settingData.i}}</div>
-        <div>отчество:{{this.settingData.o}}</div> -->
+        <div>отчество:{{this.settingData.o}}</div>
 
 <form class="m-0">
     <div class="row">
@@ -13,18 +13,18 @@
                         <img   [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
                         </ng-template>
                         <ng-template #contentDefault>
-                        <img class="rounded image-input-wrapper w-117px h-117px mr-auto" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
+                        <img class="rounded image-input-wrapper w-117px h-117px" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
                         </ng-template>
             </div>
+
                                         
-                <div class="ftext-block">
-                <div class="fc-fio">
-                    {{this.settingData.f}} {{this.settingData.i}}
-                            <!-- <input type="text" name="fio" class="form-control fc-fio readonly" 
+                <div class="text-block">
+                <div class="fio">
+                            <input type="text" name="fio" class="form-control fc-fio readonly" 
                                 [value]="this.settingData.fio"
-                                (blur)="myUpdateClick($event.target, 'fio')"/> -->
+                                (blur)="myUpdateClick($event.target, 'fio')"/>
                             </div> 
-                            <div class="status-text">{{ this.settingData.sAge }}, {{this.settingData.type}} </div>  
+                            <div class="status-text">25 лет, Суточник </div>  
                             
                               <div class=" btn-line">
                                 <button class="btn-chat">чат</button>
@@ -40,7 +40,7 @@
 
         <div class="oneCol-line">
             <span class="head-line">Разряд:</span>
-            <div class="text-blue">{{this.settingData.rank}}</div>
+            <div class=" text-blue">{{this.settingData.rank}}</div>
         </div> 
 
         <div class="oneCol-line">
@@ -134,21 +134,20 @@
             
      </div> <!-- END oneCOL -->
   
-    <div class="col-lg-8 h-1470px twoCol">
+      <div class="col-lg-8 h-1470px twoCol">
         <div class="general-information">Общая информация</div>
-        <div class="text-photo">Фотография сотрудника</div> 
-        
+        <div class="text-photo">Фотография сотрудника</div>
         <div class="big-photo">
-            <img src="/assets/img/dots.png" title="Удалить фото" width="18" height="15"class="img-dots"  (click)="clearFile()" >
+            
             <div class="image-input-wrapper" *ngIf="this.sAvatarPath.length>0;then contentLoadAvatar else contentDefault">Профиль</div>
             <ng-template #contentLoadAvatar class="image-input">
             <img   [src]="this.sAvatarPath" alt="Профиль" id="img" onclick="document.getElementById('avatar').click()">
             </ng-template>
             <ng-template #contentDefault>
             <img class="rounded" src="/assets/img/usernull.jpg" onclick="document.getElementById('avatar').click()">
+            <img class="dots-photo" src="/assets/img/dots.png">
             </ng-template>
         </div>
-       
         <div class="col-line2">
             <div class="type-block">Тип сотрудника
                     <select name="typeperson" data-control="selectTypeperson" class="form-select type-select" 
@@ -176,14 +175,15 @@
         </div>              
                 
             <div class="row col-line2">
-                                   
+                <!--begin::Label-->
+                <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
+    
                 <div class="col-lg-8 fv-row">Фамилия
                     <input name="surname" class="form-control form-control-lg form-control-solid form-select-lg fw-normal surname" 
                                [value]="this.settingData.f"
                                (blur)="myUpdateFioClick($event.target, 'f')"/>
                 </div>
-            </div> 
-
+            </div>     
             <div class="row mb-6">
                 <!--begin::Label-->
                 <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
@@ -231,180 +231,27 @@
                 </div>             
  
                 </div> 
-                <div class="row mb-6 mt-3">
-                 
+                <div class="row mb-6">
+                    <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-semibold fs-6">
                         <span class="required">Компания</span>
                         </label>
-                        <div class="col-lg-8 fv-row fs-5">
-                        <select name="organization" data-control="selectOrganization" class="form-select form-select-solid form-select-lg fw-semibold mt-n2 ml-auto w-100" 
+    
+                    <div class="col-lg-8 fv-row fs-5">
+                        <select name="organization" data-control="selectOrganization" class="form-select form-select-solid form-select-lg fw-semibold" 
                             (change)="onChangeSmallGuide($event, this.guideOrganization, 'id_organization')"
                             [(ngModel)]="this.settingData.organization">
                             <option style="font-size: 12px;" *ngFor="let go of this.guideOrganization" [value]="go.name">{{go.name}}</option>
                        </select>
                     </div>
-            </div>   
-            
-            <div class="row mb-6 mt-3">
-                 
-                <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                    <span class="required">Отдел</span>
-                    </label>
-                    <div class="col-lg-8 fv-row fs-5">
-                        <select name="department" data-control="selectDepartment" class="form-select form-select-solid form-select-lg fw-semibold ml-auto w-100" 
-                        (change)="onChangeSmallGuide($event, this.guideDepartment, 'id_department')"
-                        [(ngModel)]="this.settingData.department">
-                        <option *ngFor="let gd of this.guideDepartment" [value]="gd.name">{{gd.name}}</option>
-                </select>
-                </div>
-        </div>      
-
-        <div class="row col-line2">
-            <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                <span class="required">Телефон1</span>
-                </label>
-                <div class="col-lg-8 fv-row">
-                    <input type="tel" name="phone1" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
-                    [value]="this.settingData.phone"
-                    (blur)="myUpdateClick($event.target, 'phone')"/>
-                </div>
-            </div> 
-
-            <div class="row col-line2">
-                <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                    <span class="required">Телефон2</span>
-                    </label>
-                    <div class="col-lg-8 fv-row">
-                        <input type="tel" name="phone2" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold ml-auto w-100" placeholder="Phone number" 
-                        [value]="this.settingData.phone2"
-                        (blur)="myUpdateClick($event.target, 'phone2')"/>
-                    </div>
-                    
-            </div> 
-
-            <div class="row mb-6 mt-3">
-                 
-                <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                    <span class="required">Руководитель</span>
-                    </label>
-                    <div class="col-lg-8 fv-row fs-5">
-                        <select name="senjorguard" data-control="selectSenjorGuard" class="form-select form-select-solid form-select-lg fw-semibold ml-auto w-100" 
-                        (change)="onChangeSenjorGuard($event, this.guideSenjorGuard, 'id_senjor_guard')"
-                        [(ngModel)]="this.settingData.senjor_guard"  >
-                    <option *ngFor="let sg of this.guideSenjorGuard" [value]="sg.fio">{{sg.fio}}</option>
-                </select>
-                </div>
-        </div>   
-
-        <div class="row mb-6">
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Отдел</label>
-            <div class="col-lg-8 fv-row fs-5">
-                <select name="department" data-control="selectDepartment" class="form-select form-select-solid form-select-lg fw-semibold ml-auto w-100" 
-                (change)="onChangeSmallGuide($event, this.guideDepartment, 'id_department')"
-                [(ngModel)]="this.settingData.department">
-                <option *ngFor="let gd of this.guideDepartment" [value]="gd.name">{{gd.name}}</option>
-        </select>
-        </div>
-        </div>       
-
-        <div class="row mb-6">
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд</label>
-            <div class="col-lg-8 fv-row">
-                <select name="rank" data-control="selectRank" class="form-select form-select-solid form-select-lg fw-semibold ml-auto w-100" 
-                        (change)="myUpdateNumberClick($event, 'rank')"
-                        [(ngModel)]="this.settingData.rank" >
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>Нет</option>
-                </select>
+            </div>    
             </div>
-        </div>       
-
-        <div class="row mb-6">
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Должность</label>
-            <div class="col-lg-8 fv-row">
-                <select name="position" data-control="selectPosition" class="form-select form-select-solid form-select-lg fw-semibold ml-auto w-100" 
-                    (change)="onChangeSmallGuide($event, this.guidePosition, 'id_position')"
-                    [(ngModel)]="this.settingData.position">
-                    <option *ngFor="let gp of this.guidePosition" [value]="gp.name">{{gp.name}}</option>
-                </select>
-            </div>
-        </div>   
-             
-        <div class="row mb-6">
-             
-            <label class="col-lg-4 col-form-label fw-semibold fs-6">СМС</label>
-        
-            <div class="col-lg-8 fv-row">
-                <select name="sms" data-control="selectSms" class="form-select form-select-solid form-select-lg fw-semibold ml-auto w-100" 
-                        (change)="onChangeSmallGuide($event, this.guideSMS, 'id_sms')"
-                        [(ngModel)]="this.settingData.sms">
-                   <option *ngFor="let gsms of this.guideSMS" [value]="gsms.name">{{gsms.name}}</option>
-                 </select>
-             </div>
-    
-        </div>
-
-        <div class="row mb-6">
-        
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Собеседование</label>
-        
-            <div class="col-lg-8 fv-row">
-                <input type="date" name="staffDateInterview" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold ml-auto w-100" 
-                       [value]="this.settingData.date_interview_str"
-                       (change)="setDate($event, 'date_interview')" />
-            </div>
-            
-        </div>   
-        
-        <div class="row mb-6">
-            <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Рост</label>
-        
-             <div class="col-lg-8 fv-row">
-                <input type="text" name="staffheight" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold ml-auto w-100" 
-                        [value]="this.settingData.height"
-                        (blur)="myUpdateNumberClick($event, 'height')"/>
-            </div>
-        </div>
-
-        <div class="row mb-6">
-            <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Вес</label>
-        
-            <div class="col-lg-8 fv-row">
-                <input type="text" name="staffweight" class="form-control form-control-lg form-control-solid ml-auto w-100" 
-                       [value]="this.settingData.weight"
-                       (blur)="myUpdateNumberClick($event, 'weight')" />
-            </div>
-        </div>  
-        
-        <div class="row mb-6">
-            <!--begin::Label-->
-            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Объект</label>
-        
-            <div class="col-lg-8 fv-row">
-    
-               <select name="status" data-control="selectStatus" class="form-select form-select-solid form-select-lg fw-semibold ml-auto w-100" 
-                       (change)="onChangeProtectedObject($event, this.guideProtectedObject, this.settingProtectedObject.id || 0)" 
-                       [(ngModel)]="this.settingProtectedObject.name_object">
-                  <option *ngFor="let g of this.guideProtectedObject" [value]="g.name">{{g.name}}</option>
-                </select>
-    
-            </div>
-        </div>  
-
-
-
-</div>
  
-</div>
-
-<!-- <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display: none"> 
+                </div>
+<input type="file" id="avatar" (change)="onFileChange($event)" #fileInput style="display: none"> 
                             <span class="text-muted fs-6" style="display: block; cursor: pointer; text-decoration: underline;" onclick="document.getElementById('avatar').click()">Загрузить фото</span>
                             <span class="text-muted  fs-6" style="cursor: pointer; text-decoration: underline;" (click)="clearFile()">Удалить фото</span>
- -->
+
 
     <!-- <form class="m-0 h-auto" [formGroup]="form">
       
@@ -427,8 +274,8 @@
                 <!-- <div class="col-lg-4 col-form-label fw-semibold fs-6 d-flex flex-column"> -->
                 <!-- </div> -->
            </div>
-         <!-- <div class="row mb-6">
-                  
+         <div class="row mb-6">
+                    <!--begin::Label-->
                     <label class="col-lg-4 col-form-label fw-semibold fs-6">
                         <span class="required">Компания10</span>
                         </label>
@@ -440,20 +287,20 @@
                             <option *ngFor="let go of this.guideOrganization" [value]="go.name">{{go.name}}</option>
                        </select>
                     </div>
-            </div> -->
+            </div>
             
             <div class="col-line2">
                 <!--begin::Label-->
                 <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
     
-                <!-- <div class="col-lg-8 fv-row">Отчество11
+                <div class="col-lg-8 fv-row">Отчество11
                     <input name="surname" class="form-control form-control-lg form-control-solid form-select-lg fw-normal name" 
                                [value]="this.settingData.comment"
                                (blur)="myUpdateClick($event.target, 'comment')"/>
-                </div> -->
+                </div>
             </div>   
 
-             <!-- <div class="row mb-6">
+             <div class="row mb-6">
     
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Отдел</label>
                 <div class="col-lg-8 fv-row">
@@ -463,43 +310,45 @@
                             <option *ngFor="let gd of this.guideDepartment" [value]="gd.name">{{gd.name}}</option>
                     </select>
                   </div>
-            </div>        -->
+            </div>       
             
-            <!-- <div class="row mb-6">
-               
+            <div class="row mb-6">
+                <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                     <span class="required">Телефон 1</span>
                     <span class="ms-1" data-bs-toggle="tooltip" title="Phone number1">
                     </span>
                 </label>
-                
+                <!--end::Label-->
+                <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
                     <input type="tel" name="phone1" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
                            [value]="this.settingData.phone"
                            (blur)="myUpdateClick($event.target, 'phone')"/>
                 </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-            </div> -->
+            </div>
 
-            <!-- <div class="row mb-6">
-                
+            <div class="row mb-6">
+                <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">
                     <span class="required">Телефон 2</span>
                     <span class="ms-1" data-bs-toggle="tooltip" title="Phone number2">
                     </span>
                 </label>
-                
+                <!--end::Label-->
+                <!--begin::Col-->
                 <div class="col-lg-8 fv-row">
                     <input type="tel" name="phone2" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" placeholder="Phone number" 
                     [value]="this.settingData.phone2"
                     (blur)="myUpdateClick($event.target, 'phone2')"/>
                 </div>
                 
-            </div> -->
+            </div>
 
             
-            <!-- <div class="row mb-6">
-                
+            <div class="row mb-6">
+                <!--begin::Label-->
                 <label class="col-lg-4 col-form-label fw-semibold fs-6">Руководитель</label>
                 
                 <div class="col-lg-8 fv-row">
@@ -510,9 +359,9 @@
                     </select>
                 </div>
                 
-            </div>-->
-     
-            <!-- <div class="row mb-6">
+            </div>
+    
+            <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Должность</label>
                 <div class="col-lg-8 fv-row">
                     <select name="position" data-control="selectPosition" class="form-select form-select-solid form-select-lg fw-semibold" 
@@ -521,18 +370,34 @@
                         <option *ngFor="let gp of this.guidePosition" [value]="gp.name">{{gp.name}}</option>
                     </select>
                 </div>
-            </div>    -->
+            </div>   
                  
 
-            <!-- <div class="row mb-6">
+            <div class="row mb-6">
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Тип</label>
                 <div class="col-lg-8 fv-row">
                     
                 </div>
-            </div> -->
+            </div>
     
-        <!-- <div class="row mb-6">
-       
+            <div class="row mb-6">
+                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Разряд8</label>
+                <!-- <div class="col-lg-8 fv-row">
+                    <select name="rank" data-control="selectRank" class="form-select form-select-solid form-select-lg fw-semibold" 
+                            (change)="myUpdateNumberClick($event, 'rank')"
+                            [(ngModel)]="this.settingData.rank" >
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>Нет</option>
+                    </select>
+                </div> -->
+            </div>
+         
+            
+                    
+            <div class="row mb-6">
+        <!--begin::Label-->
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Рост</label>
     
          <div class="col-lg-8 fv-row">
@@ -540,11 +405,11 @@
                     [value]="this.settingData.height"
                     (blur)="myUpdateNumberClick($event, 'height')"/>
         </div>
-    </div> -->
+    </div>
       
     
-    <!-- <div class="row mb-6">
-        
+    <div class="row mb-6">
+        <!--begin::Label-->
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Вес</label>
     
         <div class="col-lg-8 fv-row">
@@ -552,21 +417,22 @@
                    [value]="this.settingData.weight"
                    (blur)="myUpdateNumberClick($event, 'weight')" />
         </div>
-    </div>   -->
+    </div>  
     
 
-    <!-- <div class="row mb-6">
-        
+    <div class="row mb-6">
+        <!--begin::Label-->
+        <!-- <label class="col-lg-4 col-form-label required fw-semibold fs-6"></label> -->
     
         <div class="col-lg-8 fv-row">Дата рождения1
             <input type="date" name="staffDateBirth" class="form-control form-control-lg form-control-solid form-select-lg fw-normal DateBirth margin-top-30px" 
                     [value]="this.settingData.DateBirth_str"
                    (change)="setDate($event, 'DateBirth')" />
         </div>        
-    </div>  -->
+    </div> 
     
-    <!-- <div class="row mb-6">
-        
+    <div class="row mb-6">
+        <!--begin::Label-->
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Собеседование</label>
     
         <div class="col-lg-8 fv-row">
@@ -575,9 +441,9 @@
                    (change)="setDate($event, 'date_interview')" />
         </div>
         
-    </div>     -->
+    </div>    
     
-    <!-- <div class="row mb-6">
+    <div class="row mb-6">
              
         <label class="col-lg-4 col-form-label fw-semibold fs-6">СМС</label>
     
@@ -589,10 +455,10 @@
              </select>
          </div>
 
-    </div> -->
+    </div>
 
-    <!-- <div class="row mb-6">
-       
+    <div class="row mb-6">
+        <!--begin::Label-->
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Статус</label>
     
         <div class="col-lg-8 fv-row">
@@ -602,39 +468,39 @@
               <option *ngFor="let gs of this.guideStatus" [value]="gs.name">{{gs.name}}</option>
             </select>
         </div>
-    </div>   -->
+    </div>  
 
     
 
-             <!-- <div class="row mb-6">
-               
+             <div class="row mb-6">
+                <!--begin::Label-->
                 <label class="col-lg-4 col-form-label required fw-semibold fs-6">Комментарий</label>
     
                 <div class="col-lg-8 fv-row">
-                    <input name="comment" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold w-100" 
+                    <input name="comment" class="form-control form-control-lg form-control-solid form-select-lg fw-semibold" 
                                [value]="this.settingData.comment"
                                (blur)="myUpdateClick($event.target, 'comment')"/>
                 </div>
-            </div>     
+            </div>      
 
            
 
-      <!-- <div class="row mb-6">
-       
+      <div class="row mb-6">
+        <!--begin::Label-->
         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Объект</label>
     
         <div class="col-lg-8 fv-row">
 
-           <select name="status" data-control="selectStatus" class="form-select form-select-solid form-select-lg fw-semibold w-100" 
+           <select name="status" data-control="selectStatus" class="form-select form-select-solid form-select-lg fw-semibold" 
                    (change)="onChangeProtectedObject($event, this.guideProtectedObject, this.settingProtectedObject.id || 0)" 
                    [(ngModel)]="this.settingProtectedObject.name_object">
               <option *ngFor="let g of this.guideProtectedObject" [value]="g.name">{{g.name}}</option>
             </select>
 
         </div>
-    </div>   -->
+    </div>  
 
      <button class="btn btn-secondary" (click)="backGeneral()">Назад</button>
 
-</div> 
+    </div>     
 </form>     

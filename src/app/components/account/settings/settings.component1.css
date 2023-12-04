@@ -11,7 +11,7 @@ body{
   width: 407px;
   min-height: 900px;
   box-sizing: border-box;
-  background-color:transparent;
+  background-color:#F3F6F8;
   }
   
   .img-block{
@@ -22,8 +22,6 @@ body{
   width: 100%;
   height: auto;
   margin-bottom: 20px;
-  margin-left: 0;
-  justify-content: start;
  }
 
  .oneCol-line{
@@ -33,12 +31,12 @@ body{
   width:339px; 
   height:55px;
   margin-bottom:10px; 
-  justify-content: start
+  justify-content: star
  }
  .oneCol-line:hover{
     background-color:#F3F6F9;
     cursor: pointer;
-    /* border: 2px solid rgb(226, 43, 150); */
+    border: 2px solid rgb(226, 43, 150);
  }
 .photo{
   display: flex;
@@ -46,10 +44,7 @@ body{
   height: 117px;
   left: 33px;
   margin-top: 53px;
-  margin-left: 0;
-}
-.img-dots{
-  position: absolute;
+  margin-left: 33px;
 }
 .text-block{
   display: flex;
@@ -136,12 +131,11 @@ body{
   width: 339px;
   height: 55px;
   font-family: Poppins;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   margin: 0 !important;
   color: #6993FF!important;
-  background-color: #e0ecf8;
-  border: none;
+  background-color: #F3F6F9;
 }
 .surname{ 
   background-color: #f7fafd;
@@ -180,7 +174,7 @@ body{
   flex-direction: row;
   align-items: self-end;
   width: 100%;
-  margin-top: 35px;
+  margin-top: auto; 
 }
 .btn-chat{
   font-family: Roboto;
@@ -219,7 +213,7 @@ background: #526AE5;
   height: 55px;
   margin-top: 30px;
 
-  background-color: #FFF;
+  background-color: #F3F6F9;
 
 }
 .col-line2{
@@ -229,6 +223,9 @@ background: #526AE5;
   width: 563px;
   height: 91px;
   margin: 0;
+  
+  background-color: #e9dcdc;
+
 }
 span-midle{
   display: flex;
@@ -268,10 +265,8 @@ margin: auto 0;
 
   .twoCol{
     width: 1063px;
-    height: auto;
     padding: 95px 250px !important;
-    background-color:white;
-    border: 2px solid #faf2f2;
+    background-color: #eed1d1;
   }
   .general-info{
     color: #6993ff !important;
@@ -281,8 +276,7 @@ margin: auto 0;
     font-weight: 400;
     line-height: normal;
     margin: auto;
-    background-color:transparent;
-    border: 2px solid #dde3f3;
+    background-color:#dde3f3;
  }
   .big-photo{
     display: flex;
@@ -311,7 +305,7 @@ margin: auto 0;
     background-color: #fff;   
     margin-right: 30px; 
   }
-  .form-select ,type-select{ 
+  .form-select ,type-select{
     appearance: none;
     -webkit-appearance: none; /* Safari и Chrome */
     -moz-appearance: none; /* Mozilla */
@@ -321,7 +315,7 @@ margin: auto 0;
     background-color: #f7fafd;
     background-position: calc(100% - 15px) center;
     margin-top: 10px;
-    width: 100%;
+    width: 265px;
     height: 41px;
     padding: 8px 32px 8px 16px;
     border-radius: 0;
